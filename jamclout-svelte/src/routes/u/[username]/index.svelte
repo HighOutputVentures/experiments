@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { client } from '$lib/client';
 	import { gql } from '@apollo/client/core';
-
+	const creatorUsername = $page.params.username;
 	let creatorProfile;
 
 	async function getCreatorProfile() {
@@ -55,7 +56,7 @@
 			`,
 			{
 				variables: {
-					username: 'Arriele'
+					username: creatorUsername
 				},
 				fetchPolicy: 'no-cache'
 			}
@@ -63,11 +64,11 @@
 	}
 </script>
 
-<button on:click={getCreatorProfile}>Get Profile</button>
+<button class="h-4 bg-[#1da1f2] text-white" on:click={getCreatorProfile}>Get Profile</button>
 
 {#if creatorProfile}
 	{#if $creatorProfile.loading}
-		Loading...
+		Loading... {creatorUsername}
 	{:else if $creatorProfile.error}
 		Error: {$creatorProfile.error.message}
 	{:else}
