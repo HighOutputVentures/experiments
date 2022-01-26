@@ -1,0 +1,1128 @@
+directive @mock on FIELD_DEFINITION
+
+directive @next on FIELD_DEFINITION | OBJECT
+
+directive @permission(roles: [AccountRole]!) on FIELD_DEFINITION
+
+directive @private on FIELD_DEFINITION
+
+"""Controls the rate of traffic."""
+directive @rateLimit(duration: Int! = 60, limit: Int! = 60) on FIELD_DEFINITION | OBJECT
+
+interface Account {
+  createdAt: DateTime!
+  emailAddress: EmailAddress
+  role: AccountRole!
+  updatedAt: DateTime!
+}
+
+enum AccountRole {
+  ADMIN
+  CREATOR
+  FOLLOWER
+}
+
+type AdminAccount implements Account & Node {
+  createdAt: DateTime!
+  emailAddress: EmailAddress!
+  id: ID!
+  role: AccountRole!
+  updatedAt: DateTime!
+}
+
+input AuthenticateByBitcloutInput {
+  jwt: String!
+  publicKey: String!
+}
+
+input AuthenticateFanBitcloutInput {
+  jwt: String!
+  publicKey: String!
+}
+
+type AuthenticateFanBitcloutResponse {
+  token: String!
+}
+
+input AuthenticateInput {
+  emailAddress: EmailAddress!
+  otp: String!
+}
+
+type AuthenticateResponse {
+  token: String!
+}
+
+type BitcloutExternalAccount implements ExternalAccount & Node {
+  account: Account
+  coinPrice: Float
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  image: URL
+  publicKey: String!
+  updatedAt: DateTime!
+  username: String
+}
+
+type BitcloutTransaction implements Node {
+  amount: Float
+  id: ID!
+  recipient: CreatorAccount
+  transaction: String!
+  type: BitcloutTransactionType!
+}
+
+enum BitcloutTransactionType {
+  SEND_TIP
+}
+
+input BooleanQueryOperatorInput {
+  eq: Boolean
+  in: [Boolean]
+  ne: Boolean
+}
+
+type CoinDrop implements Node {
+  accessType: CoinDropAccessType!
+  amount: Float!
+  amountUSD: Float!
+
+  """Virtual fields"""
+  claimed: Boolean!
+  claimsCount: Int!
+  createdAt: DateTime!
+  description: String!
+  endDateTime: DateTime!
+  id: ID!
+  isArchived: Boolean!
+  isCreator: Boolean!
+  maximumClaimsCount: Int!
+  name: String!
+  startDateTime: DateTime!
+  status: CoinDropStatus!
+  updatedAt: DateTime!
+}
+
+enum CoinDropAccessType {
+  COIN_HOLDERS_ONLY
+  FOLLOWERS_ONLY
+  PRIVATE
+}
+
+enum CoinDropStatus {
+  """CoinDrop is active and can be claimed."""
+  ACTIVE
+
+  """CoinDrop is stop ang archived."""
+  ARCHIVED
+
+  """Maximum number of claims is reached."""
+  EXHAUSTED
+
+  """
+  CoinDrop is inactive. Current time is outside the start time and end time.
+  """
+  INACTIVE
+
+  """CoinDrop is waiting for transfer confirmation."""
+  PENDING
+}
+
+type Comment implements Node {
+  account: Account!
+  createdAt: DateTime!
+  id: ID!
+  message: String!
+  updatedAt: DateTime!
+}
+
+type CommentNotification implements Node & Notification {
+  actor: Account!
+  comment: Comment!
+  createdAt: DateTime!
+  creator: CreatorAccount
+  id: ID!
+  nft: Nft
+  post: Post
+  type: NotificationType!
+}
+
+input ConnectBitcloutInput {
+  jwt: String!
+  publicKey: String!
+}
+
+type ConnectBitcloutResponse {
+  account: Account!
+  integration: Integration!
+}
+
+input ConnectTwitterInput {
+  userSecret: String!
+  userToken: String!
+}
+
+type ConnectTwitterResponse {
+  account: Account!
+}
+
+type Connection {
+  edges: [Edge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+input CreateBitcloutCoinHolderInput {
+  """This is the account you want to make it as a coin holder"""
+  account: ID!
+  amount: Float!
+
+  """This is a creator you buy from or sold to."""
+  creator: ID!
+}
+
+type CreateBitcloutCoinHolderResponse {
+  creator: CreatorAccount!
+}
+
+input CreateCoinDropInput {
+  accessType: CoinDropAccessType!
+  amount: Float!
+  description: String!
+  endDateTime: DateTime!
+  maximumClaimsCount: Int!
+  name: String!
+  startDateTime: DateTime!
+}
+
+type CreateCoinDropResponse {
+  coinDrop: CoinDrop!
+}
+
+input CreateCommentInput {
+  creator: ID
+  message: String!
+  nft: ID
+  post: ID
+}
+
+type CreateCommentResponse {
+  comment: Comment!
+  creator: CreatorAccount
+  nft: Nft
+  post: Post
+}
+
+input CreateCreatorAccountInput {
+  emailAddress: EmailAddress!
+  invitation: ID!
+  otp: String!
+}
+
+type CreateCreatorAccountResponse {
+  account: CreatorAccount!
+  token: String!
+}
+
+input CreateExternalAccountInput {
+  account: ID
+  image: URL
+  publicKey: String!
+  username: String
+}
+
+type CreateExternalAccountResponse {
+  externalAccount: ExternalAccount
+}
+
+input CreateFollowerAccountByBitcloutInput {
+  jwt: String!
+  publicKey: String!
+}
+
+input CreateFollowerAccountInput {
+  emailAddress: EmailAddress!
+  otp: String!
+}
+
+type CreateFollowerAccountResponse {
+  account: FollowerAccount!
+  token: String!
+}
+
+type CreateInvitationResponse {
+  invitation: Invitation!
+}
+
+input CreateLinkInput {
+  link: URL!
+}
+
+type CreateLinkResponse {
+  link: Link!
+}
+
+input CreateNftBidInput {
+  amount: Float!
+  bidder: ID!
+  nft: ID!
+}
+
+type CreateNftBidResponse {
+  nft: Nft
+  nftBid: NftBid
+}
+
+input CreateNftCopyInput {
+  amount: Float!
+  nft: ID!
+  owner: ID!
+}
+
+type CreateNftCopyResponse {
+  nft: Nft
+  nftCopy: NftCopy
+}
+
+input CreateNftInput {
+  contents: [URL!]
+  copiesCount: Int
+  creator: ID!
+  message: String
+  nftPostHash: String!
+}
+
+type CreateNftResponse {
+  nft: Nft
+}
+
+input CreatePostInput {
+  contents: [ID!]
+  embed: URL
+  message: String
+  visibilityType: PostVisibilityType
+}
+
+type CreatePostResponse {
+  post: Post!
+}
+
+type CreatorAccount implements Account & Node {
+  coinDrops(after: Cursor, first: Int): Connection!
+  coverImage: File
+  createdAt: DateTime!
+  description: String
+  emailAddress: EmailAddress
+  fans(after: Cursor, first: Int): Connection!
+  followedCreators(after: Cursor, first: Int): Connection
+  followersCount: Int!
+  following: Boolean!
+  followingCount: Int!
+  id: ID!
+  image: URL
+  image_next: File
+  integration(type: IntegrationType): Integration
+  integrations: [Integration!]!
+  isBitcloutCoinHolder: Boolean!
+  links: [Link!]!
+  nfts(after: Cursor, first: Int): Connection!
+  nsfwEnabled: Boolean!
+  ownedNftCopies(after: Cursor, first: Int): Connection!
+  ownedNfts(after: Cursor, first: Int): Connection!
+  posts(after: Cursor, first: Int): Connection!
+  role: AccountRole!
+  topInvestors: [Investor!]!
+  topTippers: [Tipper!]!
+  updatedAt: DateTime!
+  username: String
+}
+
+input CreatorAccountFilterInput {
+  emailAddress: StringQueryOperatorInput
+  username: StringQueryOperatorInput
+}
+
+"""Base64 encoded."""
+scalar Cursor
+
+scalar DateTime
+
+input DateTimeQueryOperatorInput {
+  eq: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  ne: DateTime
+  nin: [DateTime!]
+}
+
+input DeleteAccountInput {
+  id: ID!
+}
+
+input DeleteLinkInput {
+  id: ID!
+}
+
+type Edge {
+  cursor: Cursor!
+  node: Node!
+}
+
+"""
+A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
+"""
+scalar EmailAddress
+
+interface ExternalAccount {
+  account: Account
+  createdAt: DateTime!
+  description: String
+  image: URL
+  updatedAt: DateTime!
+  username: String
+}
+
+type Fan implements Node {
+  account: Account!
+  commentsCount: Int!
+  createdAt: DateTime!
+  creatorCoinsHeldMarketValue: Float!
+  id: ID!
+  likesCount: Int!
+  totalTipsSent: Float!
+}
+
+type File implements Node {
+  blurhash: String
+  createdAt: DateTime!
+  encoding: String!
+  id: ID!
+  mimetype: String!
+  status: FileStatus!
+  thumbnail: File
+  url: URL
+}
+
+enum FileStatus {
+  FAILED
+  PROCESSING
+  READY
+}
+
+input FloatQueryOperatorInput {
+  eq: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  ne: Float
+  nin: [Float!]
+}
+
+type FollowCreatorAccountResponse {
+  creatorAccount: CreatorAccount
+}
+
+type FollowNotification implements Node & Notification {
+  actor: Account!
+  createdAt: DateTime!
+  id: ID!
+  type: NotificationType!
+}
+
+type FollowerAccount implements Account & Node {
+  createdAt: DateTime!
+  emailAddress: EmailAddress
+  followedCreators(after: Cursor, first: Int): Connection
+  id: ID!
+  integration(type: IntegrationType): Integration
+  integrations: [Integration!]!
+  role: AccountRole!
+  updatedAt: DateTime!
+  username: String
+}
+
+input FollowerAccountFilterInput {
+  emailAddress: StringQueryOperatorInput
+  username: StringQueryOperatorInput
+}
+
+type GenerateBitcloutPostResponse {
+  image: File!
+  message: String!
+}
+
+input GenerateEmailOtpInput {
+  emailAddress: EmailAddress!
+  invitation: ID
+}
+
+input GenerateEmailOtpInput_next {
+  emailAddress: EmailAddress!
+  urlQueryParams: JSON
+}
+
+type GenerateEmailOtpResponse {
+  account: CreatorAccount
+}
+
+input GenerateSignUpEmailOtpInput {
+  emailAddress: EmailAddress!
+}
+
+type GenerateTwitterRequestTokenResponse {
+  token: String!
+}
+
+type HideNftResponse {
+  nft: Nft
+}
+
+input IDArrayQueryOperatorInput {
+  excludesAll: [ID!]
+  includesAny: [ID!]
+}
+
+input IDQueryOperatorInput {
+  eq: ID
+  in: [ID!]
+  ne: ID
+  nin: [ID!]
+}
+
+input IntQueryOperatorInput {
+  eq: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  ne: Int
+  nin: [Int!]
+}
+
+type Integration implements Node {
+  createdAt: DateTime!
+
+  """
+  ### BITCLOUT
+  - publicKey: String
+  - username: String
+  - image: String
+  - description: String
+  - coinPriceBitCloutNanos: number
+  - founderRewawrd: number
+  
+  _____
+  """
+  details: JSON! @deprecated(reason: "To be removed. Will be replaced by Integration.externalAccount")
+  externalAccount: ExternalAccount!
+  followersCount: Int!
+  followingCount: Int!
+  id: ID!
+  type: IntegrationType!
+  url: URL
+}
+
+enum IntegrationType {
+  BITCLOUT
+  TWITTER
+}
+
+type Investor implements Node {
+  externalAccount: ExternalAccount!
+  holdings: Float!
+  id: ID!
+}
+
+type Invitation implements Node {
+  code: String!
+  createdAt: DateTime!
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input LikeNftInput {
+  creator: ID!
+}
+
+type LikeNftResponse {
+  nft: Nft
+}
+
+type LikeNotification implements Node & Notification {
+  actor: Account!
+  createdAt: DateTime!
+  creator: CreatorAccount
+  id: ID!
+  nft: Nft
+  post: Post
+  type: NotificationType!
+}
+
+type LikePostResponse {
+  post: Post
+}
+
+type Link implements Node {
+  createdAt: DateTime!
+  id: ID!
+  link: URL!
+}
+
+input MarkOnboardingStepAsDoneInput {
+  step: OnboardingStep!
+}
+
+type MarkOnboardingStepAsDoneResponse {
+  remainingOnboardingSteps: [OnboardingStep!]!
+}
+
+type Mutation {
+  """
+  Generate access token
+  
+  ### Error Codes
+  
+  - **A00001** - Email address does not exist.
+  - **A00003** - OTP is invalid.
+  """
+  authenticate(input: AuthenticateInput): AuthenticateResponse!
+
+  """
+  Generate access token
+  
+  - Valid the jwt
+  - Find the Integration object
+  - Find CreatorAccount or FollowerAccount associated with the Integration object
+  
+  ### Error Codes
+  
+  - **A00004** - Token is invalid.
+  - **A00005** - Bitclout account does not exist.
+  - **Z00012** - Bitclout account is not yet integrated to a creator/follower account.
+  """
+  authenticateByBitclout(input: AuthenticateByBitcloutInput): AuthenticateResponse!
+  authenticateByBitclout_next(input: AuthenticateByBitcloutInput): AuthenticateResponse!
+
+  """
+  Generate access token
+  
+  ### Error Codes
+  
+  - **A00004** - Token is invalid.
+  - **A00005** - Bitclout account does not exist.
+  """
+  authenticateFanBitclout(input: AuthenticateFanBitcloutInput!): AuthenticateFanBitcloutResponse! @deprecated(reason: "Will be removed")
+  claimCoinDrop(id: ID!): Boolean!
+
+  """
+  Integration for Bitclout Account
+  
+  ### Error Codes
+  
+  - **A00004** - Token is invalid.
+  - **A00005** - Bitclout account does not exist.
+  - **A00006** - The bitclout account is already integrated by another creator/follower.
+  """
+  connectBitclout(input: ConnectBitcloutInput!): ConnectBitcloutResponse!
+
+  """
+  Integration for Twitter Account
+  
+  ### Error Codes
+  
+  - **A00008** - Token is invalid.
+  - **A00009** - Twitter account does not exist.
+  - **A00010** - Twitter account is already integrated by other creator.
+  """
+  connectTwitter(input: ConnectTwitterInput!): ConnectTwitterResponse!
+
+  """### MOCK"""
+  createBitcloutCoinHolder(input: CreateBitcloutCoinHolderInput!): CreateBitcloutCoinHolderResponse
+  createCoinDrop(input: CreateCoinDropInput!): CreateCoinDropResponse!
+
+  """
+  Create a comment
+  
+  ### Error Codes
+  
+  - **C00001** - Post does not exist.
+  """
+  createComment(input: CreateCommentInput!): CreateCommentResponse!
+
+  """
+  Create creator account
+  
+  ### Error Codes
+  
+  - **A00003** - OTP is invalid.
+  - **Z00001** - Invitation is invalid.
+  - **Z00002** - Email address is in use.
+  """
+  createCreatorAccount(input: CreateCreatorAccountInput!): CreateCreatorAccountResponse!
+  createExternalAccount(input: CreateExternalAccountInput!): CreateExternalAccountResponse!
+
+  """
+  Create follower account
+  
+  ### Error Codes
+  
+  - **A00003** - OTP is invalid.
+  - **Z00004** - Email address is in use.
+  """
+  createFollowerAccount(input: CreateFollowerAccountInput!): CreateFollowerAccountResponse!
+
+  """
+  Create follower account
+  
+  - Generate FollowerAccount object
+  - Generate Integration object
+  
+  ### Error Codes
+  
+  - **A00003** - OTP is invalid.
+  - **Z00004** - Email address is in use.
+  """
+  createFollowerAccountByBitclout(input: CreateFollowerAccountByBitcloutInput!): CreateFollowerAccountResponse!
+  createInvitation: CreateInvitationResponse!
+  createLink(input: CreateLinkInput!): CreateLinkResponse!
+  createNft(input: CreateNftInput!): CreateNftResponse!
+
+  """
+  Create NFT Bid
+  
+  ### Error Codes
+  
+  - **Z00014** - Amount must be higher.
+  """
+  createNftBid(input: CreateNftBidInput!): CreateNftBidResponse!
+  createNftCopy(input: CreateNftCopyInput!): CreateNftCopyResponse!
+
+  """
+  Create Post
+  
+  ###Error Code
+  
+  - **Z00005** - Some of the contents do not exist.
+  - **Z00008** - Must supply embed or contents.
+  """
+  createPost(input: CreatePostInput!): CreatePostResponse!
+  deleteAccount(input: DeleteAccountInput!): Boolean!
+  deleteCoinDrop(id: ID!): Boolean!
+  deleteComment(id: ID!): Boolean!
+  deleteLink(input: DeleteLinkInput!): Boolean!
+  deletePost(id: ID!): Boolean!
+  disconnectTwitter: Boolean!
+  followCreatorAccount(id: ID!): FollowCreatorAccountResponse!
+
+  """
+  Generating an image with predefined text
+  to be shared to bitclout.
+  
+  - **B00002** - No creator found.
+  - **B00003** - No username on the found creator.
+  - **B00004** - Cannot share jamclout profile if no profile picture.
+  - **B00005** - Cannot share jamclout profile if no profile picture.
+  """
+  generateBitcloutPost: GenerateBitcloutPostResponse!
+  generateEmailOtp(input: GenerateEmailOtpInput): GenerateEmailOtpResponse! @deprecated(reason: "Remove invitation as one of the parameters.")
+
+  """
+  Generate email OTP
+  
+  ### Error Codes
+  
+  - **A00002** - Can only generate one email OTP every 30s.
+  """
+  generateEmailOtp_next(input: GenerateEmailOtpInput_next): Boolean!
+
+  """
+  Generate email OTP on sign up
+  
+  It checks the email address of the creator/follower account first
+  and throws Z00010 error code if it exists
+  
+  - **A00002** - Can only generate one email OTP every 30s.
+  - **Z00010** - Email Address is already registered.
+  """
+  generateSignUpEmailOtp(input: GenerateSignUpEmailOtpInput): Boolean! @deprecated(reason: "Redundant mutation api. To be removed.")
+
+  """
+  Generate twitter request token for authentication.
+  
+  - **A00007** - Invalid twitter oauth token request.
+  """
+  generateTwitterRequestToken(callback: URL!): GenerateTwitterRequestTokenResponse!
+  hideNft(id: ID!): HideNftResponse!
+  likeNft(id: ID!, input: LikeNftInput!): LikeNftResponse!
+  likePost(id: ID!): LikePostResponse!
+  markOnboardingStepDone(input: MarkOnboardingStepAsDoneInput!): MarkOnboardingStepAsDoneResponse!
+
+  """
+  Unfollow creator account
+   ### Error Codes
+  
+  - **B00008** - Something wrong happened when unfollowing.
+  """
+  unfollowCreatorAccount(id: ID!): UnfollowCreatorAccountResponse
+  unhideNft(id: ID!): UnhideNftResponse!
+  unlikeNft(id: ID!, input: UnLikeNftInput!): UnlikeNftResponse!
+  unlikePost(id: ID!): UnlikePostResponse!
+  updateCoinDrop(id: ID!, input: UpdateCoinDropInput!): UpdateCoinDropResponse!
+  updateComment(input: UpdateCommentInput!): UpdateCommentResponse!
+
+  """
+  Updating the current logged in user.
+  
+  ### Error Codes
+  
+  - **B00001** - Username is already in use by another account.
+  """
+  updateMe(input: UpdateMeInput): UpdateMeResponse!
+
+  """
+  Update post
+  ###Error Code
+  
+  - **Z00006** - Some of the contents do not exist.
+  """
+  updatePost(id: ID!, input: UpdatePostInput!): UpdatePostResponse!
+
+  """
+  Upload File
+  
+  ### Unsupported Mimetype
+  -application/x-troff-msvideo
+  -video/avi
+  -video/msvideo
+  -video/x-msvideo
+  -video/quicktime
+  -video/x-quicktime
+  -image/mov
+  -video/avi
+  -video/ogg
+  -video/x-ms-wmv
+  -video/x-ms-asf
+  -video/webm
+  
+  ### Error Codes
+  
+  - **F00001** - Error occured in writing the file.
+  - **F00002** - Cannot package video.
+  - **F00003** - Cannot pin directory to IPFS.
+  - **F00004** - Unsupported mimetype.
+  """
+  uploadFile(input: UploadFileInput): UploadFileResponse!
+  uploadFile_next(input: UploadFileInput): UploadFileResponse!
+
+  """
+  This is a mock resolver for simulating SEND_TIP transaction from bitclout node
+  """
+  verifyBitcloutTransaction(input: VerifyBitcloutTransactionInput!): VerifyBitcloutTransactionResponse!
+
+  """
+  Verify Email
+  
+  ### Error Codes
+  
+  - **A00003** - OTP is invalid.
+  """
+  verifyEmail(input: VerifyEmailInput!): Boolean!
+  verifyEmail_next(input: VerifyEmailInput!): VerifyEmailResponse!
+}
+
+type Nft implements Node {
+  availableCopiesCount: Int!
+  bids(after: Cursor, first: Int): Connection!
+  comments(after: Cursor, first: Int): Connection!
+  contents: [URL!]!
+  copies(after: Cursor, first: Int): Connection!
+  copiesCount: Int!
+  createdAt: DateTime!
+  currentBidAmount: Float!
+  hidden: Boolean!
+  id: ID!
+  liked: Boolean!
+  likesCount: Int!
+  message: String
+  originalUrl: URL!
+  soldCopiesCount: Int!
+  topOwners: [NftCopy!]!
+  updatedAt: DateTime!
+}
+
+type NftBid implements Node {
+  amount: Float!
+  bidder: ExternalAccount!
+  createdAt: DateTime!
+  id: ID!
+}
+
+type NftCopy implements Node {
+  amount: Float!
+  createdAt: DateTime!
+  id: ID!
+  nft: Nft!
+  owner: ExternalAccount!
+}
+
+interface Node {
+  id: ID!
+}
+
+interface Notification {
+  createdAt: DateTime!
+  type: NotificationType!
+}
+
+enum NotificationType {
+  BUY_BITCLOUT_CREATOR_COIN
+  COMMENT
+  FOLLOW
+  LIKE
+  SEND_TIP
+  UNFOLLOW
+}
+
+enum OnboardingStep {
+  CONNECT_ACCOUNT
+  CONNECT_EMAIL
+  CREATE_COIN_DROP
+  CREATE_POST
+  EDIT_PROFILE
+  ENABLE_REWARDS
+  SHARE_TO_BITCLOUT
+}
+
+type PageInfo {
+  endCursor: Cursor
+  hasNextPage: Boolean!
+}
+
+type Post implements Node {
+  comments(after: Cursor, first: Int): Connection!
+  contents: [File!]
+  createdAt: DateTime!
+  creator: CreatorAccount!
+  deleted: Boolean! @deprecated(reason: "To be removed")
+  embed: URL
+  id: ID!
+  liked: Boolean!
+  likesCount: Int!
+  message: String
+  thumbnail: File
+  updatedAt: DateTime!
+  visibility: Boolean!
+  visibilityType: PostVisibilityType!
+}
+
+enum PostVisibilityType {
+  COIN_HOLDERS_ONLY
+  EVERYONE
+  FOLLOWERS_ONLY
+}
+
+type Query {
+  """
+  Retrieve account given the email address.
+  
+  ### Error Codes
+  
+  -
+  """
+  accountByEmailAddress(emailAddress: EmailAddress): Account
+  coinDrops(after: Cursor, first: Int): Connection!
+  creatorAccount(username: String!): CreatorAccount
+
+  """Retrieve Creator accounts"""
+  creatorAccounts(after: Cursor, filter: CreatorAccountFilterInput, first: Int): Connection!
+
+  """Retrieve Follower accounts"""
+  followerAccounts(after: Cursor, filter: FollowerAccountFilterInput, first: Int): Connection!
+  invitation(code: String!): Invitation
+  me: Account!
+  node(id: ID!): Node
+  notifications(after: Cursor, first: Int): Connection!
+  posts(after: Cursor, first: Int): Connection!
+  remainingOnboardingSteps: [OnboardingStep!]!
+  usdPerBitcloutExchangeRate: Float!
+
+  """Retrieve current API version"""
+  version: String!
+  walletAddress: String!
+  walletCurrentBalance: Float!
+  walletTotalAmountReceived: Float!
+  walletTotalAmountSent: Float!
+  walletTransfers: Connection!
+}
+
+type SendTipNotification implements Node & Notification {
+  actor: Account!
+  amount: Float!
+  createdAt: DateTime!
+  id: ID!
+  type: NotificationType!
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+input StringArrayQueryOperatorInput {
+  excludesAll: [String!]
+  includesAny: [String!]
+}
+
+input StringQueryOperatorInput {
+  contains: String
+  eq: String
+  in: [String!]
+  ne: String
+  nin: [String!]
+  startsWith: String
+}
+
+type Tipper implements Node {
+  externalAccount: ExternalAccount!
+  id: ID!
+  tipsSent: Float!
+}
+
+type TwitterExternalAccount implements ExternalAccount & Node {
+  account: Account
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  image: URL
+  updatedAt: DateTime!
+  username: String
+}
+
+"""
+A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+"""
+scalar URL
+
+input UnLikeNftInput {
+  creator: ID!
+}
+
+type UnfollowCreatorAccountResponse {
+  creatorAccount: CreatorAccount
+}
+
+type UnhideNftResponse {
+  nft: Nft
+}
+
+type UnlikeNftResponse {
+  nft: Nft
+}
+
+type UnlikePostResponse {
+  post: Post
+}
+
+input UpdateCoinDropInput {
+  accessType: CoinDropAccessType
+  amount: Float
+  description: String
+  endDateTime: DateTime
+  maximumClaimsCount: Int
+  name: String
+  startDateTime: DateTime
+}
+
+type UpdateCoinDropResponse {
+  coinDrop: CoinDrop
+}
+
+input UpdateCommentInput {
+  id: ID!
+  message: String!
+}
+
+type UpdateCommentResponse {
+  comment: Comment!
+  nft: Nft
+  post: Post
+}
+
+input UpdateMeInput {
+  coverImage: ID
+  description: String
+  image: ID
+  nsfwEnabled: Boolean
+  username: String
+}
+
+type UpdateMeResponse {
+  account: Account!
+}
+
+input UpdatePostInput {
+  contents: [ID!]
+  embed: URL
+  message: String
+  visibilityType: PostVisibilityType
+}
+
+type UpdatePostResponse {
+  post: Post!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UploadFileInput {
+  file: Upload!
+}
+
+type UploadFileResponse {
+  file: File!
+}
+
+input VerifyBitcloutTransactionInput {
+  amount: Float
+  recipient: ID
+  transaction: String!
+  type: BitcloutTransactionType!
+}
+
+type VerifyBitcloutTransactionResponse {
+  bitcloutTransaction: BitcloutTransaction!
+}
+
+input VerifyEmailInput {
+  emailAddress: EmailAddress!
+  otp: String!
+}
+
+type VerifyEmailResponse {
+  account: Account
+}
+
+enum WallerTransferType {
+  RECEIVE
+  SEND
+}
+
+type WalletTransfer implements Node {
+  amount: Float!
+  createdAt: DateTime!
+  id: ID!
+  receiver: ExternalAccount
+  sender: ExternalAccount
+  type: WallerTransferType!
+}
