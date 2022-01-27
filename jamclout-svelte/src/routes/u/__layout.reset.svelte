@@ -5,7 +5,6 @@
 	import { GET_PROFILE } from '$lib/graphql/queries/profile';
 	import Header from '$lib/header/Header.svelte';
 	import type { Load } from '@sveltejs/kit';
-	import { LinkIcon, TwitterIcon } from 'svelte-feather-icons';
 	import '../../app.css';
 
 	let creatorProfile;
@@ -77,7 +76,8 @@
 									<div class="flex-none w-8 h-8 mr-2">
 										<img
 											src={`${assets}/icons/bitclout-logo.svg`}
-											alt="Bitclout Logo"
+											alt="bitclout-icon"
+											color="black"
 											class="mx-auto"
 										/>
 									</div>
@@ -90,31 +90,18 @@
 									<div class="flex-none w-12 h-8">
 										<img
 											src={`${assets}/icons/check-circle.svg`}
-											alt="Bitclout Logo"
+											alt="check-circle"
 											class="mx-auto"
 										/>
 									</div>
 								</div>
 							{/if}
 
-							<!-- {#if $getProfileRes.data.creatorAccount.integrations.find((integration) => integration.type === 'INSTAGRAM')}
-								<div class="flex justify-between">
-									<div class="flex-none w-8 h-8 mr-2"><InstagramIcon class="h-6" /></div>
-									<div class="flex-none mr-2"><p class="text-base">Instagram</p></div>
-									<div class="grow text-base text-[#70747D]">12k followers</div>
-									<div class="flex-none w-12 h-8">
-										<img
-											src={`${assets}/icons/check-circle.svg`}
-											alt="Bitclout Logo"
-											class="mx-auto"
-										/>
-									</div>
-								</div>
-							{/if} -->
-
 							{#if $getProfileRes.data.creatorAccount.integrations.find((integration) => integration.type === 'TWITTER')}
 								<div class="flex justify-between">
-									<div class="flex-none w-8 h-8 mr-2"><TwitterIcon class="h-6" /></div>
+									<div class="flex-none w-8 h-8 mr-2">
+										<img src={`${assets}/icons/twitter.svg`} alt="twitter-icon" class="h-6" />
+									</div>
 									<div class="flex-none mr-2"><p class="text-base">Twitter</p></div>
 									<div class="grow text-base text-[#70747D]">
 										{$getProfileRes.data.creatorAccount.integrations.find(
@@ -124,7 +111,7 @@
 									<div class="flex-none w-12 h-8">
 										<img
 											src={`${assets}/icons/check-circle.svg`}
-											alt="Bitclout Logo"
+											alt="check-circle"
 											class="mx-auto"
 										/>
 									</div>
@@ -134,8 +121,12 @@
 							{#if $getProfileRes.data.creatorAccount.links.length > 0}
 								{#each $getProfileRes.data.creatorAccount.links as linkItem}
 									<div class="flex justify-between">
-										<div class="flex-none w-8 h-8 mr-2 justify-center items-center m-auto ">
-											<LinkIcon class="h-[21px] align-middle" />
+										<div class="flex-none w-8 h-8 mr-2">
+											<img
+												src={`${assets}/icons/link.svg`}
+												alt="link-icon"
+												class="h-[21px] mx-auto"
+											/>
 										</div>
 										<div class="grow">
 											<a href={linkItem.link} target="_blank" class="text-base text-[#1C121C]"

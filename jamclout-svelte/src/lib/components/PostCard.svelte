@@ -1,6 +1,5 @@
 <script>
 	import { assets } from '$app/paths';
-	import { XIcon } from 'svelte-feather-icons';
 	import { fade } from 'svelte/transition';
 
 	let showModal = false;
@@ -13,7 +12,7 @@
 
 <div
 	on:click={toggleModal}
-	class="w-[250px] h-[332px] bg-[#A54ED5] justify-self-center rounded-lg bg-cover"
+	class="w-[250px] h-[332px] bg-[#A54ED5] justify-self-center rounded-lg bg-cover bg-center bg-no-repeat"
 	style={`background-image: url('${
 		postData.node.thumbnail ? postData.node.thumbnail.url : `${assets}/blur.png`
 	} ')`}
@@ -32,7 +31,7 @@
 				type="button"
 				on:click={toggleModal}
 			>
-				<XIcon class="h-[24px]" />
+				<img src={`${assets}/icons/x.svg`} alt="x-btn" class="h-[24px] mx-auto" />
 			</button>
 		</div>
 		<div class="flex-none w-[398px] bg-white">wew</div>

@@ -5,7 +5,7 @@
 </script>
 
 <header
-	class="bg-cover bg-[#A54ED5] h-64"
+	class="bg-cover bg-[#A54ED5] bg-center bg-no-repeat h-64"
 	style={`background-image: url('${
 		getProfileRes &&
 		$getProfileRes.data &&
