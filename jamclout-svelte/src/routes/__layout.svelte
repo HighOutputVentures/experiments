@@ -41,12 +41,12 @@
 					Loading...
 				{:else if $getProfileRes.error}
 					Error: {$getProfileRes.error.message}
-				{:else}
+				{:else if $getProfileRes.data.creatorAccount}
 					<div class="absolute -top-20 h-auto inset-x-0 text-center">
 						<img
 							src={$getProfileRes.data.creatorAccount.image_next.url}
 							alt={$getProfileRes.data.creatorAccount.username}
-							class="mx-auto w-44 h-44 rounded-full outline outline-4 outline-offset-0 outline-white"
+							class="mx-auto w-44 h-44 rounded-full outline outline-4 outline-offset-0 outline-white bg-white"
 						/>
 						<p class="font-bold text-2xl my-2">@{$getProfileRes.data.creatorAccount.username}</p>
 						<div class="flex flex-row items-center justify-center">
@@ -161,37 +161,3 @@
 		</div>
 	</div>
 </main>
-
-<!-- <footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer> -->
-<style>
-	/* main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	} */
-</style>

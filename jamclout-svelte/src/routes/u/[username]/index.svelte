@@ -36,12 +36,14 @@
 		Error: {$creatorProps.error.message}
 	{:else}
 		<ul>
-			<!-- {console.log($creatorProps.data.creatorAccount.posts.edges)} -->
-			{#each $creatorProps.data.creatorAccount.posts.edges as node}
-				<li>
-					{node.node.id}
-				</li>
-			{/each}
+			{#if $creatorProps.data && $creatorProps.data.creatorAccount}
+				<!-- {console.log($creatorProps.data.creatorAccount.posts.edges)} -->
+				{#each $creatorProps.data.creatorAccount.posts.edges as node}
+					<li>
+						{node.node.id}
+					</li>
+				{/each}
+			{/if}
 		</ul>
 	{/if}
 {/if}

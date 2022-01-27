@@ -5,9 +5,12 @@
 </script>
 
 <header
-	class="bg-cover bg-indigo-500 h-64"
+	class="bg-cover bg-[#A54ED5] h-64"
 	style={`background-image: url('${
-		getProfileRes && $getProfileRes.data
+		getProfileRes &&
+		$getProfileRes.data &&
+		$getProfileRes.data.creatorAccount &&
+		$getProfileRes.data.creatorAccount.coverImage
 			? $getProfileRes.data.creatorAccount.coverImage.url
 			: `${assets}/cover-photo.jpg`
 	} ')`}

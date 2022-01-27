@@ -45,7 +45,11 @@
 												class="mx-auto w-[30px] h-[30px] rounded-full mr-4"
 											/>
 										</div>
-										<div class="grow">{investor.externalAccount.username}</div>
+										<div class="grow">
+											<a sveltekit:prefetch href={`/u/${investor.externalAccount.username}`}
+												>{investor.externalAccount.username}</a
+											>
+										</div>
 										<div class="flex-none">$ {investor.holdings.toFixed(2)}</div>
 									</div>
 								{/each}
