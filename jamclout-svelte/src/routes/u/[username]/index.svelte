@@ -1,85 +1,47 @@
-<script lang="ts">
-	import { page } from '$app/stores';
+<script lang="ts" context="module">
 	import { client } from '$lib/client';
-	import { gql } from '@apollo/client/core';
-	const creatorUsername = $page.params.username;
+	import type { Load } from '@sveltejs/kit';
+	import { GET_CREATOR_POSTS_WITHOUT_AUTH } from '../../../graphql/queries/creator';
+
 	let creatorProfile;
 
-	async function getCreatorProfile() {
-		console.log('🚀 ~ file: index.svelte ~ line 8 ~ getCreatorProfile ~ getCreatorProfile');
+	// see https://kit.svelte.dev/docs#loading
+	export const load: Load = async ({ params }) => {
+		const creatorUsername = params.username;
 
-		creatorProfile = await client.query(
-			gql`
-				query GetCreatorPostsWithOutAuth($username: String!) {
-					creatorAccount(username: $username) {
-						following
-						username
-						id
-						image_next {
-							id
-							url
-							blurhash
-						}
-						posts {
-							edges {
-								node {
-									... on Post {
-										id
-										message
-										embed
-										thumbnail {
-											id
-											url
-											blurhash
-										}
-										contents {
-											id
-											url
-											mimetype
-											blurhash
-											thumbnail {
-												id
-												url
-											}
-										}
-										likesCount
-										comments {
-											totalCount
-										}
-										visibilityType
-									}
-								}
-							}
-						}
-					}
-				}
-			`,
-			{
-				variables: {
-					username: creatorUsername
-				},
-				fetchPolicy: 'no-cache'
-			}
-		);
-	}
+		creatorProfile = await client.query(GET_CREATOR_POSTS_WITHOUT_AUTH, {
+			variables: {
+				username: creatorUsername
+			},
+			fetchPolicy: 'no-cache'
+		});
+
+		return {
+			props: { creatorProps: creatorProfile, creatorUname: creatorUsername }
+		};
+	};
 </script>
 
-<button class="h-4 bg-[#1da1f2] text-white" on:click={getCreatorProfile}>Get Profile</button>
+<script lang="ts">
+	export let creatorProps;
+	console.log('🚀 ~ file: index.svelte ~ line 33 ~ creatorProps', creatorProps);
+	export let creatorUname;
+	console.log('🚀 ~ file: index.svelte ~ line 34 ~ creatorUname', creatorUname);
+</script>
 
-{#if creatorProfile}
-	{#if $creatorProfile.loading}
-		Loading... {creatorUsername}
-	{:else if $creatorProfile.error}
-		Error: {$creatorProfile.error.message}
+{#if creatorProps}
+	{#if $creatorProps.loading}
+		Loading... {creatorUname}
+	{:else if $creatorProps.error}
+		Error: {$creatorProps.error.message}
 	{:else}
 		<ul>
-			{console.log(creatorProfile.data)}
-			<!-- {#each $creatorProfile.data.creatorProfile.slice(0, 5) as rate}
+			<!-- {console.log($creatorProps.data.creatorAccount.posts.edges)} -->
+			{#each $creatorProps.data.creatorAccount.posts.edges as node}
 				<li>
-					1 USD = {rate.rate}
-					{rate.currency}
+					{node.node.id}
 				</li>
-			{/each} -->
+			{/each}
 		</ul>
 	{/if}
 {/if}
