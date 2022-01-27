@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-	import { assets } from '$app/paths';
 	import { client } from '$lib/client';
+	import PostCard from '$lib/components/PostCard.svelte';
 	import { GET_CREATOR_POSTS_WITHOUT_AUTH } from '$lib/graphql/queries/creator';
 	import type { Load } from '@sveltejs/kit';
 
@@ -41,14 +41,7 @@
 		<div class="grid grid-cols-3 gap-4 max-w-fit mx-auto pt-12">
 			{#if $creatorProps.data && $creatorProps.data.creatorAccount}
 				{#each $creatorProps.data.creatorAccount.posts.edges as post}
-					<div
-						class="w-[250px] h-[332px] bg-[#A54ED5] justify-self-center rounded-lg bg-cover"
-						style={`background-image: url('${
-							post.node.thumbnail ? post.node.thumbnail.url : `${assets}/blur.png`
-						} ')`}
-					>
-						{post.node.id}
-					</div>
+					<PostCard postData={post} />
 				{/each}
 			{/if}
 		</div>
