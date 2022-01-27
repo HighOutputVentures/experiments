@@ -5,6 +5,7 @@
 	import type { Load } from '@sveltejs/kit';
 	import { LinkIcon, TwitterIcon } from 'svelte-feather-icons';
 	import '../app.css';
+	import FanTabs from '../components/FanTabs.svelte';
 	import { GET_PROFILE } from '../graphql/queries/profile';
 
 	let creatorProfile;
@@ -146,7 +147,10 @@
 							{/if}
 						</div>
 						<div class="text-left">
-							<p class="flex-none font-bold text-xl mb-4">Fans</p>
+							<p class="flex-none font-bold text-xl">Fans</p>
+							{#if $getProfileRes.data && $getProfileRes.data.creatorAccount}
+								<FanTabs topInvestors={$getProfileRes.data.creatorAccount.topInvestors} />
+							{/if}
 						</div>
 					</div>
 				{/if}
