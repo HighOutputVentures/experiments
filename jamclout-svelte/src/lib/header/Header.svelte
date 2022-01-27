@@ -1,12 +1,16 @@
 <script lang="ts">
 	// import { page } from '$app/stores';
-	// import logo from './svelte-logo.svg';
+	export let getProfileRes;
 	import { assets } from '$app/paths';
 </script>
 
 <header
 	class="bg-cover bg-indigo-500 h-64"
-	style={`background-image: url('${assets}/cover-photo.jpg')`}
+	style={`background-image: url('${
+		getProfileRes && $getProfileRes.data
+			? $getProfileRes.data.creatorAccount.coverImage.url
+			: `${assets}/cover-photo.jpg`
+	} ')`}
 >
 	<div class="h-16 flex justify-between py-3 px-7">
 		<img src={`${assets}/logo-light.png`} alt="Jamclout Logo" class="h-full w-min object-cover" />

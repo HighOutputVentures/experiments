@@ -30,7 +30,7 @@
 	export let getProfileRes;
 </script>
 
-<Header />
+<Header {getProfileRes} />
 
 <main class="container mx-auto h-full">
 	<div class="flex">
