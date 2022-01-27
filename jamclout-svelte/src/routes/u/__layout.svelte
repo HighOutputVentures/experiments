@@ -1,12 +1,12 @@
 <script lang="ts" context="module">
 	import { assets } from '$app/paths';
 	import { client } from '$lib/client';
+	import FanTabs from '$lib/components/FanTabs.svelte';
+	import { GET_PROFILE } from '$lib/graphql/queries/profile';
 	import Header from '$lib/header/Header.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { LinkIcon, TwitterIcon } from 'svelte-feather-icons';
-	import '../app.css';
-	import FanTabs from '../components/FanTabs.svelte';
-	import { GET_PROFILE } from '../graphql/queries/profile';
+	import '../../app.css';
 
 	let creatorProfile;
 

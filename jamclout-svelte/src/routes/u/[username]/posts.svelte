@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { client } from '$lib/client';
+	import { GET_CREATOR_POSTS_WITHOUT_AUTH } from '$lib/graphql/queries/creator';
 	import type { Load } from '@sveltejs/kit';
-	import { GET_CREATOR_POSTS_WITHOUT_AUTH } from '../../../graphql/queries/creator';
 
 	let creatorProfile;
 
