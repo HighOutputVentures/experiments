@@ -3,7 +3,7 @@
 	import { client } from '$lib/client';
 	import Header from '$lib/header/Header.svelte';
 	import type { Load } from '@sveltejs/kit';
-	import { TwitterIcon } from 'svelte-feather-icons';
+	import { LinkIcon, TwitterIcon } from 'svelte-feather-icons';
 	import '../app.css';
 	import { GET_PROFILE } from '../graphql/queries/profile';
 
@@ -128,6 +128,21 @@
 										/>
 									</div>
 								</div>
+							{/if}
+
+							{#if $getProfileRes.data.creatorAccount.links.length > 0}
+								{#each $getProfileRes.data.creatorAccount.links as linkItem}
+									<div class="flex justify-between">
+										<div class="flex-none w-8 h-8 mr-2 justify-center items-center m-auto ">
+											<LinkIcon class="h-[21px] align-middle" />
+										</div>
+										<div class="grow">
+											<a href={linkItem.link} target="_blank" class="text-base text-[#1C121C]"
+												>{linkItem.link}</a
+											>
+										</div>
+									</div>
+								{/each}
 							{/if}
 						</div>
 						<div class="text-left">
