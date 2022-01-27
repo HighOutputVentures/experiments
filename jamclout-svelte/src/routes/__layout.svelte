@@ -2,7 +2,7 @@
 </script>
 
 <main>
-	Main Layout
+	HOV Experiment - Svelte Development using SvelteKit
 	<slot />
 </main>
 
