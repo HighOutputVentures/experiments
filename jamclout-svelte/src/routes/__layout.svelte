@@ -1,7 +1,9 @@
 <script lang="ts" context="module">
+	import { assets } from '$app/paths';
 	import { client } from '$lib/client';
 	import Header from '$lib/header/Header.svelte';
 	import type { Load } from '@sveltejs/kit';
+	import { TwitterIcon } from 'svelte-feather-icons';
 	import '../app.css';
 	import { GET_PROFILE } from '../graphql/queries/profile';
 
@@ -19,13 +21,13 @@
 		});
 
 		return {
-			props: { creatorProps: creatorProfile }
+			props: { getProfileRes: creatorProfile }
 		};
 	};
 </script>
 
 <script lang="ts">
-	export let creatorProps;
+	export let getProfileRes;
 </script>
 
 <Header />
@@ -33,29 +35,29 @@
 <main class="container mx-auto h-full">
 	<div class="flex">
 		<div class="flex-none w-1/5 relative">
-			{#if creatorProps}
-				{#if $creatorProps.loading}
+			{#if getProfileRes}
+				{#if $getProfileRes.loading}
 					Loading...
-				{:else if $creatorProps.error}
-					Error: {$creatorProps.error.message}
+				{:else if $getProfileRes.error}
+					Error: {$getProfileRes.error.message}
 				{:else}
 					<div class="absolute -top-20 h-auto inset-x-0 text-center">
 						<img
-							src={$creatorProps.data.creatorAccount.image_next.url}
-							alt={$creatorProps.data.creatorAccount.username}
+							src={$getProfileRes.data.creatorAccount.image_next.url}
+							alt={$getProfileRes.data.creatorAccount.username}
 							class="mx-auto w-44 h-44 rounded-full outline outline-4 outline-offset-0 outline-white"
 						/>
-						<p class="font-bold text-2xl my-2">@{$creatorProps.data.creatorAccount.username}</p>
+						<p class="font-bold text-2xl my-2">@{$getProfileRes.data.creatorAccount.username}</p>
 						<div class="flex flex-row items-center justify-center">
 							<div class="flex flex-col mx-2">
 								<p class="flex-none font-bold text-xl">
-									{$creatorProps.data.creatorAccount.followersCount}
+									{$getProfileRes.data.creatorAccount.followersCount}
 								</p>
 								<p class="flex-none text-sm text-[#A5A5A5]">Followers</p>
 							</div>
 							<div class="flex flex-col mx-2">
 								<p class="flex-none font-bold text-xl">
-									{$creatorProps.data.creatorAccount.followingCount}
+									{$getProfileRes.data.creatorAccount.followingCount}
 								</p>
 								<p class="flex-none text-sm text-[#A5A5A5]">Following</p>
 							</div>
@@ -64,29 +66,69 @@
 						<div class="text-left mb-7">
 							<p class="flex-none font-bold text-xl mb-4">About</p>
 							<p class="flex-none text-sm">
-								{$creatorProps.data.creatorAccount.description}
+								{$getProfileRes.data.creatorAccount.description}
 							</p>
 						</div>
 						<div class="text-left mb-7">
 							<p class="flex-none font-bold text-xl mb-4">Links</p>
-							<div class="flex justify-between">
-								<div class="flex-none w-8 h-8">01</div>
-								<div class="grow">Bitclout</div>
-								<div class="grow">14k followers</div>
-								<div class="flex-none w-12 h-8">02</div>
-							</div>
-							<div class="flex justify-between">
-								<div class="flex-none w-8 h-8">01</div>
-								<div class="grow">Instagram</div>
-								<div class="grow">12k followers</div>
-								<div class="flex-none w-12 h-8">02</div>
-							</div>
-							<div class="flex justify-between">
-								<div class="flex-none w-8 h-8">01</div>
-								<div class="grow">Twitter</div>
-								<div class="grow">11k followers</div>
-								<div class="flex-none w-12 h-8">02</div>
-							</div>
+							{#if $getProfileRes.data.creatorAccount.integrations.find((integration) => integration.type === 'BITCLOUT')}
+								<div class="flex justify-between">
+									<div class="flex-none w-8 h-8 mr-2">
+										<img
+											src={`${assets}/icons/bitclout-logo.svg`}
+											alt="Bitclout Logo"
+											class="mx-auto"
+										/>
+									</div>
+									<div class="flex-none mr-2"><p class="text-base">Bitclout</p></div>
+									<div class="grow text-base text-[#70747D]">
+										{$getProfileRes.data.creatorAccount.integrations.find(
+											(integration) => integration.type === 'BITCLOUT'
+										).followersCount} followers
+									</div>
+									<div class="flex-none w-12 h-8">
+										<img
+											src={`${assets}/icons/check-circle.svg`}
+											alt="Bitclout Logo"
+											class="mx-auto"
+										/>
+									</div>
+								</div>
+							{/if}
+
+							<!-- {#if $getProfileRes.data.creatorAccount.integrations.find((integration) => integration.type === 'INSTAGRAM')}
+								<div class="flex justify-between">
+									<div class="flex-none w-8 h-8 mr-2"><InstagramIcon class="h-6" /></div>
+									<div class="flex-none mr-2"><p class="text-base">Instagram</p></div>
+									<div class="grow text-base text-[#70747D]">12k followers</div>
+									<div class="flex-none w-12 h-8">
+										<img
+											src={`${assets}/icons/check-circle.svg`}
+											alt="Bitclout Logo"
+											class="mx-auto"
+										/>
+									</div>
+								</div>
+							{/if} -->
+
+							{#if $getProfileRes.data.creatorAccount.integrations.find((integration) => integration.type === 'TWITTER')}
+								<div class="flex justify-between">
+									<div class="flex-none w-8 h-8 mr-2"><TwitterIcon class="h-6" /></div>
+									<div class="flex-none mr-2"><p class="text-base">Twitter</p></div>
+									<div class="grow text-base text-[#70747D]">
+										{$getProfileRes.data.creatorAccount.integrations.find(
+											(integration) => integration.type === 'TWITTER'
+										).followersCount} followers
+									</div>
+									<div class="flex-none w-12 h-8">
+										<img
+											src={`${assets}/icons/check-circle.svg`}
+											alt="Bitclout Logo"
+											class="mx-auto"
+										/>
+									</div>
+								</div>
+							{/if}
 						</div>
 						<div class="text-left">
 							<p class="flex-none font-bold text-xl mb-4">Fans</p>
