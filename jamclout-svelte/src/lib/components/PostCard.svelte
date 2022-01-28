@@ -2,6 +2,7 @@
 	import { assets } from '$app/paths';
 	import { client } from '$lib/client';
 	import { GET_CREATOR_POST_WITHOUT_AUTH } from '$lib/graphql/queries/creator';
+	import { timeAgo } from '$lib/utils/dateTime';
 	import { fade } from 'svelte/transition';
 
 	let showModal = false;
@@ -74,8 +75,8 @@
 							<div class="flex flex-col">
 								<div class="flex-none">
 									<div class="flex justify-between">
-										<div class="grow font-bold text-[#1C121C]">{creator.username}</div>
-										<div class="flex-none">days ago</div>
+										<div class="grow font-bold text-[#1C121C]">@{creator.username}</div>
+										<div class="flex-none">{timeAgo(postData.node.createdAt)}</div>
 									</div>
 								</div>
 								<div class="grow mb-[16px]">{postData.node.message || ''}</div>
@@ -109,7 +110,7 @@
 							{:else if $creatorPost.data.node.comments.totalCount > 0}
 								{#each $creatorPost.data.node.comments.edges as comment}
 									<div class="flex flex-row mt-[8px]">
-										<div class="flex-none ">
+										<div class="flex-none">
 											<img
 												src={comment.node.account.image_next
 													? comment.node.account.image_next.url
@@ -122,11 +123,13 @@
 											<div class="flex flex-col">
 												<div class="flex flex-row">
 													<div class="flex-none mr-2 font-bold">
-														{comment.node.account.username}
+														@{comment.node.account.username}
 													</div>
 													<div class="grow">{comment.node.message}</div>
 												</div>
-												<div class="flex-none">days ago</div>
+												<div class="flex-none">
+													{timeAgo($creatorPost.data.node.createdAt)}
+												</div>
 											</div>
 										</div>
 									</div>

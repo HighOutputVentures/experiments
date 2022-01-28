@@ -38,6 +38,7 @@ export const GET_CREATOR_POSTS_WITHOUT_AUTH = gql`
 								totalCount
 							}
 							visibilityType
+							createdAt
 						}
 					}
 				}
