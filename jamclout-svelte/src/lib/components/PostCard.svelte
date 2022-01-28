@@ -1,13 +1,37 @@
-<script>
+<script lang="ts">
 	import { assets } from '$app/paths';
+	import { client } from '$lib/client';
+	import { GET_CREATOR_POST_WITHOUT_AUTH } from '$lib/graphql/queries/creator';
 	import { fade } from 'svelte/transition';
 
 	let showModal = false;
+
 	export let postData;
 	export let creator;
 
+	let creatorPost;
+
 	function toggleModal() {
 		showModal = !showModal;
+	}
+
+	async function getCreatorPost() {
+		console.log('🚀 ~ file: PostCard.svelte ~ line 19 ~ getCreatorPost ~ getCreatorPost');
+		creatorPost = await client.query(GET_CREATOR_POST_WITHOUT_AUTH, {
+			variables: {
+				id: postData.node.id
+			},
+			fetchPolicy: 'no-cache'
+		});
+		console.log('🚀 ~ file: PostCard.svelte ~ line 26 ~ getCreatorPost ~ creatorPost', creatorPost);
+	}
+
+	console.log('🚀 ~ file: PostCard.svelte ~ line 9 ~ creatorPost', creatorPost);
+
+	$: {
+		if (showModal) {
+			getCreatorPost();
+		}
 	}
 </script>
 
@@ -37,7 +61,7 @@
 		</div>
 		<div class="flex-none w-[398px] bg-white">
 			<div class="flex flex-col">
-				<div class="flex-none">
+				<div class="flex-none border-b-2">
 					<div class="flex m-[24px]">
 						<div class="flex-none mb-[2px]">
 							<img
@@ -54,7 +78,7 @@
 										<div class="flex-none">days ago</div>
 									</div>
 								</div>
-								<div class="grow mb-[16px]">{postData.node.message}</div>
+								<div class="grow mb-[16px]">{postData.node.message || ''}</div>
 								<div class="flex-none">
 									<div class="flex flex-row">
 										<div class="flex-none mr-2">
@@ -75,7 +99,42 @@
 						</div>
 					</div>
 				</div>
-				<div class="grow" />
+				<div class="grow mx-[24px] my-[16px]">
+					<div class="flex flex-col">
+						{#if creatorPost}
+							{#if $creatorPost.loading}
+								Loading comments...
+							{:else if $creatorPost.error}
+								Error: {$creatorPost.error.message}
+							{:else if $creatorPost.data.node.comments.totalCount > 0}
+								{#each $creatorPost.data.node.comments.edges as comment}
+									<div class="flex flex-row mt-[8px]">
+										<div class="flex-none ">
+											<img
+												src={comment.node.account.image_next
+													? comment.node.account.image_next.url
+													: `${assets}/blur.png`}
+												alt={comment.node.account.username}
+												class="mx-auto w-[48px] h-[48px] rounded-full mr-4"
+											/>
+										</div>
+										<div class="grow">
+											<div class="flex flex-col">
+												<div class="flex flex-row">
+													<div class="flex-none mr-2 font-bold">
+														{comment.node.account.username}
+													</div>
+													<div class="grow">{comment.node.message}</div>
+												</div>
+												<div class="flex-none">days ago</div>
+											</div>
+										</div>
+									</div>
+								{/each}
+							{/if}
+						{/if}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
