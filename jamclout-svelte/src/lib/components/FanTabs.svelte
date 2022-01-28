@@ -16,18 +16,18 @@
 					: 'font-normal border-b-0'}
 						"
 			>
-				<a class="px-5 py-3 block leading-normal text-base" on:click={() => toggleTabs(1)}>
+				<p class="px-5 py-3 block leading-normal text-base hover:cursor-pointer" on:click={() => toggleTabs(1)}>
 					Top investors
-				</a>
+				</p>
 			</li>
 			<li
 				class="-mb-px mr-2 last:mr-0 flex-auto text-center {openTab === 2
 					? 'font-bold border-b-4 border-b-[#A54ED5]'
 					: 'font-normal border-b-0'}"
 			>
-				<a class="px-5 py-3 block leading-normal text-base" on:click={() => toggleTabs(2)}>
+				<p class="px-5 py-3 block leading-normal text-base hover:cursor-pointer" on:click={() => toggleTabs(2)}>
 					Top tippers
-				</a>
+				</p>
 			</li>
 		</ul>
 		<div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 mt-4">

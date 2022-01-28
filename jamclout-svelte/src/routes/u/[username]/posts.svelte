@@ -34,14 +34,20 @@
 
 {#if creatorProps}
 	{#if $creatorProps.loading}
-		Loading... {creatorUname}
+		Loading {creatorUname}'s posts...
 	{:else if $creatorProps.error}
 		Error: {$creatorProps.error.message}
 	{:else}
 		<div class="grid grid-cols-3 gap-4 max-w-fit mx-auto pt-12">
 			{#if $creatorProps.data && $creatorProps.data.creatorAccount}
 				{#each $creatorProps.data.creatorAccount.posts.edges as post}
-					<PostCard postData={post} />
+					<PostCard
+						postData={post}
+						creator={{
+							username: $creatorProps.data.creatorAccount.username,
+							userDp: $creatorProps.data.creatorAccount.image_next.url
+						}}
+					/>
 				{/each}
 			{/if}
 		</div>

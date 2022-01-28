@@ -4,6 +4,7 @@
 
 	let showModal = false;
 	export let postData;
+	export let creator;
 
 	function toggleModal() {
 		showModal = !showModal;
@@ -34,7 +35,49 @@
 				<img src={`${assets}/icons/x.svg`} alt="x-btn" class="h-[24px] mx-auto" />
 			</button>
 		</div>
-		<div class="flex-none w-[398px] bg-white">wew</div>
+		<div class="flex-none w-[398px] bg-white">
+			<div class="flex flex-col">
+				<div class="flex-none">
+					<div class="flex m-[24px]">
+						<div class="flex-none mb-[2px]">
+							<img
+								src={creator.userDp}
+								alt={creator.username}
+								class="mx-auto w-[48px] h-[48px] rounded-full mr-4"
+							/>
+						</div>
+						<div class="grow">
+							<div class="flex flex-col">
+								<div class="flex-none">
+									<div class="flex justify-between">
+										<div class="grow font-bold text-[#1C121C]">{creator.username}</div>
+										<div class="flex-none">days ago</div>
+									</div>
+								</div>
+								<div class="grow mb-[16px]">{postData.node.message}</div>
+								<div class="flex-none">
+									<div class="flex flex-row">
+										<div class="flex-none mr-2">
+											<img src={`${assets}/icons/thumbs-up.svg`} alt="thumbs-up-icon" class="h-6" />
+										</div>
+										<div class="flex-none mr-4">{postData.node.likesCount}</div>
+										<div class="flex-none mr-2">
+											<img
+												src={`${assets}/icons/message-circle.svg`}
+												alt="message-circle-icon"
+												class="h-6"
+											/>
+										</div>
+										<div class="flex-none">{postData.node.comments.totalCount}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="grow" />
+			</div>
+		</div>
 	</div>
 	<div class="opacity-80 fixed inset-0 z-40 bg-black" transition:fade />
 {/if}
