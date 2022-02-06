@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from '@apollo/client/core/index.js';
 
 export const GET_CREATOR_POSTS_WITHOUT_AUTH = gql`
 	query GetCreatorPostsWithOutAuth($username: String!) {

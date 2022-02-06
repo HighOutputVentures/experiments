@@ -2,6 +2,7 @@
 	import { assets } from '$app/paths';
 	import { client } from '$lib/client';
 	import FanTabs from '$lib/components/FanTabs.svelte';
+	import SupportButton from '$lib/components/SupportButton.svelte';
 	import { GET_PROFILE } from '$lib/graphql/queries/profile';
 	import Header from '$lib/header/Header.svelte';
 	import type { Load } from '@sveltejs/kit';
@@ -62,7 +63,7 @@
 								<p class="flex-none text-sm text-[#A5A5A5]">Following</p>
 							</div>
 						</div>
-						<button class="my-4 h-14 bg-[#A54ED5] text-white w-full rounded-full">Support</button>
+						<SupportButton creatorData={$getProfileRes.data.creatorAccount} />
 						<div class="text-left mb-7">
 							<p class="flex-none font-bold text-xl mb-4">About</p>
 							<p class="flex-none text-sm">
