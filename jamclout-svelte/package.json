@@ -37,6 +37,7 @@
 		"@apollo/client": "^3.6.0-beta.5",
 		"@fontsource/fira-mono": "^4.5.0",
 		"@lukeed/uuid": "^2.0.0",
+		"blurhash": "^1.1.4",
 		"cookie": "^0.4.1",
 		"dayjs": "^1.10.7",
 		"graphql": "^16.2.0",

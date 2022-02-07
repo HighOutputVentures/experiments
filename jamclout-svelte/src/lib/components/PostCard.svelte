@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { assets } from '$app/paths';
 	import { client } from '$lib/client';
+	import Blurhash from '$lib/components/Blurhash.svelte';
 	import { GET_CREATOR_POST_WITHOUT_AUTH } from '$lib/graphql/queries/creator';
 	import { timeAgo } from '$lib/utils/dateTime';
 	import { fade } from 'svelte/transition';
@@ -11,23 +12,43 @@
 	export let creator;
 
 	let creatorPost;
+	function getOverlayText(type) {
+		switch (type) {
+			case 'FOLLOWERS_ONLY':
+				return {
+					displayText: `This post is for ${creator.username}’s followers only`,
+					btnText: 'Follow to unlock'
+				};
+			case 'COIN_HOLDERS_ONLY':
+				return {
+					displayText: `This post is for ${creator.username}’s coin holders only`,
+					btnText: 'Buy coin to unlock'
+				};
+			default:
+				return {};
+		}
+	}
+
+	let overlayProps = getOverlayText(postData.node.visibilityType);
+	console.log(
+		'🚀 ~ file: PostCard.svelte ~ line 33 ~ overlayProps',
+		Boolean(overlayProps.displayText)
+	);
 
 	function toggleModal() {
-		showModal = !showModal;
+		if (!overlayProps.displayText) {
+			showModal = !showModal;
+		}
 	}
 
 	async function getCreatorPost() {
-		console.log('🚀 ~ file: PostCard.svelte ~ line 19 ~ getCreatorPost ~ getCreatorPost');
 		creatorPost = await client.query(GET_CREATOR_POST_WITHOUT_AUTH, {
 			variables: {
 				id: postData.node.id
 			},
 			fetchPolicy: 'no-cache'
 		});
-		console.log('🚀 ~ file: PostCard.svelte ~ line 26 ~ getCreatorPost ~ creatorPost', creatorPost);
 	}
-
-	console.log('🚀 ~ file: PostCard.svelte ~ line 9 ~ creatorPost', creatorPost);
 
 	$: {
 		if (showModal) {
@@ -38,12 +59,44 @@
 
 <div
 	on:click={toggleModal}
-	class="w-[250px] h-[332px] bg-[#A54ED5] justify-self-center rounded-lg bg-cover bg-center bg-no-repeat"
+	class={`w-[250px] h-[332px] bg-[#A54ED5] justify-self-center rounded-lg bg-cover bg-center bg-no-repeat ${
+		overlayProps.displayText ? '' : 'hover:cursor-pointer hover:brightness-75'
+	}`}
 	style={`background-image: url('${
 		postData.node.thumbnail ? postData.node.thumbnail.url : `${assets}/blur.png`
 	} ')`}
 >
-	{postData.node.id}
+	{#if Boolean(overlayProps.displayText)}
+		<div class="relative ">
+			<div class="absolute">
+				<Blurhash hash={'LEHV6nWB2yk8pyoJadR*.7kCMdnj'} width={250} height={332} />
+			</div>
+			<div class="absolute h-[332px] table text-center">
+				<div class="table-cell align-middle text-white">
+					<div class="mx-8 text-[18px] leading-[24px]">{overlayProps.displayText}</div>
+					<button
+						class="text-[16px] leading-[16px] mt-4 px-[24px] py-[16px] rounded-full border-solid border-[1px] opacity-80 hover:opacity-100"
+						>{overlayProps.btnText}</button
+					>
+				</div>
+			</div>
+		</div>
+	{:else}
+		<div class="absolute text-white h-[332px] w-[250px] table">
+			<div class="table-cell align-bottom">
+				<div class="flex flex-row ml-4 mb-4">
+					<div class="flex-none mr-2">
+						<img src={`${assets}/icons/thumbs-up.svg`} alt="thumbs-up-icon" class="h-6" />
+					</div>
+					<div class="flex-none mr-4">{postData.node.likesCount}</div>
+					<div class="flex-none mr-2">
+						<img src={`${assets}/icons/message-circle.svg`} alt="message-circle-icon" class="h-6" />
+					</div>
+					<div class="flex-none">{postData.node.comments.totalCount}</div>
+				</div>
+			</div>
+		</div>
+	{/if}
 </div>
 
 {#if showModal}
