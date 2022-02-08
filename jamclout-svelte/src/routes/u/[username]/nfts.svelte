@@ -1,18 +1,18 @@
 <script lang="ts" context="module">
 	import { client } from '$lib/client';
-	import PostCard from '$lib/components/PostCard.svelte';
-	import { GET_CREATOR_POSTS_WITHOUT_AUTH } from '$lib/graphql/queries/creator';
+	import NftCard from '$lib/components/NftCard.svelte';
+	import { PUBLIC_CREATOR_NFTS } from '$lib/graphql/queries/creator';
 	import type { Load } from '@sveltejs/kit';
 
 	let creatorProfile;
 
-	// see https://kit.svelte.dev/docs#loading
 	export const load: Load = async ({ params }) => {
 		const creatorUsername = params.username;
 
-		creatorProfile = await client.query(GET_CREATOR_POSTS_WITHOUT_AUTH, {
+		creatorProfile = await client.query(PUBLIC_CREATOR_NFTS, {
 			variables: {
-				username: creatorUsername
+				username: creatorUsername,
+				isAuthenticated: false
 			},
 			fetchPolicy: 'no-cache'
 		});
@@ -29,20 +29,20 @@
 </script>
 
 <svelte:head>
-	<title>Jamclout - Posts</title>
+	<title>Jamclout - NFTs</title>
 </svelte:head>
 
 {#if creatorProps}
 	{#if $creatorProps.loading}
-		Loading {creatorUname}'s posts...
+		Loading {creatorUname}'s nfts...
 	{:else if $creatorProps.error}
 		Error: {$creatorProps.error.message}
 	{:else}
 		<div class="grid grid-cols-3 gap-4 max-w-fit mx-auto pt-12">
 			{#if $creatorProps.data && $creatorProps.data.creatorAccount}
-				{#each $creatorProps.data.creatorAccount.posts.edges as post}
-					<PostCard
-						postData={post}
+				{#each $creatorProps.data.creatorAccount.nfts.edges as nft}
+					<NftCard
+						nftData={nft}
 						creator={{
 							username: $creatorProps.data.creatorAccount.username,
 							userDp: $creatorProps.data.creatorAccount.image_next.url
@@ -53,6 +53,3 @@
 		</div>
 	{/if}
 {/if}
-
-<style>
-</style>

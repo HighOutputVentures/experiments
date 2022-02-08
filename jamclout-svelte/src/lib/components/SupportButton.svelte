@@ -2,7 +2,7 @@
 	import { assets } from '$app/paths';
 	import { fade } from 'svelte/transition';
 
-	let showModal = true;
+	let showModal = false;
 	export let creatorData;
 
 	function toggleModal() {
