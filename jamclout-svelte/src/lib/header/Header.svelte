@@ -8,10 +8,10 @@
 	class="bg-cover bg-[#A54ED5] bg-center bg-no-repeat h-64"
 	style={`background-image: url('${
 		getProfileRes &&
-		$getProfileRes.data &&
-		$getProfileRes.data.creatorAccount &&
-		$getProfileRes.data.creatorAccount.coverImage
-			? $getProfileRes.data.creatorAccount.coverImage.url
+		getProfileRes.data &&
+		getProfileRes.data.creatorAccount &&
+		getProfileRes.data.creatorAccount.coverImage
+			? getProfileRes.data.creatorAccount.coverImage.url
 			: `${assets}/cover-photo.jpg`
 	} ')`}
 >
