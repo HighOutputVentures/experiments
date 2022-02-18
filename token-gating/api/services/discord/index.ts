@@ -9,6 +9,7 @@ import { inject, injectable } from 'inversify';
 import Logger from '@highoutput/logger';
 import Queue from 'p-queue';
 import axios from 'axios';
+import delay from '@highoutput/delay';
 import { TYPES as ACCOUNT_TYPES } from '../account/types';
 import { TYPES as GLOBAL_TYPES } from '../../types';
 import { TYPES as PROJECT_TYPES } from '../project/types';
@@ -244,6 +245,7 @@ export class DiscordService {
               });
 
               this.logger.info(`DiscordService => Kick ${document.discordId} on guild ${project.discordGuild}`);
+              await delay(1000);
             }
           }
         }
