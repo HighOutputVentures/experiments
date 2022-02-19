@@ -55,4 +55,4 @@ In this experiment, I will be using Keras with TensorFlow as backend.
 
 ## Documentations
 
-1. [Setting Up The Development Environment](./docs/setting-up-development-environment.md)
+1. [Setting Up The Development Environment](./docs/setting-up-the-development-environment.md)
