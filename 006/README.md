@@ -42,7 +42,7 @@ Planned Steps:
   1. Retrieve logs for response times for every 1 minute interval.
   2. Normalize the points to be between 0 and 1. Make sure data is consistent and dimensionality is right.
   2. For the training data, filter only those data we consider to be normal or good and use that as our `training_normal_logs`.
-  3. Train the model with using `training_normal_logs` and determine the training loss to establish a threshold.
+  3. Train the model using `training_normal_logs` and determine the training loss to establish a threshold.
   4. Input logs that will generate loss greater than the threshold should be anomalous.
 
 In this experiment, I will be using Keras with TensorFlow as backend.
