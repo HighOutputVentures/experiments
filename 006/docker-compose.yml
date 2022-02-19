@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+  tf:
+    image: tensorflow/tensorflow:latest-gpu-jupyter
+    ports:
+      - 8888:8888
+
+networks:
+  local:
+    driver: bridge
