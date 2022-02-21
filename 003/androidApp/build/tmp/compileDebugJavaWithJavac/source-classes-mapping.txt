@@ -1,2 +1,0 @@
-com/ralphordanza/samplekmm/android/BuildConfig.java
- com.ralphordanza.samplekmm.android.BuildConfig
