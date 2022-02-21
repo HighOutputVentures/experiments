@@ -17,3 +17,30 @@ export const GET_PROJECTS = gql`
     }
   }
 `
+
+export const GET_PROJECT = gql`
+  query GetProject($id: ID!) {
+    node(id: $id) {
+      ... on Project {
+        id
+        name
+        contractAddress
+        description
+      }
+    }
+  }
+`
+
+export const GET_DISCORD_GUILD_INFO = gql`
+  query GetDiscordChannels($guildId: String!) {
+    getDiscordChannels(guildId: $guildId) {
+      data {
+        channels {
+          id
+          name
+          type
+        }
+      }
+    }
+  }
+`

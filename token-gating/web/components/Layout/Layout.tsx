@@ -96,7 +96,7 @@ const Layout: FC<LayoutProps> = ({ children, title }) => {
             >
               New Project
             </Button>
-            <Button
+            {/* <Button
               borderBottom={`2px solid ${address ? 'orange' : 'gray'}`}
               borderLeft={`2px solid ${address ? 'orange' : 'gray'}`}
               onClick={walletInit}
@@ -113,7 +113,7 @@ const Layout: FC<LayoutProps> = ({ children, title }) => {
               }}
             >
               Metamask
-            </Button>
+            </Button> */}
             <ConnectDiscord />
           </Flex>
         </Flex>

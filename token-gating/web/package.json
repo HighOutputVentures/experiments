@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@chakra-ui/icons": "^1.1.5",
     "@chakra-ui/react": "^1.6.9",
     "@discordjs/rest": "^0.3.0",
     "@emotion/react": "^11.4.1",

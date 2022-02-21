@@ -17,8 +17,8 @@ const scrollBar = {
   },
 }
 
-const url =
-  'https://discord.com/api/oauth2/authorize?client_id=939013514922713109&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fdiscord&response_type=code&scope=identify%20email%20connections%20guilds'
+const admin =
+  'https://discord.com/api/oauth2/authorize?client_id=942737934946287617&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fdiscord&response_type=code&scope=identify%20email%20connections%20guilds%20guilds.join%20guilds.members.read'
 
 export const ConnectDiscord = () => {
   const discordToken = cookie.get('discord_token')
@@ -30,7 +30,7 @@ export const ConnectDiscord = () => {
   })
 
   const router = useRouter()
-  const onConnectDiscord = () => router.push(url)
+  const onConnectDiscord = () => router.push(admin)
 
   if (discordToken && !isLoading)
     return (
@@ -39,9 +39,7 @@ export const ConnectDiscord = () => {
           <MenuButton
             as={Button}
             borderBottom="2px solid #738ADB"
-            borderLeft="2px solid #738ADB"
             color="gray.600"
-            // outline="2px solid gray"
             bg="white"
             _active={{
               bg: 'white',
@@ -88,7 +86,6 @@ export const ConnectDiscord = () => {
     <Button
       onClick={onConnectDiscord}
       borderBottom="2px solid gray"
-      borderLeft="2px solid gray"
       ml="10px"
       shadow="md"
       variant="outline"

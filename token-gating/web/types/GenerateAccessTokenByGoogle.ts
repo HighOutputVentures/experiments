@@ -15,7 +15,7 @@ export interface GenerateAccessTokenByGoogle_generateAccessTokenByGoogle_data {
 }
 
 export interface GenerateAccessTokenByGoogle_generateAccessTokenByGoogle_error {
-  __typename: "InvalidGoogleAccessTokenError";
+  __typename: "InvalidGoogleAccessTokenError" | "InvalidGoogleAuthorizationCodeError";
 }
 
 export interface GenerateAccessTokenByGoogle_generateAccessTokenByGoogle {
