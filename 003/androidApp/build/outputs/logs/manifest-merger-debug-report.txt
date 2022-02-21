@@ -1,0 +1,358 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+MERGED from [:shared] /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [io.coil-kt:coil-compose:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/24278fc97222b45d0b05f5275bdc9bf2/transformed/coil-compose-1.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [io.coil-kt:coil-compose-base:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/f84c98134d36fc4218cf526bbb575395/transformed/coil-compose-base-1.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.19.0] /Users/ralphordanza/.gradle/caches/transforms-3/339bfb7e4abf403c8ff9040303aea618/transformed/accompanist-drawablepainter-0.19.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.navigation:navigation-compose:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/0cd96c831edc7bce421afa0f69588c57/transformed/navigation-compose-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-compose:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/7d27339b746b789ea5dd7cd47c03451f/transformed/activity-compose-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b45dd5f9f5412e9665c14dccf5edbca5/transformed/material-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-ripple:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/a6c26cca6ac8f5f3145153e9b4f73efa/transformed/material-ripple-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/11d94a601289fcc552b02a036483eac0/transformed/foundation-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/907c68bf6fc1edc85b0e5705fa83adcc/transformed/animation-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation-core:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/46d888d417da3a1b934afc7605545a65/transformed/animation-core-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-core:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/5ebd5d03720474f9b45ad43a005b9471/transformed/material-icons-core-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/2ae816177789e5401762efb96cfc826a/transformed/foundation-layout-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-data:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/5c8b81ecc6d43612500a42197e6fa616/transformed/ui-tooling-data-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/e72a532b5c6e9afdeefecffe54318af6/transformed/lifecycle-viewmodel-compose-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b32094f8793a093f7e884da80dbaa6c3/transformed/ui-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-text:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/50f596c39d726070071b28084dd7f97d/transformed/ui-text-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-graphics:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/6dbabf058c9e9540ad3b82d913ddeb25/transformed/ui-graphics-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-unit:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/425f43ff28d7212a40f10962abaa9048/transformed/ui-unit-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-geometry:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8132353dae8998785ac5472ffb5efa02/transformed/ui-geometry-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/72efa26a6e87a4a6eafdf5e8128a55aa/transformed/ui-tooling-preview-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime-saveable:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/c079906e816ea4fb8122df485b02cd41/transformed/runtime-saveable-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/572d71713c5118876e3ca94917c4422d/transformed/runtime-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/66252bfef15abe669f99d4009dc7fe9d/transformed/navigation-runtime-ktx-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/8f7fad3fd72da00a21b168f8e2f7d3e4/transformed/navigation-runtime-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/3f3ace9b843cfc48e35277d2d04a3cb0/transformed/activity-ktx-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/4d35ee409cd4187329fab089d34b5d1f/transformed/navigation-common-ktx-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/d8397108bde1da5ce86603097d0fff70/transformed/navigation-common-2.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/0d0e38ba2acc7e7fecbae2679e9c9ab5/transformed/lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/a70ff9b31812f913267b1ac588a3b2ac/transformed/lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [io.coil-kt:coil:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/feef1cccc57e415852307942afadf097/transformed/coil-1.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [io.coil-kt:coil-base:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/1987df4981a84486a47eb9738ad75428/transformed/coil-base-1.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/7f2b319fd5f98ff3dbe14fc86edf4a9a/transformed/datastore-preferences-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/a22ad650e48d37da376793924972b9f2/transformed/datastore-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/5bb74daff488c64cd5d11c7a3114d94e/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/85f285c7cc7bd4fdc90e753f559c8841/transformed/constraintlayout-2.1.0/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/4294723f6b191c5a22ae196fbcbc8554/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-util:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b1e41d80a5dfb69e8367958af8ede47e/transformed/ui-util-1.0.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/aac85638f81d05b909836c93e6c7c280/transformed/core-ktx-1.6.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/3a23725b413711bdc40ddbd93b7ba786/transformed/savedstate-ktx-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/73456d6515ebcb422b927450f7836e12/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/3f577f2df1c4da2f827dc6b8adbcd3df/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] /Users/ralphordanza/.gradle/caches/transforms-3/b49c519f23fc3eea9a6149668d76a931/transformed/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/7b15b2f4fc66093974891226dd1c0a16/transformed/appcompat-resources-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/61f49a61fa98bfd25c43de6df2910e94/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/2527e9ec4305da1b7a878155f27a7147/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1852591fa90284c07bc4e3f2eae309f1/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/ralphordanza/.gradle/caches/transforms-3/b851d24d75f9d12e5158403e1354bb14/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/bed9da2fd655be2c679946a969ea0ec8/transformed/activity-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1071b4b4d4b19d38af37b6195c258838/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/5080fc18806688fbe95a35e16d81e345/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/4ba534e197b3fa634b73ffb495879bb1/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/6bbece00beb8eae17ad522208cdd1e78/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/fabeb7608d77ec7ddc3254896e6c1da2/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/7e7997a6a02fa98d1de8403c554ad768/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/ab59a1c3a2bbf49ebc5d0aedebadf95c/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/62f01d130841ff34eafb24c90342fe27/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/fc42237548442d51f7ce96b58ec4625b/transformed/core-1.6.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/030618bad7588372b97aa087353f8511/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/3822a4b371aa7713531d4415a71e0276/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/1422b9ff611f35602503f4b1cdb81e63/transformed/lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/90edf9f9b8c279119c94085c3eea0460/transformed/savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/687d8884189d3cd03851a6cde4351548/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/ralphordanza/.gradle/caches/transforms-3/c479077825fd602cf1c67eaf3e0e8f73/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/aef1a7cf189e8c8ac9125c5aefc3ac35/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/89ccb3672ef97747e904e3b491ffdc13/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/7f4552c2d8290890144ef79f6654c4e1/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:17:1-48:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/dbed4c6a40fabe5046bba1bcb85cb42b/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/53a0c9b5df2f344dd8354c5bcc4dcd0f/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/67eaeabe735a39435ae412cba4ffb4e0/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/f0cd34f51c992b901febf1920271b8a4/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/90cd65caec12214da5d4a5dd43e6d965/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/ralphordanza/.gradle/caches/transforms-3/a65c8de4a2d98227a37d431bff890c49/transformed/exifinterface-1.3.3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/35372d6451a88dc767ea22efad8d961e/transformed/annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+	package
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:3:5-49
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:1-22:12
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:5:5-66
+	android:name
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:5:22-64
+application
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:7:5-21:19
+MERGED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:24:5-28:19
+MERGED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.android.material:material:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/5bb74daff488c64cd5d11c7a3114d94e/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/5bb74daff488c64cd5d11c7a3114d94e/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/85f285c7cc7bd4fdc90e753f559c8841/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/85f285c7cc7bd4fdc90e753f559c8841/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/fc42237548442d51f7ce96b58ec4625b/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/fc42237548442d51f7ce96b58ec4625b/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/ralphordanza/.gradle/caches/transforms-3/c479077825fd602cf1c67eaf3e0e8f73/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/ralphordanza/.gradle/caches/transforms-3/c479077825fd602cf1c67eaf3e0e8f73/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:25:5-46:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:25:5-46:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:25:5-31:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/fc42237548442d51f7ce96b58ec4625b/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:11:9-35
+	android:label
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:9:9-40
+	android:allowBackup
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:10:9-36
+	android:theme
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:12:9-40
+	android:name
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:8:9-73
+activity#com.highoutput.web3mobile.android.MainActivity
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:13:9-20:20
+	android:exported
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:15:13-36
+	android:name
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:14:13-74
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:16:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml:18:27-74
+uses-sdk
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+MERGED from [:shared] /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:shared] /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/24278fc97222b45d0b05f5275bdc9bf2/transformed/coil-compose-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/24278fc97222b45d0b05f5275bdc9bf2/transformed/coil-compose-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose-base:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/f84c98134d36fc4218cf526bbb575395/transformed/coil-compose-base-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-compose-base:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/f84c98134d36fc4218cf526bbb575395/transformed/coil-compose-base-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.19.0] /Users/ralphordanza/.gradle/caches/transforms-3/339bfb7e4abf403c8ff9040303aea618/transformed/accompanist-drawablepainter-0.19.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.19.0] /Users/ralphordanza/.gradle/caches/transforms-3/339bfb7e4abf403c8ff9040303aea618/transformed/accompanist-drawablepainter-0.19.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-compose:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/0cd96c831edc7bce421afa0f69588c57/transformed/navigation-compose-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-compose:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/0cd96c831edc7bce421afa0f69588c57/transformed/navigation-compose-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-compose:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/7d27339b746b789ea5dd7cd47c03451f/transformed/activity-compose-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-compose:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/7d27339b746b789ea5dd7cd47c03451f/transformed/activity-compose-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b45dd5f9f5412e9665c14dccf5edbca5/transformed/material-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b45dd5f9f5412e9665c14dccf5edbca5/transformed/material-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-ripple:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/a6c26cca6ac8f5f3145153e9b4f73efa/transformed/material-ripple-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-ripple:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/a6c26cca6ac8f5f3145153e9b4f73efa/transformed/material-ripple-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/11d94a601289fcc552b02a036483eac0/transformed/foundation-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/11d94a601289fcc552b02a036483eac0/transformed/foundation-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/907c68bf6fc1edc85b0e5705fa83adcc/transformed/animation-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/907c68bf6fc1edc85b0e5705fa83adcc/transformed/animation-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/46d888d417da3a1b934afc7605545a65/transformed/animation-core-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/46d888d417da3a1b934afc7605545a65/transformed/animation-core-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/5ebd5d03720474f9b45ad43a005b9471/transformed/material-icons-core-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/5ebd5d03720474f9b45ad43a005b9471/transformed/material-icons-core-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/2ae816177789e5401762efb96cfc826a/transformed/foundation-layout-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/2ae816177789e5401762efb96cfc826a/transformed/foundation-layout-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/5c8b81ecc6d43612500a42197e6fa616/transformed/ui-tooling-data-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-data:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/5c8b81ecc6d43612500a42197e6fa616/transformed/ui-tooling-data-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/e72a532b5c6e9afdeefecffe54318af6/transformed/lifecycle-viewmodel-compose-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/e72a532b5c6e9afdeefecffe54318af6/transformed/lifecycle-viewmodel-compose-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b32094f8793a093f7e884da80dbaa6c3/transformed/ui-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b32094f8793a093f7e884da80dbaa6c3/transformed/ui-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/50f596c39d726070071b28084dd7f97d/transformed/ui-text-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/50f596c39d726070071b28084dd7f97d/transformed/ui-text-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/6dbabf058c9e9540ad3b82d913ddeb25/transformed/ui-graphics-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/6dbabf058c9e9540ad3b82d913ddeb25/transformed/ui-graphics-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/425f43ff28d7212a40f10962abaa9048/transformed/ui-unit-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/425f43ff28d7212a40f10962abaa9048/transformed/ui-unit-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8132353dae8998785ac5472ffb5efa02/transformed/ui-geometry-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8132353dae8998785ac5472ffb5efa02/transformed/ui-geometry-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/72efa26a6e87a4a6eafdf5e8128a55aa/transformed/ui-tooling-preview-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling-preview:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/72efa26a6e87a4a6eafdf5e8128a55aa/transformed/ui-tooling-preview-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saveable:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/c079906e816ea4fb8122df485b02cd41/transformed/runtime-saveable-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saveable:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/c079906e816ea4fb8122df485b02cd41/transformed/runtime-saveable-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/572d71713c5118876e3ca94917c4422d/transformed/runtime-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/572d71713c5118876e3ca94917c4422d/transformed/runtime-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/66252bfef15abe669f99d4009dc7fe9d/transformed/navigation-runtime-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/66252bfef15abe669f99d4009dc7fe9d/transformed/navigation-runtime-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/8f7fad3fd72da00a21b168f8e2f7d3e4/transformed/navigation-runtime-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/8f7fad3fd72da00a21b168f8e2f7d3e4/transformed/navigation-runtime-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/3f3ace9b843cfc48e35277d2d04a3cb0/transformed/activity-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/3f3ace9b843cfc48e35277d2d04a3cb0/transformed/activity-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/4d35ee409cd4187329fab089d34b5d1f/transformed/navigation-common-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/4d35ee409cd4187329fab089d34b5d1f/transformed/navigation-common-ktx-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/d8397108bde1da5ce86603097d0fff70/transformed/navigation-common-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/d8397108bde1da5ce86603097d0fff70/transformed/navigation-common-2.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/0d0e38ba2acc7e7fecbae2679e9c9ab5/transformed/lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/0d0e38ba2acc7e7fecbae2679e9c9ab5/transformed/lifecycle-runtime-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/a70ff9b31812f913267b1ac588a3b2ac/transformed/lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/a70ff9b31812f913267b1ac588a3b2ac/transformed/lifecycle-viewmodel-ktx-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [io.coil-kt:coil:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/feef1cccc57e415852307942afadf097/transformed/coil-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/feef1cccc57e415852307942afadf097/transformed/coil-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-base:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/1987df4981a84486a47eb9738ad75428/transformed/coil-base-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-base:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/1987df4981a84486a47eb9738ad75428/transformed/coil-base-1.4.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/7f2b319fd5f98ff3dbe14fc86edf4a9a/transformed/datastore-preferences-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/7f2b319fd5f98ff3dbe14fc86edf4a9a/transformed/datastore-preferences-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/a22ad650e48d37da376793924972b9f2/transformed/datastore-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/a22ad650e48d37da376793924972b9f2/transformed/datastore-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/5bb74daff488c64cd5d11c7a3114d94e/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] /Users/ralphordanza/.gradle/caches/transforms-3/5bb74daff488c64cd5d11c7a3114d94e/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/85f285c7cc7bd4fdc90e753f559c8841/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/85f285c7cc7bd4fdc90e753f559c8841/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/4294723f6b191c5a22ae196fbcbc8554/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/4294723f6b191c5a22ae196fbcbc8554/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b1e41d80a5dfb69e8367958af8ede47e/transformed/ui-util-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/b1e41d80a5dfb69e8367958af8ede47e/transformed/ui-util-1.0.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/aac85638f81d05b909836c93e6c7c280/transformed/core-ktx-1.6.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/aac85638f81d05b909836c93e6c7c280/transformed/core-ktx-1.6.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/3a23725b413711bdc40ddbd93b7ba786/transformed/savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/3a23725b413711bdc40ddbd93b7ba786/transformed/savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/73456d6515ebcb422b927450f7836e12/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/73456d6515ebcb422b927450f7836e12/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/3f577f2df1c4da2f827dc6b8adbcd3df/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/3f577f2df1c4da2f827dc6b8adbcd3df/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/ralphordanza/.gradle/caches/transforms-3/b49c519f23fc3eea9a6149668d76a931/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/ralphordanza/.gradle/caches/transforms-3/b49c519f23fc3eea9a6149668d76a931/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/7b15b2f4fc66093974891226dd1c0a16/transformed/appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/7b15b2f4fc66093974891226dd1c0a16/transformed/appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/61f49a61fa98bfd25c43de6df2910e94/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/61f49a61fa98bfd25c43de6df2910e94/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/2527e9ec4305da1b7a878155f27a7147/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/2527e9ec4305da1b7a878155f27a7147/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1852591fa90284c07bc4e3f2eae309f1/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1852591fa90284c07bc4e3f2eae309f1/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/ralphordanza/.gradle/caches/transforms-3/b851d24d75f9d12e5158403e1354bb14/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/ralphordanza/.gradle/caches/transforms-3/b851d24d75f9d12e5158403e1354bb14/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/bed9da2fd655be2c679946a969ea0ec8/transformed/activity-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/bed9da2fd655be2c679946a969ea0ec8/transformed/activity-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1071b4b4d4b19d38af37b6195c258838/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1071b4b4d4b19d38af37b6195c258838/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/5080fc18806688fbe95a35e16d81e345/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/5080fc18806688fbe95a35e16d81e345/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/4ba534e197b3fa634b73ffb495879bb1/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/4ba534e197b3fa634b73ffb495879bb1/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/6bbece00beb8eae17ad522208cdd1e78/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/6bbece00beb8eae17ad522208cdd1e78/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/fabeb7608d77ec7ddc3254896e6c1da2/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/fabeb7608d77ec7ddc3254896e6c1da2/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/7e7997a6a02fa98d1de8403c554ad768/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/7e7997a6a02fa98d1de8403c554ad768/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/ab59a1c3a2bbf49ebc5d0aedebadf95c/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/ab59a1c3a2bbf49ebc5d0aedebadf95c/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/62f01d130841ff34eafb24c90342fe27/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/62f01d130841ff34eafb24c90342fe27/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/fc42237548442d51f7ce96b58ec4625b/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] /Users/ralphordanza/.gradle/caches/transforms-3/fc42237548442d51f7ce96b58ec4625b/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/030618bad7588372b97aa087353f8511/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/030618bad7588372b97aa087353f8511/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/3822a4b371aa7713531d4415a71e0276/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/3822a4b371aa7713531d4415a71e0276/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/1422b9ff611f35602503f4b1cdb81e63/transformed/lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/1422b9ff611f35602503f4b1cdb81e63/transformed/lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/90edf9f9b8c279119c94085c3eea0460/transformed/savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/90edf9f9b8c279119c94085c3eea0460/transformed/savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/687d8884189d3cd03851a6cde4351548/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/687d8884189d3cd03851a6cde4351548/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/ralphordanza/.gradle/caches/transforms-3/c479077825fd602cf1c67eaf3e0e8f73/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/ralphordanza/.gradle/caches/transforms-3/c479077825fd602cf1c67eaf3e0e8f73/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/aef1a7cf189e8c8ac9125c5aefc3ac35/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/aef1a7cf189e8c8ac9125c5aefc3ac35/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/89ccb3672ef97747e904e3b491ffdc13/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/ralphordanza/.gradle/caches/transforms-3/89ccb3672ef97747e904e3b491ffdc13/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/7f4552c2d8290890144ef79f6654c4e1/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/7f4552c2d8290890144ef79f6654c4e1/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/dbed4c6a40fabe5046bba1bcb85cb42b/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/dbed4c6a40fabe5046bba1bcb85cb42b/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/53a0c9b5df2f344dd8354c5bcc4dcd0f/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/53a0c9b5df2f344dd8354c5bcc4dcd0f/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/67eaeabe735a39435ae412cba4ffb4e0/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/67eaeabe735a39435ae412cba4ffb4e0/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/f0cd34f51c992b901febf1920271b8a4/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/f0cd34f51c992b901febf1920271b8a4/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/90cd65caec12214da5d4a5dd43e6d965/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/90cd65caec12214da5d4a5dd43e6d965/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/ralphordanza/.gradle/caches/transforms-3/a65c8de4a2d98227a37d431bff890c49/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/ralphordanza/.gradle/caches/transforms-3/a65c8de4a2d98227a37d431bff890c49/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/35372d6451a88dc767ea22efad8d961e/transformed/annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/ralphordanza/.gradle/caches/transforms-3/35372d6451a88dc767ea22efad8d961e/transformed/annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/androidApp/src/main/AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:25:9-27:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:27:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling:1.0.5] /Users/ralphordanza/.gradle/caches/transforms-3/8d01cfaa0e7225c64d1294208932f156/transformed/ui-tooling-1.0.5/AndroidManifest.xml:26:13-71
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:26:9-34:20
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.0.0] /Users/ralphordanza/.gradle/caches/transforms-3/1e3e9504a8cc79e4d0f95bcf2cb5e6f4/transformed/startup-runtime-1.0.0/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:30:13-31
+	android:authorities
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:28:13-68
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:27:13-67
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:31:13-33:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:33:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:32:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:36:9-45:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:39:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:40:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:41:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:38:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:37:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:42:13-44:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:43:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.0.4] /Users/ralphordanza/.gradle/caches/transforms-3/8b6170022fdda3633d7952f3c591f03e/transformed/profileinstaller-1.0.4/AndroidManifest.xml:43:25-88
