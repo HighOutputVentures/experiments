@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml:2:1-50
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml:2:1-50
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml:2:1-50
+	package
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml:2:11-47
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml:2:1-50
+uses-sdk
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+		ADDED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml
+		INJECTED from /Users/ralphordanza/Documents/KMMProjects/web3-mobile/shared/src/androidMain/AndroidManifest.xml

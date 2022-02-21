@@ -1,0 +1,2 @@
+com/ralphordanza/samplekmm/BuildConfig.java
+ com.ralphordanza.samplekmm.BuildConfig
