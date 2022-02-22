@@ -30,6 +30,7 @@ export const drawBoxes = ({ ctx, boxes = [] }) => {
       case SHAPE_TYPE.parallelogram: drawParallelogram(ctx, data); break;
       case SHAPE_TYPE.hexagon: drawHexagon(ctx, data); break;
       case SHAPE_TYPE.cylinder: drawCylinder(ctx, data); break;
+      case SHAPE_TYPE.x: drawX(ctx, data); break;
       default: drawRectangle(ctx, data); break;
     }
   });
@@ -168,6 +169,7 @@ const drawParallelogram = (ctx, data) => {
   ctx.stroke();
 }
 
+// TODO Bottom curve is not "smooth":
 const drawCylinder = (ctx, data) => {
   const { left, right, top, bottom, centerX, w, h } = data;
   const almostTop = top + (h * 0.2);
@@ -182,17 +184,7 @@ const drawCylinder = (ctx, data) => {
   ctx.lineTo(right, almostBottom);
 
   ctx.lineTo(right, almostTop);
-  // ctx.lineTo(left, almostTop);
   ctx.fill();
-  // ctx.lineTo(left, almostBottom);
-
-  // ctx.arcTo(centerX, almostBottom, (w * 0.5), almostBottom, (h * 0.2));
-  // ctx.lineTo(almostRight, bottom);
-  // ctx.lineTo(left, bottom);
-  // ctx.lineTo(almostLeft, top);
-
-  // ctx.arcTo(left, almostBottom, right, almostBottom, w/4);
-  // ctx.bezierCurveTo(left, almostBottom, right, almostBottom, 180,10, 220,140);
 
   ctx.ellipse(centerX, almostTop, (w * 0.5), (h * 0.2), 0, 0, Math.PI * 2);
 
@@ -200,6 +192,24 @@ const drawCylinder = (ctx, data) => {
   ctx.stroke();
 }
 
+const drawX = (ctx, data) => {
+  const { left, right, top, bottom, h, w } = data;
+
+  const almostTop = top + (h * 0.1);
+  const almostBottom = bottom - (h * 0.1);
+  const almostLeft = left + (w * 0.1);
+  const almostRight = right - (w * 0.1);
+
+  ctx.beginPath();
+
+  ctx.moveTo(almostLeft, almostTop);
+  ctx.lineTo(almostRight, almostBottom);
+
+  ctx.moveTo(almostRight, almostTop);
+  ctx.lineTo(almostLeft, almostBottom);
+
+  ctx.stroke();
+}
 
 const drawHuman = (ctx, data) => {
   const {
