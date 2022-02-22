@@ -1,5 +1,12 @@
 // TODO Rename most instances of "box" to "shape":
-import { DEFAULT_BOX, SHAPE_TYPE, DEFAULT_BOX_FILL, DEFAULT_BOX_LINECOLOR, DEFAULT_BOX_LINEWIDTH } from '../constants';
+import {
+  DEFAULT_BOX,
+  SHAPE_TYPE,
+  DEFAULT_BOX_FILL,
+  DEFAULT_BOX_LINECOLOR,
+  DEFAULT_BOX_LINEWIDTH,
+  SHAPE_TOP_HEADER_MIN_H,
+} from '../constants';
 
 export const drawBoxes = ({ ctx, boxes = [] }) => {
   if (!ctx) return;
@@ -32,6 +39,7 @@ export const drawBoxes = ({ ctx, boxes = [] }) => {
       case SHAPE_TYPE.cylinder: drawCylinder(ctx, data); break;
       case SHAPE_TYPE.x: drawX(ctx, data); break;
       case SHAPE_TYPE.note: drawNote(ctx, data); break;
+      case SHAPE_TYPE.package: drawPackage(ctx, data); break;
       default: drawRectangle(ctx, data); break;
     }
   });
@@ -178,6 +186,7 @@ const drawCylinder = (ctx, data) => {
 
   ctx.beginPath();
 
+  // Main part of cylinder:
   ctx.moveTo(left, almostTop);
   ctx.lineTo(left, almostBottom);
 
@@ -187,6 +196,7 @@ const drawCylinder = (ctx, data) => {
   ctx.lineTo(right, almostTop);
   ctx.fill();
 
+  // Head:
   ctx.ellipse(centerX, almostTop, (w * 0.5), (h * 0.2), 0, 0, Math.PI * 2);
 
   ctx.fill();
@@ -221,6 +231,7 @@ const drawNote = (ctx, data) => {
 
   ctx.beginPath();
 
+  // Main rectangle:
   ctx.moveTo(left, top);
   ctx.lineTo(almostRight, top);
   ctx.lineTo(right, almostTop);
@@ -231,10 +242,38 @@ const drawNote = (ctx, data) => {
   ctx.fill();
   ctx.stroke();
 
+  // Folded corner:
   ctx.lineTo(almostRight, top);
   ctx.lineTo(almostRight, almostTop);
   ctx.lineTo(right, almostTop);
 
+  ctx.stroke();
+}
+
+const drawPackage = (ctx, data) => {
+  const { w, h, top, bottom, left, right, centerX, centerY } = data;
+
+  const radius = w * 0.05;
+  const almostTop = top + Math.min(Math.max(SHAPE_TOP_HEADER_MIN_H, h * 0.1), h * 0.3);
+  const pastCenterX1 = centerX + (w * 0.1);
+  const pastCenterX2 = pastCenterX1 + (w * 0.05);
+  const pastCenterX3 = pastCenterX2 + (w * 0.05);
+
+  ctx.beginPath();
+
+  // Main rectangle:
+  ctx.moveTo(left, almostTop);
+  ctx.arcTo(left, bottom, left + radius, bottom, radius);
+  ctx.arcTo(right, bottom, right, bottom - radius, radius);
+  ctx.arcTo(right, almostTop, right - radius, almostTop, radius);
+  ctx.lineTo(left, almostTop);
+
+  // Header at top:
+  ctx.arcTo(left, top, left + radius, top, radius);
+  ctx.lineTo(pastCenterX1, top);
+  ctx.quadraticCurveTo(pastCenterX2, top, pastCenterX3, almostTop);
+
+  ctx.fill();
   ctx.stroke();
 }
 
