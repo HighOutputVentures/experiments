@@ -24,14 +24,13 @@ type Error = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { code, state } = req.query
-
   const params = new URLSearchParams()
   params.append('client_id', process.env.CLIENT_ID_IMPLICIT)
   params.append('client_secret', process.env.CLIENT_SECRET_IMPLICIT)
   params.append('grant_type', 'authorization_code')
   params.append('code', code)
-  params.append('redirect_uri', process.env.REDIRECT_URI)
-  console.log(params)
+  params.append('redirect_uri', process.env.REDIRECT_URI_IMPLICIT)
+
   await fetch(process.env.API_ENDPOINT, {
     method: 'post',
     body: params,
@@ -48,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           })
         )
       }
-      res.redirect(`/welcome?${toQueryParams(response)}&state=${state}`)
+      res.redirect(`/invite/${state}?${toQueryParams(response)}`)
     })
     .catch((error: Error) => {
       res.status(404).json(error)

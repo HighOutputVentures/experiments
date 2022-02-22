@@ -1,7 +1,7 @@
 import { Button, Text, Menu, MenuButton, MenuList, MenuItem, Avatar, Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import cookie from 'js-cookie'
-import getQueries from '@services/queries'
+import getQueries, { ChannelType } from '@services/queries'
 import { useQuery } from 'react-query'
 
 const scrollBar = {
@@ -17,8 +17,7 @@ const scrollBar = {
   },
 }
 
-const url =
-  'https://discord.com/api/oauth2/authorize?client_id=939013514922713109&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fdiscord&response_type=code&scope=identify%20email%20connections%20guilds'
+const admin = process.env.OAUTH2_ADMIN
 
 export const ConnectDiscord = () => {
   const discordToken = cookie.get('discord_token')
@@ -30,7 +29,7 @@ export const ConnectDiscord = () => {
   })
 
   const router = useRouter()
-  const onConnectDiscord = () => router.push(url)
+  const onConnectDiscord = () => router.push(admin)
 
   if (discordToken && !isLoading)
     return (
@@ -39,9 +38,7 @@ export const ConnectDiscord = () => {
           <MenuButton
             as={Button}
             borderBottom="2px solid #738ADB"
-            borderLeft="2px solid #738ADB"
             color="gray.600"
-            // outline="2px solid gray"
             bg="white"
             _active={{
               bg: 'white',
@@ -63,7 +60,7 @@ export const ConnectDiscord = () => {
             </Flex>
           </MenuButton>
           <MenuList maxH="70vh" overflow="auto" css={scrollBar}>
-            {channels?.map((channel: any) => {
+            {channels?.map((channel: ChannelType) => {
               return (
                 <MenuItem minH="48px" key={channel.id}>
                   <Avatar
@@ -88,7 +85,6 @@ export const ConnectDiscord = () => {
     <Button
       onClick={onConnectDiscord}
       borderBottom="2px solid gray"
-      borderLeft="2px solid gray"
       ml="10px"
       shadow="md"
       variant="outline"
