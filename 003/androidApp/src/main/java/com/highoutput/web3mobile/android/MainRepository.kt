@@ -2,6 +2,7 @@ package com.highoutput.web3mobile.android
 
 import android.util.Log
 import com.highoutput.web3mobile.android.common.Resource
+import com.highoutput.web3mobile.android.extensions.ipfsToHttp
 import com.highoutput.web3mobile.android.models.NFT
 import com.highoutput.web3mobile.android.models.NFTResult
 import com.highoutput.web3mobile.android.network.EtherscanApiService
@@ -26,21 +27,28 @@ import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
 
 class MainRepository {
-    private val interceptor = HttpLoggingInterceptor()
-    val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+    companion object{
+        val interceptor = HttpLoggingInterceptor()
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.ETHERSCAN_RINKEBY_BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
+        init {
+            this.interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        }
 
-    val token = BuildConfig.ETHERSCAN_API_KEY
+        val httpClient = OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-    val service: EtherscanApiService = retrofit.create(EtherscanApiService::class.java)
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BuildConfig.ETHERSCAN_RINKEBY_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient)
+            .build()
 
-    val web3j =
-        Web3j.build(HttpService("https://rinkeby.infura.io/v3/d875af89f451403fa0bbc650e642df3a"));
+        val token = BuildConfig.ETHERSCAN_API_KEY
+
+        val service: EtherscanApiService = retrofit.create(EtherscanApiService::class.java)
+
+        val web3j =
+            Web3j.build(HttpService("https://rinkeby.infura.io/v3/d875af89f451403fa0bbc650e642df3a"));
+    }
 
     suspend fun loadNfts(address: String): List<NFTResult> {
         return withContext(Dispatchers.IO) {
@@ -63,7 +71,7 @@ class MainRepository {
     }
 
     suspend fun loadNFTImage(address: String): Resource<List<NFT>> {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             val nfts = mutableListOf<NFT>()
             loadNfts(address).forEach {
                 val function = Function(
@@ -75,19 +83,44 @@ class MainRepository {
                 val encodedFunction = FunctionEncoder.encode(function)
 
                 val response = web3j.ethCall(
-                    org.web3j.protocol.core.methods.request.Transaction.createEthCallTransaction(address, it.contractAddress, encodedFunction), DefaultBlockParameterName.LATEST)
+                    org.web3j.protocol.core.methods.request.Transaction.createEthCallTransaction(
+                        address,
+                        it.contractAddress,
+                        encodedFunction), DefaultBlockParameterName.LATEST)
                     .sendAsync().get()
 
                 val someTypes = FunctionReturnDecoder.decode(
-                    response.value, function.outputParameters);
+                    response.value, function.outputParameters)
+
+                val typeValue = someTypes[0].value.toString()
+
+                val tokenUriLink = if (typeValue.contains("ipfs")) {
+                    //CONVERT IPFS (ipfs://{id}) LINK TO HTTP (https://ipfs.io/ipfs/{id})
+                    val id = typeValue.split("://").last()
+                    id.ipfsToHttp()
+                } else {
+                    typeValue
+                }
 
                 val meta = service.getMetadata(
-                    someTypes[0].value.toString(),
+                    tokenUriLink
                 )
-                nfts.add(NFT(
-                    meta.body()!!.imageUrl,
-                    it
-                ))
+
+                val imageUrl = if (meta.body()!!.imageUrl.contains("ipfs")) {
+                    val id = meta.body()!!.imageUrl.split("://").last()
+                    id.ipfsToHttp()
+                } else {
+                    meta.body()!!.imageUrl
+                }
+
+                Log.d("IMAGE URL", imageUrl)
+
+                nfts.add(
+                    NFT(
+                        imageUrl,
+                        it,
+                    ),
+                )
             }
             Resource.Success(nfts)
         }
