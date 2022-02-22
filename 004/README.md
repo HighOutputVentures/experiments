@@ -16,11 +16,11 @@ At the end of this experiment, we should be able to;
 
 ## Abstract
 
-In this experiment, We are going to build a web application that provides exclusive access only to NFT token holders. Side-tasks such as fetching of transaction data of NFT smart contract on backend was achieved using Etherscan API, and the auto-creation of roles, setting private channels, and adding of guild member features were implemented using the discord API. The token ownership validation was achieved by checking the ownership table if the holder's Ethereum address owns an NFT.
+In this experiment, We are going to build a web application that provides exclusive access only to NFT token holders. Side-tasks such as fetching of transaction data of NFT smart contract on backend was achieved using Etherscan API, and the auto-creation of roles, setting private channels, and adding of guild member features were implemented using the Discord API. The token ownership validation was achieved by checking the ownership table if the holder's Ethereum address owns an NFT.
 
 One of the few challenges that we encountered was the speed of updating the ownership table on MongoDB, it takes a long time to finish the updates. To abate this kind of problem, we created an implementation that will reduce the time of updating the ownership table by storing the instructions into an array and executing it using the bulk write function of MongoDB which executes multiple instructions into a single execution.
 
-In the last days of this experiment, we were having issues like getting the channel list of the discord server because the discord user token is limited only for basic access of discord API, and we resolved it by using the discord bot token which has higher permission than discord user token. This way, our token gating project is working correctly.
+In the last days of this experiment, we were having issues like getting the channel list of the discord server because the discord user token is limited only for basic access of Discord API, and we resolved it by using the discord bot token which has higher permission than discord user token. This way, our token gating project is working correctly.
 
 ## Conclusion
 
@@ -50,41 +50,41 @@ Due to the rising popularity of NFT tokens and exclusive digital content access,
 **Topics learned**
 
 - acquiring discord bot tokens
-- create servers using discord API
-- create channels using discord API
-- create roles using discord API
-- create private channels using discord API
+- create servers using Discord API
+- create channels using Discord API
+- create roles using Discord API
+- create private channels using Discord API
 - setting discord permissions on channels
-- add guild members with roles using discord API
-- removing roles of a guild member using discord API
-- getting discord user information on discord API using discord user tokens
-- retrieve guild list on discord API using discord user tokens
-- retrieve channel list on discord API using discord bot tokens
-- add roles to channel using discord API
-- acquiring discord user tokens using discord oauth2 authorization code grant
+- add guild members with roles using Discord API
+- remove roles of a guild member using Discord API
+- getting user information using discord user tokens
+- retrieve guild list using discord user tokens
+- retrieve channel list using discord bot tokens
+- add roles to channel using Discord API
+- acquiring user tokens using Discord OAuth2 authorization code grant
 - discord role hierarchy on servers
 - fetch transactions of NFT collection smart contract using Etherscan API
-- acquiring google access token using google oauth2
-- retrieve token information using google API
+- acquiring access token using Google OAuth2
+- retrieve token information using Google API
 - running worker service in the background using async-group
 
 **Topics to learn on Week 1**
 
 - acquiring discord bot tokens
-- create servers using discord API
-- create channels using discord API
-- create roles using discord API
-- create private channels using discord API
+- create servers using Discord API
+- create channels using Discord API
+- create roles using Discord API
+- create private channels using Discord API
 - setting discord permissions on channels
-- getting discord user information on discord API using discord user tokens
-- acquiring discord user tokens using discord oauth2 authorization code grant
-- retrieve guild list on discord API using discord user tokens
-- add roles to channel using discord API
+- getting user information using discord user tokens
+- acquiring user tokens using Discord OAuth2 authorization code grant
+- retrieve guild list using discord user tokens
+- add roles to channel using Discord API
 - fetch transactions of NFT collection smart contract using Etherscan API
 
 **Challenges**
 
-- assigning roles to discord channels using discord API
+- assigning roles to channels using Discord API
 - increase ownership table update speed
 - auto-retry of update worker service when fetching of the transaction fails
 
@@ -111,11 +111,11 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 
 **Topics learned on Week 2**
 
-- acquiring google access token using google oauth2
-- retrieve token information using google API
-- retrieve channel list on discord API using discord bot tokens
-- add guild members with roles using discord API
-- removing roles of a guild member using discord API
+- acquiring access token using Google OAuth2
+- retrieve token information using Google API
+- retrieve channel list using discord bot tokens
+- add guild members with roles using Discord API
+- remove roles of a guild member using Discord API
 - discord role hierarchy on servers
 - running worker service in the background using async-group
 
