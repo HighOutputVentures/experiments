@@ -20,7 +20,7 @@ In this experiment, We are going to build a web application that provides exclus
 
 One of the few challenges that we encountered was the speed of updating the ownership table on mongodb, it takes a long time to finish the updates. To abate this kind of problem, we created an implementation that will reduce the time of updating the ownership table by storing the instructions into an array and execute it using the bulk write function of mongodb which executes multiple instructions into a single execution.
 
-In the last days of this experiment, we were having an issues like getting the channel list of the discord server because the discord user token is limited only for basic access of discord api and we resolved it by using the discord bot token which has higher permission than discord user token. This way, our token gating project works perfectly.
+In the last days of this experiment, we were having an issues like getting the channel list of the discord server because the discord user token is limited only for basic access of discord api and we resolved it by using the discord bot token which has higher permission than discord user token. This way, our token gating project is working properly.
 
 ## Conclusion
 
