@@ -1,19 +1,18 @@
 ## Authors
-* [ALRES ARENA](https://app.identifi.com/profile/00797e4189900e4762e3f459337dd735) (Backend Developer)
-* [ALEXANDER SARITA](https://app.identifi.com/profile/00797e4189900e4762e3f459337dd735) (Frontend Developer)
+
+- [ALRES ARENA](https://app.identifi.com/profile/00797e4189900e4762e3f459337dd735) (Backend Developer)
+- [ALEXANDER SARITA](https://app.identifi.com/profile/00797e4189900e4762e3f459337dd735) (Frontend Developer)
 
 ## Goal Statements
 
 At the end of this experiment, we should be able to;
 
+- Implement token gating mechanism
+- Create an app that will let a creator/admin create an online space where he/she will set specific space (discord, youtube etc) and nft collection to be checked.
+- Create an app that will check if the nft holder owns the nft set by the creator/admin
 - Know how to use etherscan api to retrieve transactions of erc-721 nft tokens by nft collections' smart contract address.
 - Build an auto update worker service to update an ownership table when its collection status is updated.
-- Know how to use discord api to create roles, private channels and get the list of guilds or server and channels.
-- Create discord bots to get user information, tokens and auto remove access of non-nft owner. 
-- Make discord channels exclusive only to nft owners.
-- Add guild member with roles on the discord server.
-- Auto remove access of discord user if he/she doesn't own an nft
-
+- Auto remove the access of user if he/she doesn't own an nft
 
 ## Abstract
 
@@ -25,22 +24,26 @@ In the last days of this experiment, we were having an issues like getting the c
 
 ## Conclusion
 
-Due to the rising popularity of nft tokens and exclusive digital content access, I would be recommend that we consider adding the token gating experiment as one of the projects of this company because this experiment is very feasible and we can attract potential customers like video bloggers, influencers celebrities and etc.  
+Due to the rising popularity of nft tokens and exclusive digital content access, I would be recommend that we consider adding the token gating experiment as one of the projects of this company because this experiment is very feasible and we can attract potential customers like video bloggers, influencers celebrities and etc.
+
 ## Resources
 
-- [Discord API Documentation](https://discord.com/developers/docs) 
-- [Discord OAuth2 Documentation](https://discord.com/developers/docs/topics/oauth2) 
-- [Discord Authorization Code Grant Documentation](https://discord.com/developers/docs/topics/oauth2#authorization-code-grant) 
-- [Discord Bot Documentation](https://discord.com/developers/docs/topics/oauth2#bots) 
-- [Etherscan API Documentation](https://docs.etherscan.io/) 
-- [Etherscan Rinkeby Testnet API Documentation](https://rinkeby.etherscan.io/apidoc) 
-- [Etherscan Sample API](https://api.etherscan.io/apis) 
-- [Google OAuth2 Documentation](https://developers.google.com/identity/protocols/oauth2) 
-- [Google Token Info Documentation](https://developers.google.com/identity/sign-in/web/backend-auth) 
+- [Discord API Documentation](https://discord.com/developers/docs)
+- [Discord OAuth2 Documentation](https://discord.com/developers/docs/topics/oauth2)
+- [Discord Authorization Code Grant Documentation](https://discord.com/developers/docs/topics/oauth2#authorization-code-grant)
+- [Discord Bot Documentation](https://discord.com/developers/docs/topics/oauth2#bots)
+- [Etherscan API Documentation](https://docs.etherscan.io/)
+- [Etherscan Rinkeby Testnet API Documentation](https://rinkeby.etherscan.io/apidoc)
+- [Etherscan Sample API](https://api.etherscan.io/apis)
+- [Google OAuth2 Documentation](https://developers.google.com/identity/protocols/oauth2)
+- [Google Token Info Documentation](https://developers.google.com/identity/sign-in/web/backend-auth)
 - [@highoutput/async-group](https://www.npmjs.com/package/@highoutput/async-group)
 - [Axios](https://www.npmjs.com/package/axios)
 - [Apollo GraphQL Documentation](https://www.apollographql.com/docs/)
 - [Mongoose Documentation](https://mongoosejs.com/docs/)
+- [Chakra UI Documentation](https://chakra-ui.com/)
+- [React Query Documentation](https://react-query.tanstack.com/overview)
+- [NextJS Documentation](https://nextjs.org/docs)
 
 ## Documentation
 
@@ -65,7 +68,6 @@ Due to the rising popularity of nft tokens and exclusive digital content access,
 - retrieve token information using google api
 - running worker service in the background using async-group
 
-
 **Topics to learn on Week 1**
 
 - acquiring discord bot tokens
@@ -79,7 +81,6 @@ Due to the rising popularity of nft tokens and exclusive digital content access,
 - retrieve guild list on discord api using discord user tokens
 - add roles to channel using discord api
 - fetch transactions of nft collection smart contract using etherscan api
-
 
 **Challenges**
 
@@ -97,18 +98,16 @@ Due to the rising popularity of nft tokens and exclusive digital content access,
 **Getting Discord User Information Request Sample Code**
 
 ```tsx
-   await axios.get('https://discord.com/api/users/@me', {
-        headers: {
-          Authorization: `Bearer ${params.userOAuth2Token}`,
-        },
-      });
-
+await axios.get("https://discord.com/api/users/@me", {
+  headers: {
+    Authorization: `Bearer ${params.userOAuth2Token}`,
+  },
+});
 ```
 
 **Get Transactions of NFT Collection Smart Contract Request**
 
 https://api.etherscan.io/api?module=account&action=tokennfttx&contractaddress=0x06012c8cf97bead5deae237070f9587f8e7a266d&page=1&offset=5&startblock=0&sort=desc&apikey=S1W3GXNSMC72X93RF6XD2VPMQVXUUC5KY2
-
 
 **Topics learned on Week 2**
 
@@ -120,10 +119,10 @@ https://api.etherscan.io/api?module=account&action=tokennfttx&contractaddress=0x
 - discord role hierarchy on servers
 - running worker service in the background using async-group
 
-
 ## Developing
 
 Once cloned the project and installed dependencies with `npm install`, start a development server:
+
 ```bash
 ENV=staging BOT_TOKEN=<discord_bot_token> npm run start
 ```
@@ -139,6 +138,7 @@ npm run build
 ## Production
 
 Once cloned the project and installed dependencies with `npm install`, start a production server:
+
 ```bash
 ENV=production BOT_TOKEN=<discord_bot_token> npm run start
 ```
