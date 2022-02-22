@@ -18,3 +18,16 @@ export const DELETE_PROJECT = gql`
     deleteProject(request: $request)
   }
 `
+
+export const GET_PROJECT_ACCESS = gql`
+  mutation GetProjectAccess($request: GenerateProjectAccessTokenRequest!) {
+    generateProjectAccessToken(request: $request) {
+      data {
+        accessToken
+      }
+      error {
+        __typename
+      }
+    }
+  }
+`

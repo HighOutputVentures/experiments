@@ -11,9 +11,9 @@ export interface CreateProjectRequest {
   name: string;
   description?: string | null;
   contractAddress: string;
-  discordId: string;
+  discordGuild: string;
   discordChannel: string;
-  discordBotAccessToken: string;
+  discordAccessToken: string;
 }
 
 export interface DeleteProjectRequest {
@@ -22,6 +22,19 @@ export interface DeleteProjectRequest {
 
 export interface GenerateAccessTokenByGoogleRequest {
   accessToken: string;
+}
+
+export interface GenerateProjectAccessTokenRequest {
+  projectId: string;
+  discordAccessToken: string;
+  ethAddress: string;
+  timestamp: any;
+  signature: string;
+  ttl?: any | null;
+}
+
+export interface GetDiscordGuildInfoRequest {
+  guildId: string;
 }
 
 //==============================================================
