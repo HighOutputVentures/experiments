@@ -17,7 +17,7 @@ At the end of this experiment, we should be able to;
 
 ## Abstract
 
-In this experiment, We are going to build a web application that provides exclusive access only to nft token holders. Side-tasks such as fetching of transaction data of nft smart contract on the backend side was achieved using etherscan api and the auto creation of roles, setting private channels and adding of guild member features were implemented using the discord api. The token ownership validation was achieved by checking the ownership table if the holder's ethereum address owns an nft.
+In this experiment, We are going to build a web application that provides exclusive access only to nft token holders. Side-tasks such as fetching of transaction data of nft smart contract on backend was achieved using etherscan api and the auto creation of roles, setting private channels and adding of guild member features were implemented using the discord api. The token ownership validation was achieved by checking the ownership table if the holder's ethereum address owns an nft.
 
 One of the few challenges that we encountered was the speed of updating the ownership table on mongodb, it takes a long time to finish the updates. To abate this kind of problem, we created an implementation that will reduce the time of updating the ownership table by storing the instructions into an array and execute it using the bulk write function of mongodb which executes multiple instructions into a single execution.
 
