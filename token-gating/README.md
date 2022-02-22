@@ -77,6 +77,7 @@ Due to the rising popularity of nft tokens and exclusive digital content access,
 - getting discord user information on discord api using discord user tokens
 - acquiring discord user tokens using discord oauth2 authorization code grant
 - retrieve guild list on discord api using discord user tokens
+- add roles to channel using discord api
 - fetch transactions of nft collection smart contract using etherscan api
 
 
@@ -113,7 +114,6 @@ https://api.etherscan.io/api?module=account&action=tokennfttx&contractaddress=0x
 
 - acquiring google access token using google oauth2
 - retrieve token information using google api
-- add roles to channel using discord api
 - retrieve channel list on discord api using discord bot tokens
 - add guild member with roles using discord api
 - removing roles of a guild member using discord api
