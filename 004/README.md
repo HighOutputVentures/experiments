@@ -10,7 +10,7 @@ At the end of this experiment, we should be able to;
 - Implement token gating mechanism
 - Create an app that will let a creator/admin create an online space where he/she will set specific space (discord, youtube etc) and nft collection to be checked.
 - Create an app that will check if the nft holder owns the nft set by the creator/admin
-- Know how to use etherscan api to retrieve transactions of erc-721 nft tokens by nft collections' smart contract address.
+- Know how to use etherscan api to retrieve transactions of erc-721 nft tokens by nft collection's smart contract address.
 - Build an auto update worker service to update an ownership table when its collection status is updated.
 - Auto remove the access of user if he/she doesn't own an nft
 
@@ -20,11 +20,11 @@ In this experiment, We are going to build a web application that provides exclus
 
 One of the few challenges that we encountered was the speed of updating the ownership table on mongodb, it takes a long time to finish the updates. To abate this kind of problem, we created an implementation that will reduce the time of updating the ownership table by storing the instructions into an array and execute it using the bulk write function of mongodb which executes multiple instructions into a single execution.
 
-In the last days of this experiment, we were having an issues like getting the channel list of the discord server because the discord user token is limited only for basic access of discord api like user information, joining of guild and list of guilds and we resolved it by using the discord bot token which has higher permission that discord user token. This way, our token gating project works perfectly.
+In the last days of this experiment, we were having an issues like getting the channel list of the discord server because the discord user token is limited only for basic access of discord api and we resolved it by using the discord bot token which has higher permission than discord user token. This way, our token gating project works perfectly.
 
 ## Conclusion
 
-Due to the rising popularity of nft tokens and exclusive digital content access, I would be recommend that we consider adding the token gating experiment as one of the projects of this company because this experiment is very feasible and we can attract potential customers like video bloggers, influencers celebrities and etc.
+Due to the rising popularity of nft tokens and exclusive digital content access, I would be recommend that we consider adding the token gating experiment as one of the projects of this company because this experiment is very feasible and we can attract potential customers like video bloggers, influencers, celebrities and etc.
 
 ## Resources
 
@@ -105,7 +105,7 @@ await axios.get("https://discord.com/api/users/@me", {
 });
 ```
 
-**Get Transactions of NFT Collection Smart Contract Request**
+**Get Transactions of NFT Collection Smart Contract Sample Request**
 
 https://api.etherscan.io/api?module=account&action=tokennfttx&contractaddress=0x06012c8cf97bead5deae237070f9587f8e7a266d&page=1&offset=5&startblock=0&sort=desc&apikey=S1W3GXNSMC72X93RF6XD2VPMQVXUUC5KY2
 
