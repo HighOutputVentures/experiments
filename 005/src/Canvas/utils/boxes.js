@@ -31,6 +31,7 @@ export const drawBoxes = ({ ctx, boxes = [] }) => {
       case SHAPE_TYPE.hexagon: drawHexagon(ctx, data); break;
       case SHAPE_TYPE.cylinder: drawCylinder(ctx, data); break;
       case SHAPE_TYPE.x: drawX(ctx, data); break;
+      case SHAPE_TYPE.note: drawNote(ctx, data); break;
       default: drawRectangle(ctx, data); break;
     }
   });
@@ -207,6 +208,32 @@ const drawX = (ctx, data) => {
 
   ctx.moveTo(almostRight, almostTop);
   ctx.lineTo(almostLeft, almostBottom);
+
+  ctx.stroke();
+}
+
+const drawNote = (ctx, data) => {
+  const { left, right, top, bottom, h, w } = data;
+
+  const smallerGap = Math.min(w, h) * 0.2;
+  const almostRight = right - smallerGap;
+  const almostTop = top + smallerGap;
+
+  ctx.beginPath();
+
+  ctx.moveTo(left, top);
+  ctx.lineTo(almostRight, top);
+  ctx.lineTo(right, almostTop);
+  ctx.lineTo(right, bottom);
+  ctx.lineTo(left, bottom);
+  ctx.lineTo(left, top);
+
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.lineTo(almostRight, top);
+  ctx.lineTo(almostRight, almostTop);
+  ctx.lineTo(right, almostTop);
 
   ctx.stroke();
 }
