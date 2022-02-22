@@ -17,7 +17,7 @@ export default {
     const result = await axios.get<Channel[]>(`${process.env.NEXT_PUBLIC_DISCORD_URI}guilds/${guildId}/channels`, {
       headers: {
         'Access-Control-Allow-Origin': '*',
-        Authorization: `Bot OTM5MDEzNTE0OTIyNzEzMTA5.Yfyqew.mD53adCRJxi1eqWASUjNRsTwjfQ`,
+        Authorization: `Bot ${process.env.BOT_TOKEN}`,
       },
     })
     return result.data

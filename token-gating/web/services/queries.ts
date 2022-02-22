@@ -2,7 +2,7 @@
 import axios from 'axios'
 import cookie from 'js-cookie'
 
-type ChannelType = {
+export type ChannelType = {
   icon: string
   id: string
   name: string
@@ -42,14 +42,11 @@ export default {
     return result.data.filter((guild) => guild.owner)
   },
   getCollectionInfo: (collectionAddress: string) => async () => {
-    const result = await axios.get<CollectionType>(
-      `https://testnets-api.opensea.io/api/v1/asset_contract/${collectionAddress}`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookie.get('discord_token')}`,
-        },
-      }
-    )
+    const result = await axios.get<CollectionType>(`${process.env.OPENSEA_API}/${collectionAddress}`, {
+      headers: {
+        Authorization: `Bearer ${cookie.get('discord_token')}`,
+      },
+    })
     return result.data
   },
 }
