@@ -1,5 +1,12 @@
 // TODO Rename most instances of "box" to "shape":
-import { DEFAULT_BOX, SHAPE_TYPE, DEFAULT_BOX_FILL, DEFAULT_BOX_LINECOLOR, DEFAULT_BOX_LINEWIDTH } from '../constants';
+import {
+  DEFAULT_BOX,
+  SHAPE_TYPE,
+  DEFAULT_BOX_FILL,
+  DEFAULT_BOX_LINECOLOR,
+  DEFAULT_BOX_LINEWIDTH,
+  SHAPE_TOP_HEADER_MIN_H,
+} from '../constants';
 
 export const drawBoxes = ({ ctx, boxes = [] }) => {
   if (!ctx) return;
@@ -28,6 +35,11 @@ export const drawBoxes = ({ ctx, boxes = [] }) => {
       case SHAPE_TYPE.triangle: drawTriangle(ctx, data); break;
       case SHAPE_TYPE.diamond: drawDiamond(ctx, data); break;
       case SHAPE_TYPE.parallelogram: drawParallelogram(ctx, data); break;
+      case SHAPE_TYPE.hexagon: drawHexagon(ctx, data); break;
+      case SHAPE_TYPE.cylinder: drawCylinder(ctx, data); break;
+      case SHAPE_TYPE.x: drawX(ctx, data); break;
+      case SHAPE_TYPE.note: drawNote(ctx, data); break;
+      case SHAPE_TYPE.package: drawPackage(ctx, data); break;
       default: drawRectangle(ctx, data); break;
     }
   });
@@ -95,7 +107,7 @@ const drawEllipse = (ctx, data) => {
 
   ctx.beginPath();
 
-  ctx.ellipse(centerX, centerY, (w * 0.2), (h * 0.2), 0, 0, Math.PI * 2);
+  ctx.ellipse(centerX, centerY, (w * 0.5), (h * 0.5), 0, 0, Math.PI * 2);
 
   ctx.fill();
   ctx.stroke();
@@ -130,10 +142,29 @@ const drawDiamond = (ctx, data) => {
   ctx.stroke();
 }
 
+const drawHexagon = (ctx, data) => {
+  const { left, right, top, bottom, centerY, w } = data;
+  const almostLeft = left + (w * 0.2);
+  const almostRight = right - (w * 0.2);
+
+  ctx.beginPath();
+
+  ctx.moveTo(almostLeft, top);
+  ctx.lineTo(almostRight, top);
+  ctx.lineTo(right, centerY);
+  ctx.lineTo(almostRight, bottom);
+  ctx.lineTo(almostLeft, bottom);
+  ctx.lineTo(left, centerY);
+  ctx.lineTo(almostLeft, top);
+
+  ctx.fill();
+  ctx.stroke();
+}
+
 const drawParallelogram = (ctx, data) => {
   const { left, right, top, bottom, w } = data;
-  const almostLeft = left + (w * 0.2)
-  const almostRight = right - (w * 0.2)
+  const almostLeft = left + (w * 0.2);
+  const almostRight = right - (w * 0.2);
 
   ctx.beginPath();
 
@@ -142,6 +173,105 @@ const drawParallelogram = (ctx, data) => {
   ctx.lineTo(almostRight, bottom);
   ctx.lineTo(left, bottom);
   ctx.lineTo(almostLeft, top);
+
+  ctx.fill();
+  ctx.stroke();
+}
+
+// TODO Bottom curve is not "smooth":
+const drawCylinder = (ctx, data) => {
+  const { left, right, top, bottom, centerX, w, h } = data;
+  const almostTop = top + (h * 0.2);
+  const almostBottom = bottom - (h * 0.2);
+
+  ctx.beginPath();
+
+  // Main part of cylinder:
+  ctx.moveTo(left, almostTop);
+  ctx.lineTo(left, almostBottom);
+
+  ctx.arcTo(centerX, bottom, right, almostBottom, w);
+  ctx.lineTo(right, almostBottom);
+
+  ctx.lineTo(right, almostTop);
+  ctx.fill();
+
+  // Head:
+  ctx.ellipse(centerX, almostTop, (w * 0.5), (h * 0.2), 0, 0, Math.PI * 2);
+
+  ctx.fill();
+  ctx.stroke();
+}
+
+const drawX = (ctx, data) => {
+  const { left, right, top, bottom, h, w } = data;
+
+  const almostTop = top + (h * 0.1);
+  const almostBottom = bottom - (h * 0.1);
+  const almostLeft = left + (w * 0.1);
+  const almostRight = right - (w * 0.1);
+
+  ctx.beginPath();
+
+  ctx.moveTo(almostLeft, almostTop);
+  ctx.lineTo(almostRight, almostBottom);
+
+  ctx.moveTo(almostRight, almostTop);
+  ctx.lineTo(almostLeft, almostBottom);
+
+  ctx.stroke();
+}
+
+const drawNote = (ctx, data) => {
+  const { left, right, top, bottom, h, w } = data;
+
+  const smallerGap = Math.min(w, h) * 0.2;
+  const almostRight = right - smallerGap;
+  const almostTop = top + smallerGap;
+
+  ctx.beginPath();
+
+  // Main rectangle:
+  ctx.moveTo(left, top);
+  ctx.lineTo(almostRight, top);
+  ctx.lineTo(right, almostTop);
+  ctx.lineTo(right, bottom);
+  ctx.lineTo(left, bottom);
+  ctx.lineTo(left, top);
+
+  ctx.fill();
+  ctx.stroke();
+
+  // Folded corner:
+  ctx.lineTo(almostRight, top);
+  ctx.lineTo(almostRight, almostTop);
+  ctx.lineTo(right, almostTop);
+
+  ctx.stroke();
+}
+
+const drawPackage = (ctx, data) => {
+  const { w, h, top, bottom, left, right, centerX, centerY } = data;
+
+  const radius = w * 0.05;
+  const almostTop = top + Math.min(Math.max(SHAPE_TOP_HEADER_MIN_H, h * 0.1), h * 0.3);
+  const pastCenterX1 = centerX + (w * 0.1);
+  const pastCenterX2 = pastCenterX1 + (w * 0.05);
+  const pastCenterX3 = pastCenterX2 + (w * 0.05);
+
+  ctx.beginPath();
+
+  // Main rectangle:
+  ctx.moveTo(left, almostTop);
+  ctx.arcTo(left, bottom, left + radius, bottom, radius);
+  ctx.arcTo(right, bottom, right, bottom - radius, radius);
+  ctx.arcTo(right, almostTop, right - radius, almostTop, radius);
+  ctx.lineTo(left, almostTop);
+
+  // Header at top:
+  ctx.arcTo(left, top, left + radius, top, radius);
+  ctx.lineTo(pastCenterX1, top);
+  ctx.quadraticCurveTo(pastCenterX2, top, pastCenterX3, almostTop);
 
   ctx.fill();
   ctx.stroke();

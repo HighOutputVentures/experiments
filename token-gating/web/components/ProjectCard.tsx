@@ -1,4 +1,18 @@
-import { Box, Center, useColorModeValue, Heading, Text, Stack, Image, Fade, Grid, Spinner } from '@chakra-ui/react'
+import {
+  Box,
+  Center,
+  useColorModeValue,
+  Heading,
+  Text,
+  Stack,
+  Image,
+  Fade,
+  Grid,
+  Spinner,
+  Tooltip,
+  Avatar,
+  Flex,
+} from '@chakra-ui/react'
 import { useMutation } from '@apollo/client'
 import { DELETE_PROJECT } from '@graphql/mutations/project'
 import { DeleteProjectVariables, DeleteProject } from '../types/DeleteProject'
@@ -39,42 +53,22 @@ export const ProjectCard: FC<ProjectCardProps> = ({ id, name, description, addre
       },
     })
   }
+
+  // if (data) {
   return (
     <Fade in>
       <Center
         py={12}
-        onClick={(e) => {
+        onDoubleClick={(e) => {
           e.stopPropagation()
           router.push(`/invite/${id}`)
         }}
       >
-        <Box
-          role={'group'}
-          p={6}
-          w={'330px'}
-          bg={useColorModeValue('white', 'gray.800')}
-          boxShadow={'md'}
-          rounded={'lg'}
-          pos={'relative'}
-          zIndex={1}
-        >
+        <Box role={'group'} p={6} w={'330px'} boxShadow={'md'} rounded={'lg'} pos={'relative'} zIndex={1} bg="white">
           <Box
             rounded={'lg'}
-            mt={-12}
             pos={'relative'}
-            height={'230px'}
-            _after={{
-              transition: 'all .3s ease',
-              content: '""',
-              w: 'full',
-              h: 'full',
-              pos: 'absolute',
-              top: 1,
-              left: 0,
-              backgroundImage: `url(${data?.collection.banner_image_url})`,
-              filter: 'blur(15px)',
-              zIndex: -1,
-            }}
+            height={'240px'}
             _groupHover={{
               cursor: 'pointer',
               _after: {
@@ -127,21 +121,83 @@ export const ProjectCard: FC<ProjectCardProps> = ({ id, name, description, addre
               </Box>
             )}
           </Box>
-          <Stack pt={7} align={'center'}>
-            <Heading fontSize={'18px'} fontWeight={600} isTruncated noOfLines={2}>
-              {name}
-            </Heading>
-            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-              {description}
-            </Text>
-            <Stack direction={'row'} align={'center'}>
-              <Text fontWeight={800} fontSize={'xl'}></Text>
+          <Grid gridTemplateRows="3fr 1fr">
+            <Stack align={'start'} gap="1px" mt="25px">
+              <Flex
+                pl="10px"
+                w="full"
+                flexDir="column"
+                justifyContent="center"
+                alignItems="center"
+                css={{
+                  gap: '10px',
+                }}
+                wrap="wrap"
+              >
+                <Heading fontSize={'18px'} fontWeight={600} isTruncated noOfLines={2}>
+                  {name}
+                </Heading>
+                <Text
+                  color={'gray.500'}
+                  fontWeight="light"
+                  fontSize={'xs'}
+                  textTransform="lowercase"
+                  textAlign="center"
+                >
+                  {description}
+                </Text>
+              </Flex>
+              {/* <Text
+                  color={'gray.500'}
+                  fontWeight="light"
+                  fontSize={'xs'}
+                  textTransform="lowercase"
+                  textAlign="center"
+                >
+                  {`/${id}`}
+                </Text> */}
             </Stack>
-          </Stack>
+
+            <Stack align={'center'}>
+              <Text fontSize="10px" color="gray.500">
+                {/* NFT Collection Details */}
+              </Text>
+              <Flex
+                w="full"
+                justifyContent="center"
+                alignItems="center"
+                css={{
+                  gap: '6px',
+                }}
+              >
+                <Avatar src={data?.image_url} borderRadius="full" shadow="md" h="30px" w="30px" />
+                <Flex
+                  flexDir="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  css={{
+                    gap: '6px',
+                  }}
+                >
+                  <Text color={'gray.700'} fontSize={'sm'} textTransform={'uppercase'} fontWeight="bold">
+                    {data?.collection.name}
+                  </Text>
+                  {/* <Text color={'gray.500'} fontSize={'xs'} textTransform={'uppercase'}>
+                      {data?.schema_name}
+                    </Text>
+                    <Text color={'gray.500'} fontSize={'xs'} textTransform={'uppercase'}>
+                      {data?.address.slice(0, 3)}....
+                      {data?.address.slice(data?.address.length - 4, data?.address.length)}
+                    </Text> */}
+                </Flex>
+              </Flex>
+            </Stack>
+          </Grid>
         </Box>
       </Center>
     </Fade>
   )
+  // }
 }
 
 export default ProjectCard
