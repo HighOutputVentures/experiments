@@ -40,6 +40,8 @@ export const drawBoxes = ({ ctx, boxes = [] }) => {
       case SHAPE_TYPE.x: drawX(ctx, data); break;
       case SHAPE_TYPE.note: drawNote(ctx, data); break;
       case SHAPE_TYPE.package: drawPackage(ctx, data); break;
+      case SHAPE_TYPE.entity: drawEntity(ctx, data); break;
+      case SHAPE_TYPE.boundary: drawBoundary(ctx, data); break;
       default: drawRectangle(ctx, data); break;
     }
   });
@@ -251,7 +253,7 @@ const drawNote = (ctx, data) => {
 }
 
 const drawPackage = (ctx, data) => {
-  const { w, h, top, bottom, left, right, centerX, centerY } = data;
+  const { w, h, top, bottom, left, right, centerX } = data;
 
   const radius = w * 0.05;
   const almostTop = top + Math.min(Math.max(SHAPE_TOP_HEADER_MIN_H, h * 0.1), h * 0.3);
@@ -275,6 +277,43 @@ const drawPackage = (ctx, data) => {
 
   ctx.fill();
   ctx.stroke();
+}
+
+const drawEntity = (ctx, data) => {
+  const { left, right, bottom } = data;
+
+  ctx.beginPath();
+
+  ctx.moveTo(left, bottom);
+  ctx.lineTo(right, bottom);
+
+  ctx.fill();
+  ctx.stroke();
+
+  drawEllipse(ctx, data);
+}
+
+const drawBoundary = (ctx, data) => {
+  const { top, bottom, left, centerY, w } = data;
+  const almostLeft = left + (w * 0.1);
+
+  ctx.beginPath();
+
+  ctx.moveTo(left, top);
+  ctx.lineTo(left, bottom);
+
+  ctx.moveTo(left, centerY);
+  ctx.lineTo(almostLeft, centerY);
+
+  ctx.fill();
+  ctx.stroke();
+
+  // TODO Maybe another func just for resizing "data":
+  drawEllipse(ctx, getBoxBounds({
+    ...data,
+    w: w - (w * 0.1),
+    x: left + (w * 0.1),
+  }));
 }
 
 const drawHuman = (ctx, data) => {
