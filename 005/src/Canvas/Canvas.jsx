@@ -123,6 +123,8 @@ export const Canvas = () => {
         <button onClick={() => addShape(SHAPE_TYPE.cylinder)}>Cylinder</button>
         <button onClick={() => addShape(SHAPE_TYPE.x)}>x</button>
         <button onClick={() => addShape(SHAPE_TYPE.note)}>Note</button>
+        <button onClick={() => addShape(SHAPE_TYPE.entity)}>Entity</button>
+        <button onClick={() => addShape(SHAPE_TYPE.boundary)}>Boundary</button>
         <button onClick={() => addShape(SHAPE_TYPE.package)}>Package</button>
       </div>
     </div>
