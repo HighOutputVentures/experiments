@@ -86,7 +86,6 @@ fun AssetList(navController: NavController, viewModel: MainViewModel) {
         if (address.isNotEmpty()) {
             Column {
                 Balance(viewModel = viewModel)
-                Transactions(viewModel = viewModel)
             }
         }
     }
@@ -99,19 +98,5 @@ fun Balance(viewModel: MainViewModel) {
     Column {
         Text("Balance", fontWeight = FontWeight(600), fontSize = 24.sp)
         Text(text = balance)
-    }
-}
-
-@Composable
-fun Transactions(viewModel: MainViewModel) {
-    val transactions = viewModel.transactions.value
-
-    Column {
-        Text("Transactions", fontWeight = FontWeight(600), fontSize = 24.sp)
-        LazyColumn {
-            items(transactions.size) { index ->
-                Text(transactions[index])
-            }
-        }
     }
 }
