@@ -18,12 +18,12 @@ android {
         }
         getByName("debug") {
             isDebuggable = true
-            buildConfigField("String", "ETHERSCAN_BASE_URL", "\"https://api.etherscan.io/\"")
-            buildConfigField("String", "ETHERSCAN_RINKEBY_BASE_URL", "\"https://api-rinkeby.etherscan.io/\"")
+            buildConfigField("String", "MORALIS_BASE_URL", "\"https://deep-index.moralis.io/api/v2/\"")
             buildConfigField("String",
-                "ETHERSCAN_API_KEY",
-                "\"UGUGWP87BNPRYFJ4C9ZVQ7HPKCDS2QQ7RX\"")
-            buildConfigField("String", "OPENSEA_BASE_URL", "\"https://api.opensea.io/api/v1/\"")
+                "MORALIS_API_KEY",
+                "\"zb2Qbd5k3qa2UOfZKiWhFNSl8X7spHnQXkXacw4qkzPjQBaYy6dSL6Z0nHTqbyp5\"")
+            buildConfigField("String", "INFURA_BASE_URL", "\"https://mainnet.infura.io/v3/d875af89f451403fa0bbc650e642df3a\"")
+            buildConfigField("String", "INFURA_RINKEBY_BASE_URL", "\"https://rinkeby.infura.io/v3/d875af89f451403fa0bbc650e642df3a\"")
         }
     }
     buildFeatures {
@@ -92,11 +92,7 @@ dependencies {
 
     //Retfrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-
-    //Gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    //Logging
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
     //Coil
