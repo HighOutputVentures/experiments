@@ -32,10 +32,15 @@ class MainViewModel : ViewModel(), Session.Callback {
     private val _state = mutableStateOf(NFTTransactionsState())
     val state: State<NFTTransactionsState> = _state
 
-    private var nftTransactions = mutableStateOf<List<NFTResult>>(listOf())
-    private var currPage = 1
     private val _endReached = mutableStateOf(false)
     val endReached: State<Boolean> = _endReached
+
+    private val _isLoading = mutableStateOf(false)
+    val isLoading: State<Boolean> = _isLoading
+
+    private var nftTransactions = mutableStateOf<List<NFTResult>>(listOf())
+    private var currPage = 1
+    private var cursor = ""
 
     init {
         initialSetup()
@@ -43,18 +48,20 @@ class MainViewModel : ViewModel(), Session.Callback {
     }
 
     fun loadNFTImages(address: String) {
-        repository.loadNFTImage(address, PAGE_SIZE, currPage * PAGE_SIZE).onEach { response ->
+        _isLoading.value = true
+        repository.loadNFTImage(address, PAGE_SIZE, cursor).onEach { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
+                        _isLoading.value = false
                         nftTransactions.value += it.result
                         val state = _state.value.copy(
                             transactions = nftTransactions.value,
                             isLoading = false,
                         )
                         _state.value = state
-                        Log.d("END", "${currPage * PAGE_SIZE} ${it.total}")
                         _endReached.value = currPage * PAGE_SIZE >= it.total!!
+                        cursor = it.cursor ?: ""
                         currPage++
                     }
                 }
