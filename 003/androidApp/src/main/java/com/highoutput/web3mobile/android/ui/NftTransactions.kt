@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
+import com.highoutput.web3mobile.android.MainApplication
 import com.highoutput.web3mobile.android.MainViewModel
 
 const val DEFAULT_IMAGE = "https://www.truesupreme.com/wp-content/uploads/2017/04/default-image.jpg"
@@ -26,6 +27,13 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
     }
     val state = viewModel.state.value
     val endReached = viewModel.endReached.value
+    val isLoading = viewModel.isLoading.value
+
+    LaunchedEffect(key1 = viewModel.address.value) {
+        if (viewModel.address.value.isNotEmpty()) {
+            viewModel.loadNFTImages(viewModel.address.value)
+        }
+    }
 
     Column {
         OutlinedTextField(
@@ -40,7 +48,7 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
         LazyColumn {
             val itemCount = state.transactions.size
             items(itemCount) { index ->
-                if(index >= itemCount - 1 && !endReached){
+                if (index >= itemCount - 1 && !endReached && !isLoading) {
                     viewModel.loadNFTImages(address)
                 }
                 val item = state.transactions[index]
@@ -56,6 +64,11 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
                     Text("Token Name: ${item.metadata?.name}")
                     Text("Token ID: ${item.metadata?.description}")
                 }
+            }
+        }
+        if (isLoading) {
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
             }
         }
     }

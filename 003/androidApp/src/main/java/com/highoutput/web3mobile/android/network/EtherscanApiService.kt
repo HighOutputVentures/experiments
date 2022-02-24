@@ -14,8 +14,8 @@ interface EtherscanApiService {
     suspend fun getTransactionsViaAddress(
         @Path("address") address: String,
         @Query("chain") chain: String,
-        @Query("offset") offset: Int,
         @Query("limit") limit: Int,
+        @Query("cursor") cursor: String,
     ): Response<NFTTransactionDto>
 
     @GET

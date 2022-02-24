@@ -37,6 +37,7 @@ import java.util.concurrent.TimeUnit
 
 class MainRepository {
     companion object {
+        val chain = "eth"
         val interceptor = HttpLoggingInterceptor()
 
         init {
@@ -58,11 +59,20 @@ class MainRepository {
 
         val service: EtherscanApiService = retrofit.create(EtherscanApiService::class.java)
 
+        private val web3jUrl = if (chain == "eth") {
+            BuildConfig.INFURA_BASE_URL
+        } else {
+            BuildConfig.INFURA_RINKEBY_BASE_URL
+        }
         val web3j =
-            Web3j.build(HttpService(BuildConfig.INFURA_BASE_URL));
+            Web3j.build(HttpService(web3jUrl));
     }
 
-    fun loadNFTImage(address: String, limit: Int, offset: Int): Flow<Resource<NFTTransaction>> =
+    fun loadNFTImage(
+        address: String,
+        limit: Int,
+        cursor: String,
+    ): Flow<Resource<NFTTransaction>> =
         flow {
             try {
                 emit(Resource.Loading<NFTTransaction>())
@@ -74,9 +84,9 @@ class MainRepository {
                     val response = async {
                         service.getTransactionsViaAddress(
                             address,
-                            "eth",
-                            offset,
+                            chain,
                             limit,
+                            cursor,
                         )
                     }.await()
 
@@ -154,7 +164,12 @@ class MainRepository {
         val someTypes = FunctionReturnDecoder.decode(
             response.value, function.outputParameters)
 
-        return someTypes[0].value.toString().checkIpfs()
+        Log.d("TOKEN", "${someTypes}")
+
+        if (someTypes.isNotEmpty()) {
+            return someTypes[0].value.toString().checkIpfs()
+        }
+        return "";
     }
 
     fun initializeWeb3(): String {
