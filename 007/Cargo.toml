@@ -9,4 +9,6 @@ edition = "2021"
 web3 = "0.17.0"
 tokio = { version = "1.17.0", features = ["full"] }
 dotenv = "0.15.0"
-sha3 = "0.10.1"
+mongodb = "2.1.0"
+serde = "1.0.136"
+ethabi = "16.0.0"
