@@ -47,28 +47,7 @@ Due to the rising popularity of NFT tokens and exclusive digital content access,
 
 ## Documentation
 
-**Topics learned**
-
-- acquiring discord bot tokens
-- create servers using Discord API
-- create channels using Discord API
-- create roles using Discord API
-- create private channels using Discord API
-- setting discord permissions on channels
-- add guild members with roles using Discord API
-- remove roles of a guild member using Discord API
-- getting user information using discord user tokens
-- retrieve guild list using discord user tokens
-- retrieve channel list using discord bot tokens
-- add roles to channel using Discord API
-- acquiring user tokens using Discord OAuth2 authorization code grant
-- discord role hierarchy on servers
-- fetch transactions of NFT collection smart contract using Etherscan API
-- acquiring access token using Google OAuth2
-- retrieve token information using Google API
-- running worker service in the background using async-group
-
-**Topics to learn on Week 1**
+**Topics learned on Week 1**
 
 - acquiring discord bot tokens
 - create servers using Discord API
