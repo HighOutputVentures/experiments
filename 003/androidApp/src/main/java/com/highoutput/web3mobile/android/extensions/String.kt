@@ -9,6 +9,11 @@ fun String.toWei(unit: Convert.Unit = Convert.Unit.ETHER): BigDecimal = Convert.
 
 fun BigDecimal.toHex(): String = Numeric.toHexStringWithPrefixSafe(this.toBigInteger())
 
-fun String.ipfsToHttp(): String {
-    return "https://ipfs.io/ipfs/$this"
+fun String.checkIpfs(): String {
+    return if (this.contains("https")) {
+        this
+    } else {
+        val id = this.split("://").last()
+        "https://ipfs.io/ipfs/$id"
+    }
 }
