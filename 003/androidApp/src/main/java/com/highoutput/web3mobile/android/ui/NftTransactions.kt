@@ -67,7 +67,7 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
             }
         }
         if (isLoading) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         }
