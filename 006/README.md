@@ -40,6 +40,7 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 
 1. [Setting Up The Development Environment](./docs/setting-up-the-development-environment.md)
 2. [Data Gathering](./docs/data-gathering.md)
+3. [Data Manipulation](./docs/data-manipulation.md)
 
 ## Resources
 - [Anomaly Detection: Definition, Best Practices and Use Cases](https://datrics.ai/anomaly-detection-best-practices)
