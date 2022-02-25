@@ -22,11 +22,11 @@ This experiment does not aim towards complex methodologies or even very high acc
 
 ## Abstract
 
-In this experiment, I am going to build a model that detects anomaly in the logs generated in OneWallet system. Generally speaking, the problem here is a binary classification of time series data. More specifically, our model will tell us whether a given set of logs in a fixed and consistent time window is good or anomalous.
+In this experiment, I am going to build a model that detects anomaly in the logs generated in OneWallet system. The model will tell us whether a given set of logs in a fixed and consistent time window is good or anomalous.
 
 As this experiment aims to establish a set of processes, to reduce complexity, I am going to focus on logs that pertains to the response times of internal APIs in OneWallet.
 
-My approach in solving this problem is to train a model for it to learn to be very good at processing a time series of logs that we consider to be normal or good, but fails to a high degree in processing a time series of logs that we consider to be anomalous. More specifically, the model should generate a significantly greater loss in processing an anomalous set of logs compared to processing a good set of logs.
+My approach in solving this problem is to train a model for it to learn to be very good at processing a time series of logs that we consider to be normal or good, but fails to a high degree in processing a time series of logs that are anomalous. More specifically, the model should generate a significantly greater loss in processing an anomalous set of logs compared to processing a good set of logs.
 
 For this approach I'm going to use Autoencoder.
 
