@@ -32,37 +32,6 @@ For this approach I'm going to use Autoencoder.
 
 ![Autoencoder](./docs/autoencoder.png "Autoencoder")
 
-### Model Training
-
-#### Time Domain
-
-1. Retrieve 95th percentile of response times per 1 minute.
-2. Create a dataset where each item is a plot of the response times (per minute) for every 10 minute window.
-3. Remove data that we consider to be anomalous.
-4. Handle missing values. (TO DO: Research on how to handle missing values)
-5. Normalize response times to be between 0 and 1.
-6. Using the resulting data, train the autoencoder.
-7. Get the training loss (or reconstruction error) as the anomaly score.
-
-#### Frequency Domain
-
-Same steps with Time Domain model training above but plots the dataset into frequency domain using Fast Fourier Transform.
-1. Retrieve 95th percentile of response times per 1 minute.
-2. Create a dataset where each item is a plot of the response times (per minute) for every 10 minute window.
-3. Remove data that we consider to be anomalous.
-4. Handle missing values. (TO DO: Research on how to handle missing values)
-5. Normalize response times to be between 0 and 1.
-6. Plot data in frequency domain using FFT.
-7. Using the resulting data, train the autoencoder.
-8. Get the training loss (or reconstruction error) as the anomaly score.
-
-### Questions to Answer
-
-1. How do we evaluate the performance of our model?
-2. How does performance differ between data in time domain and frequency domain?
-3. How is the training loss computed? What are the differences in the results between different ways used to compute the error?
-4. What are the effects of increasing or decreasing our time window? 10 minute window? 30 minute window? 1 hour window?
-
 In this experiment, I will be using Keras with TensorFlow as backend and Python as the programming language.
 
 ## Conclusion

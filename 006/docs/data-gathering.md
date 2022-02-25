@@ -77,8 +77,8 @@ Sample Response
                     "intervals": {
                         "buckets": [
                             {
-                                "key_as_string": "2022-02-23T04:19:05.000Z",
-                                "key": 1645589945000,
+                                "key_as_string": "2022-02-23T04:10:00.000Z",
+                                "key": 1645589400000,
                                 "doc_count": 41,
                                 "point": {
                                     "values": {
@@ -87,8 +87,8 @@ Sample Response
                                 }
                             },
                             {
-                                "key_as_string": "2022-02-23T04:19:10.000Z",
-                                "key": 1645589950000,
+                                "key_as_string": "2022-02-23T04:10:05.000Z",
+                                "key": 1645589405000,
                                 "doc_count": 511,
                                 "point": {
                                     "values": {
@@ -97,8 +97,8 @@ Sample Response
                                 }
                             },
                             {
-                                "key_as_string": "2022-02-23T04:19:15.000Z",
-                                "key": 1645589955000,
+                                "key_as_string": "2022-02-23T04:10:10.000Z",
+                                "key": 1645589410000,
                                 "doc_count": 582,
                                 "point": {
                                     "values": {
