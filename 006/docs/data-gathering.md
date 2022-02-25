@@ -119,4 +119,4 @@ Sample Response
 
 For this experiment, I'll choose 10-minute window with 95th percentile of response times plotted in 5-second intervals. The main reason for this decision is that, since autoencoders are neural networks that reduce the data into low dimensional latent representation, we want our samples or inputs to have enough dimensionality.
 
-With response times plotted in 5-second intervals in a 10-minute window, I can have 140 points. Having 140 points per data sample as input to an autoencoder is more reasonable compared to 5 points per data sample that I would get if I choose response times plotted in 60-second intervals in 5-minute window.
+With response times plotted in 5-second intervals in a 10-minute window, I can have 140 points. Having 120 points per data sample as input to an autoencoder is more reasonable compared to 5 points per data sample that I would get if I choose response times plotted in 60-second intervals in 5-minute window.
