@@ -1,89 +1,122 @@
 # Data Gathering
 
-1. Retrieving logs from Elasticsearch
+The goal is to get data samples of m-minute window of response times plotted into n-second intervals.
 
-    Performed two level of aggregations. (1) Group logs by date using `date_histogram` and specifying the `fixed_interval` as `1m`. (2) For each group, compute the 95th percentile using `percentiles` aggregation.
+1. Retrieve all logs for response times.
+2. Group the logs by m-minute.
+3. For each m-minute group, group the logs by n-second interval.
+4. For each n-second group, compute the 95th percentile response time.
 
-    Elasticsearch Query Body
-    ```json
-    {
-        "query": {
-            "bool": {
-                "must": [
-                    { "match": { "json.tags": "client" } },
-                    { "exists": { "field": "json.message.responseTime" } }
-                ]
-            }
-        },
-        "aggs": {
-            "group_by_minute": {
-                "date_histogram": {
-                    "field": "@timestamp",
-                    "fixed_interval": "1m"
-                },
-                "aggs": {
-                    "percentiles_by_group": {
-                        "percentiles": {
-                            "field": "json.message.responseTime",
-                            "percents": [ 95 ]
+All these steps can be performed using Elasticsearch query.
+
+Elasticsearch Query
+```json
+{
+    "size": 0,
+    "query": {
+        "bool": {
+            "must": [
+                { "match": { "json.tags": "client, transaction" } },
+                { "exists": { "field": "json.message.responseTime" } }
+            ]
+        }
+    },
+    "aggs": {
+        "window": {
+            "date_histogram": {
+                "field": "@timestamp",
+                "fixed_interval": "10m"
+            },
+            "aggs": {
+                "intervals": {
+                    "date_histogram": {
+                        "field": "@timestamp",
+                        "fixed_interval": "5s"
+                    },
+                    "aggs": {
+                        "point": {
+                            "percentiles": {
+                                "field": "json.message.responseTime",
+                                "percents": [ 95 ]
+                            }
                         }
                     }
                 }
             }
         }
     }
-    ```
+}
+```
 
-    Sample Response
-    ```json
-    {
-        "took": 7215,
-        "timed_out": false,
-        "_shards": {
-            "total": 164,
-            "successful": 164,
-            "skipped": 154,
-            "failed": 0
+Sample Response
+```json
+{
+    "took": 10294,
+    "timed_out": false,
+    "_shards": {
+        "total": 165,
+        "successful": 165,
+        "skipped": 154,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 10000,
+            "relation": "gte"
         },
-        "hits": {
-          // ...
-        },
-        "aggregations": {
-            "group_by_minute": {
-                "buckets": [
-                    {
-                        "key_as_string": "2022-02-23T04:19:00.000Z",
-                        "key": 1645589940000,
-                        "doc_count": 7033,
-                        "percentiles_by_group": {
-                            "values": {
-                                "95.0": 152.05384615384608
-                            }
-                        }
-                    },
-                    {
-                        "key_as_string": "2022-02-23T04:20:00.000Z",
-                        "key": 1645590000000,
-                        "doc_count": 7511,
-                        "percentiles_by_group": {
-                            "values": {
-                                "95.0": 176.9821428571428
-                            }
-                        }
-                    },
-                    {
-                        "key_as_string": "2022-02-23T04:21:00.000Z",
-                        "key": 1645590060000,
-                        "doc_count": 5200,
-                        "percentiles_by_group": {
-                            "values": {
-                                "95.0": 202.13636363636363
-                            }
-                        }
-                    },
-                    // ...
-                ]
-            }
+        "max_score": null,
+        "hits": []
+    },
+    "aggregations": {
+        "window": {
+            "buckets": [
+                {
+                    "key_as_string": "2022-02-23T04:10:00.000Z",
+                    "key": 1645589400000,
+                    "doc_count": 7033,
+                    "intervals": {
+                        "buckets": [
+                            {
+                                "key_as_string": "2022-02-23T04:19:05.000Z",
+                                "key": 1645589945000,
+                                "doc_count": 41,
+                                "point": {
+                                    "values": {
+                                        "95.0": 76.84999999999994
+                                    }
+                                }
+                            },
+                            {
+                                "key_as_string": "2022-02-23T04:19:10.000Z",
+                                "key": 1645589950000,
+                                "doc_count": 511,
+                                "point": {
+                                    "values": {
+                                        "95.0": 186.95
+                                    }
+                                }
+                            },
+                            {
+                                "key_as_string": "2022-02-23T04:19:15.000Z",
+                                "key": 1645589955000,
+                                "doc_count": 582,
+                                "point": {
+                                    "values": {
+                                        "95.0": 104.0
+                                    }
+                                }
+                            },
+                            // ...
+                        ]
+                    }
+                },
+                // ...
+            ]
         }
     }
-    ```
+}
+```
+
+For this experiment, I'll choose 10-minute window with 95th percentile of response times plotted in 5-second intervals. The main reason for this decision is that, since autoencoders are neural networks that reduce the data into low dimensional latent representation, we want our samples or inputs to have enough dimensionality.
+
+With response times plotted in 5-second intervals in a 10-minute window, I can have 140 points. Having 140 points per data sample as input to an autoencoder is more reasonable compared to 5 points per data sample that I would get if I choose response times plotted in 60-second intervals in 5-minute window.
