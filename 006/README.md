@@ -47,3 +47,4 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 - [Anomaly detection with TensorFlow | Workshop](https://www.youtube.com/watch?v=2K3ScZp1dXQ)
 - [Fourier Transform in Python - Vibration Analysis](https://www.alphabold.com/fourier-transform-in-python-vibration-analysis/)
 - [Autoencoder with Spiking in Frequency Domain for Anomaly Detection of Uncertainty Event](https://www.atlantis-press.com/journals/jrnal/125935236/view)
+- [CUDA on WSL User Guide](https://docs.nvidia.com/cuda/wsl-user-guide/index.html#ch03a-setting-up-cuda)
