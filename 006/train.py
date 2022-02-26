@@ -1,11 +1,14 @@
-from tensorflow.python.keras import Model
-from tensorflow.python.keras import layers, losses
+import os
+os.add_dll_directory("C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/bin")
+
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 from get_samples import get_samples
+from tensorflow.python.keras import Model
+from tensorflow.python.keras import layers, losses
 
 
 samples = get_samples()
