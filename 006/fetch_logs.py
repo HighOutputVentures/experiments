@@ -42,7 +42,7 @@ query = {
     }
 }
 
-def search_logs():
+def fetch_logs():
     r = requests.post(
         url=ELASTICSEARCH_URI,
         json=query,

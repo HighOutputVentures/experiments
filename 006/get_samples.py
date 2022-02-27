@@ -2,10 +2,10 @@ import json
 
 import numpy
 
-from search_logs import search_logs
+from fetch_logs import fetch_logs
 
 
-def complete_dimension(item):
+def has_complete_dimensions(item):
     return len(item['intervals']['buckets']) == 120
 
 def generate_points(sample):
@@ -14,7 +14,7 @@ def generate_points(sample):
     return points + [label]
 
 def get_samples(from_local=True):
-    raw = json.load(open('data/raw.json')) if from_local else search_logs()
-    valid_samples = list(filter(complete_dimension, raw['aggregations']['window']['buckets']))
+    raw = json.load(open('data/raw.json')) if from_local else fetch_logs()
+    valid_samples = list(filter(has_complete_dimensions, raw['aggregations']['window']['buckets']))
 
     return numpy.array([generate_points(n) for n in valid_samples])
