@@ -1,5 +1,5 @@
 [package]
-name = "ethereal"
+name = "expirement007"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 web3 = "0.17.0"
 tokio = { version = "1.17.0", features = ["full"] }
-dotenv = "0.15.0"
 mongodb = "2.1.0"
 serde = "1.0.136"
 ethabi = "16.0.0"
+num-traits = "0.2.14"
