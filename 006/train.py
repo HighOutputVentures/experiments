@@ -11,7 +11,7 @@ from tensorflow.python.keras import Model
 from tensorflow.python.keras import layers, losses
 
 
-samples = get_samples()
+samples = get_samples(from_local=False)
 
 
 def get_normals(sample):
