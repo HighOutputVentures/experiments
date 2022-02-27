@@ -7,7 +7,6 @@ import numpy as np
 
 from pandas import array
 from get_samples import get_samples
-from keras import layers, losses
 from sklearn.model_selection import train_test_split
 from model import AnomalyDetector
 
@@ -70,8 +69,8 @@ history = autoencoder.fit(
   shuffle=True
 )
 
-# plt.plot(history.history['loss'], label='Training Loss')
-# plt.plot(history.history['val_loss'], label='Validation Loss')
+# plt.plot(history.history["loss"], label="Training Loss")
+# plt.plot(history.history["val_loss"], label="Validation Loss")
 # plt.legend()
 # plt.show()
 
@@ -82,7 +81,7 @@ history = autoencoder.fit(
 # plt.plot(normal_test_data[0], 'b')
 # plt.plot(normal_decoded_data[0], 'r')
 # plt.fill_between(np.arange(120), normal_decoded_data[0], normal_test_data[0], color='lightcoral')
-# plt.legend(labels=['Input', 'Reconstruction', 'Error'])
+# plt.legend(labels=["Input", "Reconstruction", "Error"])
 # plt.show()
 
 # Plot reconstruction of an anomalous data
@@ -92,7 +91,7 @@ history = autoencoder.fit(
 # plt.plot(anomalous_test_data[0], 'b')
 # plt.plot(anomalous_decoded_data[0], 'r')
 # plt.fill_between(np.arange(120), anomalous_decoded_data[0], anomalous_test_data[0], color='lightcoral')
-# plt.legend(labels=['Input', 'Reconstruction', 'Error'])
+# plt.legend(labels=["Input", "Reconstruction", "Error"])
 # plt.show()
 
 normal_reconstructions = autoencoder.predict(normal_train_data)
@@ -102,8 +101,8 @@ threshold = np.mean(normal_train_loss) + np.std(normal_train_loss)
 print('Threshold: ', threshold)
 
 # plt.hist(normal_train_loss[None,:], bins=50)
-# plt.xlabel('Train loss')
-# plt.ylabel('No of examples')
+# plt.xlabel("Train loss")
+# plt.ylabel("No of examples")
 # plt.show()
 
 

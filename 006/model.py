@@ -1,20 +1,21 @@
 import os
-os.add_dll_directory("C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/bin")
+os.add_dll_directory('C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/bin')
 
-import keras
+import tensorflow as tf
 
-from keras import layers, Model
+from tensorflow.python.keras import layers
+from tensorflow.python.keras.models import Model
 
 class AnomalyDetector(Model):
     def __init__(self):
         super().__init__()
-        self.encoder = keras.Sequential([
+        self.encoder = tf.keras.Sequential([
           layers.Dense(32, activation='relu'),
           layers.Dense(16, activation='relu'),
           layers.Dense(8, activation='relu'),
         ])
 
-        self.decoder = keras.Sequential([
+        self.decoder = tf.keras.Sequential([
           layers.Dense(16, activation='relu'),
           layers.Dense(32, activation='relu'),
           layers.Dense(120, activation='sigmoid')
