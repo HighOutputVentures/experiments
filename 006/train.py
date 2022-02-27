@@ -63,17 +63,17 @@ autoencoder.compile(optimizer='adam', loss='mae')
 history = autoencoder.fit(
   normal_train_data,
   normal_train_data,
-  epochs=25,
-  batch_size=12,
+  epochs=100,
+  batch_size=32,
   validation_data=(test_data, test_data),
   shuffle=True
 )
 
 # Plot the training loss and validation loss
-# plt.plot(history.history['loss'], label='Training Loss')
-# plt.plot(history.history['val_loss'], label='Validation Loss')
-# plt.legend()
-# plt.show()
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.legend()
+plt.show()
 
 # Plot reconstruction error of a normal data
 # normal_encoded_data = autoencoder.encoder(normal_test_data).numpy()

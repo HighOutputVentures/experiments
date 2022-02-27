@@ -53,5 +53,6 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 - [Comparing Robustness of MAE,MSE and RMSE](https://towardsdatascience.com/comparing-robustness-of-mae-mse-and-rmse-6d69da870828)
 - [Classification: Accuracy](https://developers.google.com/machine-learning/crash-course/classification/accuracy)
 - [Classification: Precision and Recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy)
+- [Understand the Impact of Learning Rate on Neural Network Performance](https://machinelearningmastery.com/understand-the-dynamics-of-learning-rate-on-deep-learning-neural-networks)
 - [Fourier Transform in Python - Vibration Analysis](https://www.alphabold.com/fourier-transform-in-python-vibration-analysis/)
 - [Autoencoder with Spiking in Frequency Domain for Anomaly Detection of Uncertainty Event](https://www.atlantis-press.com/journals/jrnal/125935236/view)

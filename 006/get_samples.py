@@ -10,7 +10,7 @@ def has_complete_dimensions(item):
 
 def generate_points(sample):
     points = [m['point']['values']['95.0'] or 300 for m in sample['intervals']['buckets']]
-    label = 1.0 if max(points) < 5000 else 0.0
+    label = 1.0 if max(points) < 10000 else 0.0
     return points + [label]
 
 def get_samples(from_local=True):
