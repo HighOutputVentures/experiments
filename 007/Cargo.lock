@@ -307,12 +307,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dotenv"
-version = "0.15.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "77c90badedccf4105eca100756a0b1289e191f6fcbdadd3cee1d2f614f97da8f"
-
-[[package]]
 name = "encoding_rs"
 version = "0.8.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -378,18 +372,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ethereal"
-version = "0.1.0"
-dependencies = [
- "dotenv",
- "ethabi 16.0.0",
- "mongodb",
- "serde",
- "tokio",
- "web3",
-]
-
-[[package]]
 name = "ethereum-types"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -415,6 +397,18 @@ dependencies = [
  "impl-serde",
  "primitive-types 0.10.1",
  "uint",
+]
+
+[[package]]
+name = "expirement007"
+version = "0.1.0"
+dependencies = [
+ "ethabi 16.0.0",
+ "mongodb",
+ "num-traits",
+ "serde",
+ "tokio",
+ "web3",
 ]
 
 [[package]]
