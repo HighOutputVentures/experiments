@@ -42,11 +42,11 @@ query = {
     }
 }
 
-def search_logs():
+def fetch_logs():
     r = requests.post(
-        url = ELASTICSEARCH_URI,
-        json = query,
-        auth = HTTPBasicAuth(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD)
+        url=ELASTICSEARCH_URI,
+        json=query,
+        auth=HTTPBasicAuth(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD)
     )
 
     return r.json()
