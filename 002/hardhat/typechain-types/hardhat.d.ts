@@ -49,6 +49,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IGuard__factory>;
     getContractFactory(
+      name: "ISignatureValidator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISignatureValidator__factory>;
+    getContractFactory(
       name: "IWorkflowModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IWorkflowModule__factory>;
@@ -72,6 +76,10 @@ declare module "hardhat/types/runtime" {
       name: "WorkflowModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.WorkflowModule__factory>;
+    getContractFactory(
+      name: "WorkflowModuleV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WorkflowModuleV2__factory>;
 
     getContractAt(
       name: "ERC20",
@@ -119,6 +127,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IGuard>;
     getContractAt(
+      name: "ISignatureValidator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISignatureValidator>;
+    getContractAt(
       name: "IWorkflowModule",
       address: string,
       signer?: ethers.Signer
@@ -148,6 +161,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.WorkflowModule>;
+    getContractAt(
+      name: "WorkflowModuleV2",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WorkflowModuleV2>;
 
     // default types
     getContractFactory(
