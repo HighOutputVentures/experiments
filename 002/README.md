@@ -12,6 +12,7 @@ We should be able to:
 5. Tried out different development environment for development contracts
 6. Different technique of testing
 
+<!-- TODO: Finish up Abstract -->
 ## Abstract
 To develop a customized smart contract with the security and optimization in mind alongside with unit testing it.
 
@@ -38,23 +39,51 @@ In this case, we can train developers to write smart contracts and flesh out ide
 
 
 ## Documentation
---
-### Prerequisites
---
 ### Development
---
-### Using Hardhat
---
-### Testing
---
-### Deployment
---
+Install `hardhat`
+```sh
+npm install --save-dev hardhat
+```
+
+Compile smart contracts
+```sh
+npx hardhat compile
+```
 
 
-### Progress
+Default testing
+```sh
+npx hardhat test
+```
 
-Redesigning WorkflowModule
+Testing using rinkeby network
+```sh
+npx hardhat --network rinkeby test
+```
 
+<!-- TODO: Complete this first -->
+### Experiment journey
+Week 1
+- Writing custom smart contract
+- Integrate Uniswap
+- Integrate GnosisSafe
+
+Week 2
+- Testing the custom smart contract
+- Make integration work with the smart contract
+- Try developing in Truffle and Hardhat
+
+Week 3
+- Benchmarking
+- Redesign custom smart contract
+
+Week 4
+- Redesigning Workflow
+- Apply security hash
+- Appply nonce
+
+
+### Redesigning WorkflowModule
 ### V1
 - `#addWorkflow`
   - `IGnosisSafe _safe`
