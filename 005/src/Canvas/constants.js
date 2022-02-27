@@ -11,6 +11,13 @@ export const SHAPE_TYPE = {
   triangle: 'TRIANGLE',
   diamond: 'DIAMOND',
   parallelogram: 'PARALLELOGRAM',
+  hexagon: 'HEXAGON',
+  cylinder: 'CYLINDER',
+  x: 'X',
+  note: 'NOTE',
+  package: 'PACKAGE',
+  entity: 'ENTITY',
+  boundary: 'BOUNDARY',
   human: 'HUMAN',
 }
 
@@ -19,6 +26,7 @@ export const DEFAULT_BOX_H = 50;
 export const DEFAULT_BOX_FILL = 'white';
 export const DEFAULT_BOX_LINECOLOR = 'black';
 export const DEFAULT_BOX_LINEWIDTH = 4;
+export const SHAPE_TOP_HEADER_MIN_H = 16;
 
 export const DEFAULT_BOX = {
   type: SHAPE_TYPE.box,
@@ -33,7 +41,7 @@ export const DEFAULT_BOX = {
 
 export const DEFAULT_BOXES = [
   { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen' },
-  { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, type: SHAPE_TYPE.parallelogram },
+  { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, type: SHAPE_TYPE.boundary },
   { x: 400, y: 517, w: 30, h: 75, fillColor: '#E75480' },
 ];
 

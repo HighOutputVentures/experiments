@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class NFTMetadata(
     val name: String,
-    @SerializedName("image_url")
-    val imageUrl: String
+    val description: String,
+    val image: String
 )
