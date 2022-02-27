@@ -18,14 +18,19 @@ def get_normals(sample):
     return max(sample) <= 10000
 
 
-normal_train_data = list(filter(get_normals, samples))
-min_val_train_data = tf.reduce_min(normal_train_data)
-max_val_train_data = tf.reduce_max(normal_train_data)
+raw_good_train_data = list(filter(get_normals, samples))
+min_val = tf.reduce_min(raw_good_train_data)
+max_val = tf.reduce_max(raw_good_train_data)
 
-print(f'no. of training_data: {len(normal_train_data)}')
-print(f'max_val_train_data: {max_val_train_data}')
-print(f'min_val_train_data: {min_val_train_data}')
+print(f'no. of training_data: {len(raw_good_train_data)}')
 
-plt.plot(normal_train_data[0])
+normalized_good_train_data = tf.cast(
+    (raw_good_train_data - min_val) / (max_val - min_val),
+    tf.float32
+)
+
+for idx, plot in enumerate(normalized_good_train_data):
+    plt.plot(plot)
+
 plt.ylabel('Response Time')
 plt.show()
