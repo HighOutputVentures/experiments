@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "module": "commonjs",
+    "module": "nodenext",
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
     "declaration": true,
     "resolveJsonModule": true,
+    "rootDirs": ["./src", "./scripts", "./test"]
   },
   "include": ["./scripts", "./test", "./typechain", "**/*.d.ts"],
   "exclude": ["dist", "node_modules"],

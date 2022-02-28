@@ -21,27 +21,33 @@ export const SHAPE_TYPE = {
   human: 'HUMAN',
 }
 
-export const DEFAULT_BOX_W = 100;
-export const DEFAULT_BOX_H = 50;
-export const DEFAULT_BOX_FILL = 'white';
-export const DEFAULT_BOX_LINECOLOR = 'black';
-export const DEFAULT_BOX_LINEWIDTH = 4;
+export const DEFAULT_SHAPE_W = 100;
+export const DEFAULT_SHAPE_H = 50;
+export const DEFAULT_SHAPE_TEXT_XY_PERCENT = 0.5;
+export const DEFAULT_SHAPE_TEXT_SIZE = 20;
+export const DEFAULT_SHAPE_FILL = 'white';
+export const DEFAULT_SHAPE_LINECOLOR = 'black';
+export const DEFAULT_SHAPE_LINEWIDTH = 4;
 export const SHAPE_TOP_HEADER_MIN_H = 16;
 
-export const DEFAULT_BOX = {
+export const DEFAULT_SHAPE = {
   type: SHAPE_TYPE.box,
   x: 0,
   y: 0,
-  w: DEFAULT_BOX_W,
-  h: DEFAULT_BOX_H,
-  fillColor: DEFAULT_BOX_FILL,
-  lineColor: DEFAULT_BOX_LINECOLOR,
-  lineWidth: DEFAULT_BOX_LINEWIDTH,
+  w: DEFAULT_SHAPE_W,
+  h: DEFAULT_SHAPE_H,
+  fillColor: DEFAULT_SHAPE_FILL,
+  lineColor: DEFAULT_SHAPE_LINECOLOR,
+  lineWidth: DEFAULT_SHAPE_LINEWIDTH,
+  textXPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  textYPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  textColor: undefined, // defaults to "linecolor"
+  textSize: DEFAULT_SHAPE_TEXT_SIZE,
 };
 
-export const DEFAULT_BOXES = [
-  { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen' },
-  { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, type: SHAPE_TYPE.boundary },
+export const DEFAULT_SHAPEES = [
+  { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
+  { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, text: "TEST", textYPercent: 1.2, type: SHAPE_TYPE.boundary },
   { x: 400, y: 517, w: 30, h: 75, fillColor: '#E75480' },
 ];
 

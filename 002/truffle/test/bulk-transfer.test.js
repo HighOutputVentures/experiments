@@ -19,7 +19,7 @@ const TestToken = artifacts.require("./TestToken.sol")
 
 use(chaiAsPromised);
 
-contract.only('BulkTransfer', function(accounts) {
+contract('BulkTransfer', function(accounts) {
   let lw
   let gnosisSafe
   let bulkTransferSafeModule

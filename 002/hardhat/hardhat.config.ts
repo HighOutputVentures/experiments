@@ -22,9 +22,6 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
-const ALCHEMY_API = 'https://eth-rinkeby.alchemyapi.io/v2/JRg6lBJPJ8PiIFVvvlkSqakwc5cGDCvj';
-const ALCHEMY_MAINNET_API = 'https://eth-mainnet.alchemyapi.io/v2/JRg6lBJPJ8PiIFVvvlkSqakwc5cGDCvj';
-const PRIVATE_KEY = 'e57a0b19e2a0a1a20864e9f4ef2b464b54d65dbe5bb6b5d8da677a955c5602aa';
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -40,12 +37,11 @@ const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   networks: {
     rinkeby: {
-      url: ALCHEMY_API,
-      accounts: [PRIVATE_KEY],
-    },
-    mainnet: {
-      url: ALCHEMY_MAINNET_API,
-      
+      url: 'https://eth-rinkeby.alchemyapi.io/v2/JRg6lBJPJ8PiIFVvvlkSqakwc5cGDCvj',
+      accounts: [
+        'e57a0b19e2a0a1a20864e9f4ef2b464b54d65dbe5bb6b5d8da677a955c5602aa',
+        '65290224200a67be9fd9f791581e3fd5fa3d85a4a0869caf158d163a2fffb955'
+      ],
     },
     hardhat: {
       allowUnlimitedContractSize: true,
