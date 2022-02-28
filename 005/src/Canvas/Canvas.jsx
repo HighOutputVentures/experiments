@@ -4,23 +4,23 @@ import immutableUpdate from 'immutability-helper';
 import {
   CANVAS_WIDTH,
   CANVAS_HEIGHT,
-  DEFAULT_BOX,
+  DEFAULT_SHAPE,
   SHAPE_TYPE,
-  DEFAULT_BOX_W,
-  DEFAULT_BOX_H,
-  DEFAULT_BOXES,
+  DEFAULT_SHAPE_W,
+  DEFAULT_SHAPE_H,
+  DEFAULT_SHAPEES,
   DEFAULT_CONNECTIONS,
 } from './constants';
 import { clearScreen } from './utils/screen';
-import { drawBoxes } from './utils/boxes';
+import { drawShapes } from './utils/shapes';
 import { drawConnections } from './utils/connections';
-import { getMouseXY, getDragTargetIndexAndBoxOffsets } from './utils/mouse';
+import { getMouseXY, getDragTargetIndexAndShapeOffsets } from './utils/mouse';
 
 export const Canvas = () => {
   const canvas = useRef();
 
   const [ctx, setCtx] = useState(null);
-  const [boxes, setBoxes] = useState(DEFAULT_BOXES);
+  const [shapes, setShapes] = useState(DEFAULT_SHAPEES);
   const [connections] = useState(DEFAULT_CONNECTIONS);
   const [dragTargetIndex, setDragTargetIndex] = useState(-1);
   const [dragTargetXOffset, setDragTargetXOffset] = useState(0);
@@ -38,25 +38,25 @@ export const Canvas = () => {
     clearScreen({ ctx, canvas });
     // TODO Switch these two later,
     // having them like this for now for easier debugging:
-    drawBoxes({ ctx, boxes });
-    drawConnections({ ctx, boxes, connections });
-  }, [boxes, connections, ctx]);
+    drawShapes({ ctx, shapes });
+    drawConnections({ ctx, shapes, connections });
+  }, [shapes, connections, ctx]);
 
   const addShape = (data = {}) => {
     console.log(typeof data);
     if (typeof data === 'string') {
-      setBoxes([...boxes, { ...DEFAULT_BOX, type: data }]);
+      setShapes([...shapes, { ...DEFAULT_SHAPE, type: data }]);
     } else {
-      setBoxes([...boxes, { ...DEFAULT_BOX, ...data }]);
+      setShapes([...shapes, { ...DEFAULT_SHAPE, ...data }]);
     }
   }
 
   const handleMouseDown = event => {
-    const [dragTargetIndex, boxXOffset, boxYOffset] = getDragTargetIndexAndBoxOffsets({ event, canvas, boxes });
+    const [dragTargetIndex, shapeXOffset, shapeYOffset] = getDragTargetIndexAndShapeOffsets({ event, canvas, shapes });
 
     if (dragTargetIndex >= 0) {
-      setDragTargetXOffset(boxXOffset);
-      setDragTargetYOffset(boxYOffset);
+      setDragTargetXOffset(shapeXOffset);
+      setDragTargetYOffset(shapeYOffset);
       setDragTargetIndex(dragTargetIndex);
     }
   }
@@ -70,28 +70,28 @@ export const Canvas = () => {
 
     const [x, y] = getMouseXY({ event, canvas });
     const {
-      w: boxW = DEFAULT_BOX_W,
-      h: boxH = DEFAULT_BOX_H,
-    } = boxes[dragTargetIndex];
+      w: shapeW = DEFAULT_SHAPE_W,
+      h: shapeH = DEFAULT_SHAPE_H,
+    } = shapes[dragTargetIndex];
 
-    const newBoxX = Math.min(
-      canvas.current.clientLeft + canvas.current.clientWidth - boxW,
+    const newShapeX = Math.min(
+      canvas.current.clientLeft + canvas.current.clientWidth - shapeW,
       Math.max(canvas.current.clientLeft, x - dragTargetXOffset)
     );
 
-    const newBoxY = Math.min(
-      canvas.current.clientTop + canvas.current.clientHeight - boxH,
+    const newShapeY = Math.min(
+      canvas.current.clientTop + canvas.current.clientHeight - shapeH,
       Math.max(canvas.current.clientTop, y - dragTargetYOffset)
     );
 
-    const newBoxes = immutableUpdate(boxes, {
+    const newShapes = immutableUpdate(shapes, {
       [dragTargetIndex]: {
-        x: { $set: newBoxX },
-        y: { $set: newBoxY },
+        x: { $set: newShapeX },
+        y: { $set: newShapeY },
       },
     });
 
-    setBoxes(newBoxes);
+    setShapes(newShapes);
   }
 
   return (

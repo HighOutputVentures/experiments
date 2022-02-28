@@ -1,25 +1,24 @@
-// TODO Rename most instances of "box" to "shape":
 import {
-  DEFAULT_BOX,
+  DEFAULT_SHAPE,
   SHAPE_TYPE,
-  DEFAULT_BOX_FILL,
-  DEFAULT_BOX_LINECOLOR,
-  DEFAULT_BOX_LINEWIDTH,
+  DEFAULT_SHAPE_FILL,
+  DEFAULT_SHAPE_LINECOLOR,
+  DEFAULT_SHAPE_LINEWIDTH,
   SHAPE_TOP_HEADER_MIN_H,
 } from '../constants';
 
-export const drawBoxes = ({ ctx, boxes = [] }) => {
+export const drawShapes = ({ ctx, shapes = [] }) => {
   if (!ctx) return;
 
-  boxes.forEach(({
+  shapes.forEach(({
     type = SHAPE_TYPE.rectangle,
-    fillColor = DEFAULT_BOX_FILL,
-    lineColor = DEFAULT_BOX_LINECOLOR,
-    lineWidth = DEFAULT_BOX_LINEWIDTH,
+    fillColor = DEFAULT_SHAPE_FILL,
+    lineColor = DEFAULT_SHAPE_LINECOLOR,
+    lineWidth = DEFAULT_SHAPE_LINEWIDTH,
     debugDrawOutline = false,
     ...rest
   }) => {
-    const data = getBoxBounds(rest);
+    const data = getShapeBounds(rest);
 
     if (debugDrawOutline) drawDebugOutline(ctx, data);
 
@@ -306,7 +305,7 @@ const drawBoundary = (ctx, data) => {
   ctx.stroke();
 
   // TODO Maybe another func just for resizing "data":
-  drawEllipse(ctx, getBoxBounds({
+  drawEllipse(ctx, getShapeBounds({
     ...data,
     w: w - (w * 0.1),
     x: left + (w * 0.1),
@@ -359,16 +358,16 @@ const drawHuman = (ctx, data) => {
   ctx.fill();
 }
 
-export const getBoxBounds = (rawBox) => {
-  const box = { ...DEFAULT_BOX, ...rawBox };
+export const getShapeBounds = (rawShape) => {
+  const shape = { ...DEFAULT_SHAPE, ...rawShape };
 
   return {
-    ...box,
-    top: box.y,
-    bottom: box.y + box.h,
-    left: box.x,
-    right: box.x + box.w,
-    centerX: box.x + (box.w / 2),
-    centerY: box.y + (box.h / 2),
+    ...shape,
+    top: shape.y,
+    bottom: shape.y + shape.h,
+    left: shape.x,
+    right: shape.x + shape.w,
+    centerX: shape.x + (shape.w / 2),
+    centerY: shape.y + (shape.h / 2),
   }
 }
