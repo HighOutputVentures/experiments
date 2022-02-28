@@ -191,15 +191,12 @@ const drawCylinder = (ctx, data) => {
   // Main part of cylinder:
   ctx.moveTo(left, almostTop);
   ctx.lineTo(left, almostBottom);
-
-  ctx.arcTo(centerX, bottom, right, almostBottom, w);
+  ctx.quadraticCurveTo(centerX, bottom, right, almostBottom);
   ctx.lineTo(right, almostBottom);
-
   ctx.lineTo(right, almostTop);
   ctx.fill();
 
-  // Head:
-  ctx.ellipse(centerX, almostTop, (w * 0.5), (h * 0.2), 0, 0, Math.PI * 2);
+  ctx.ellipse(centerX, almostTop, (w * 0.5), (h * 0.1), 0, 0, Math.PI * 2);
 
   ctx.fill();
   ctx.stroke();
