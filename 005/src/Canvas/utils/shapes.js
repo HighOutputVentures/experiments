@@ -4,21 +4,26 @@ import {
   DEFAULT_SHAPE_FILL,
   DEFAULT_SHAPE_LINECOLOR,
   DEFAULT_SHAPE_LINEWIDTH,
+  DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  DEFAULT_SHAPE_TEXT_SIZE,
   SHAPE_TOP_HEADER_MIN_H,
 } from '../constants';
 
 export const drawShapes = ({ ctx, shapes = [] }) => {
   if (!ctx) return;
 
-  shapes.forEach(({
-    type = SHAPE_TYPE.rectangle,
-    fillColor = DEFAULT_SHAPE_FILL,
-    lineColor = DEFAULT_SHAPE_LINECOLOR,
-    lineWidth = DEFAULT_SHAPE_LINEWIDTH,
-    debugDrawOutline = false,
-    ...rest
-  }) => {
-    const data = getShapeBounds(rest);
+  shapes.forEach(shape => {
+    const data = getShapeBounds(shape);
+
+    const {
+      type = SHAPE_TYPE.rectangle,
+      fillColor = DEFAULT_SHAPE_FILL,
+      lineColor = DEFAULT_SHAPE_LINECOLOR,
+      lineWidth = DEFAULT_SHAPE_LINEWIDTH,
+      textColor = lineColor,
+      textSize = DEFAULT_SHAPE_TEXT_SIZE,
+      debugDrawOutline = false,
+    } = data;
 
     if (debugDrawOutline) drawDebugOutline(ctx, data);
 
@@ -43,6 +48,8 @@ export const drawShapes = ({ ctx, shapes = [] }) => {
       case SHAPE_TYPE.boundary: drawBoundary(ctx, data); break;
       default: drawRectangle(ctx, data); break;
     }
+
+    drawTextIfNeeded(ctx, data);
   });
 }
 
@@ -356,6 +363,31 @@ const drawHuman = (ctx, data) => {
   ctx.beginPath();
   ctx.arc(centerX, headCenterY, radius, 0, Math.PI * 2);
   ctx.fill();
+}
+
+const drawTextIfNeeded = (ctx, data) => {
+  const {
+    text,
+    left,
+    w,
+    top,
+    h,
+    textXPercent = DEFAULT_SHAPE_TEXT_XY_PERCENT,
+    textYPercent = DEFAULT_SHAPE_TEXT_XY_PERCENT,
+    textSize,
+    lineColor,
+    textColor,
+  } = data;
+
+  if (text) {
+    const textX = left + (w * textXPercent);
+    const textY = top + (h * textYPercent) + (textSize / 4);
+
+    ctx.font = `${textSize}px Arial`;
+    ctx.textAlign = "center";
+    ctx.fillStyle = textColor || lineColor;
+    ctx.fillText(text, textX, textY);
+  }
 }
 
 export const getShapeBounds = (rawShape) => {

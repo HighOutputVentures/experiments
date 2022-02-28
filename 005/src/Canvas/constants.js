@@ -23,6 +23,8 @@ export const SHAPE_TYPE = {
 
 export const DEFAULT_SHAPE_W = 100;
 export const DEFAULT_SHAPE_H = 50;
+export const DEFAULT_SHAPE_TEXT_XY_PERCENT = 0.5;
+export const DEFAULT_SHAPE_TEXT_SIZE = 20;
 export const DEFAULT_SHAPE_FILL = 'white';
 export const DEFAULT_SHAPE_LINECOLOR = 'black';
 export const DEFAULT_SHAPE_LINEWIDTH = 4;
@@ -37,11 +39,15 @@ export const DEFAULT_SHAPE = {
   fillColor: DEFAULT_SHAPE_FILL,
   lineColor: DEFAULT_SHAPE_LINECOLOR,
   lineWidth: DEFAULT_SHAPE_LINEWIDTH,
+  textXPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  textYPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  textColor: undefined, // defaults to "linecolor"
+  textSize: DEFAULT_SHAPE_TEXT_SIZE,
 };
 
 export const DEFAULT_SHAPEES = [
-  { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen' },
-  { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, type: SHAPE_TYPE.boundary },
+  { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
+  { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, text: "TEST", textYPercent: 1.2, type: SHAPE_TYPE.boundary },
   { x: 400, y: 517, w: 30, h: 75, fillColor: '#E75480' },
 ];
 
