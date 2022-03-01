@@ -1,5 +1,5 @@
 import { DEFAULT_SHAPE, MARGIN, TEXT_DEFAULTS } from '../constants';
-import { getShapeBounds } from './shapes';
+import { getShapeData } from './shapes';
 
 export const drawConnections = ({ ctx, shapes = [], connections = [] }) => {
   if (!ctx) return;
@@ -23,6 +23,7 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
       color = 'black',
       width: lineWidth = 1,
       isStraightLine = false,
+      isDashed = false,
       ...rest
     } = connection;
 
@@ -76,10 +77,16 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
       toBottom,
       toLeft,
       toRight,
-      fromShapeBounds: getShapeBounds(fromShape),
-      toShapeBounds: getShapeBounds(toShape),
+      fromShapeBounds: getShapeData(fromShape),
+      toShapeBounds: getShapeData(toShape),
       lineBetweenX: (lineStartX + lineEndX) * 0.5,
       lineBetweenY: (lineStartY + lineEndY) * 0.5,
+    }
+
+    if (isDashed) {
+      ctx.setLineDash([20, 5]);
+    } else {
+      ctx.setLineDash([]);
     }
 
     if (!isStraightLine) {

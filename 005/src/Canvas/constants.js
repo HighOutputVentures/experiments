@@ -1,5 +1,5 @@
-export const CANVAS_WIDTH = 800;
-export const CANVAS_HEIGHT = 800;
+export const CANVAS_WIDTH = 1200;
+export const CANVAS_HEIGHT = 900;
 
 export const MARGIN = 64;
 
@@ -49,6 +49,7 @@ export const DEFAULT_SHAPE = {
   ...TEXT_DEFAULTS
 };
 
+/*
 export const DEFAULT_SHAPES = [
   { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
   { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, text: "TEST", textYPercent: 1.2, type: SHAPE_TYPE.boundary },
@@ -73,6 +74,7 @@ export const DEFAULT_CONNECTIONS = [
     toLeft: true,
     // toRight: true,
     text: 'aaaa',
+    isDashed: true,
   },
   {
     from: 0,
@@ -87,3 +89,15 @@ export const DEFAULT_CONNECTIONS = [
     toRight: true,
   },
 ];
+*/
+
+export const DEFAULT_SHAPES = [
+  { x: 50, y: 50, w: 100, h: 200, text: "User", textYPercent: 1.1, type: SHAPE_TYPE.human },
+  { x: 400, y: 100, w: 200, h: 100, text: "Wallet", type: SHAPE_TYPE.rectangleRounded, fillColor: '#FFAF28', lineWidth: 0 },
+  { x: 750, y: 100, w: 200, h: 100, text: "Backend", type: SHAPE_TYPE.rectangleRounded, fillColor: '#FFAF28', lineWidth: 0 },
+
+  { x: 475, y: 300, w: 50, h: 550, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
+  { x: 825, y: 300, w: 50, h: 550, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
+]
+
+export const DEFAULT_CONNECTIONS = [];

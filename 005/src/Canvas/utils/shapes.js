@@ -1,9 +1,6 @@
 import {
   DEFAULT_SHAPE,
   SHAPE_TYPE,
-  DEFAULT_SHAPE_FILL,
-  DEFAULT_SHAPE_LINECOLOR,
-  DEFAULT_SHAPE_LINEWIDTH,
   DEFAULT_SHAPE_TEXT_XY_PERCENT,
   DEFAULT_SHAPE_TEXT_SIZE,
   SHAPE_TOP_HEADER_MIN_H,
@@ -13,15 +10,9 @@ export const drawShapes = ({ ctx, shapes = [] }) => {
   if (!ctx) return;
 
   shapes.forEach(shape => {
-    const data = getShapeBounds(shape);
+    const data = getShapeData(shape);
 
-    const {
-      type = SHAPE_TYPE.rectangle,
-      fillColor = DEFAULT_SHAPE_FILL,
-      lineColor = DEFAULT_SHAPE_LINECOLOR,
-      lineWidth = DEFAULT_SHAPE_LINEWIDTH,
-      debugDrawOutline = false,
-    } = data;
+    const { type, fillColor, lineColor, lineWidth, debugDrawOutline } = data;
 
     if (debugDrawOutline) drawDebugOutline(ctx, data);
 
@@ -52,14 +43,14 @@ export const drawShapes = ({ ctx, shapes = [] }) => {
 }
 
 const drawRectangle = (ctx, data) => {
-  const { left, top, w, h } = data;
+  const { left, top, w, h, lineWidth } = data;
 
   ctx.beginPath();
 
   ctx.rect(left, top, w, h);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawDebugOutline = (ctx, data) => {
@@ -77,8 +68,8 @@ const drawDebugOutline = (ctx, data) => {
 }
 
 const drawRectangleRounded = (ctx, data) => {
-  const { w, top, bottom, left, right } = data;
-  const radius = w * 0.2;
+  const { w, top, bottom, left, right, lineWidth } = data;
+  const radius = w * 0.1;
 
   ctx.beginPath();
 
@@ -89,14 +80,14 @@ const drawRectangleRounded = (ctx, data) => {
   ctx.arcTo(left, top, left, top + radius, radius);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawRectangleProcess = (ctx, data) => {
   drawRectangle(ctx, data);
   ctx.beginPath();
 
-  const { top, bottom } = data;
+  const { top, bottom, lineWidth } = data;
   const left = data.left + data.w * 0.2;
   const right = data.right - data.w * 0.2;
 
@@ -105,22 +96,22 @@ const drawRectangleProcess = (ctx, data) => {
   ctx.moveTo(right, top);
   ctx.lineTo(right, bottom);
 
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawEllipse = (ctx, data) => {
-  const { w, h, centerX, centerY, } = data;
+  const { w, h, centerX, centerY, lineWidth } = data;
 
   ctx.beginPath();
 
   ctx.ellipse(centerX, centerY, (w * 0.5), (h * 0.5), 0, 0, Math.PI * 2);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawTriangle = (ctx, data) => {
-  const { left, right, top, bottom, centerY } = data;
+  const { left, right, top, bottom, centerY, lineWidth } = data;
 
   ctx.beginPath();
 
@@ -130,11 +121,11 @@ const drawTriangle = (ctx, data) => {
   ctx.lineTo(right, centerY);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawDiamond = (ctx, data) => {
-  const { left, right, top, bottom, centerX, centerY } = data;
+  const { left, right, top, bottom, centerX, centerY, lineWidth } = data;
 
   ctx.beginPath();
 
@@ -145,11 +136,11 @@ const drawDiamond = (ctx, data) => {
   ctx.lineTo(centerX, top);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawHexagon = (ctx, data) => {
-  const { left, right, top, bottom, centerY, w } = data;
+  const { left, right, top, bottom, centerY, w, lineWidth } = data;
   const almostLeft = left + (w * 0.2);
   const almostRight = right - (w * 0.2);
 
@@ -164,11 +155,11 @@ const drawHexagon = (ctx, data) => {
   ctx.lineTo(almostLeft, top);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawParallelogram = (ctx, data) => {
-  const { left, right, top, bottom, w } = data;
+  const { left, right, top, bottom, w, lineWidth } = data;
   const almostLeft = left + (w * 0.2);
   const almostRight = right - (w * 0.2);
 
@@ -181,12 +172,12 @@ const drawParallelogram = (ctx, data) => {
   ctx.lineTo(almostLeft, top);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 // TODO Bottom curve is not "smooth":
 const drawCylinder = (ctx, data) => {
-  const { left, right, top, bottom, centerX, w, h } = data;
+  const { left, right, top, bottom, centerX, w, h, lineWidth } = data;
   const almostTop = top + (h * 0.2);
   const almostBottom = bottom - (h * 0.2);
 
@@ -203,11 +194,11 @@ const drawCylinder = (ctx, data) => {
   ctx.ellipse(centerX, almostTop, (w * 0.5), (h * 0.1), 0, 0, Math.PI * 2);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawX = (ctx, data) => {
-  const { left, right, top, bottom, h, w } = data;
+  const { left, right, top, bottom, h, w, lineWidth } = data;
 
   const almostTop = top + (h * 0.1);
   const almostBottom = bottom - (h * 0.1);
@@ -222,11 +213,11 @@ const drawX = (ctx, data) => {
   ctx.moveTo(almostRight, almostTop);
   ctx.lineTo(almostLeft, almostBottom);
 
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawNote = (ctx, data) => {
-  const { left, right, top, bottom, h, w } = data;
+  const { left, right, top, bottom, h, w, lineWidth } = data;
 
   const smallerGap = Math.min(w, h) * 0.2;
   const almostRight = right - smallerGap;
@@ -243,18 +234,18 @@ const drawNote = (ctx, data) => {
   ctx.lineTo(left, top);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 
   // Folded corner:
   ctx.lineTo(almostRight, top);
   ctx.lineTo(almostRight, almostTop);
   ctx.lineTo(right, almostTop);
 
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawPackage = (ctx, data) => {
-  const { w, h, top, bottom, left, right, centerX } = data;
+  const { w, h, top, bottom, left, right, centerX, lineWidth } = data;
 
   const radius = w * 0.05;
   const almostTop = top + Math.min(Math.max(SHAPE_TOP_HEADER_MIN_H, h * 0.1), h * 0.3);
@@ -277,11 +268,11 @@ const drawPackage = (ctx, data) => {
   ctx.quadraticCurveTo(pastCenterX2, top, pastCenterX3, almostTop);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawEntity = (ctx, data) => {
-  const { left, right, bottom } = data;
+  const { left, right, bottom, lineWidth } = data;
 
   ctx.beginPath();
 
@@ -289,13 +280,13 @@ const drawEntity = (ctx, data) => {
   ctx.lineTo(right, bottom);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 
   drawEllipse(ctx, data);
 }
 
 const drawBoundary = (ctx, data) => {
-  const { top, bottom, left, centerY, w } = data;
+  const { top, bottom, left, centerY, w, lineWidth } = data;
   const almostLeft = left + (w * 0.1);
 
   ctx.beginPath();
@@ -307,10 +298,10 @@ const drawBoundary = (ctx, data) => {
   ctx.lineTo(almostLeft, centerY);
 
   ctx.fill();
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 
   // TODO Maybe another func just for resizing "data":
-  drawEllipse(ctx, getShapeBounds({
+  drawEllipse(ctx, getShapeData({
     ...data,
     w: w - (w * 0.1),
     x: left + (w * 0.1),
@@ -319,16 +310,16 @@ const drawBoundary = (ctx, data) => {
 
 const drawHuman = (ctx, data) => {
   const {
-    w,
     h,
     top,
     bottom,
     left,
     right,
     centerX,
+    lineWidth,
   } = data;
 
-  const radius = Math.min(w, h) * 0.2;
+  const radius = h * 0.2;
   const headCenterY = top + radius;
   const headBottom = headCenterY + radius;
   const armStartY = top + (h * 0.5);
@@ -339,7 +330,7 @@ const drawHuman = (ctx, data) => {
   ctx.beginPath();
   ctx.moveTo(centerX, headBottom);
   ctx.lineTo(centerX, crotchY);
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 
   // arms:
   ctx.beginPath();
@@ -347,7 +338,7 @@ const drawHuman = (ctx, data) => {
   ctx.lineTo(left, armEndY);
   ctx.moveTo(centerX, armStartY);
   ctx.lineTo(right, armEndY);
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 
   // legs:
   ctx.beginPath();
@@ -355,12 +346,13 @@ const drawHuman = (ctx, data) => {
   ctx.lineTo(left, bottom);
   ctx.moveTo(centerX, crotchY);
   ctx.lineTo(right, bottom);
-  ctx.stroke();
+  if (lineWidth > 0) ctx.stroke();
 
   // head:
   ctx.beginPath();
   ctx.arc(centerX, headCenterY, radius, 0, Math.PI * 2);
   ctx.fill();
+  if (lineWidth > 0) ctx.stroke();
 }
 
 const drawTextIfNeeded = (ctx, data) => {
@@ -388,7 +380,7 @@ const drawTextIfNeeded = (ctx, data) => {
   }
 }
 
-export const getShapeBounds = (rawShape) => {
+export const getShapeData = (rawShape) => {
   const shape = { ...DEFAULT_SHAPE, ...rawShape };
 
   return {
@@ -399,5 +391,10 @@ export const getShapeBounds = (rawShape) => {
     right: shape.x + shape.w,
     centerX: shape.x + (shape.w / 2),
     centerY: shape.y + (shape.h / 2),
+    type: shape.type,
+    fillColor: shape.fillColor,
+    lineColor: shape.lineColor,
+    lineWidth: shape.lineWidth,
+    debugDrawOutline: shape.drawDebugOutline,
   }
 }
