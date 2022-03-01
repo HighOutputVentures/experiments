@@ -14,9 +14,11 @@ We should be able to:
 
 <!-- TODO: Finish up Abstract -->
 ## Abstract
-To develop a customized smart contract with the security and optimization in mind alongside with unit testing it.
+To develop a well-tested customized smart contract with the security and optimization in mind. In the first week we implemented the usage of `BulkTransfer` on a smart contract, `WorkflowModule`. By running `BulkTransfer` under the hood, we should make use of function selectors and transaction hash. We also tried implementing `UniSwap` in `WorkflowModule`, however could not since the `Rinkeby` test network is unstable for `UniSwap`. During the implementation phase we incorporate different kinds of techniques, simple tests, mocking tests and tests using the rinkeby network config from `Hardhat`. 
 
-Lastly, we tried to redesign the workflow module for doing off-chain actions with signatures.
+After we implemented the `BulkTransfer` into the `WorkflowModule`, we benchmark multiple single transfers and bulk transfers with multiple transactions in it. During the benchmarking we discover that as the number increases the BulkTransfer win over single transfer in optimizing gas fees. 
+
+Lastly, we tried to redesign the workflow module for doing off-chain actions with signatures. This will help us on security on who executes the workflow making use of the delegates.
 
 ## Conclusion
 I, the author, volunteer to take part in this interesting experiment with the help of my colleagues. I found 
