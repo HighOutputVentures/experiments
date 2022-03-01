@@ -151,6 +151,17 @@ const discordUserResponse = await axios.get(
 );
 ```
 
+**Get Google User Information using Google Access Token**
+
+```tsx
+const tokenInfoResponse = await axios.post('https://oauth2.googleapis.com/tokeninfo', {}, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Bearer ${args.request.accessToken}`,
+    },
+  });
+```
+
 **Get Transactions of NFT Collection Smart Contract Sample Request**
 
 https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x06012c8cf97bead5deae237070f9587f8e7a266d&page=1&offset=5&startblock=0&sort=desc&apikey=S1W3GXNSMC72X93RF6XD2VPMQVXUUC5KY2
