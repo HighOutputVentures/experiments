@@ -158,6 +158,29 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 
 ## Developing
 
+**Week 1**
+
+- Build Worker Service
+- Build API Service Base Code
+- Integrate Worker Service to API Service
+- Create resolver for Mutation.generateAccessTokenByGoogle
+- Create resolver for Mutation.createProject
+- Create resolver for Mutation.deleteProject
+- Create resolver for Query.projects
+- Create resolver for Mutation.generateProjectAccessToken
+- Create access endpoint for redirection
+- Add test for Mutation.createProject
+- Add test for Mutation.deleteProject
+- Add test for Query.projects
+- Add test for Mutation.generateProjectAccessToken
+- Add test for access endpoint test
+
+**Week 2**
+
+- Add discord guild member adding feature on generate project access token endpoint
+- Auto remove role for discord users that didn't have owned a NFT
+- Create docker container for token gating api service
+
 Once cloned the project and installed dependencies with `npm install`, start a development server:
 
 ```bash
