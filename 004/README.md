@@ -187,7 +187,10 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 - Build API Service Base Code
 - Integrate Worker Service to API Service
 - Create resolver for Mutation.generateAccessTokenByGoogle
+- Retrieve email address from Google Token
 - Create resolver for Mutation.createProject
+- Create discord roles when creating a project 
+- Convert channels into private channels when creating a project
 - Create resolver for Mutation.deleteProject
 - Create resolver for Query.projects
 - Create resolver for Mutation.generateProjectAccessToken
@@ -207,7 +210,8 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 
 **Week 2**
 
-- Add discord guild member adding feature on generate project access token endpoint
+- Retrieve discord user id on generate project access token
+- Add discord guild member adding feature on generate project access token
 - Auto remove role for discord users that didn't have owned a NFT
 - Create docker container for token gating api service
 - Create the grant page and worked on its features
