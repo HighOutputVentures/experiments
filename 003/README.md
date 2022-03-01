@@ -22,12 +22,10 @@ https://docs.web3j.io/4.8.7/
 #### Infura
 https://infura.io/dashboard
 
-#### Etherscan API Docs
-https://docs.etherscan.io/
+#### Moralis API Docs
+https://docs.moralis.io/moralis-server/web3-sdk/nft-api
 
 #### Querying a Smart Contract
 https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-smart-contract-using-web3j-in-android/13397
 
 ## Documentation
-
-### How to import WalletConnect

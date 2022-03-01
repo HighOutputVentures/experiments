@@ -22,46 +22,15 @@ This experiment does not aim towards complex methodologies or even very high acc
 
 ## Abstract
 
-In this experiment, I am going to build a model that detects anomaly in the logs generated in OneWallet system. Generally speaking, the problem here is a binary classification of time series data. More specifically, our model will tell us whether a given set of logs in a fixed and consistent time window is good or anomalous.
+In this experiment, I am going to build a model that detects anomaly in the logs generated in OneWallet system. The model will tell us whether a given set of logs in a fixed and consistent time window is good or anomalous.
 
 As this experiment aims to establish a set of processes, to reduce complexity, I am going to focus on logs that pertains to the response times of internal APIs in OneWallet.
 
-My approach in solving this problem is to train a model for it to learn to be very good at processing a time series of logs that we consider to be normal or good, but fails to a high degree in processing a time series of logs that we consider to be anomalous. More specifically, the model should generate a significantly greater loss in processing an anomalous set of logs compared to processing a good set of logs.
+My approach in solving this problem is to train a model for it to learn to be very good at processing a time series of logs that we consider to be normal or good, but fails to a high degree in processing a time series of logs that are anomalous. More specifically, the model should generate a significantly greater loss in processing an anomalous set of logs compared to processing a good set of logs.
 
 For this approach I'm going to use Autoencoder.
 
 ![Autoencoder](./docs/autoencoder.png "Autoencoder")
-
-### Model Training
-
-#### Time Domain
-
-1. Retrieve 95th percentile of response times per 1 minute.
-2. Create a dataset where each item is a plot of the response times (per minute) for every 10 minute window.
-3. Remove data that we consider to be anomalous.
-4. Handle missing values. (TO DO: Research on how to handle missing values)
-5. Normalize response times to be between 0 and 1.
-6. Using the resulting data, train the autoencoder.
-7. Get the training loss (or reconstruction error) as the anomaly score.
-
-#### Frequency Domain
-
-Same steps with Time Domain model training above but plots the dataset into frequency domain using Fast Fourier Transform.
-1. Retrieve 95th percentile of response times per 1 minute.
-2. Create a dataset where each item is a plot of the response times (per minute) for every 10 minute window.
-3. Remove data that we consider to be anomalous.
-4. Handle missing values. (TO DO: Research on how to handle missing values)
-5. Normalize response times to be between 0 and 1.
-6. Plot data in frequency domain using FFT.
-7. Using the resulting data, train the autoencoder.
-8. Get the training loss (or reconstruction error) as the anomaly score.
-
-### Questions to Answer
-
-1. How do we evaluate the performance of our model?
-2. How does performance differ between data in time domain and frequency domain?
-3. How is the training loss computed? What are the differences in the results between different ways used to compute the error?
-4. What are the effects of increasing or decreasing our time window? 10 minute window? 30 minute window? 1 hour window?
 
 In this experiment, I will be using Keras with TensorFlow as backend and Python as the programming language.
 
@@ -70,9 +39,20 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 ## Documentations
 
 1. [Setting Up The Development Environment](./docs/setting-up-the-development-environment.md)
+2. [Data Gathering](./docs/data-gathering.md)
+3. [Data Manipulation](./docs/data-manipulation.md)
 
 ## Resources
 - [Anomaly Detection: Definition, Best Practices and Use Cases](https://datrics.ai/anomaly-detection-best-practices)
 - [Anomaly detection with TensorFlow | Workshop](https://www.youtube.com/watch?v=2K3ScZp1dXQ)
+- [Intro to Autoencoders](https://www.tensorflow.org/tutorials/generative/autoencoder)
+- [A Complete Understanding of Dense Layers in Neural Networks](https://analyticsindiamag.com/a-complete-understanding-of-dense-layers-in-neural-networks/)
+- [A Gentle Introduction to the Rectified Linear Unit (ReLU)](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/)
+- [Activation Functions in Neural Networks](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)]
+- [Gentle Introduction to the Adam Optimization Algorithm for Deep Learning](https://machinelearningmastery.com/adam-optimization-algorithm-for-deep-learning/)
+- [Comparing Robustness of MAE,MSE and RMSE](https://towardsdatascience.com/comparing-robustness-of-mae-mse-and-rmse-6d69da870828)
+- [Classification: Accuracy](https://developers.google.com/machine-learning/crash-course/classification/accuracy)
+- [Classification: Precision and Recall](https://developers.google.com/machine-learning/crash-course/classification/accuracy)
+- [Understand the Impact of Learning Rate on Neural Network Performance](https://machinelearningmastery.com/understand-the-dynamics-of-learning-rate-on-deep-learning-neural-networks)
 - [Fourier Transform in Python - Vibration Analysis](https://www.alphabold.com/fourier-transform-in-python-vibration-analysis/)
 - [Autoencoder with Spiking in Frequency Domain for Anomaly Detection of Uncertainty Event](https://www.atlantis-press.com/journals/jrnal/125935236/view)

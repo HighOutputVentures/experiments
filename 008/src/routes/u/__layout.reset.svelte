@@ -8,21 +8,11 @@
 
 	let creatorProfile;
 
-	// see https://kit.svelte.dev/docs#loading
 	export const load: Load = async ({ params }) => {
 		const creatorUsername = params.username;
-
-		// creatorProfile = await client.query(GET_PROFILE, {
-		// 	variables: {
-		// 		username: creatorUsername
-		// 	},
-		// 	fetchPolicy: 'no-cache'
-		// });
-
 		const endpoint = 'https://beta-api.jamclout.com/graphql';
 		const headers = {
 			'content-type': 'application/json'
-			// "Authorization": "<token>"
 		};
 		const graphqlQuery = {
 			operationName: 'GetProfile',

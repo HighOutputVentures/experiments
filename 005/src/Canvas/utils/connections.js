@@ -1,17 +1,17 @@
-import { DEFAULT_BOX, MARGIN } from '../constants';
-import { getBoxBounds } from './boxes';
+import { DEFAULT_SHAPE, MARGIN } from '../constants';
+import { getShapeBounds } from './shapes';
 
-export const drawConnections = ({ ctx, boxes = [], connections = [] }) => {
+export const drawConnections = ({ ctx, shapes = [], connections = [] }) => {
   if (!ctx) return;
 
-  connections.map(connection => drawConnection({ ctx, boxes, connection }));
+  connections.map(connection => drawConnection({ ctx, shapes, connection }));
 }
 
-const drawConnection = ({ ctx, boxes = [], connection }) => {
+const drawConnection = ({ ctx, shapes = [], connection }) => {
   try {
     const {
-      from: fromBoxIndex,
-      to: toBoxIndex,
+      from: fromShapeIndex,
+      to: toShapeIndex,
       fromTop = false,
       fromBottom = false,
       fromLeft = false,
@@ -26,36 +26,36 @@ const drawConnection = ({ ctx, boxes = [], connection }) => {
       pivotPoint = 0.5,
     } = connection;
 
-    const fromBox = { ...DEFAULT_BOX, ...boxes[fromBoxIndex] };
-    const toBox = { ...DEFAULT_BOX, ...boxes[toBoxIndex] };
+    const fromShape = { ...DEFAULT_SHAPE, ...shapes[fromShapeIndex] };
+    const toShape = { ...DEFAULT_SHAPE, ...shapes[toShapeIndex] };
 
-    let lineStartX = fromBox.x;
-    let lineStartY = fromBox.y;
-    let lineEndX = toBox.x;
-    let lineEndY = toBox.y;
+    let lineStartX = fromShape.x;
+    let lineStartY = fromShape.y;
+    let lineEndX = toShape.x;
+    let lineEndY = toShape.y;
 
     if (fromRight) {
-      lineStartX += fromBox.w;
+      lineStartX += fromShape.w;
     } else if (!fromLeft) {
-      lineStartX += fromBox.w / 2;
+      lineStartX += fromShape.w / 2;
     }
 
     if (fromBottom) {
-      lineStartY += fromBox.h;
+      lineStartY += fromShape.h;
     } else if (!fromTop) {
-      lineStartY += fromBox.h / 2;
+      lineStartY += fromShape.h / 2;
     }
 
     if (toRight) {
-      lineEndX += toBox.w;
+      lineEndX += toShape.w;
     } else if (!toLeft) {
-      lineEndX += toBox.w / 2;
+      lineEndX += toShape.w / 2;
     }
 
     if (toBottom) {
-      lineEndY += toBox.h;
+      lineEndY += toShape.h;
     } else if (!toTop) {
-      lineEndY += toBox.h / 2;
+      lineEndY += toShape.h / 2;
     }
 
     ctx.beginPath();
@@ -64,17 +64,17 @@ const drawConnection = ({ ctx, boxes = [], connection }) => {
     if (!isStraightLine) {
       // "pivot" may not be the right word:
       createPivotLinePath(ctx, {
-        // fromBox,
-        // toBox,
+        // fromShape,
+        // toShape,
         lineStartX,
         lineStartY,
         lineEndX,
         lineEndY,
         pivotPoint,
-        // toBoxXLeft: toBox.x,
-        // toBoxXRight: toBox.x + (toBox.w || DEFAULT_BOX_W),
-        // toBoxYTop: toBox.y,
-        // toBoxYBottom: toBox.y + (toBox.h || DEFAULT_BOX_H),
+        // toShapeXLeft: toShape.x,
+        // toShapeXRight: toShape.x + (toShape.w || DEFAULT_SHAPE_W),
+        // toShapeYTop: toShape.y,
+        // toShapeYBottom: toShape.y + (toShape.h || DEFAULT_SHAPE_H),
         fromTop,
         fromBottom,
         fromLeft,
@@ -83,8 +83,8 @@ const drawConnection = ({ ctx, boxes = [], connection }) => {
         toBottom,
         toLeft,
         toRight,
-        fromBoxBounds: getBoxBounds(fromBox),
-        toBoxBounds: getBoxBounds(toBox),
+        fromShapeBounds: getShapeBounds(fromShape),
+        toShapeBounds: getShapeBounds(toShape),
         lineBetweenX: (lineStartX + lineEndX) * 0.5,
         lineBetweenY: (lineStartY + lineEndY) * 0.5,
       });
@@ -114,8 +114,8 @@ const createPivotLinePath = (ctx, data) => {
     toBottom,
     toLeft,
     toRight,
-    fromBoxBounds,
-    toBoxBounds,
+    fromShapeBounds,
+    toShapeBounds,
   } = data;
 
   let currentXY = { currentX: lineStartX, currentY: lineStartY };
@@ -126,7 +126,7 @@ const createPivotLinePath = (ctx, data) => {
   }
 
   else if (fromTop && toBottom) {
-    if (isCloseToOrBelow(fromBoxBounds.top, toBoxBounds.bottom)) {
+    if (isCloseToOrBelow(fromShapeBounds.top, toShapeBounds.bottom)) {
       currentXY = goSlightlyUp(ctx, currentXY, data);
       currentXY = goBetweenStartEndX(ctx, currentXY, data);
       currentXY = goSlightyBelowEndY(ctx, currentXY, data);
@@ -138,7 +138,7 @@ const createPivotLinePath = (ctx, data) => {
   }
 
   else if (fromTop && toLeft) {
-    const isLeft = isCloseToOrLeft(lineStartX, toBoxBounds.left);
+    const isLeft = isCloseToOrLeft(lineStartX, toShapeBounds.left);
     const isBelow = isCloseToOrBelow(lineStartY, lineEndY);
 
     if (isBelow && !isLeft) {
@@ -164,7 +164,7 @@ const createPivotLinePath = (ctx, data) => {
   }
 
   else if (fromBottom && toTop) {
-    if (isCloseToOrBelow(fromBoxBounds.bottom, toBoxBounds.top)) {
+    if (isCloseToOrBelow(fromShapeBounds.bottom, toShapeBounds.top)) {
       currentXY = goBetweenStartEndY(ctx, currentXY, data);
       currentXY = goTowardsEndX(ctx, currentXY, data);
     } else {
@@ -200,12 +200,12 @@ const goSlightlyDown = (ctx, { currentX, currentY }) => {
 }
 
 /*
-const getAlmostToEndX = ({ fromBoxBounds, toBoxBounds, currentX }) => {
+const getAlmostToEndX = ({ fromShapeBounds, toShapeBounds, currentX }) => {
   return
 }
 
-const getSlightlyBeyondEndX = ({ fromBoxBounds, toBoxBounds, currentX }) => {
-  return isCloseToOrLeft(fromBoxBounds.centerX, toBoxBounds.centerX)
+const getSlightlyBeyondEndX = ({ fromShapeBounds, toShapeBounds, currentX }) => {
+  return isCloseToOrLeft(fromShapeBounds.centerX, toShapeBounds.centerX)
     ? currentX + MARGIN
     : currentX - MARGIN;
 }
@@ -214,11 +214,11 @@ const getSlightlyBeyondEndX = ({ fromBoxBounds, toBoxBounds, currentX }) => {
 const goAlmostToEndX = (
   ctx,
   { currentY },
-  { fromBoxBounds, toBoxBounds },
+  { fromShapeBounds, toShapeBounds },
 ) => {
-  const newX = isCloseToOrLeft(fromBoxBounds.centerX, toBoxBounds.centerX)
-    ? toBoxBounds.right + MARGIN
-    : toBoxBounds.left - MARGIN;
+  const newX = isCloseToOrLeft(fromShapeBounds.centerX, toShapeBounds.centerX)
+    ? toShapeBounds.right + MARGIN
+    : toShapeBounds.left - MARGIN;
 
   return lineToAndReturnXY(ctx, newX, currentY);
 }
@@ -226,11 +226,11 @@ const goAlmostToEndX = (
 const goSlightlyBeyondEndX = (
   ctx,
   { currentY },
-  { fromBoxBounds, toBoxBounds },
+  { fromShapeBounds, toShapeBounds },
 ) => {
-  const newX = isCloseToOrLeft(fromBoxBounds.centerX, toBoxBounds.centerX)
-    ? toBoxBounds.left - MARGIN
-    : toBoxBounds.right + MARGIN;
+  const newX = isCloseToOrLeft(fromShapeBounds.centerX, toShapeBounds.centerX)
+    ? toShapeBounds.left - MARGIN
+    : toShapeBounds.right + MARGIN;
 
   return lineToAndReturnXY(ctx, newX, currentY);
 }
@@ -238,9 +238,9 @@ const goSlightlyBeyondEndX = (
 const goSlightlyBeyondMoreLeft = (
   ctx,
   { currentY },
-  { fromBoxBounds, toBoxBounds },
+  { fromShapeBounds, toShapeBounds },
 ) => {
-  const newX = Math.min(fromBoxBounds.left, toBoxBounds.left) - MARGIN;
+  const newX = Math.min(fromShapeBounds.left, toShapeBounds.left) - MARGIN;
 
   return lineToAndReturnXY(ctx, newX, currentY);
 }
@@ -265,12 +265,12 @@ const goSlightlyBelowEnd = (ctx, { currentY }, { lineEndX },) => {
   return lineToAndReturnXY(ctx, lineEndX, currentY);
 }
 
-const goSlightyAboveHigher = (ctx, { currentX }, { fromBoxBounds, toBoxBounds }) => {
-  return lineToAndReturnXY(ctx, currentX, getHigher(fromBoxBounds.top, toBoxBounds.top) - MARGIN);
+const goSlightyAboveHigher = (ctx, { currentX }, { fromShapeBounds, toShapeBounds }) => {
+  return lineToAndReturnXY(ctx, currentX, getHigher(fromShapeBounds.top, toShapeBounds.top) - MARGIN);
 }
 
-const goSlightyBelowLower = (ctx, { currentX }, { fromBoxBounds, toBoxBounds }) => {
-  return lineToAndReturnXY(ctx, currentX, getLower(fromBoxBounds.bottom, toBoxBounds.bottom) + MARGIN);
+const goSlightyBelowLower = (ctx, { currentX }, { fromShapeBounds, toShapeBounds }) => {
+  return lineToAndReturnXY(ctx, currentX, getLower(fromShapeBounds.bottom, toShapeBounds.bottom) + MARGIN);
 }
 
 const goTowardsEndX = (ctx, { currentY }, { lineEndX }) => {
