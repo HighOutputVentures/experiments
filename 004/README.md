@@ -178,7 +178,7 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 - Discord **-** a VoIP, instant messaging, and digital distribution platform.
 - NFT **-** (Non-Fungible Token), a non-interchangeable unit of data stored on a blockchain, a form of digital ledger, that can be sold and traded.
 
-## Developing
+## Development
 
 **Week 1**
 
