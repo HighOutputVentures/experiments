@@ -92,21 +92,36 @@ export const DEFAULT_CONNECTIONS = [
 */
 
 export const DEFAULT_SHAPES = [
-  { x: 50, y: 50, w: 100, h: 200, text: "User", textYPercent: 1.1, type: SHAPE_TYPE.human },
+  /*0*/ { x: 50, y: 50, w: 100, h: 200, text: "User", textYPercent: 1.1, type: SHAPE_TYPE.human },
   { x: 400, y: 100, w: 200, h: 100, text: "Wallet", type: SHAPE_TYPE.rectangleRounded, fillColor: '#FFAF28', lineWidth: 0 },
   { x: 750, y: 100, w: 200, h: 100, text: "Backend", type: SHAPE_TYPE.rectangleRounded, fillColor: '#FFAF28', lineWidth: 0 },
 
-  { x: 475, y: 300, w: 50, h: 550, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
-  { x: 825, y: 300, w: 50, h: 550, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
+  /*3*/ { x: 475, y: 300, w: 50, h: 575, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
+  { x: 825, y: 300, w: 50, h: 575, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
 
-  { x: 95, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
-  { x: 495, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
-  { x: 845, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  /*5*/ { x: 95, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 495, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 845, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
 
-  { x: 95, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
-  { x: 475, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
-  { x: 95, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
-  { x: 475, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  /*8*/ { x: 95, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 475, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 95, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 475, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+
+  /*12*/ { x: 95, y: 475, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 825, y: 475, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 95, y: 525, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 825, y: 525, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+
+  /*16*/ { x: 95, y: 625, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 475, y: 625, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 95, y: 700, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 475, y: 700, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+
+  /*20*/ { x: 95, y: 775, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 825, y: 775, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 95, y: 850, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  { x: 825, y: 850, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
 ]
 
 export const DEFAULT_CONNECTIONS = [
@@ -119,4 +134,13 @@ export const DEFAULT_CONNECTIONS = [
 
   { from: 8, to: 9, text: 'connect wallet', textYPercent: 0.53 },
   { from: 11, to: 10, isDashed: true },
+
+  { from: 12, to: 13, text: 'get nonce', textYPercent: 0.52, textXPercent: 0.7 },
+  { from: 15, to: 14, text: 'nonce', isDashed: true, textYPercent: 0.52, textXPercent: 0.7 },
+
+  { from: 16, to: 17, text: 'sign message', textYPercent: 0.52 },
+  { from: 19, to: 18, text: 'signature', isDashed: true, textYPercent: 0.52 },
+
+  { from: 20, to: 21, text: 'verify message', textYPercent: 0.52, textXPercent: 0.7 },
+  { from: 23, to: 22, text: 'access token', isDashed: true, textYPercent: 0.52, textXPercent: 0.7 },
 ];
