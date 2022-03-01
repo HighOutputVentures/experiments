@@ -5,7 +5,6 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pandas import array
 from get_samples import get_samples
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score
@@ -63,17 +62,17 @@ autoencoder.compile(optimizer='adam', loss='mae')
 history = autoencoder.fit(
   normal_train_data,
   normal_train_data,
-  epochs=100,
+  epochs=70,
   batch_size=32,
   validation_data=(test_data, test_data),
   shuffle=True
 )
 
 # Plot the training loss and validation loss
-plt.plot(history.history['loss'], label='Training Loss')
-plt.plot(history.history['val_loss'], label='Validation Loss')
-plt.legend()
-plt.show()
+# plt.plot(history.history['loss'], label='Training Loss')
+# plt.plot(history.history['val_loss'], label='Validation Loss')
+# plt.legend()
+# plt.show()
 
 # Plot reconstruction error of a normal data
 # normal_encoded_data = autoencoder.encoder(normal_test_data).numpy()

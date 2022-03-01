@@ -1,4 +1,4 @@
-import { DEFAULT_BOX_W, DEFAULT_BOX_H } from '../constants';
+import { DEFAULT_SHAPE_W, DEFAULT_SHAPE_H } from '../constants';
 
 export const getMouseXY = ({ event, canvas }) => {
   if (!event || !canvas) {
@@ -14,19 +14,19 @@ export const getMouseXY = ({ event, canvas }) => {
   return [x, y];
 }
 
-export const getDragTargetIndexAndBoxOffsets = ({ event, canvas, boxes = [] }) => {
+export const getDragTargetIndexAndShapeOffsets = ({ event, canvas, shapes = [] }) => {
   const [mouseX, mouseY] = getMouseXY({ event, canvas });
 
-  for (let i = 0; i < boxes.length; i++) {
+  for (let i = 0; i < shapes.length; i++) {
     const {
-      x: boxX = 0,
-      y: boxY = 0,
-      w: boxW = DEFAULT_BOX_W,
-      h: boxH = DEFAULT_BOX_H,
-    } = boxes[i];
+      x: shapeX = 0,
+      y: shapeY = 0,
+      w: shapeW = DEFAULT_SHAPE_W,
+      h: shapeH = DEFAULT_SHAPE_H,
+    } = shapes[i];
 
-    if (mouseX >= boxX && mouseX <= boxX + boxW && mouseY >= boxY && mouseY <= boxY + boxH) {
-      return [i, mouseX - boxX, mouseY - boxY];
+    if (mouseX >= shapeX && mouseX <= shapeX + shapeW && mouseY >= shapeY && mouseY <= shapeY + shapeH) {
+      return [i, mouseX - shapeX, mouseY - shapeY];
     }
   }
 
