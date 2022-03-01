@@ -77,6 +77,7 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
       toBottom,
       toLeft,
       toRight,
+      color,
       fromShapeBounds: getShapeData(fromShape),
       toShapeBounds: getShapeData(toShape),
       lineBetweenX: (lineStartX + lineEndX) * 0.5,
@@ -126,6 +127,8 @@ const drawTextIfNeeded = (ctx, data) => {
   if (text) {
     const textX = (lineStartX + lineEndX) * textXPercent;
     const textY = (lineStartY + lineEndY) * textYPercent;
+
+    console.log({ textColor, color });
 
     ctx.font = `${textSize}px Arial`;
     ctx.textAlign = "center";

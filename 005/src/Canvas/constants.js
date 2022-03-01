@@ -98,6 +98,25 @@ export const DEFAULT_SHAPES = [
 
   { x: 475, y: 300, w: 50, h: 550, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
   { x: 825, y: 300, w: 50, h: 550, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
+
+  { x: 95, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 495, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 845, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+
+  { x: 95, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 475, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 95, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 475, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
 ]
 
-export const DEFAULT_CONNECTIONS = [];
+export const DEFAULT_CONNECTIONS = [
+  { from: 1, to: 3, fromBottom: true, toTop: true, isDashed: true },
+  { from: 2, to: 4, fromBottom: true, toTop: true, isDashed: true },
+  { from: 0, to: 5, toTop: true, isDashed: true },
+
+  { from: 3, to: 6, fromBottom: true, toTop: true, isDashed: true },
+  { from: 4, to: 7, fromBottom: true, toTop: true, isDashed: true },
+
+  { from: 8, to: 9, text: 'connect wallet', textYPercent: 0.53 },
+  { from: 11, to: 10, isDashed: true },
+];

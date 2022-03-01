@@ -19,6 +19,7 @@ export const drawShapes = ({ ctx, shapes = [] }) => {
     ctx.fillStyle = fillColor;
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
+    ctx.setLineDash([]);
 
     switch (type) {
       case SHAPE_TYPE.human: drawHuman(ctx, data); break;
