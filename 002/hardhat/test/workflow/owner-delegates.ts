@@ -5,8 +5,6 @@ import chaiAsPromised from 'chai-as-promised';
 import { ethers } from 'hardhat';
 import { expect, use } from 'chai';
 
-
-
 use(chaiAsPromised);
 
 const encodeTransactionData = (args: {
@@ -34,11 +32,13 @@ describe('WorkflowModuleV2 - 2 Owner delegates', () => {
     });
 
     const SAFE_ADDRESS = '0x2700208D4b0b2bb83CF89601d5691b08c296Ae72';
-
+    
+    // The MAIN OWNER
     const safeSdk: Safe = await Safe.create({ ethAdapter, safeAddress: SAFE_ADDRESS })
     
     this.safeSdk = safeSdk;
 
+    // The other owner
     const owner02 = await safeSdk.connect({
       ethAdapter: new EthersAdapter({
         ethers,
@@ -56,6 +56,7 @@ describe('WorkflowModuleV2 - 2 Owner delegates', () => {
     this.owners = owners;
   
     const workflowV2ContractAddress = '0x2700208D4b0b2bb83CF89601d5691b08c296Ae72';
+
     const contract = await ethers.getContractAt('WorkflowModuleV2', workflowV2ContractAddress);
 
     this.contract = contract;
@@ -73,16 +74,18 @@ describe('WorkflowModuleV2 - 2 Owner delegates', () => {
     
     this.txHash = txHash;
 
+    // Signing of contract
     const firstSafeSignature = await safeSdk.signTransactionHash(txHash);
     const secondSafeSignature = await owner02.signTransactionHash(txHash);
 
+    // joining the two contracts
     const signatureBytes = ethers.utils.solidityPack(
       ['bytes', 'bytes'], 
       [secondSafeSignature.data, firstSafeSignature.data]
     );
     
     this.signatureBytes = signatureBytes;
-
+    
     const encodedTransactionData = encodeTransactionData({
       abi: ['function executeWorkflow(address,address[],tuple(bytes4,bytes)[],bytes)'],
       values: [
