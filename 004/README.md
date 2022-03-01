@@ -211,6 +211,7 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 **Week 2**
 
 - Retrieve discord user id from access token
+- Retrieve email from Google access token
 - Add discord guild member adding feature on generate project access token
 - Auto remove role for discord users that didn't have owned a NFT
 - Create docker container for token gating api service
