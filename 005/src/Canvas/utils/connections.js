@@ -128,8 +128,6 @@ const drawTextIfNeeded = (ctx, data) => {
     const textX = (lineStartX + lineEndX) * textXPercent;
     const textY = (lineStartY + lineEndY) * textYPercent;
 
-    console.log({ textColor, color });
-
     ctx.font = `${textSize}px Arial`;
     ctx.textAlign = "center";
     ctx.fillStyle = textColor || color;
