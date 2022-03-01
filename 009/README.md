@@ -3,8 +3,9 @@
 ## Goal Statements
 
 At the end of this experiment, we should be able to;
+Create a Kanban Board GraphQL API that runs in deno with these features:
 
-[ ]  Authentication with OTP
+[ ]  Authenticate with OTP
 
 [ ]  Implement Dataloaders
 
