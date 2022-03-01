@@ -49,44 +49,95 @@ Due to the rising popularity of NFT tokens and exclusive digital content access,
 
 **Topics learned on Week 1**
 
-- acquiring discord bot tokens
-- create servers using Discord API
-- create channels using Discord API
+- [create discord bots](./docs/create-discord-bots/index.md)
+- [acquiring discord bot tokens](./docs/acquiring-discord-bot-tokens/index.md)
 - create roles using Discord API
-- create private channels using Discord API
-- setting discord permissions on channels
-- getting user information using discord user tokens
-- acquiring user tokens using Discord OAuth2 authorization code grant
+- convert channels into private channels using Discord API
+- [acquire user tokens using Discord OAuth2 authorization code grant](./docs/acquire-discord-user-access-tokens/index.md)
+- get user information using discord user tokens
 - retrieve guild list using discord user tokens
 - add roles to channel using Discord API
 - fetch transactions of NFT collection smart contract using Etherscan API
+
+**Create Roles using Discord API**
+
+```tsx
+      const discordRoleResponse = await axios.post(`https://discord.com/api/guilds/${params.guildId}/roles`, {
+        name: params.roleName,
+      }, {
+        headers: {
+          Authorization: `Bot ${this.BOT_TOKEN}`,
+        },
+      });
+```
+*Note: Make sure your Bot has **Manage Roles** permission enabled.*
+
+**Add Roles to Channels**
+
+```tsx
+      await axios.put(`https://discord.com/api/v9/channels/${params.channelId}/permissions/${params.roleId}`, {
+        id: params.roleId, // role id
+        type: 0,
+        allow: '1024',    // 1024 - TRUE, 0 - FALSE
+        deny: '0',  // 1024 - TRUE, 0 - FALSE
+      }, {
+        headers: {
+          Authorization: `Bot ${this.BOT_TOKEN}`,
+        },
+      });
+```
+*Note: Make sure your Bot has **Manage Channels** permission enabled.*
+
+**Convert Channels to Private Channels**
+
+```tsx
+      await axios.put(`https://discord.com/api/v9/channels/${params.channelId}/permissions/${params.guildId}`, {
+        id: params.guildId, // guild id is everyone role id
+        type: 0,
+        allow: '0',    // 1024 - TRUE, 0 - FALSE
+        deny: '1024',  // 1024 - TRUE, 0 - FALSE
+      }, {
+        headers: {
+          Authorization: `Bot ${this.BOT_TOKEN}`,
+        },
+      });
+```
+*Note: Make sure your Bot has **Manage Channels** permission enabled.*
+
+**Add Guild Member to Server with Role**
+
+```tsx
+      await axios
+        .put(`https://discord.com/api/guilds/${params.guildId}/members/${params.userId}`, {
+          access_token: params.userOAuth2Token,
+          roles: [params.roleId],
+        }, {
+          headers: {
+            Authorization: `Bot ${this.BOT_TOKEN}`,
+          },
+      });
+```
+*Note: Make sure your Bot has **Guilds.Join** permission enabled.*
+
+**Get Discord User Information**
+
+```tsx
+      const discordUserResponse = await axios.get("https://discord.com/api/users/@me", {
+        headers: {
+          Authorization: `Bearer ${params.userOAuth2Token}`,
+        },
+      });
+```
+
+**Get Transactions of NFT Collection Smart Contract Sample Request**
+
+https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x06012c8cf97bead5deae237070f9587f8e7a266d&page=1&offset=5&startblock=0&sort=desc&apikey=S1W3GXNSMC72X93RF6XD2VPMQVXUUC5KY2
 
 **Challenges**
 
 - assigning roles to channels using Discord API
 - increase ownership table update speed
 - auto-retry of update worker service when fetching of the transaction fails
-
-**Terminologies**
-
-- OAuth2 **-** a protocol that allows a user to grant a third-party website or application access to the user's protected resources, without necessarily revealing their long-term credentials or even their identity.
-- API **-** (Application Programming Interface), an interface that delivers the request from the client to the provider and then delivers the response back to the client.
-- Discord **-** a VoIP, instant messaging, and digital distribution platform.
-- NFT **-** (Non-Fungible Token), a non-interchangeable unit of data stored on a blockchain, a form of digital ledger, that can be sold and traded.
-
-**Getting Discord User Information Request Sample Code**
-
-```tsx
-await axios.get("https://discord.com/API/users/@me", {
-  headers: {
-    Authorization: `Bearer ${params.userOAuth2Token}`,
-  },
-});
-```
-
-**Get Transactions of NFT Collection Smart Contract Sample Request**
-
-https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x06012c8cf97bead5deae237070f9587f8e7a266d&page=1&offset=5&startblock=0&sort=desc&apikey=S1W3GXNSMC72X93RF6XD2VPMQVXUUC5KY2
 
 **Topics learned on Week 2**
 
@@ -97,6 +148,13 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 - remove roles of a guild member using Discord API
 - discord role hierarchy on servers
 - running worker service in the background using async-group
+
+**Terminologies**
+
+- OAuth2 **-** a protocol that allows a user to grant a third-party website or application access to the user's protected resources, without necessarily revealing their long-term credentials or even their identity.
+- API **-** (Application Programming Interface), an interface that delivers the request from the client to the provider and then delivers the response back to the client.
+- Discord **-** a VoIP, instant messaging, and digital distribution platform.
+- NFT **-** (Non-Fungible Token), a non-interchangeable unit of data stored on a blockchain, a form of digital ledger, that can be sold and traded.
 
 ## Developing
 
