@@ -33,7 +33,11 @@ describe('Support Button', () => {
 		});
 
 		const supportBtn = getByText('Support');
+		expect(supportBtn).toBeInTheDocument();
+		expect(supportBtn).toBeEnabled();
+
 		await fireEvent.click(supportBtn);
+
 		expect(mockFn).toHaveBeenCalled();
 	});
 });
