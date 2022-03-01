@@ -62,71 +62,93 @@ Due to the rising popularity of NFT tokens and exclusive digital content access,
 **Create Roles using Discord API**
 
 ```tsx
-      const discordRoleResponse = await axios.post(`https://discord.com/api/guilds/${params.guildId}/roles`, {
-        name: params.roleName,
-      }, {
-        headers: {
-          Authorization: `Bot ${this.BOT_TOKEN}`,
-        },
-      });
+const discordRoleResponse = await axios.post(
+  `https://discord.com/api/guilds/${params.guildId}/roles`,
+  {
+    name: params.roleName,
+  },
+  {
+    headers: {
+      Authorization: `Bot ${this.BOT_TOKEN}`,
+    },
+  }
+);
 ```
-*Note: Make sure your Bot has **Manage Roles** permission enabled.*
+
+_Note: Make sure your Bot has **Manage Roles** permission enabled._
 
 **Add Roles to Channels**
 
 ```tsx
-      await axios.put(`https://discord.com/api/v9/channels/${params.channelId}/permissions/${params.roleId}`, {
-        id: params.roleId, // role id
-        type: 0,
-        allow: '1024',    // 1024 - TRUE, 0 - FALSE
-        deny: '0',  // 1024 - TRUE, 0 - FALSE
-      }, {
-        headers: {
-          Authorization: `Bot ${this.BOT_TOKEN}`,
-        },
-      });
+await axios.put(
+  `https://discord.com/api/v9/channels/${params.channelId}/permissions/${params.roleId}`,
+  {
+    id: params.roleId, // role id
+    type: 0,
+    allow: "1024", // 1024 - TRUE, 0 - FALSE
+    deny: "0", // 1024 - TRUE, 0 - FALSE
+  },
+  {
+    headers: {
+      Authorization: `Bot ${this.BOT_TOKEN}`,
+    },
+  }
+);
 ```
-*Note: Make sure your Bot has **Manage Channels** permission enabled.*
+
+_Note: Make sure your Bot has **Manage Channels** permission enabled._
 
 **Convert Channels to Private Channels**
 
 ```tsx
-      await axios.put(`https://discord.com/api/v9/channels/${params.channelId}/permissions/${params.guildId}`, {
-        id: params.guildId, // guild id is everyone role id
-        type: 0,
-        allow: '0',    // 1024 - TRUE, 0 - FALSE
-        deny: '1024',  // 1024 - TRUE, 0 - FALSE
-      }, {
-        headers: {
-          Authorization: `Bot ${this.BOT_TOKEN}`,
-        },
-      });
+await axios.put(
+  `https://discord.com/api/v9/channels/${params.channelId}/permissions/${params.guildId}`,
+  {
+    id: params.guildId, // guild id is everyone role id
+    type: 0,
+    allow: "0", // 1024 - TRUE, 0 - FALSE
+    deny: "1024", // 1024 - TRUE, 0 - FALSE
+  },
+  {
+    headers: {
+      Authorization: `Bot ${this.BOT_TOKEN}`,
+    },
+  }
+);
 ```
-*Note: Make sure your Bot has **Manage Channels** permission enabled.*
+
+_Note: Make sure your Bot has **Manage Channels** permission enabled._
 
 **Add Guild Member to Server with Role**
 
 ```tsx
-      await axios
-        .put(`https://discord.com/api/guilds/${params.guildId}/members/${params.userId}`, {
-          access_token: params.userOAuth2Token,
-          roles: [params.roleId],
-        }, {
-          headers: {
-            Authorization: `Bot ${this.BOT_TOKEN}`,
-          },
-      });
+await axios.put(
+  `https://discord.com/api/guilds/${params.guildId}/members/${params.userId}`,
+  {
+    access_token: params.userOAuth2Token,
+    roles: [params.roleId],
+  },
+  {
+    headers: {
+      Authorization: `Bot ${this.BOT_TOKEN}`,
+    },
+  }
+);
 ```
-*Note: Make sure your Bot has **Guilds.Join** permission enabled.*
+
+_Note: Make sure your Bot has **Guilds.Join** permission enabled._
 
 **Get Discord User Information**
 
 ```tsx
-      const discordUserResponse = await axios.get("https://discord.com/api/users/@me", {
-        headers: {
-          Authorization: `Bearer ${params.userOAuth2Token}`,
-        },
-      });
+const discordUserResponse = await axios.get(
+  "https://discord.com/api/users/@me",
+  {
+    headers: {
+      Authorization: `Bearer ${params.userOAuth2Token}`,
+    },
+  }
+);
 ```
 
 **Get Transactions of NFT Collection Smart Contract Sample Request**
@@ -174,12 +196,22 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 - Add test for Query.projects
 - Add test for Mutation.generateProjectAccessToken
 - Add test for access endpoint test
+- Created wireframe of the app
+- Initialized Frontend project from the scaffold
+- Setup the codegen for type generations
+- Setup the GoogleOAuth2 for signup/login
+- Created the initial dashboard and login UI
+- Setup the OAuth2 setup for discord
+- Developed the CRUD features of the app
 
 **Week 2**
 
 - Add discord guild member adding feature on generate project access token endpoint
 - Auto remove role for discord users that didn't have owned a NFT
 - Create docker container for token gating api service
+- Create the grant page and worked on its features
+- Linked the project to opensea api to get the assets
+- Revamped the UI of the app
 
 Once cloned the project and installed dependencies with `npm install`, start a development server:
 
