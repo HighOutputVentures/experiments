@@ -187,7 +187,6 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 - Build API Service Base Code
 - Integrate Worker Service to API Service
 - Create resolver for Mutation.generateAccessTokenByGoogle
-- Retrieve email address from Google Token
 - Create resolver for Mutation.createProject
 - Create discord roles when creating a project 
 - Convert channels into private channels when creating a project
