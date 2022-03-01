@@ -1,0 +1,8 @@
+
+type Column implements Node {
+  id: ID!
+  type: NodeType!
+
+  title: String!
+  cards: [SortConfiguration]!
+}

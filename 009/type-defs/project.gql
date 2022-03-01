@@ -1,0 +1,11 @@
+
+type Project implements Node{
+  id: ID!
+  type: NodeType!
+
+  members: [Account]!
+  creator: Account!
+  dateTimeCreated: DateTime!
+
+  columns: [SortConfiguration!]!
+}
