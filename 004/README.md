@@ -58,6 +58,7 @@ Due to the rising popularity of NFT tokens and exclusive digital content access,
 - retrieve guild list using discord user tokens
 - add roles to channel using Discord API
 - fetch transactions of NFT collection smart contract using Etherscan API
+- simulate response using nock for tests
 
 **Create Roles using Discord API**
 
