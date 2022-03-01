@@ -182,7 +182,8 @@ https://api.etherscan.io/API?module=account&action=tokennfttx&contractaddress=0x
 
 **Week 1**
 
-- Build Worker Service
+- Build Worker Service Base Code
+- Add syncCollection function to fetch transactions from etherscan
 - Build API Service Base Code
 - Integrate Worker Service to API Service
 - Create resolver for Mutation.generateAccessTokenByGoogle
