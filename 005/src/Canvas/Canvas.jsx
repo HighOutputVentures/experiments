@@ -8,7 +8,7 @@ import {
   SHAPE_TYPE,
   DEFAULT_SHAPE_W,
   DEFAULT_SHAPE_H,
-  DEFAULT_SHAPEES,
+  DEFAULT_SHAPES,
   DEFAULT_CONNECTIONS,
 } from './constants';
 import { clearScreen } from './utils/screen';
@@ -20,7 +20,7 @@ export const Canvas = () => {
   const canvas = useRef();
 
   const [ctx, setCtx] = useState(null);
-  const [shapes, setShapes] = useState(DEFAULT_SHAPEES);
+  const [shapes, setShapes] = useState(DEFAULT_SHAPES);
   const [connections] = useState(DEFAULT_CONNECTIONS);
   const [dragTargetIndex, setDragTargetIndex] = useState(-1);
   const [dragTargetXOffset, setDragTargetXOffset] = useState(0);

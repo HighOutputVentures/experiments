@@ -30,6 +30,13 @@ export const DEFAULT_SHAPE_LINECOLOR = 'black';
 export const DEFAULT_SHAPE_LINEWIDTH = 4;
 export const SHAPE_TOP_HEADER_MIN_H = 16;
 
+export const TEXT_DEFAULTS = {
+  textXPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  textYPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
+  textColor: undefined, // defaults to "linecolor" (if shape) or "color" (if connection)
+  textSize: DEFAULT_SHAPE_TEXT_SIZE,
+}
+
 export const DEFAULT_SHAPE = {
   type: SHAPE_TYPE.box,
   x: 0,
@@ -39,13 +46,10 @@ export const DEFAULT_SHAPE = {
   fillColor: DEFAULT_SHAPE_FILL,
   lineColor: DEFAULT_SHAPE_LINECOLOR,
   lineWidth: DEFAULT_SHAPE_LINEWIDTH,
-  textXPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
-  textYPercent: DEFAULT_SHAPE_TEXT_XY_PERCENT,
-  textColor: undefined, // defaults to "linecolor"
-  textSize: DEFAULT_SHAPE_TEXT_SIZE,
+  ...TEXT_DEFAULTS
 };
 
-export const DEFAULT_SHAPEES = [
+export const DEFAULT_SHAPES = [
   { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
   { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, text: "TEST", textYPercent: 1.2, type: SHAPE_TYPE.boundary },
   { x: 400, y: 517, w: 30, h: 75, fillColor: '#E75480' },
@@ -68,6 +72,7 @@ export const DEFAULT_CONNECTIONS = [
     // toBottom: true,
     toLeft: true,
     // toRight: true,
+    text: 'aaaa',
   },
   {
     from: 0,

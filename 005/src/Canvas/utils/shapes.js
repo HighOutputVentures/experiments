@@ -20,8 +20,6 @@ export const drawShapes = ({ ctx, shapes = [] }) => {
       fillColor = DEFAULT_SHAPE_FILL,
       lineColor = DEFAULT_SHAPE_LINECOLOR,
       lineWidth = DEFAULT_SHAPE_LINEWIDTH,
-      textColor = lineColor,
-      textSize = DEFAULT_SHAPE_TEXT_SIZE,
       debugDrawOutline = false,
     } = data;
 
@@ -374,7 +372,7 @@ const drawTextIfNeeded = (ctx, data) => {
     h,
     textXPercent = DEFAULT_SHAPE_TEXT_XY_PERCENT,
     textYPercent = DEFAULT_SHAPE_TEXT_XY_PERCENT,
-    textSize,
+    textSize = DEFAULT_SHAPE_TEXT_SIZE,
     lineColor,
     textColor,
   } = data;

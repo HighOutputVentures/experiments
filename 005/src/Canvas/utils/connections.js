@@ -1,4 +1,4 @@
-import { DEFAULT_SHAPE, MARGIN } from '../constants';
+import { DEFAULT_SHAPE, MARGIN, TEXT_DEFAULTS } from '../constants';
 import { getShapeBounds } from './shapes';
 
 export const drawConnections = ({ ctx, shapes = [], connections = [] }) => {
@@ -23,7 +23,7 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
       color = 'black',
       width: lineWidth = 1,
       isStraightLine = false,
-      pivotPoint = 0.5,
+      ...rest
     } = connection;
 
     const fromShape = { ...DEFAULT_SHAPE, ...shapes[fromShapeIndex] };
@@ -61,42 +61,69 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
     ctx.beginPath();
     ctx.moveTo(lineStartX, lineStartY);
 
-    if (!isStraightLine) {
-      // "pivot" may not be the right word:
-      createPivotLinePath(ctx, {
-        // fromShape,
-        // toShape,
-        lineStartX,
-        lineStartY,
-        lineEndX,
-        lineEndY,
-        pivotPoint,
-        // toShapeXLeft: toShape.x,
-        // toShapeXRight: toShape.x + (toShape.w || DEFAULT_SHAPE_W),
-        // toShapeYTop: toShape.y,
-        // toShapeYBottom: toShape.y + (toShape.h || DEFAULT_SHAPE_H),
-        fromTop,
-        fromBottom,
-        fromLeft,
-        fromRight,
-        toTop,
-        toBottom,
-        toLeft,
-        toRight,
-        fromShapeBounds: getShapeBounds(fromShape),
-        toShapeBounds: getShapeBounds(toShape),
-        lineBetweenX: (lineStartX + lineEndX) * 0.5,
-        lineBetweenY: (lineStartY + lineEndY) * 0.5,
-      });
+    const data = {
+      ...TEXT_DEFAULTS,
+      ...rest,
+      lineStartX,
+      lineStartY,
+      lineEndX,
+      lineEndY,
+      fromTop,
+      fromBottom,
+      fromLeft,
+      fromRight,
+      toTop,
+      toBottom,
+      toLeft,
+      toRight,
+      fromShapeBounds: getShapeBounds(fromShape),
+      toShapeBounds: getShapeBounds(toShape),
+      lineBetweenX: (lineStartX + lineEndX) * 0.5,
+      lineBetweenY: (lineStartY + lineEndY) * 0.5,
     }
 
+    if (!isStraightLine) {
+      // "pivot" may not be the right word:
+      createPivotLinePath(ctx, data);
+    }
+
+    // Draw the final line to the end:
     ctx.lineTo(lineEndX, lineEndY);
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
     ctx.stroke();
 
+    drawTextIfNeeded(ctx, data);
+
   } catch(e) {
     console.warn("Error drawing connection:", e);
+  }
+}
+
+// TODO This does NOT currently factor in "pivots" when calculating
+// where to actually put the text:
+const drawTextIfNeeded = (ctx, data) => {
+  const {
+    text,
+    textSize,
+    textColor,
+    color,
+    lineStartX,
+    lineStartY,
+    lineEndX,
+    lineEndY,
+    textXPercent,
+    textYPercent
+  } = data;
+
+  if (text) {
+    const textX = (lineStartX + lineEndX) * textXPercent;
+    const textY = (lineStartY + lineEndY) * textYPercent;
+
+    ctx.font = `${textSize}px Arial`;
+    ctx.textAlign = "center";
+    ctx.fillStyle = textColor || color;
+    ctx.fillText(text, textX, textY);
   }
 }
 
@@ -104,12 +131,12 @@ const createPivotLinePath = (ctx, data) => {
   const {
     lineStartX,
     lineStartY,
-    lineEndX,
+    // lineEndX,
     lineEndY,
     fromTop,
     fromBottom,
-    fromLeft,
-    fromRight,
+    // fromLeft,
+    // fromRight,
     toTop,
     toBottom,
     toLeft,
@@ -200,17 +227,6 @@ const goSlightlyDown = (ctx, { currentX, currentY }) => {
 }
 
 /*
-const getAlmostToEndX = ({ fromShapeBounds, toShapeBounds, currentX }) => {
-  return
-}
-
-const getSlightlyBeyondEndX = ({ fromShapeBounds, toShapeBounds, currentX }) => {
-  return isCloseToOrLeft(fromShapeBounds.centerX, toShapeBounds.centerX)
-    ? currentX + MARGIN
-    : currentX - MARGIN;
-}
-*/
-
 const goAlmostToEndX = (
   ctx,
   { currentY },
@@ -234,6 +250,7 @@ const goSlightlyBeyondEndX = (
 
   return lineToAndReturnXY(ctx, newX, currentY);
 }
+*/
 
 const goSlightlyBeyondMoreLeft = (
   ctx,
@@ -309,4 +326,4 @@ const isCloseToOrBelow = (from, to, deviation = 0) => {
 
 const isCloseToOrLeft = (...args) => isCloseToOrAbove(...args);
 
-const isCloseToOrRight = (...args) => isCloseToOrBelow(...args);
+// const isCloseToOrRight = (...args) => isCloseToOrBelow(...args);
