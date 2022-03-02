@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "lib": ["es2017"]
+    "lib": ["ESNext", "DOM"]
   },
   "lint": {
     "files": {
@@ -11,7 +11,7 @@
     "rules": {
       "tags": ["recommended"],
       "include": ["ban-untagged-todo"],
-      "exclude": ["no-unused-vars"]
+      "exclude": ["no-unused-vars", "require-await"]
     }
   },
   "fmt": {
@@ -24,7 +24,7 @@
       "lineWidth": 80,
       "indentWidth": 4,
       "singleQuote": true,
-      "proseWrap": "preserve"
+      "proseWrap": "always"
     }
   }
 }

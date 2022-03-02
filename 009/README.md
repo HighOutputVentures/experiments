@@ -30,6 +30,8 @@ Create a Kanban Board GraphQL API that runs in deno with these features:
 
 - [linter](https://deno.land/manual@v1.16.4/tools/linter)
 
+- https://lint.deno.land/
+
 ## Documentation
 
 **With Visual Studio Code**
