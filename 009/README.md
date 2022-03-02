@@ -3,17 +3,18 @@
 ## Goal Statements
 
 At the end of this experiment, we should be able to;
+
 Create a Kanban Board GraphQL API that runs in deno with these features:
 
-[ ]  Authenticate with OTP
+[ ] Authenticate with OTP
 
-[ ]  Implement Dataloaders
+[ ] Implement Dataloaders
 
-[ ]  Upload Files
+[ ] Upload Files
 
-[ ]  Manage Database (MongoDB)
+[ ] Manage Database (MongoDB)
 
-[ ]  Implement Cursor Based Pagination
+[ ] Implement Cursor Based Pagination
 
 ## Abstract
 
@@ -33,9 +34,14 @@ Create a Kanban Board GraphQL API that runs in deno with these features:
 
 **With Visual Studio Code**
 
-Install [vscode_deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno) in vscode extensions, when installed, it will connect to the language server built into the Deno CLI. Deno is not enabled in vscode by default and needs to manually set "deno.enable" to true. 
+Install
+[vscode_deno](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno)
+in vscode extensions, when installed, it will connect to the language server
+built into the Deno CLI. Deno is not enabled in vscode by default and needs to
+manually set "deno.enable" to true.
 
-I suggest you create a different workspace vscode settings. In your project folder, create a new file `.vscode/settings.json` :
+I suggest you create a different workspace vscode settings. In your project
+folder, create a new file `.vscode/settings.json` :
 
 ```json
 // .vscode/settings.json
@@ -49,7 +55,9 @@ I suggest you create a different workspace vscode settings. In your project fold
 }
 ```
 
-More information can be found in the [Using Visual Studio Code](https://deno.land/manual@v1.16.4/vscode_deno) section of the manual.
+More information can be found in
+the [Using Visual Studio Code](https://deno.land/manual@v1.16.4/vscode_deno) section
+of the manual.
 
 **Linter**
 
@@ -68,7 +76,8 @@ deno lint --json
 cat file.ts | deno lint -
 ```
 
-Deno v1.14 and above linter can be customized using either a config file or cli flags.
+Deno v1.14 and above linter can be customized using either a config file or cli
+flags.
 
 ```json
 // tsconfig.json
