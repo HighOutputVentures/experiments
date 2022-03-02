@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "hardhat test",
-    "coverage": "hardhat coverage"
+    "coverage": "hardhat coverage",
+    "test:rinkeby": "hardhat --network rinkeby test"
   },
   "keywords": [],
   "author": "",
