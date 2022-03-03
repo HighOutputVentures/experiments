@@ -1,5 +1,5 @@
 import EthersAdapter from '@gnosis.pm/safe-ethers-lib'
-import Safe from "@gnosis.pm/safe-core-sdk";
+import Safe, { SafeFactory } from "@gnosis.pm/safe-core-sdk";
 import chaiAsPromised from 'chai-as-promised';
 import { ethers } from 'hardhat';
 import { expect, use } from 'chai';
@@ -17,9 +17,9 @@ const encodeTransactionData = (args: {
 
 const OWNER = '0xC9e29C46E35AA801a8226886912a9b1A9e355D47';
 const OWNER02 = '0xB0E965c2c3Ab93007662B6Efaff38549bA01FbFF';
-const OWNERS = [OWNER, OWNER02];
+const DELEGATE = '0xf0EC734B0A144E72e90DA72ad91317fe2bab90bd';
 
-describe('WorkflowModuleV2 - Non-owner delegates', () => {
+describe.only('WorkflowModuleV2 - Non-owner delegates', () => {
   before(async function () {
     const signer = ethers.provider.getSigner(OWNER);
 
@@ -44,6 +44,14 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
       safeAddress: SAFE_ADDRESS,
     });
 
+    const delegate = await safeSdk.connect({
+      ethAdapter: new EthersAdapter({
+        ethers,
+        signer: ethers.provider.getSigner(DELEGATE),
+      }),
+      safeAddress: SAFE_ADDRESS,
+    });
+  
     const safeAddress = safeSdk.getAddress();
     
     this.safeAddress = safeAddress;
@@ -52,20 +60,21 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
 
     this.owners = owners;
   
-    const workflowV2ContractAddress = '0x29d2619382FfaB913aEc2481981596DA32eb450e';
+    const workflowV2ContractAddress = '0xeA1d9F887902b3b2a6Fa7cBB60953908A6aE81d2';
     const contract = await ethers.getContractAt('WorkflowModuleV2', workflowV2ContractAddress);
     
     this.contract = contract;
-
+    
     const txHash = await contract.getTransactionHash(
       safeAddress,
-      [OWNER, '0xf0EC734B0A144E72e90DA72ad91317fe2bab90bd'],
+      [OWNER, DELEGATE],
       [
        {
          selector: '0x0ebaf650',
          arguments: '0x0000000000000000000000002700208d4b0b2bb83cf89601d5691b08c296ae7200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000003000000000000000000000000b0e965c2c3ab93007662b6efaff38549ba01fbff000000000000000000000000c778417e063141139fce010982780140aa0cd5ab00000000000000000000000000000000000000000000000000000000000000640000000000000000000000003fa9bfbe6a6e70a052e7478431fb7bc400d2f694000000000000000000000000c778417e063141139fce010982780140aa0cd5ab0000000000000000000000000000000000000000000000000000000000000064000000000000000000000000f0ec734b0a144e72e90da72ad91317fe2bab90bd000000000000000000000000c778417e063141139fce010982780140aa0cd5ab0000000000000000000000000000000000000000000000000000000000000064',
        },
       ],
+      1
     );
     
     this.txHash = txHash;
@@ -84,7 +93,7 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
       abi: ['function executeWorkflow(address,address[],tuple(bytes4,bytes)[],bytes)'],
       values: [
         safeAddress,
-        [OWNER, '0xf0EC734B0A144E72e90DA72ad91317fe2bab90bd'],
+        [OWNER, DELEGATE],
         [
           ['0x0ebaf650', '0x0000000000000000000000002700208d4b0b2bb83cf89601d5691b08c296ae7200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000003000000000000000000000000b0e965c2c3ab93007662b6efaff38549ba01fbff000000000000000000000000c778417e063141139fce010982780140aa0cd5ab00000000000000000000000000000000000000000000000000000000000000640000000000000000000000003fa9bfbe6a6e70a052e7478431fb7bc400d2f694000000000000000000000000c778417e063141139fce010982780140aa0cd5ab0000000000000000000000000000000000000000000000000000000000000064000000000000000000000000f0ec734b0a144e72e90da72ad91317fe2bab90bd000000000000000000000000c778417e063141139fce010982780140aa0cd5ab0000000000000000000000000000000000000000000000000000000000000064']
         ],
@@ -105,18 +114,34 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
     await safeSdk.signTransaction(txData);
     await owner02.signTransaction(txData);
 
-    const executedTransaction = await safeSdk.executeTransaction(txData, {
-      gasLimit: 250000,
-    });
+    // const executedTransaction = await safeSdk.executeTransaction(txData, {
+    //   from: DELEGATE,
+    //   gasLimit: 250000,
+    // });
 
-    this.executedTransaction = executedTransaction;
+    // this.executedTransaction = executedTransaction;
 
-    const confirmed = executedTransaction.transactionResponse?.wait();
+    // const confirmed = executedTransaction.transactionResponse?.wait();
 
-    this.confirmed = confirmed;
+    // this.confirmed = confirmed;
+
+    await contract.connect(ethers.provider.getSigner(DELEGATE)).executeWorkflow(
+      safeSdk.getAddress(),
+      [OWNER, DELEGATE],
+      [
+        {
+          selector: '0x0ebaf650',
+          arguments: '0x0000000000000000000000002700208d4b0b2bb83cf89601d5691b08c296ae7200000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000003000000000000000000000000b0e965c2c3ab93007662b6efaff38549ba01fbff000000000000000000000000c778417e063141139fce010982780140aa0cd5ab00000000000000000000000000000000000000000000000000000000000000640000000000000000000000003fa9bfbe6a6e70a052e7478431fb7bc400d2f694000000000000000000000000c778417e063141139fce010982780140aa0cd5ab0000000000000000000000000000000000000000000000000000000000000064000000000000000000000000f0ec734b0a144e72e90da72ad91317fe2bab90bd000000000000000000000000c778417e063141139fce010982780140aa0cd5ab0000000000000000000000000000000000000000000000000000000000000064',
+        },
+      ],
+      signatureBytes,
+      {
+        gasLimit: 250000,
+      }
+    );
   });
 
-  it('should not include', async function () {
+  it.skip('should not include', async function () {
     await expect(this.signer.getAddress()).to.eventually.fulfilled.and.become('0xC9e29C46E35AA801a8226886912a9b1A9e355D47');
 
     expect(this.safeAddress).to.be.equals('0x2700208D4b0b2bb83CF89601d5691b08c296Ae72');

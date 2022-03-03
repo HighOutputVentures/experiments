@@ -14,9 +14,11 @@ We should be able to:
 
 <!-- TODO: Finish up Abstract -->
 ## Abstract
-To develop a customized smart contract with the security and optimization in mind alongside with unit testing it.
+To develop a well-tested customized smart contract with the security and optimization in mind. In the first week we implemented the usage of `BulkTransfer` on a smart contract, `WorkflowModule`. By running `BulkTransfer` under the hood, we should make use of function selectors and transaction hash. We also tried implementing `UniSwap` in `WorkflowModule`, however could not since the `Rinkeby` test network is unstable for `UniSwap`. During the implementation phase we incorporate different kinds of techniques, simple tests, mocking tests and tests using the rinkeby network config from `Hardhat`. 
 
-Lastly, we tried to redesign the workflow module for doing off-chain actions with signatures.
+After we implemented the `BulkTransfer` into the `WorkflowModule`, we benchmark multiple single transfers and bulk transfers with multiple transactions in it. During the benchmarking we discover that as the number increases the BulkTransfer win over single transfer in optimizing gas fees. 
+
+Lastly, we tried to redesign the workflow module for doing off-chain actions with signatures. This will help us on security on who executes the workflow making use of the delegates.
 
 ## Conclusion
 I, the author, volunteer to take part in this interesting experiment with the help of my colleagues. I found 
@@ -36,20 +38,152 @@ In this case, we can train developers to write smart contracts and flesh out ide
 * https://hardhat.org/
 * https://docs.gnosis-safe.io/
 * https://uniswap.org/developers
+* https://www.quicknode.com/guides/web3-sdks/how-to-create-and-deploy-a-smart-contract-with-hardhat
+* https://betterprogramming.pub/the-complete-hands-on-hardhat-tutorial-9e23728fc8a4
 
 
 ## Documentation
 ### Development
-Install `hardhat`
+
+Create the project directory
 ```sh
-npm install --save-dev hardhat
+~ $  mkdir getting-started; cd getting-started
 ```
 
-Compile smart contracts
+Initializing the NodeJS project
+```sh
+~/getting-started $ npm init -y
+```
+
+Finding developments tools for smart contract development
+- Truffle Suite
+- Brownie
+- Dapp Tools
+- Foundry
+- Hardhat*
+- Remix
+
+**Using hardhat**
+
+Install `hardhat`
+```sh
+~/getting-started $ npm install -D hardhat
+```
+
+Barebones installation using `TypeScript`
+```sh
+~/getting-started $ npx hardhat 
+
+
+Welcome to Hardhat v2.0.8
+
+? What do you want to do? …
+  Create a sample project
+  Create an advanced sample project
+> Create an advanced sample project that uses TypeScript
+  Create an empty hardhat.config.js
+  Quit
+```
+
+> 💡 **TIP**
+> 
+>Hardhat will let you know how, but, in case you missed it, you can install them with,
+> ```sh
+>npm install -D @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
+>```
+
+Add this rule in `eslintrc.js`
+```js
+'prettier/prettier': ['error', { singleQuote: true, trailingComma: true, semi: true }]
+```
+
+Update the `"test"` iln `package.json`
+From:
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+}
+```
+To:
+```jsom
+"scripts": {
+  "test": "hardhat test"
+}
+```
+
+Install `chai-as-promised`
+```sh
+npm i -D chai-as-promised @types/chai-as-promised
+```
+
+Update the test
+```ts
+import { expect, use } from "chai";
+import { ethers } from "hardhat";
+import chaiAsPromised from 'chai-as-promised';
+
+use(chaiAsPromised);
+
+describe("Lottery", function () {
+  it('should be deployed', async () => {
+    const Lottery = await ethers.getContractFactory('Lottery');
+
+    await expect(Lottery.deploy('test')).to.eventually.fulfilled;
+  });
+});
+```
+Run the test above using `npm t` and **it will fail**.
+```sh
+  Lottery
+    1) should be deployed
+
+
+  0 passing (634ms)
+  1 failing
+
+  1) Lottery
+       should be deployed:
+     HardhatError: HH700: Artifact for contract "Lottery" not found. 
+```
+
+Update the `Greeter.sol` to `Lottery.sol` to this:
+```solidity
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
+
+contract Lottery {
+    string private greeting;
+
+    constructor(string memory _greeting) {
+        greeting = _greeting;
+    }
+
+    function greet() public view returns (string memory) {
+        return greeting;
+    }
+
+    function setGreeting(string memory _greeting) public {
+        greeting = _greeting;
+    }
+}
+```
+Run the test again, `npm t` and it will pass:
+```sh
+  Lottery
+    ✓ should be deployed (765ms)
+
+
+  1 passing (766ms)
+```
+
+Choosing Node Providers:
+1. Infura
+2. Alchemy*
+  
+Compile
 ```sh
 npx hardhat compile
 ```
-
 
 Default testing
 ```sh

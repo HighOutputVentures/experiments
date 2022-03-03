@@ -1,7 +1,20 @@
 export const clearScreen = ({ ctx, canvas }) => {
   if (!ctx || !canvas) return;
 
-  ctx.clearRect(0, 0, canvas.current.clientWidth, canvas.current.clientHeight);
-  ctx.fillStyle = "lightgray";
-  ctx.fillRect(0, 0, canvas.current.clientWidth, canvas.current.clientHeight);
+  const top = 0;
+  const left = 0;
+  const width = canvas.current.clientWidth;
+  const height = canvas.current.clientHeight;
+
+  ctx.fillStyle = "white";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+
+  ctx.beginPath();
+
+  ctx.clearRect(top, left, width, height);
+  ctx.rect(top, left, width, height);
+
+  ctx.fill();
+  ctx.stroke();
 }
