@@ -43,178 +43,325 @@ In this case, we can train developers to write smart contracts and flesh out ide
 
 
 ## Documentation
-### Development
 
-Create the project directory
-```sh
-~ $  mkdir getting-started; cd getting-started
-```
+## Tutorials
+<details>
+  <summary><b>Getting started</b></summary>
 
-Initializing the NodeJS project
-```sh
-~/getting-started $ npm init -y
-```
+  Create the project directory
+  ```sh
+  ~ $  mkdir getting-started; cd getting-started
+  ```
 
-Finding developments tools for smart contract development
-- Truffle Suite
-- Brownie
-- Dapp Tools
-- Foundry
-- Hardhat*
-- Remix
+  Initializing the NodeJS project
+  ```sh
+  ~/getting-started $ npm init -y
+  ```
 
-**Using hardhat**
+  Finding developments tools for smart contract development
+  - Truffle Suite
+  - Brownie
+  - Dapp Tools
+  - Foundry
+  - **Hardhat**
+  - Remix
 
-Install `hardhat`
-```sh
-~/getting-started $ npm install -D hardhat
-```
+  **Using hardhat**
 
-Barebones installation using `TypeScript`
-```sh
-~/getting-started $ npx hardhat 
+  Install `hardhat`
+  ```sh
+  ~/getting-started $ npm install -D hardhat
+  ```
+
+  Barebones installation using `TypeScript`
+  ```sh
+  ~/getting-started $ npx hardhat 
 
 
-Welcome to Hardhat v2.0.8
+  Welcome to Hardhat v2.0.8
 
-? What do you want to do? …
-  Create a sample project
-  Create an advanced sample project
-> Create an advanced sample project that uses TypeScript
-  Create an empty hardhat.config.js
-  Quit
-```
+  ? What do you want to do? …
+    Create a sample project
+    Create an advanced sample project
+  > Create an advanced sample project that uses TypeScript
+    Create an empty hardhat.config.js
+    Quit
+  ```
 
-> 💡 **TIP**
-> 
->Hardhat will let you know how, but, in case you missed it, you can install them with,
-> ```sh
->npm install -D @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
->```
+  > 💡 **TIP**
+  > 
+  >Hardhat will let you know how, but, in case you missed it, you can install them with,
+  > ```sh
+  >npm install -D @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
+  >```
 
-Add this rule in `eslintrc.js`
-```js
-'prettier/prettier': ['error', { singleQuote: true, trailingComma: true, semi: true }]
-```
+  Add this rule in `eslintrc.js`
+  ```js
+  'prettier/prettier': ['error', { singleQuote: true, trailingComma: true, semi: true }]
+  ```
 
-Update the `"test"` iln `package.json`
-From:
-```json
-"scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1"
-}
-```
-To:
-```jsom
-"scripts": {
-  "test": "hardhat test"
-}
-```
+  Update the `"test"` iln `package.json`
+  From:
+  ```json
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+  ```
+  To:
+  ```json
+  "scripts": {
+    "test": "hardhat test"
+  }
+  ```
 
-Install `chai-as-promised`
-```sh
-npm i -D chai-as-promised @types/chai-as-promised
-```
+  Install `chai-as-promised`
+  ```sh
+  npm i -D chai-as-promised @types/chai-as-promised
+  ```
 
-Update the test
-```ts
-import { expect, use } from "chai";
-import { ethers } from "hardhat";
-import chaiAsPromised from 'chai-as-promised';
+  Update the test
+  ```ts
+  import { expect, use } from "chai";
+  import { ethers } from "hardhat";
+  import chaiAsPromised from 'chai-as-promised';
 
-use(chaiAsPromised);
+  use(chaiAsPromised);
 
-describe("Lottery", function () {
-  it('should be deployed', async () => {
-    const Lottery = await ethers.getContractFactory('Lottery');
+  describe("Lottery", function () {
+    it('should be deployed', async () => {
+      const Lottery = await ethers.getContractFactory('Lottery');
 
-    await expect(Lottery.deploy('test')).to.eventually.fulfilled;
+      await expect(Lottery.deploy('test')).to.eventually.fulfilled;
+    });
   });
-});
-```
-Run the test above using `npm t` and **it will fail**.
-```sh
-  Lottery
-    1) should be deployed
+  ```
+  Run the test above using `npm t` and **it will fail**.
+  ```sh
+    Lottery
+      1) should be deployed
 
 
-  0 passing (634ms)
-  1 failing
+    0 passing (634ms)
+    1 failing
 
-  1) Lottery
-       should be deployed:
-     HardhatError: HH700: Artifact for contract "Lottery" not found. 
-```
+    1) Lottery
+        should be deployed:
+      HardhatError: HH700: Artifact for contract "Lottery" not found. 
+  ```
 
-Update the `Greeter.sol` to `Lottery.sol` to this:
-```solidity
-//SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+  Update the `Greeter.sol` to `Lottery.sol` to this:
+  ```solidity
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
 
-contract Lottery {
-    string private greeting;
+  contract Lottery {
+      string private greeting;
 
-    constructor(string memory _greeting) {
-        greeting = _greeting;
+      constructor(string memory _greeting) {
+          greeting = _greeting;
+      }
+
+      function greet() public view returns (string memory) {
+          return greeting;
+      }
+
+      function setGreeting(string memory _greeting) public {
+          greeting = _greeting;
+      }
+  }
+  ```
+  Run the test again, `npm t` and it will pass:
+  ```sh
+    Lottery
+      ✓ should be deployed (765ms)
+
+
+    1 passing (766ms)
+  ```
+
+  We're going to remove the `constructor`, `#greet`, `setGreeting` and `.greeting`
+  ```solidity
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {}
+  ```
+
+  Update the test so that we're expecting a method, `sum`.
+  ```ts
+  describe('#sum', () => {
+    it('should have sum method', async () => {
+      expect(contract.sum).to.be.exist;
+    });
+  });
+  ```
+
+  Run the tests and expect it to fail.
+  ```
+  FAILED
+  ```
+
+  Update the `Lottery.sol`
+  ```
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {
+    function sum() public {}
+  }
+  ```
+
+  Run the tests and it will pass
+  ```
+  PASSED
+  ```
+
+  Update the test to have fully functional `#sum`
+  ```ts
+  describe('#sum', () => {
+    it('should have sum method', async () => {
+      expect(contract.sum).to.be.exist;
+    });
+
+    it('should return 3 when the given parametes are 1 and 2', async () => {
+      const sum = await contract.sum(1, 2);
+
+      expect(sum).to.be.exist;
+    });
+  });
+  ```
+
+  The test would fail again
+  ```
+  FAILED
+  ```
+
+  Update the `Lottery.sol` to pass the failing test
+  ```
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {
+    function sum(uint _a, uint _b) public pure returns(uint) {
+        return _a + _b;
     }
+  }
+  ```
 
-    function greet() public view returns (string memory) {
-        return greeting;
-    }
+  Let deploy this contract in `Rinkeby` test network:
+  Update your `hardhat.config.ts`
+  ```ts
+  ...
 
-    function setGreeting(string memory _greeting) public {
-        greeting = _greeting;
-    }
-}
-```
-Run the test again, `npm t` and it will pass:
-```sh
-  Lottery
-    ✓ should be deployed (765ms)
+  const config: HardhatUserConfig = {
+    solidity: "0.8.4",
+    networks: {
+      rinkeby: {
+        url: process.env.RINKEBY_URL || "",
+        accounts:
+          process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      },
+    },
+    gasReporter: {
+      enabled: process.env.REPORT_GAS !== undefined,
+      currency: "USD",
+    },
+    etherscan: {
+      apiKey: process.env.ETHERSCAN_API_KEY
+    },
+    mocha: {
+      bail: true,
+    },
+  };
 
+  export default config;
+  ```
 
-  1 passing (766ms)
-```
+  Choosing Node Providers:
+  1. Infura
+  2. **Alchemy**
 
-Choosing Node Providers:
-1. Infura
-2. Alchemy*
+  Registering to **Alchemy**
+
+  Registering to **Etherscan**
+
+  Exporting your private key in **Metamask**
+
+  Update your `.env` file
+
+  ```sh
+  ETHERSCAN_API_KEY=<YOUR ETHERSCAN API KEY>
+  RINKEBY_URL=<YOUR ALCHEMY API KEY>
+  PRIVATE_KEY=<YOU ACCOUNT PRIVATE FROM METAMASK>
+  ```
   
-Compile
-```sh
-npx hardhat compile
-```
+  Update your `scripts/deploy.ts`
+  ```ts
+  async function main() {
+    // Hardhat always runs the compile task when running scripts with its command
+    // line interface.
+    //
+    // If this script is run directly using `node` you may want to call compile
+    // manually to make sure everything is compiled
+    // await hre.run('compile');
 
-Default testing
-```sh
-npx hardhat test
-```
+    const owner = ethers.provider.getSigner('You accounts address');
 
-Testing using rinkeby network
-```sh
-npx hardhat --network rinkeby test
-```
+    // We get the contract to deploy
+    const Lottery = await ethers.getContractFactory("Lottery");
+    const contract = await Lottery.deploy();
 
-<!-- TODO: Complete this first -->
+    await contract.deployed();
+
+    console.log("Lottery deployed to:", contract.address);
+  }
+  ```
+
+  Update your `package.json`
+  ```json
+  "scripts": {
+    ...
+    "deploy": "hardhat run scripts/deploy.ts --network rinkeby"
+  }
+  ```
+
+  Run this command:
+  ```sh
+  npm run deploy rinkeby
+  ```
+
+  After that copy the contract address of the Lottery for verification
+
+  And run:
+  ```
+  npx hardhat verifiy --network rinkeby <Lottery's contract address>
+  ```
+</details>
+
+<details>
+  <summary><b>Optimizations</b></summary>
+</details>
+____
+
 ### Experiment journey
-Week 1
+**Week 1**
 - Writing custom smart contract
 - Integrate Uniswap
 - Integrate GnosisSafe
 
-Week 2
+**Week 2**
 - Testing the custom smart contract
 - Make integration work with the smart contract
 - Try developing in Truffle and Hardhat
 
-Week 3
+**Week 3**
 - Benchmarking
 - Redesign custom smart contract
 
-Week 4
+**Week 4**
 - Redesigning Workflow
 - Apply security hash
-- Appply nonce
+- Apply nonce
 
 
 ### Redesigning WorkflowModule
@@ -229,11 +376,11 @@ Week 4
 
 ### V2
 - ~`#addWorkflow`~
-
 - `executeWorkflow`
   - `IGnosisSafe _safe`
   - `address[] _delegates`
   - `Action[] calldata _actions`
   - `bytes memory signatures`
+    - Using the `_delegates`
+    - Using the `_nonce`
 
-Initiating a transaction
