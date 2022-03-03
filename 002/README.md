@@ -40,6 +40,16 @@ In this case, we can train developers to write smart contracts and flesh out ide
 * https://uniswap.org/developers
 * https://www.quicknode.com/guides/web3-sdks/how-to-create-and-deploy-a-smart-contract-with-hardhat
 * https://betterprogramming.pub/the-complete-hands-on-hardhat-tutorial-9e23728fc8a4
+* [https://cryptozombies.io/en/course/](https://cryptozombies.io/en/course/)
+* [https://cryptozombies.io/en/lesson/3/chapter/4](https://cryptozombies.io/en/lesson/3/chapter/4)
+* [https://cryptozombies.io/en/lesson/3/chapter/10](https://cryptozombies.io/en/lesson/3/chapter/10)
+* [https://eip2535diamonds.substack.com/p/smart-contract-gas-optimization-with](https://eip2535diamonds.substack.com/p/smart-contract-gas-optimization-with)
+* [https://eip2535diamonds.substack.com/p/how-eip2535-diamonds-reduces-gas](https://eip2535diamonds.substack.com/p/how-eip2535-diamonds-reduces-gas)
+* [https://github.com/solidstate-network/solidstate-solidity](https://github.com/solidstate-network/solidstate-solidity)
+* [https://github.com/BeanstalkFarms/Beanstalk](https://github.com/BeanstalkFarms/Beanstalk)
+* [https://github.com/aavegotchi/aavegotchi-contracts](https://github.com/aavegotchi/aavegotchi-contracts)
+* [https://github.com/crytic/not-so-smart-contracts](https://github.com/crytic/not-so-smart-contracts)
+* [https://github.com/ConsenSys/smart-contract-best-practices](https://github.com/ConsenSys/smart-contract-best-practices)
 
 
 ## Documentation
@@ -340,6 +350,103 @@ In this case, we can train developers to write smart contracts and flesh out ide
 
 <details>
   <summary><b>Optimizations</b></summary>
+
+
+  Structuring `struct`
+
+  ```
+  struct ExpensiveStruct {
+    address addressOne;
+    uint8 numberOne;
+    string stringOne;
+    uint8 numberTwo;
+    address addressTwo;
+    string stringTwo;
+  }
+
+  struct CheapStruct {
+    address addressOne;
+    address addressTwo;
+    uint8 numberOne;
+    uint8 numberTwo;
+    string stringOne;
+    string stringTwo;
+  }
+  ```
+
+  **View functions don’t cost Gas**
+
+  `view` functions don't cost any gas when they're called externally by a user.
+
+  This is because `view` functions don't actually change anything on the blockchain – they only read the data. So marking a function with `view` tells `web3.js` that it only needs to query your local Ethereum node to run the function, and it doesn't actually have to create a transaction on the blockchain (which would need to be run on every single node, and cost gas).
+
+  We'll cover setting up web3.js with your own node later. But for now, the big takeaway is that you can optimize your DApp's gas usage for your users by using read-only `external view` functions wherever possible.
+
+  ```solidity
+  contract MyContract {
+    ...
+    struct User {
+      ...,
+      string name;
+    }
+    
+    User[] public users;
+
+    function getNameByUser(uint userId) external view returns(string memory) {
+      return users[userId].name;
+    }
+  }
+  ```
+
+  > *Note: If a `view` function is called internally from another function in the same contract that is **not** a `view` function, it will still cost gas. This is because the other function creates a transaction on Ethereum, and will still need to be verified from every node. So `view` functions are only free when they're called externally.*
+  
+  **Reading constants and immutable variables**
+
+  ```solidity
+  contract CallMyName {
+    string public NAME = "ETH"; // Expensive 24586 Gas
+    string public constant CONSTANT_NAME = "ETH"; // Cheap 21865 Gas
+  }
+  ```
+
+  **Reading and writing local variables**
+
+  Expensive:
+
+  ```solidity
+  contract Expensive {
+    uint16[] public myArray;
+    uint16 public myCounter = 0;
+
+    function run() external {                
+      for(uint256 index; index < myArray.length; index++) { // state reads
+        myCounter++; // state reads and writes
+      }        
+    }
+  }
+  ```
+
+  Cheap:
+
+  ```solidity
+  contract Cheap {
+    uint16[] public myArray;
+    uint16 public stateCounter = 0;
+
+    function run() external {
+        uint16 length = myArray.length; // one state read
+        uint16 localCounter = myCounter; // one state read
+    
+        for(uint16 index; index < length; index++) { // local reads
+            localCounter++; // local reads and writes  
+        }
+    
+        stateCounter = localCounter; // one state write
+    }
+  }
+  ```
+
+  **Reading `calldata` variables like `calldata` arrays and structs.**
 </details>
 ____
 
