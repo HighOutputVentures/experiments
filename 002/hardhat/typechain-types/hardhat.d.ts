@@ -45,10 +45,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IGnosisSafe__factory>;
     getContractFactory(
-      name: "IGuard",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IGuard__factory>;
-    getContractFactory(
       name: "ISignatureValidator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ISignatureValidator__factory>;
@@ -68,10 +64,6 @@ declare module "hardhat/types/runtime" {
       name: "TestToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TestToken__factory>;
-    getContractFactory(
-      name: "Utility",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Utility__factory>;
     getContractFactory(
       name: "WorkflowModule",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -122,11 +114,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IGnosisSafe>;
     getContractAt(
-      name: "IGuard",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IGuard>;
-    getContractAt(
       name: "ISignatureValidator",
       address: string,
       signer?: ethers.Signer
@@ -151,11 +138,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TestToken>;
-    getContractAt(
-      name: "Utility",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Utility>;
     getContractAt(
       name: "WorkflowModule",
       address: string,
