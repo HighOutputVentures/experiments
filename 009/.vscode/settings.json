@@ -4,5 +4,6 @@
   "deno.config": "./tsconfig.json",
   "deno.cache": "./cache",
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "deno.unstable": true
 }
