@@ -23,3 +23,6 @@ https://codepen.io/teacherhogg/pen/QpeXrY
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
 https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
 https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
+
+https://gist.github.com/jwir3/d797037d2e1bf78a9b04838d73436197
+http://stackoverflow.com/a/36805543/281460
