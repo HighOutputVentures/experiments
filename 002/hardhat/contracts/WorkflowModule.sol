@@ -95,9 +95,4 @@ contract WorkflowModule is BulkTransfer, SimpleSwap {
         
         require(success, "Call failed!");
     }
-
-    /// @dev Testing purposes
-    function greet(string memory _greet) public pure returns(string memory) {
-        return _greet;
-    }
 }

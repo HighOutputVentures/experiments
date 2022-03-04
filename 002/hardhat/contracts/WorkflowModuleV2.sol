@@ -8,9 +8,10 @@ import "@gnosis.pm/safe-contracts/contracts/external/GnosisSafeMath.sol";
 import "./IGnosisSafe.sol";
 import "./BulkTransfer.sol";
 import "./ISignatureValidator.sol";
+import "./SelfAuthority.sol";
 
 /// @notice You can use this contract for basic simulation (bulk transferring and swap)
-contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidatorConstants {
+contract WorkflowModuleV2 is SelfAuthority, BulkTransfer, SignatureDecoder, ISignatureValidatorConstants {
     using GnosisSafeMath for uint256;
 
     string public constant NAME = "Workflow Module V2";
@@ -24,21 +25,14 @@ contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidator
         bytes arguments;
     }
 
-    struct Workflow {
-        IGnosisSafe safe;
-        Action[] actions;
-        address[] delegates;
-    }
-
     /// @notice Execute actions
     function executeWorkflow(
         IGnosisSafe _safe,
         address[] calldata _delegates,
         Action[] calldata _actions,
         bytes memory _signatures
-    ) public {
+    ) public selfAuthorized() {
         bool success;
-        // bytes memory data;
         bytes32 txHash;
 
         {
@@ -81,7 +75,12 @@ contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidator
         return 0;
     }
 
-    function encodeTransactionData(address _safe, address[] calldata _delegates, Action[] calldata _actions, uint _nonce)
+    function encodeTransactionData(
+        address _safe, 
+        address[] calldata _delegates, 
+        Action[] calldata _actions, 
+        uint _nonce
+    )
         public
         pure
         returns (bytes memory)
@@ -103,7 +102,12 @@ contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidator
             );
     }
 
-    function getTransactionHash(address _safe, address[] calldata _delegates, Action[] calldata _actions, uint _nonce)
+    function getTransactionHash(
+        address _safe, 
+        address[] calldata _delegates, 
+        Action[] calldata _actions, 
+        uint _nonce
+    )
         public
         pure
         returns (bytes32)
