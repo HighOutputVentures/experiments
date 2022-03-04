@@ -447,6 +447,56 @@ In this case, we can train developers to write smart contracts and flesh out ide
   ```
 
   **Reading `calldata` variables like `calldata` arrays and structs.**
+
+
+  Benchmarking results:
+
+  **WorkflowModule**
+  
+  100 WEI = 0.0000000000000001 ETH
+
+  Deployment
+  - Actual Gas Fee `0.006974072544634064`
+
+  Enabling Workflow Module
+  - Actual Gas Fee `0.0001898125009111`
+
+
+  Single Transfer
+  Adding a workflow
+  - Actual Gas Fee `0.001344555012907728` (3 Single Transfers)
+
+  Execute Workflow
+  - Actual Gas Fee `0.000358567502294832` (3 Single Transfers)
+    
+  ---
+
+  Direct a single transfer
+  - Actual Gas Fee `0.000133077500904927` ETH
+
+  Total: 0.00039923250303416696
+
+  Direct Bulk Transfer
+  - Estimated Gas Fee 0.000254ETH
+  - Actual Gas Fee 0.000253347501418746 ETH
+
+  Bulk Transfer
+  Adding a Workflow
+  - Actual Gas Fee 0.001243105005469662 ETH  (3 Single Transfer into Bulk)
+
+  Execute Workflow
+  - Estimated Gas Fee 0.000317ETH (3 Single Transfer into Bulk)
+  - Actual Gas Fee 0.00031673250126693 (3 Single Transfer into Bulk)
+
+  Workflow with Bulk Transfer (3 ST) and 3 Single Transfers
+
+  Add Workflow
+  - Estimated Gas Fee 0.002272ETH
+  - Actual Gas Fee 0.002271610009995084
+
+  Execute Workflow
+  - Estimated Gas Fee 0.000533ETH
+  - Actual Gas Fee 0.0005333750025602
 </details>
 ____
 
