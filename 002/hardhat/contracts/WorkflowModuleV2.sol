@@ -10,7 +10,6 @@ import "./BulkTransfer.sol";
 import "./ISignatureValidator.sol";
 import "./SelfAuthority.sol";
 
-/// @notice You can use this contract for basic simulation (bulk transferring and swap)
 contract WorkflowModuleV2 is SelfAuthority, BulkTransfer, SignatureDecoder, ISignatureValidatorConstants {
     using GnosisSafeMath for uint256;
 
@@ -64,8 +63,7 @@ contract WorkflowModuleV2 is SelfAuthority, BulkTransfer, SignatureDecoder, ISig
         require(success, "Call failed!");
     }
 
-    
-    function indexOf(address[] calldata _haystack, address _needle) public pure returns(uint8) {
+    function indexOf(address[] calldata _haystack, address _needle) private pure returns(uint8) {
         for (uint index = 0; index < _haystack.length; index++) {
             if (_haystack[index] == _needle) {
                 return 1;
