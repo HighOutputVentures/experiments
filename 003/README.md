@@ -16,14 +16,14 @@ use of Web3J. On the other hand, WalletConnect proves that it is possible to int
 wallets with the use of deep linking. However, there are still some limitation when it comes to
 developing dApps for mobile. First, documentations are still limited. Second, some of the
 functions (`eth_signTransaction` which is one of the most important function) are not yet supported
-on the third-party mobile wallets, although they already support `eth_sign`, `eth_sendTransaction` etc.
-which is a really good thing for ERC20 tokens. This might be the reason why Metamask decided
-to build their mobile app using React Native as it has a close relation to web technologies. This
-also might be the reason why OpenSea does not support purchasing NFTs with their native mobile apps
-yet. Instead, only redirect the user to their web app to purchase an NFT.
+on the third-party mobile wallets, although they already support `eth_sign`, `eth_sendTransaction`
+etc. which is a really good thing for ERC20 tokens. This might be the reason why Metamask decided to
+build their mobile app using React Native as it has a close relation to web technologies. This also
+might be the reason why OpenSea does not support purchasing NFTs with their native mobile apps yet.
+Instead, only redirect the user to their web app to purchase an NFT.
 
-We can say that dapps built for mobile, if not wallet app, only serves as displaying app or a
-showcase app.
+It is possible to build your own mobile wallet apps with the use of Web3J but we can say that dapps built
+for mobile, if not wallet app, only serves as displaying app or a showcase app.
 
 ## Resources
 
@@ -79,8 +79,8 @@ order to access it directly on the web browser
 
 ##### Challenges
 
-* Concluding that `eth_signTransaction` is not supported yet by metamask-mobile (this might change in
-  the future, will just update accordingly)
+* Concluding that `eth_signTransaction` is not supported yet by metamask-mobile (this might change
+  in the future, will just update accordingly)
     - https://github.com/MetaMask/metamask-mobile/issues/2834
     - https://github.com/MetaMask/metamask-mobile/issues/3437
 * This prevents us from transferring an NFT on mobile as this can be set as a limitation on the
