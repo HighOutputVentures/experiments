@@ -10,7 +10,11 @@ import "./BulkTransfer.sol";
 import "./ISignatureValidator.sol";
 import "./SelfAuthority.sol";
 
-contract WorkflowModuleV2 is SelfAuthority, BulkTransfer, SignatureDecoder, ISignatureValidatorConstants {
+contract WorkflowModuleV2 is 
+    SelfAuthority, 
+    BulkTransfer, 
+    SignatureDecoder, 
+    ISignatureValidatorConstants {
     using GnosisSafeMath for uint256;
 
     string public constant NAME = "Workflow Module V2";

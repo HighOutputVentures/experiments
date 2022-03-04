@@ -11,11 +11,11 @@ contract BulkTransfer is SelfAuthority {
     using GnosisSafeMath for uint256;
 
     struct Transfer {
-      address recipient;
-      address token;
-      uint256 amount;
+        address recipient;
+        address token;
+        uint256 amount;
     }
-    
+
     modifier shouldHaveTransfers(Transfer[] calldata transfers) {
         require(transfers.length > 0, "It should have transfers");
 
@@ -27,7 +27,12 @@ contract BulkTransfer is SelfAuthority {
         Transfer[] calldata transfers
     ) external selfAuthorized shouldHaveTransfers(transfers) {
         for (uint256 i = 0; i < transfers.length; i++) {
-            transfer(safe, transfers[i].token, payable(transfers[i].recipient), transfers[i].amount);
+            transfer(
+                safe,
+                transfers[i].token,
+                payable(transfers[i].recipient),
+                transfers[i].amount
+            );
         }
     }
 
@@ -53,7 +58,7 @@ contract BulkTransfer is SelfAuthority {
                 to,
                 amount
             );
-            
+
             require(
                 safe.execTransactionFromModule(
                     token,

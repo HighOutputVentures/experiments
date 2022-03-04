@@ -120,7 +120,4 @@ contract SimpleSwap is SelfAuthority, NonZeroAmount {
         // Approve WETH to this contract for transfer
         TransferHelper.safeApprove(_WETH, address(_UNISWAP_ROUTER), msg.value);
     }
-
-    /// @notice Allow this contract to receive ETH
-    receive() external payable {}
 }

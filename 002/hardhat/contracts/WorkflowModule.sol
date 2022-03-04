@@ -27,16 +27,16 @@ contract WorkflowModule is BulkTransfer, SimpleSwap {
     Workflow[] public workflows;
 
     /// @dev Safe -> number of workflows
-    mapping(address => uint) public safeWorkflowCount;
+    mapping(address => uint256) public safeWorkflowCount;
 
     /// @dev Safe -> Workflow -> index -> delegate address
-    mapping(address => mapping(uint => mapping(uint => address))) public workflowDelegates;
+    mapping(address => mapping(uint256 => mapping(uint256 => address)))
+        public workflowDelegates;
 
     /// @dev Safe -> Delegate -> Delegate or not
-    mapping (address => mapping(address => bool)) private activeWorkflowDelegate;
+    mapping(address => mapping(address => bool)) private activeWorkflowDelegate;
 
     modifier canDelegate(bool delegatable) {
-        console.log("CAN DELEGATE: ", delegatable);
         require(delegatable, "Sender is not a delegate");
 
         _;
@@ -49,50 +49,53 @@ contract WorkflowModule is BulkTransfer, SimpleSwap {
         IGnosisSafe _safe,
         address[] calldata _delegates,
         Action[] calldata _actions
-    ) external returns(uint)  {
+    ) external returns (uint256) {
         address safeAddress = address(_safe);
 
         workflows.push();
 
-        uint count = workflows.length;
-        uint256 newIndex = workflows.length -1;
+        uint256 count = workflows.length;
+        uint256 newIndex = workflows.length - 1;
 
         workflows[newIndex].safe = _safe;
         workflows[newIndex].delegates = _delegates;
 
-        for (uint index = 0; index < _actions.length; index++) {
+        for (uint256 index = 0; index < _actions.length; index++) {
             workflows[newIndex].actions.push(_actions[index]);
         }
-        
+
         safeWorkflowCount[safeAddress]++;
-        
-        for (uint index = 0; index < _delegates.length; index++) {
-            activeWorkflowDelegate[safeAddress][_delegates[index]] = true;    
+
+        for (uint256 index = 0; index < _delegates.length; index++) {
+            activeWorkflowDelegate[safeAddress][_delegates[index]] = true;
         }
 
         return count;
     }
 
     /// @dev should check the threshold before executing
-    function executeWorkflow(uint _workflow) 
+    function executeWorkflow(uint256 _workflow)
         external
-        canDelegate(activeWorkflowDelegate[address(workflows[_workflow].safe)][msg.sender] == true) 
-        payable {
+        canDelegate(
+            activeWorkflowDelegate[address(workflows[_workflow].safe)][msg.sender] == true
+        ) 
+        payable
+    {
         Workflow memory workflow = workflows[_workflow];
 
         bool success;
         bytes memory data;
 
-        // IGnosisSafe safe = workflows[_workflow].safe;
-
-        for (uint index = 0; index < workflow.actions.length; index++) {
+        for (uint256 index = 0; index < workflow.actions.length; index++) {
             (success, data) = address(this).call(
-                abi.encodePacked(workflow.actions[index].selector, workflow.actions[index].arguments)
+                abi.encodePacked(
+                    workflow.actions[index].selector, workflow.actions[index].arguments
+                )
             );
 
             emit ExecuteWorkflow(data);
         } 
-        
+
         require(success, "Call failed!");
     }
 }
