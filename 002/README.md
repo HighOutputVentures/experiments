@@ -498,8 +498,8 @@ In this case, we can train developers to write smart contracts and flesh out ide
   - Estimated Gas Fee 0.000533ETH
   - Actual Gas Fee 0.0005333750025602
 </details>
-____
 
+----
 ### Experiment journey
 **Week 1**
 - Writing custom smart contract
