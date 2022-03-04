@@ -1,5 +1,5 @@
 import EthersAdapter from '@gnosis.pm/safe-ethers-lib'
-import Safe, { SafeFactory } from "@gnosis.pm/safe-core-sdk";
+import Safe from "@gnosis.pm/safe-core-sdk";
 import chaiAsPromised from 'chai-as-promised';
 import { ethers } from 'hardhat';
 import { expect, use } from 'chai';
@@ -19,7 +19,7 @@ const OWNER = '0xC9e29C46E35AA801a8226886912a9b1A9e355D47';
 const OWNER02 = '0xB0E965c2c3Ab93007662B6Efaff38549bA01FbFF';
 const DELEGATE = '0xf0EC734B0A144E72e90DA72ad91317fe2bab90bd';
 
-describe.only('WorkflowModuleV2 - Non-owner delegates', () => {
+describe('WorkflowModuleV2 - Non-owner delegates', () => {
   before(async function () {
     const signer = ethers.provider.getSigner(OWNER);
 
