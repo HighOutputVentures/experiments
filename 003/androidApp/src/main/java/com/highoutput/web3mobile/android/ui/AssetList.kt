@@ -47,42 +47,6 @@ fun AssetList(navController: NavController, viewModel: MainViewModel) {
         }) {
             Text("Shutdown")
         }
-        Button(onClick = {
-            val txRequest = System.currentTimeMillis()
-//            val params = listOf(
-//                mapOf(
-//                    "from" to address,
-//                    "to" to "0xadD803D79035Be0bBEbbF7495a52d81710E57386",
-//                    "data" to "0x",
-//                    "gas" to null,
-//                    "gasPrice" to null,
-//                    "value" to "0x${
-//                        Convert.toWei("0.5", Convert.Unit.ETHER).toBigInteger().toString(16)
-//                    }",
-//                    "nonce" to null,
-//                )
-//            )
-            val params = listOf(
-                "0xdeadbeaf", "0x671E139f6818319F23272434185B4C8872036548"
-            )
-            Log.d("PARAMS", "$params")
-            MainApplication.session?.performMethodCall(
-                Session.MethodCall.Custom(
-                    1,
-                    "personal_sign",
-                    params = params
-                )
-            ) { resp ->
-                if (resp.id == txRequest) {
-                    Log.d("RESPONSE", "${resp.result}")
-                }
-            }
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse("wc:")
-            context.startActivity(i)
-        }) {
-            Text("Sign Transaction1")
-        }
         if (address.isNotEmpty()) {
             Column {
                 Balance(viewModel = viewModel)

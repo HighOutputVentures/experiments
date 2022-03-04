@@ -22,13 +22,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHost
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
+import androidx.navigation.navArgument
 import com.highoutput.web3mobile.android.ui.AssetList
 import com.highoutput.web3mobile.android.ui.NftTransactions
 import com.highoutput.web3mobile.android.ui.Screen
+import com.highoutput.web3mobile.android.ui.SendNFT
 import org.walletconnect.Session
 import org.web3j.crypto.Hash
 import org.web3j.utils.Convert
@@ -80,12 +80,38 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             ) { innerPadding ->
-                NavHost(navController, startDestination = Screen.AssetList.route, Modifier.padding(innerPadding)) {
+                NavHost(navController,
+                    startDestination = Screen.AssetList.route,
+                    Modifier.padding(innerPadding)) {
                     composable(Screen.AssetList.route) { AssetList(navController, viewModel) }
-                    composable(Screen.NftTransactions.route) { NftTransactions(navController, viewModel) }
+                    navigation(startDestination = "username", route = "login") {
+                        composable(
+                            Screen.NftTransactions.route,
+                        ) { NftTransactions(navController, viewModel) }
+                        composable(
+                            Screen.SendNFT.route + "/{tokenId}/{contractAddress}",
+                            arguments = listOf(
+                                navArgument("tokenId") {
+                                    type = NavType.StringType
+                                    defaultValue = ""
+                                    nullable = false
+                                },
+                                navArgument("contractAddress") {
+                                    type = NavType.StringType
+                                    defaultValue = ""
+                                    nullable = false
+                                }
+                            ),
+                        ) { entry ->
+                            SendNFT(navController,
+                                viewModel,
+                                tokenId = entry.arguments?.getString("tokenId") ?: "",
+                                contractAddress = entry.arguments?.getString("contractAddress")
+                                    ?: "")
+                        }
+                    }
                 }
             }
-
         }
     }
 }

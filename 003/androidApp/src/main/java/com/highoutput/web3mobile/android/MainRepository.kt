@@ -1,8 +1,6 @@
 package com.highoutput.web3mobile.android
 
 import android.util.Log
-import androidx.navigation.navArgument
-import com.google.gson.Gson
 import com.highoutput.web3mobile.android.common.Resource
 import com.highoutput.web3mobile.android.extensions.checkIpfs
 import com.highoutput.web3mobile.android.models.NFTResult
@@ -15,29 +13,34 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import org.web3j.abi.FunctionEncoder
 import org.web3j.abi.FunctionReturnDecoder
 import org.web3j.abi.TypeReference
+import org.web3j.abi.datatypes.Address
 import org.web3j.abi.datatypes.Function
 import org.web3j.abi.datatypes.Utf8String
 import org.web3j.abi.datatypes.generated.Uint256
-import org.web3j.ens.EnsResolver
-import org.web3j.ens.contracts.generated.ENS
+import org.web3j.crypto.Credentials
+import org.web3j.crypto.RawTransaction
+import org.web3j.crypto.TransactionEncoder
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.core.DefaultBlockParameterName
+import org.web3j.protocol.core.methods.request.Transaction
 import org.web3j.protocol.core.methods.response.EthBlock
 import org.web3j.protocol.http.HttpService
+import org.web3j.tx.gas.DefaultGasProvider
+import org.web3j.utils.Numeric
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.concurrent.TimeUnit
 
+
 class MainRepository {
     companion object {
-        val chain = "eth"
+        val chain = "rinkeby"
         val interceptor = HttpLoggingInterceptor()
 
         init {
@@ -65,7 +68,7 @@ class MainRepository {
             BuildConfig.INFURA_RINKEBY_BASE_URL
         }
         val web3j =
-            Web3j.build(HttpService(web3jUrl));
+            Web3j.build(HttpService(web3jUrl))
     }
 
     fun loadNFTImage(
@@ -170,6 +173,51 @@ class MainRepository {
             return someTypes[0].value.toString().checkIpfs()
         }
         return "";
+    }
+
+    fun sendNFT(
+        to: String,
+        from: String,
+        contractAddress: String,
+        tokenId: String,
+    ): Flow<Resource<String>> = flow {
+        try {
+            emit(Resource.Loading())
+            val function = Function(
+                "safeTransferFrom",
+                listOf(
+                    Address(from),
+                    Address(to),
+                    Uint256(BigInteger(tokenId)),
+                ),
+                listOf(object : TypeReference<Utf8String>() {}),
+            )
+
+            val encodedFunction = FunctionEncoder.encode(function)
+
+            val nonce = web3j.ethGetTransactionCount(
+                from, DefaultBlockParameterName.LATEST).sendAsync().get();
+
+//            val rawTx = RawTransaction.createTransaction(
+//                BigInteger.ZERO,
+//                DefaultGasProvider.GAS_PRICE,
+//                DefaultGasProvider.GAS_LIMIT,
+//                contractAddress,
+//                BigInteger.ZERO,
+//                encodedFunction)
+
+            val tx = Transaction.createFunctionCallTransaction(
+                from,
+                nonce.transactionCount,
+                DefaultGasProvider.GAS_PRICE,
+                DefaultGasProvider.GAS_LIMIT,
+                contractAddress,
+                encodedFunction)
+
+            emit(Resource.Success(tx.data))
+        } catch (e: Exception) {
+            Log.d("exception", e.message ?: "")
+        }
     }
 
     fun initializeWeb3(): String {
