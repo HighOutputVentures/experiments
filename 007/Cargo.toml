@@ -12,3 +12,4 @@ mongodb = "2.1.0"
 serde = "1.0.136"
 ethabi = "16.0.0"
 num-traits = "0.2.14"
+clap = { version = "3.1.5", features = ["derive"] }
