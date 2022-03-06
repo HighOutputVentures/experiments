@@ -17,10 +17,13 @@ import com.ralphordanza.samplekmm.android.BuildConfig
 import org.walletconnect.Session
 import org.web3j.crypto.Hash
 import org.web3j.protocol.Web3j
+import org.web3j.protocol.core.DefaultBlockParameterName
 import org.web3j.protocol.core.methods.response.EthSendTransaction
 import org.web3j.protocol.http.HttpService
 import org.web3j.rlp.RlpEncoder
 import org.web3j.rlp.RlpType
+import org.web3j.tx.gas.DefaultGasProvider
+import java.math.BigInteger
 
 
 @Composable
@@ -44,32 +47,22 @@ fun SendNFT(
                 viewModel.sendNFT(to = to, tokenId = tokenId, contractAddress = contractAddress) {
                     //USED WALLET CONNECT TO SIGN TRANSACTION
                     val txRequest = System.currentTimeMillis()
-                    val params = listOf(
-                        mapOf(
-                            "from" to viewModel.address.value,
-                            "to" to to,
-                            "data" to it,
-                        )
-                    )
+                    val nonce = MainRepository.web3j.ethGetTransactionCount(
+                        viewModel.address.value, DefaultBlockParameterName.LATEST).sendAsync().get();
                     MainApplication.session?.performMethodCall(
-                        Session.MethodCall.Custom(
+                        Session.MethodCall.SendTransaction(
                             txRequest,
-                            "eth_signTransaction",
-                            params = params
+                            from = viewModel.address.value,
+                            contractAddress,
+                            nonce.transactionCount.toString(16),
+                            DefaultGasProvider.GAS_PRICE.toString(16),
+                            DefaultGasProvider.GAS_LIMIT.toString(16),
+                            value = BigInteger.ZERO.toString(16),
+                            data = it
                         )
                     ) { resp ->
                         if (resp.id == txRequest) {
-                            val web3j =
-                                Web3j.build(HttpService(BuildConfig.INFURA_RINKEBY_BASE_URL))
-                            val ethSendTransaction: EthSendTransaction =
-                                web3j.ethSendRawTransaction(resp.result.toString()).send()
-
-                            if (ethSendTransaction.error != null) {
-                                Log.d("ERROR", ethSendTransaction.error.message)
-                            }
-
-                            val transactionHash = ethSendTransaction.transactionHash
-                            Log.d("RESPONSE", transactionHash)
+                            Log.d("RESPONSE", resp.result.toString())
                         }
                     }
                     val i = Intent(Intent.ACTION_VIEW)

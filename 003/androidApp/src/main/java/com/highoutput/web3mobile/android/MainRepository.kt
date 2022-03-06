@@ -195,26 +195,7 @@ class MainRepository {
 
             val encodedFunction = FunctionEncoder.encode(function)
 
-            val nonce = web3j.ethGetTransactionCount(
-                from, DefaultBlockParameterName.LATEST).sendAsync().get();
-
-//            val rawTx = RawTransaction.createTransaction(
-//                BigInteger.ZERO,
-//                DefaultGasProvider.GAS_PRICE,
-//                DefaultGasProvider.GAS_LIMIT,
-//                contractAddress,
-//                BigInteger.ZERO,
-//                encodedFunction)
-
-            val tx = Transaction.createFunctionCallTransaction(
-                from,
-                nonce.transactionCount,
-                DefaultGasProvider.GAS_PRICE,
-                DefaultGasProvider.GAS_LIMIT,
-                contractAddress,
-                encodedFunction)
-
-            emit(Resource.Success(tx.data))
+            emit(Resource.Success(encodedFunction))
         } catch (e: Exception) {
             Log.d("exception", e.message ?: "")
         }
