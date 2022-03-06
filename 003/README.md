@@ -11,19 +11,24 @@
 
 ## Conclusion
 
-We can prove that it is possible to connect directly to the blockchain with mobile alone with the
-use of Web3J. On the other hand, WalletConnect proves that it is possible to integrate third-patry
+We can conclude that it is possible to connect directly to the blockchain with mobile alone with the
+use of Web3J and WalletConnect side by side. WalletConnect proves that it is possible to integrate third-patry
 wallets with the use of deep linking. However, there are still some limitation when it comes to
-developing dApps for mobile. First, documentations are still limited. Second, some of the
+developing dApps for mobile (natively). First, documentations are still limited. Second, some of the
 functions (`eth_signTransaction` which is one of the most important function) are not yet supported
 on the third-party mobile wallets, although they already support `eth_sign`, `eth_sendTransaction`
-etc. which is a really good thing for ERC20 tokens. This might be the reason why Metamask decided to
-build their mobile app using React Native as it has a close relation to web technologies. This also
-might be the reason why OpenSea does not support purchasing NFTs with their native mobile apps yet.
-Instead, only redirect the user to their web app to purchase an NFT.
+etc. 
 
-It is possible to build your own mobile wallet apps with the use of Web3J but we can say that dapps built
-for mobile, if not wallet app, only serves as displaying app or a showcase app.
+With `eth_sendTransaction` is the only available option as of the moment, we can utilize this in order to
+confirm the transaction to the Metamask. The only downside in using this function is that, it
+doesn't explicitly display what method is being used in the smart contract as compared to the Metamask
+browser extension. This might be the reason why Metamask decided to build their mobile app using React Native as it has
+a close relation to web technologies. As well as the reason why OpenSea does not support
+purchasing NFTs with their native mobile apps yet. Instead, only redirect the user to their web app
+to purchase an NFT.
+
+It is possible to build your own mobile wallet apps with the use of Web3J but we can say that dapps
+built for mobile, if not wallet app, only serves as displaying app or a showcase app.
 
 ## Resources
 
@@ -77,13 +82,13 @@ https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-s
 If the image or tokenURI is formatted as `ipfs://id`. Convert it to `https://ipfs.io/ipfs/{id}` in
 order to access it directly on the web browser
 
-##### Challenges
+#### Sending NFT to another address
 
-* Concluding that `eth_signTransaction` is not supported yet by metamask-mobile (this might change
-  in the future, will just update accordingly)
-    - https://github.com/MetaMask/metamask-mobile/issues/2834
-    - https://github.com/MetaMask/metamask-mobile/issues/3437
-* This prevents us from transferring an NFT on mobile as this can be set as a limitation on the
-  metamask mobile app as of now
-* This can be the reason why OpenSea does not support buying of NFT on their native mobile apps yet.
-  They only redirect the user to their web app to purchase an NFT
+So it turns out that sending an NFT and signing it is possible using Metamask mobile. The only
+problem is, Metamask does not show explicitly the function used to transfer the token, in this
+case `safeTransferFrom`. Instead, it displays it as `unknown method`
+
+1.Encode the function using web3j (we will use the `safeTransferFrom` method)
+2.Using WalletConnect, use the method call `SendTransaction` and apply the parameters. Then supply
+the encoded function to the `data` parameter.
+
