@@ -1,16 +1,20 @@
 package com.highoutput.web3mobile.android
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.highoutput.web3mobile.android.common.Resource
 import com.highoutput.web3mobile.android.models.NFT
 import com.highoutput.web3mobile.android.models.NFTResult
 import com.highoutput.web3mobile.android.ui.state.NFTTransactionsState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.walletconnect.Session
 import org.walletconnect.nullOnThrow
 
@@ -76,12 +80,36 @@ class MainViewModel : ViewModel(), Session.Callback {
         }.launchIn(viewModelScope)
     }
 
+    fun sendNFT(to: String, tokenId: String, contractAddress: String, callback: (String) -> Unit) {
+        repository.sendNFT(
+            to = to,
+            from = _address.value,
+            contractAddress = contractAddress,
+            tokenId = tokenId,
+        ).onEach { response ->
+            when (response) {
+                is Resource.Success -> {
+                    response.data?.let {
+                        callback(it)
+                    }
+                }
+                is Resource.Error -> {
+                    val state = _state.value.copy(
+                        isLoading = false,
+                        error = response.message ?: "",
+                    )
+                    _state.value = state
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
     fun initWeb3() {
-        val response = repository.initializeWeb3()
+        repository.initializeWeb3()
     }
 
     fun closeWeb3() {
-        val response = repository.shutdown()
+        repository.shutdown()
     }
 
     fun getBalance() {
@@ -125,9 +153,11 @@ class MainViewModel : ViewModel(), Session.Callback {
         _connectionStatus.value = ""
         _address.value = ""
         _balance.value = ""
+        _state.value = NFTTransactionsState()
     }
 
     fun resetSession() {
+        MainApplication.session?.kill()
         MainApplication.resetSession()
         MainApplication.session?.addCallback(this)
     }
@@ -135,5 +165,6 @@ class MainViewModel : ViewModel(), Session.Callback {
     fun closeConnection() {
         MainApplication.session?.kill()
         closeWeb3()
+        sessionClear()
     }
 }

@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -46,17 +45,19 @@ export interface WorkflowModuleV2Interface extends utils.Interface {
   functions: {
     "NAME()": FunctionFragment;
     "VERSION()": FunctionFragment;
-    "encodeTransactionData(address,address[],(bytes4,bytes)[])": FunctionFragment;
+    "encodeTransactionData(address,address[],(bytes4,bytes)[],uint256)": FunctionFragment;
     "executeBulkTransfer(address,(address,address,uint256)[])": FunctionFragment;
     "executeWorkflow(address,address[],(bytes4,bytes)[],bytes)": FunctionFragment;
-    "getTransactionHash(address,address[],(bytes4,bytes)[])": FunctionFragment;
+    "getTransactionHash(address,address[],(bytes4,bytes)[],uint256)": FunctionFragment;
+    "indexOf(address[],address)": FunctionFragment;
+    "nonce()": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "NAME", values?: undefined): string;
   encodeFunctionData(functionFragment: "VERSION", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "encodeTransactionData",
-    values: [string, string[], WorkflowModuleV2.ActionStruct[]]
+    values: [string, string[], WorkflowModuleV2.ActionStruct[], BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "executeBulkTransfer",
@@ -68,8 +69,13 @@ export interface WorkflowModuleV2Interface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getTransactionHash",
-    values: [string, string[], WorkflowModuleV2.ActionStruct[]]
+    values: [string, string[], WorkflowModuleV2.ActionStruct[], BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "indexOf",
+    values: [string[], string]
+  ): string;
+  encodeFunctionData(functionFragment: "nonce", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "NAME", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "VERSION", data: BytesLike): Result;
@@ -89,6 +95,8 @@ export interface WorkflowModuleV2Interface extends utils.Interface {
     functionFragment: "getTransactionHash",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "indexOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nonce", data: BytesLike): Result;
 
   events: {};
 }
@@ -129,6 +137,7 @@ export interface WorkflowModuleV2 extends BaseContract {
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -143,15 +152,24 @@ export interface WorkflowModuleV2 extends BaseContract {
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
       _signatures: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     getTransactionHash(
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    indexOf(
+      _haystack: string[],
+      _needle: string,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
+
+    nonce(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
 
   NAME(overrides?: CallOverrides): Promise<string>;
@@ -162,6 +180,7 @@ export interface WorkflowModuleV2 extends BaseContract {
     _safe: string,
     _delegates: string[],
     _actions: WorkflowModuleV2.ActionStruct[],
+    _nonce: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -176,15 +195,24 @@ export interface WorkflowModuleV2 extends BaseContract {
     _delegates: string[],
     _actions: WorkflowModuleV2.ActionStruct[],
     _signatures: BytesLike,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   getTransactionHash(
     _safe: string,
     _delegates: string[],
     _actions: WorkflowModuleV2.ActionStruct[],
+    _nonce: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
+
+  indexOf(
+    _haystack: string[],
+    _needle: string,
+    overrides?: CallOverrides
+  ): Promise<number>;
+
+  nonce(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
     NAME(overrides?: CallOverrides): Promise<string>;
@@ -195,6 +223,7 @@ export interface WorkflowModuleV2 extends BaseContract {
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -216,8 +245,17 @@ export interface WorkflowModuleV2 extends BaseContract {
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    indexOf(
+      _haystack: string[],
+      _needle: string,
+      overrides?: CallOverrides
+    ): Promise<number>;
+
+    nonce(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   filters: {};
@@ -231,6 +269,7 @@ export interface WorkflowModuleV2 extends BaseContract {
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -245,15 +284,24 @@ export interface WorkflowModuleV2 extends BaseContract {
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
       _signatures: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     getTransactionHash(
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    indexOf(
+      _haystack: string[],
+      _needle: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    nonce(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -265,6 +313,7 @@ export interface WorkflowModuleV2 extends BaseContract {
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -279,14 +328,23 @@ export interface WorkflowModuleV2 extends BaseContract {
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
       _signatures: BytesLike,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     getTransactionHash(
       _safe: string,
       _delegates: string[],
       _actions: WorkflowModuleV2.ActionStruct[],
+      _nonce: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    indexOf(
+      _haystack: string[],
+      _needle: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    nonce(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

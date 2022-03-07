@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedTextField
@@ -30,7 +31,7 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
     val isLoading = viewModel.isLoading.value
 
     LaunchedEffect(key1 = viewModel.address.value) {
-        if (viewModel.address.value.isNotEmpty()) {
+        if (viewModel.address.value.isNotEmpty() && state.transactions.isEmpty()) {
             viewModel.loadNFTImages(viewModel.address.value)
         }
     }
@@ -62,7 +63,19 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
                             .height(120.dp),
                     )
                     Text("Token Name: ${item.metadata?.name}")
-                    Text("Token ID: ${item.metadata?.description}")
+                    SelectionContainer() {
+                        Column() {
+                            Text("Token ID: ${item.tokenId}")
+                            Text("Token Address: ${item.tokenAddress}")
+                        }
+                    }
+
+                    Button(onClick = {
+                        navHostController.navigate(Screen.SendNFT.withArgs(item.tokenId,
+                            item.tokenAddress))
+                    }) {
+                        Text("Send NFT")
+                    }
                 }
             }
         }

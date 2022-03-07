@@ -8,31 +8,24 @@ import "@gnosis.pm/safe-contracts/contracts/external/GnosisSafeMath.sol";
 import "./IGnosisSafe.sol";
 import "./BulkTransfer.sol";
 import "./ISignatureValidator.sol";
+import "./SelfAuthority.sol";
 
-/// @notice You can use this contract for basic simulation (bulk transferring and swap)
-contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidatorConstants {
+contract WorkflowModuleV2 is 
+    SelfAuthority, 
+    BulkTransfer, 
+    SignatureDecoder, 
+    ISignatureValidatorConstants {
     using GnosisSafeMath for uint256;
 
     string public constant NAME = "Workflow Module V2";
 
     string public constant VERSION = "0.0.2";
 
+    uint public nonce;
+    
     struct Action {
         bytes4 selector;
         bytes arguments;
-    }
-
-    struct Workflow {
-        IGnosisSafe safe;
-        Action[] actions;
-        address[] delegates;
-    }
-
-    modifier checkDelegates(IGnosisSafe _safe, address[] calldata _delegates) {
-        for (uint index = 0; index < _delegates.length; index++) {
-            require(_safe.isOwner(_delegates[index]), "Not an owner");
-        }
-        _;
     }
 
     /// @notice Execute actions
@@ -41,22 +34,29 @@ contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidator
         address[] calldata _delegates,
         Action[] calldata _actions,
         bytes memory _signatures
-    ) external payable checkDelegates(_safe, _delegates) {
+    ) public selfAuthorized() {
         bool success;
-        // bytes memory data;
         bytes32 txHash;
 
         {
             bytes memory txHashData = encodeTransactionData(
                 address(_safe),
                 _delegates,
-                _actions
+                _actions,
+                nonce
             );
 
             txHash = keccak256(txHashData);
 
             _safe.checkSignatures(txHash, txHashData, _signatures);
         }
+
+        require(
+            indexOf(_delegates, msg.sender) == 1 || _safe.isOwner(msg.sender), 
+            "Can't execute if not an owner nor part of the delegates"
+        );
+
+        nonce++;
 
         for (uint index = 0; index < _actions.length; index++) {
             (success,) = address(this).call(
@@ -67,7 +67,22 @@ contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidator
         require(success, "Call failed!");
     }
 
-    function encodeTransactionData(address _safe, address[] calldata _delegates, Action[] calldata _actions)
+    function indexOf(address[] calldata _haystack, address _needle) private pure returns(uint8) {
+        for (uint index = 0; index < _haystack.length; index++) {
+            if (_haystack[index] == _needle) {
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    function encodeTransactionData(
+        address _safe, 
+        address[] calldata _delegates, 
+        Action[] calldata _actions, 
+        uint _nonce
+    )
         public
         pure
         returns (bytes memory)
@@ -84,15 +99,21 @@ contract WorkflowModuleV2 is BulkTransfer, SignatureDecoder, ISignatureValidator
                         _actions,
                         abi.encodePacked(address(0))
                     )
-                )
+                ),
+                _nonce
             );
     }
 
-    function getTransactionHash(address _safe, address[] calldata _delegates, Action[] calldata _actions)
+    function getTransactionHash(
+        address _safe, 
+        address[] calldata _delegates, 
+        Action[] calldata _actions, 
+        uint _nonce
+    )
         public
         pure
         returns (bytes32)
     {
-        return keccak256(encodeTransactionData(_safe, _delegates, _actions));
+        return keccak256(encodeTransactionData(_safe, _delegates, _actions, _nonce));
     }
 }

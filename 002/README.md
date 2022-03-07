@@ -14,9 +14,11 @@ We should be able to:
 
 <!-- TODO: Finish up Abstract -->
 ## Abstract
-To develop a customized smart contract with the security and optimization in mind alongside with unit testing it.
+To develop a well-tested customized smart contract with the security and optimization in mind. In the first week we implemented the usage of `BulkTransfer` on a smart contract, `WorkflowModule`. By running `BulkTransfer` under the hood, we should make use of function selectors and transaction hash. We also tried implementing `UniSwap` in `WorkflowModule`, however could not since the `Rinkeby` test network is unstable for `UniSwap`. During the implementation phase we incorporate different kinds of techniques, simple tests, mocking tests and tests using the rinkeby network config from `Hardhat`. 
 
-Lastly, we tried to redesign the workflow module for doing off-chain actions with signatures.
+After we implemented the `BulkTransfer` into the `WorkflowModule`, we benchmark multiple single transfers and bulk transfers with multiple transactions in it. During the benchmarking we discover that as the number increases the BulkTransfer win over single transfer in optimizing gas fees. 
+
+Lastly, we tried to redesign the workflow module for doing off-chain actions with signatures. This will help us on security on who executes the workflow making use of the delegates.
 
 ## Conclusion
 I, the author, volunteer to take part in this interesting experiment with the help of my colleagues. I found 
@@ -36,51 +38,538 @@ In this case, we can train developers to write smart contracts and flesh out ide
 * https://hardhat.org/
 * https://docs.gnosis-safe.io/
 * https://uniswap.org/developers
+* https://www.quicknode.com/guides/web3-sdks/how-to-create-and-deploy-a-smart-contract-with-hardhat
+* https://betterprogramming.pub/the-complete-hands-on-hardhat-tutorial-9e23728fc8a4
+* [https://cryptozombies.io/en/course/](https://cryptozombies.io/en/course/)
+* [https://cryptozombies.io/en/lesson/3/chapter/4](https://cryptozombies.io/en/lesson/3/chapter/4)
+* [https://cryptozombies.io/en/lesson/3/chapter/10](https://cryptozombies.io/en/lesson/3/chapter/10)
+* [https://eip2535diamonds.substack.com/p/smart-contract-gas-optimization-with](https://eip2535diamonds.substack.com/p/smart-contract-gas-optimization-with)
+* [https://eip2535diamonds.substack.com/p/how-eip2535-diamonds-reduces-gas](https://eip2535diamonds.substack.com/p/how-eip2535-diamonds-reduces-gas)
+* [https://github.com/solidstate-network/solidstate-solidity](https://github.com/solidstate-network/solidstate-solidity)
+* [https://github.com/BeanstalkFarms/Beanstalk](https://github.com/BeanstalkFarms/Beanstalk)
+* [https://github.com/aavegotchi/aavegotchi-contracts](https://github.com/aavegotchi/aavegotchi-contracts)
+* [https://github.com/crytic/not-so-smart-contracts](https://github.com/crytic/not-so-smart-contracts)
+* [https://github.com/ConsenSys/smart-contract-best-practices](https://github.com/ConsenSys/smart-contract-best-practices)
 
 
 ## Documentation
-### Development
-Install `hardhat`
-```sh
-npm install --save-dev hardhat
-```
 
-Compile smart contracts
-```sh
-npx hardhat compile
-```
+## Tutorials
+
+<details>
+  <summary><b>Using Hardhat</b></summary>
+  # Advanced Sample Hardhat Project
+
+  This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+
+  The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+
+  Try running some of the following tasks:
+
+  ```shell
+  npx hardhat accounts
+  npx hardhat compile
+  npx hardhat clean
+  npx hardhat test
+  npx hardhat node
+  npx hardhat help
+  REPORT_GAS=true npx hardhat test
+  npx hardhat coverage
+  npx hardhat run scripts/deploy.ts
+  TS_NODE_FILES=true npx ts-node scripts/deploy.ts
+  npx eslint '**/*.{js,ts}'
+  npx eslint '**/*.{js,ts}' --fix
+  npx prettier '**/*.{json,sol,md}' --check
+  npx prettier '**/*.{json,sol,md}' --write
+  npx solhint 'contracts/**/*.sol'
+  npx solhint 'contracts/**/*.sol' --fix
+  ```
+
+  # Etherscan verification
+
+  To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+
+  In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+
+  ```shell
+  hardhat run --network ropsten scripts/sample-script.ts
+  ```
+
+  Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+
+  ```shell
+  npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
+  ```
+
+  # Performance optimizations
+
+  For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+</details>
+
+<details>
+  <summary><b>Getting started</b></summary>
+
+  Create the project directory
+  ```sh
+  ~ $  mkdir getting-started; cd getting-started
+  ```
+
+  Initializing the NodeJS project
+  ```sh
+  ~/getting-started $ npm init -y
+  ```
+
+  Finding developments tools for smart contract development
+  - Truffle Suite
+  - Brownie
+  - Dapp Tools
+  - Foundry
+  - **Hardhat**
+  - Remix
+
+  **Using hardhat**
+
+  Install `hardhat`
+  ```sh
+  ~/getting-started $ npm install -D hardhat
+  ```
+
+  Barebones installation using `TypeScript`
+  ```sh
+  ~/getting-started $ npx hardhat 
 
 
-Default testing
-```sh
-npx hardhat test
-```
+  Welcome to Hardhat v2.0.8
 
-Testing using rinkeby network
-```sh
-npx hardhat --network rinkeby test
-```
+  ? What do you want to do? …
+    Create a sample project
+    Create an advanced sample project
+  > Create an advanced sample project that uses TypeScript
+    Create an empty hardhat.config.js
+    Quit
+  ```
 
-<!-- TODO: Complete this first -->
+  > 💡 **TIP**
+  > 
+  >Hardhat will let you know how, but, in case you missed it, you can install them with,
+  > ```sh
+  >npm install -D @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
+  >```
+
+  Add this rule in `eslintrc.js`
+  ```js
+  'prettier/prettier': ['error', { singleQuote: true, trailingComma: true, semi: true }]
+  ```
+
+  Update the `"test"` iln `package.json`
+  From:
+  ```json
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+  ```
+  To:
+  ```json
+  "scripts": {
+    "test": "hardhat test"
+  }
+  ```
+
+  Install `chai-as-promised`
+  ```sh
+  npm i -D chai-as-promised @types/chai-as-promised
+  ```
+
+  Update the test
+  ```ts
+  import { expect, use } from "chai";
+  import { ethers } from "hardhat";
+  import chaiAsPromised from 'chai-as-promised';
+
+  use(chaiAsPromised);
+
+  describe("Lottery", function () {
+    it('should be deployed', async () => {
+      const Lottery = await ethers.getContractFactory('Lottery');
+
+      await expect(Lottery.deploy('test')).to.eventually.fulfilled;
+    });
+  });
+  ```
+  Run the test above using `npm t` and **it will fail**.
+  ```sh
+    Lottery
+      1) should be deployed
+
+
+    0 passing (634ms)
+    1 failing
+
+    1) Lottery
+        should be deployed:
+      HardhatError: HH700: Artifact for contract "Lottery" not found. 
+  ```
+
+  Update the `Greeter.sol` to `Lottery.sol` to this:
+  ```solidity
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {
+      string private greeting;
+
+      constructor(string memory _greeting) {
+          greeting = _greeting;
+      }
+
+      function greet() public view returns (string memory) {
+          return greeting;
+      }
+
+      function setGreeting(string memory _greeting) public {
+          greeting = _greeting;
+      }
+  }
+  ```
+  Run the test again, `npm t` and it will pass:
+  ```sh
+    Lottery
+      ✓ should be deployed (765ms)
+
+
+    1 passing (766ms)
+  ```
+
+  We're going to remove the `constructor`, `#greet`, `setGreeting` and `.greeting`
+  ```solidity
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {}
+  ```
+
+  Update the test so that we're expecting a method, `sum`.
+  ```ts
+  describe('#sum', () => {
+    it('should have sum method', async () => {
+      expect(contract.sum).to.be.exist;
+    });
+  });
+  ```
+
+  Run the tests and expect it to fail.
+  ```
+  FAILED
+  ```
+
+  Update the `Lottery.sol`
+  ```
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {
+    function sum() public {}
+  }
+  ```
+
+  Run the tests and it will pass
+  ```
+  PASSED
+  ```
+
+  Update the test to have fully functional `#sum`
+  ```ts
+  describe('#sum', () => {
+    it('should have sum method', async () => {
+      expect(contract.sum).to.be.exist;
+    });
+
+    it('should return 3 when the given parametes are 1 and 2', async () => {
+      const sum = await contract.sum(1, 2);
+
+      expect(sum).to.be.exist;
+    });
+  });
+  ```
+
+  The test would fail again
+  ```
+  FAILED
+  ```
+
+  Update the `Lottery.sol` to pass the failing test
+  ```
+  //SPDX-License-Identifier: Unlicense
+  pragma solidity ^0.8.0;
+
+  contract Lottery {
+    function sum(uint _a, uint _b) public pure returns(uint) {
+        return _a + _b;
+    }
+  }
+  ```
+
+  Let deploy this contract in `Rinkeby` test network:
+  Update your `hardhat.config.ts`
+  ```ts
+  ...
+
+  const config: HardhatUserConfig = {
+    solidity: "0.8.4",
+    networks: {
+      rinkeby: {
+        url: process.env.RINKEBY_URL || "",
+        accounts:
+          process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      },
+    },
+    gasReporter: {
+      enabled: process.env.REPORT_GAS !== undefined,
+      currency: "USD",
+    },
+    etherscan: {
+      apiKey: process.env.ETHERSCAN_API_KEY
+    },
+    mocha: {
+      bail: true,
+    },
+  };
+
+  export default config;
+  ```
+
+  Choosing Node Providers:
+  1. Infura
+  2. **Alchemy**
+
+  Registering to **Alchemy**
+
+  Registering to **Etherscan**
+
+  Exporting your private key in **Metamask**
+
+  Update your `.env` file
+
+  ```sh
+  ETHERSCAN_API_KEY=<YOUR ETHERSCAN API KEY>
+  RINKEBY_URL=<YOUR ALCHEMY API KEY>
+  PRIVATE_KEY=<YOU ACCOUNT PRIVATE FROM METAMASK>
+  ```
+  
+  Update your `scripts/deploy.ts`
+  ```ts
+  async function main() {
+    // Hardhat always runs the compile task when running scripts with its command
+    // line interface.
+    //
+    // If this script is run directly using `node` you may want to call compile
+    // manually to make sure everything is compiled
+    // await hre.run('compile');
+
+    const owner = ethers.provider.getSigner('You accounts address');
+
+    // We get the contract to deploy
+    const Lottery = await ethers.getContractFactory("Lottery");
+    const contract = await Lottery.deploy();
+
+    await contract.deployed();
+
+    console.log("Lottery deployed to:", contract.address);
+  }
+  ```
+
+  Update your `package.json`
+  ```json
+  "scripts": {
+    ...
+    "deploy": "hardhat run scripts/deploy.ts --network rinkeby"
+  }
+  ```
+
+  Run this command:
+  ```sh
+  npm run deploy rinkeby
+  ```
+
+  After that copy the contract address of the Lottery for verification
+
+  And run:
+  ```
+  npx hardhat verifiy --network rinkeby <Lottery's contract address>
+  ```
+</details>
+
+<details>
+  <summary><b>Optimizations</b></summary>
+
+
+  Structuring `struct`
+
+  ```
+  struct ExpensiveStruct {
+    address addressOne;
+    uint8 numberOne;
+    string stringOne;
+    uint8 numberTwo;
+    address addressTwo;
+    string stringTwo;
+  }
+
+  struct CheapStruct {
+    address addressOne;
+    address addressTwo;
+    uint8 numberOne;
+    uint8 numberTwo;
+    string stringOne;
+    string stringTwo;
+  }
+  ```
+
+  **View functions don’t cost Gas**
+
+  `view` functions don't cost any gas when they're called externally by a user.
+
+  This is because `view` functions don't actually change anything on the blockchain – they only read the data. So marking a function with `view` tells `web3.js` that it only needs to query your local Ethereum node to run the function, and it doesn't actually have to create a transaction on the blockchain (which would need to be run on every single node, and cost gas).
+
+  We'll cover setting up web3.js with your own node later. But for now, the big takeaway is that you can optimize your DApp's gas usage for your users by using read-only `external view` functions wherever possible.
+
+  ```solidity
+  contract MyContract {
+    ...
+    struct User {
+      ...,
+      string name;
+    }
+    
+    User[] public users;
+
+    function getNameByUser(uint userId) external view returns(string memory) {
+      return users[userId].name;
+    }
+  }
+  ```
+
+  > *Note: If a `view` function is called internally from another function in the same contract that is **not** a `view` function, it will still cost gas. This is because the other function creates a transaction on Ethereum, and will still need to be verified from every node. So `view` functions are only free when they're called externally.*
+  
+  **Reading constants and immutable variables**
+
+  ```solidity
+  contract CallMyName {
+    string public NAME = "ETH"; // Expensive 24586 Gas
+    string public constant CONSTANT_NAME = "ETH"; // Cheap 21865 Gas
+  }
+  ```
+
+  **Reading and writing local variables**
+
+  Expensive:
+
+  ```solidity
+  contract Expensive {
+    uint16[] public myArray;
+    uint16 public myCounter = 0;
+
+    function run() external {                
+      for(uint256 index; index < myArray.length; index++) { // state reads
+        myCounter++; // state reads and writes
+      }        
+    }
+  }
+  ```
+
+  Cheap:
+
+  ```solidity
+  contract Cheap {
+    uint16[] public myArray;
+    uint16 public stateCounter = 0;
+
+    function run() external {
+        uint16 length = myArray.length; // one state read
+        uint16 localCounter = myCounter; // one state read
+    
+        for(uint16 index; index < length; index++) { // local reads
+            localCounter++; // local reads and writes  
+        }
+    
+        stateCounter = localCounter; // one state write
+    }
+  }
+  ```
+
+  **Reading `calldata` variables like `calldata` arrays and structs.**
+
+
+  Benchmarking results:
+
+  **WorkflowModule**
+  
+  100 WEI = 0.0000000000000001 ETH
+
+  Deployment
+  - Actual Gas Fee `0.006974072544634064`
+
+  Enabling Workflow Module
+  - Actual Gas Fee `0.0001898125009111`
+
+
+  Single Transfer
+  Adding a workflow
+  - Actual Gas Fee `0.001344555012907728` (3 Single Transfers)
+
+  Execute Workflow
+  - Actual Gas Fee `0.000358567502294832` (3 Single Transfers)
+    
+  ---
+
+  Direct a single transfer
+  - Actual Gas Fee `0.000133077500904927` ETH
+
+  Total: 0.00039923250303416696
+
+  Direct Bulk Transfer
+  - Estimated Gas Fee 0.000254ETH
+  - Actual Gas Fee 0.000253347501418746 ETH
+
+  Bulk Transfer
+  Adding a Workflow
+  - Actual Gas Fee 0.001243105005469662 ETH  (3 Single Transfer into Bulk)
+
+  Execute Workflow
+  - Estimated Gas Fee 0.000317ETH (3 Single Transfer into Bulk)
+  - Actual Gas Fee 0.00031673250126693 (3 Single Transfer into Bulk)
+
+  Workflow with Bulk Transfer (3 ST) and 3 Single Transfers
+
+  Add Workflow
+  - Estimated Gas Fee 0.002272ETH
+  - Actual Gas Fee 0.002271610009995084
+
+  Execute Workflow
+  - Estimated Gas Fee 0.000533ETH
+  - Actual Gas Fee 0.0005333750025602
+</details>
+
+----
 ### Experiment journey
-Week 1
+**Week 1**
 - Writing custom smart contract
 - Integrate Uniswap
 - Integrate GnosisSafe
 
-Week 2
+**Week 2**
 - Testing the custom smart contract
 - Make integration work with the smart contract
 - Try developing in Truffle and Hardhat
 
-Week 3
+**Week 3**
 - Benchmarking
 - Redesign custom smart contract
 
-Week 4
+**Week 4**
 - Redesigning Workflow
 - Apply security hash
-- Appply nonce
+- Apply nonce
 
 
 ### Redesigning WorkflowModule
@@ -95,11 +584,11 @@ Week 4
 
 ### V2
 - ~`#addWorkflow`~
-
 - `executeWorkflow`
   - `IGnosisSafe _safe`
   - `address[] _delegates`
   - `Action[] calldata _actions`
   - `bytes memory signatures`
+    - Using the `_delegates`
+    - Using the `_nonce`
 
-Initiating a transaction
