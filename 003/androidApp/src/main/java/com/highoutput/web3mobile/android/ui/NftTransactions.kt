@@ -31,7 +31,7 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
     val isLoading = viewModel.isLoading.value
 
     LaunchedEffect(key1 = viewModel.address.value) {
-        if (viewModel.address.value.isNotEmpty()) {
+        if (viewModel.address.value.isNotEmpty() && state.transactions.isEmpty()) {
             viewModel.loadNFTImages(viewModel.address.value)
         }
     }
@@ -71,7 +71,8 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
                     }
 
                     Button(onClick = {
-                        navHostController.navigate(Screen.SendNFT.withArgs(item.tokenId, item.tokenAddress))
+                        navHostController.navigate(Screen.SendNFT.withArgs(item.tokenId,
+                            item.tokenAddress))
                     }) {
                         Text("Send NFT")
                     }

@@ -105,11 +105,11 @@ class MainViewModel : ViewModel(), Session.Callback {
     }
 
     fun initWeb3() {
-        val response = repository.initializeWeb3()
+        repository.initializeWeb3()
     }
 
     fun closeWeb3() {
-        val response = repository.shutdown()
+        repository.shutdown()
     }
 
     fun getBalance() {
@@ -153,9 +153,11 @@ class MainViewModel : ViewModel(), Session.Callback {
         _connectionStatus.value = ""
         _address.value = ""
         _balance.value = ""
+        _state.value = NFTTransactionsState()
     }
 
     fun resetSession() {
+        MainApplication.session?.kill()
         MainApplication.resetSession()
         MainApplication.session?.addCallback(this)
     }
@@ -163,5 +165,6 @@ class MainViewModel : ViewModel(), Session.Callback {
     fun closeConnection() {
         MainApplication.session?.kill()
         closeWeb3()
+        sessionClear()
     }
 }
