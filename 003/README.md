@@ -53,7 +53,7 @@ https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-s
 1. Using Etherscan and Web3J
 2. Using Moralis API (easier way)
 
-##### Using Etherscan API and Web3J
+#### Using Etherscan API and Web3J
 
 1. Fetch ERC721 transfer events
    from https://docs.etherscan.io/v/rinkeby-etherscan/api-endpoints/accounts#get-a-list-of-erc721-token-transfer-events-by-address
@@ -68,7 +68,7 @@ https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-s
 >
 > Make sure to set your fields to nullable to avoid null exceptions
 
-##### Using Moralis API (easier way)
+#### Using Moralis API (easier way)
 
 1. Fetch NFTs using `{address}/nft` endpoint
 2. The metadata is already included in the token object as a json string. Parse it to the native
@@ -88,7 +88,7 @@ So it turns out that sending an NFT and signing it is possible using Metamask mo
 problem is, Metamask does not show explicitly the function used to transfer the token, in this
 case `safeTransferFrom`. Instead, it displays it as `unknown method`
 
-1.Encode the function using web3j (we will use the `safeTransferFrom` method)
-2.Using WalletConnect, use the method call `SendTransaction` and apply the parameters. Then supply
-the encoded function to the `data` parameter.
+1. Encode the function using web3j (we will use the `safeTransferFrom` method)
+2. Using WalletConnect, use the method call `SendTransaction` and apply the parameters. Then, supply
+the function we encoded earlier to the `data` parameter.
 
