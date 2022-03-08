@@ -114,17 +114,6 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
     await safeSdk.signTransaction(txData);
     await owner02.signTransaction(txData);
 
-    // const executedTransaction = await safeSdk.executeTransaction(txData, {
-    //   from: DELEGATE,
-    //   gasLimit: 250000,
-    // });
-
-    // this.executedTransaction = executedTransaction;
-
-    // const confirmed = executedTransaction.transactionResponse?.wait();
-
-    // this.confirmed = confirmed;
-
     await contract.connect(ethers.provider.getSigner(DELEGATE)).executeWorkflow(
       safeSdk.getAddress(),
       [OWNER, DELEGATE],
@@ -141,7 +130,7 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
     );
   });
 
-  it.skip('should not include', async function () {
+  it('should be confirmed', async function () {
     await expect(this.signer.getAddress()).to.eventually.fulfilled.and.become('0xC9e29C46E35AA801a8226886912a9b1A9e355D47');
 
     expect(this.safeAddress).to.be.equals('0x2700208D4b0b2bb83CF89601d5691b08c296Ae72');
@@ -152,9 +141,7 @@ describe('WorkflowModuleV2 - Non-owner delegates', () => {
 
     expect(this.txHash).to.be.not.null;
 
-    await expect(this.safeSdk.signTransactionHash(this.txHash)).to.eventually.fulfilled
-
-    await expect(this.confirmed).to.be.eventually.rejected;
+    await expect(this.safeSdk.signTransactionHash(this.txHash)).to.eventually.fulfilled;
   })
 });
 
