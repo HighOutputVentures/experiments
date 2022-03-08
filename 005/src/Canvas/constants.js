@@ -49,11 +49,10 @@ export const DEFAULT_SHAPE = {
   ...TEXT_DEFAULTS
 };
 
-/*
 export const DEFAULT_SHAPES = [
-  { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
+  { x: 400, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
   { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, text: "TEST", textYPercent: 1.2, type: SHAPE_TYPE.boundary },
-  { x: 400, y: 517, w: 30, h: 75, fillColor: '#E75480' },
+  { x: 800, y: 517, w: 30, h: 75, fillColor: '#E75480' },
 ];
 
 export const DEFAULT_CONNECTIONS = [
@@ -62,7 +61,7 @@ export const DEFAULT_CONNECTIONS = [
     to: 2,
     color: 'red',
     width: 5,
-    // pivotPoint: 0.75,
+    endPercent: 0.75,
 
     fromTop: true,
     // fromBottom: true,
@@ -83,15 +82,13 @@ export const DEFAULT_CONNECTIONS = [
     width: 3,
     isStraightLine: true,
 
-    fromTop: true,
     fromLeft: true,
     toBottom: true,
-    toRight: true,
+    // endPercent: 1,
   },
 ];
-*/
 
-export const DEFAULT_SHAPES = [
+export const DEFAULT_SHAPESx = [
   /*0*/ { x: 50, y: 50, w: 100, h: 200, text: "User", textYPercent: 1.1, type: SHAPE_TYPE.human },
   { x: 400, y: 100, w: 200, h: 100, text: "Wallet", type: SHAPE_TYPE.rectangleRounded, fillColor: '#FFAF28', lineWidth: 0 },
   { x: 750, y: 100, w: 200, h: 100, text: "Backend", type: SHAPE_TYPE.rectangleRounded, fillColor: '#FFAF28', lineWidth: 0 },
@@ -99,32 +96,32 @@ export const DEFAULT_SHAPES = [
   /*3*/ { x: 475, y: 300, w: 50, h: 575, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
   { x: 825, y: 300, w: 50, h: 575, type: SHAPE_TYPE.rectangleRounded, fillColor: '#CED4DB', lineWidth: 0 },
 
-  /*5*/ { x: 95, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 495, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 845, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  /*5*/ { x: 95, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 495, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 845, y: 890, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
 
-  /*8*/ { x: 95, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 475, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 95, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 475, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  /*8*/ { x: 95, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 475, y: 350, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 95, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 475, y: 400, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
 
-  /*12*/ { x: 95, y: 475, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 825, y: 475, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 95, y: 525, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 825, y: 525, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  /*12*/ { x: 95, y: 475, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 825, y: 475, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 95, y: 525, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 825, y: 525, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
 
-  /*16*/ { x: 95, y: 625, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 475, y: 625, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 95, y: 700, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 475, y: 700, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  /*16*/ { x: 95, y: 625, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 475, y: 625, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 95, y: 700, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 475, y: 700, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
 
-  /*20*/ { x: 95, y: 775, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 825, y: 775, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 95, y: 850, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
-  { x: 825, y: 850, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'transparent', lineWidth: 0 },
+  /*20*/ { x: 95, y: 775, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 825, y: 775, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 95, y: 850, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
+  { x: 825, y: 850, w: 10, h: 10, type: SHAPE_TYPE.rectangle, fillColor: 'red', lineWidth: 0 },
 ]
 
-export const DEFAULT_CONNECTIONS = [
+export const DEFAULT_CONNECTIONSx = [
   { from: 1, to: 3, fromBottom: true, toTop: true, isDashed: true },
   { from: 2, to: 4, fromBottom: true, toTop: true, isDashed: true },
 

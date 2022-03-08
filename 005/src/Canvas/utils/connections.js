@@ -9,7 +9,7 @@ export const drawConnections = ({ ctx, shapes = [], connections = [] }) => {
 
 const drawConnection = ({ ctx, shapes = [], connection }) => {
   try {
-    const {
+    let {
       from: fromShapeIndex,
       to: toShapeIndex,
       fromTop = false,
@@ -22,11 +22,36 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
       toRight = false,
       color = 'black',
       width: lineWidth = 1,
+      startPercent = 0.5,
+      endPercent = 0.5,
       isStraightLine = false,
       isDashed = false,
       withArrow = true,
       ...rest
     } = connection;
+
+    if (fromTop) {
+      fromBottom = fromLeft = fromRight = false;
+    } else if (fromBottom) {
+      fromLeft = fromRight = fromTop = false;
+    } else if (fromLeft) {
+      fromRight = fromTop = fromBottom = false;
+    } else if (fromRight) {
+      fromTop = fromBottom = fromLeft = false;
+    }
+
+    if (toTop) {
+      toBottom = toLeft = toRight = false;
+    } else if (toBottom) {
+      toLeft = toRight = toTop = false;
+    } else if (toLeft) {
+      toRight = toTop = toBottom = false;
+    } else if (toRight) {
+      toTop = toBottom = toLeft = false;
+    }
+
+    startPercent = Math.min(Math.max(0, startPercent), 1);
+    endPercent = Math.min(Math.max(0, endPercent), 1);
 
     const fromShape = { ...DEFAULT_SHAPE, ...shapes[fromShapeIndex] };
     const toShape = { ...DEFAULT_SHAPE, ...shapes[toShapeIndex] };
@@ -39,25 +64,25 @@ const drawConnection = ({ ctx, shapes = [], connection }) => {
     if (fromRight) {
       lineStartX += fromShape.w;
     } else if (!fromLeft) {
-      lineStartX += fromShape.w / 2;
+      lineStartX += fromShape.w * startPercent;
     }
 
     if (fromBottom) {
       lineStartY += fromShape.h;
     } else if (!fromTop) {
-      lineStartY += fromShape.h / 2;
+      lineStartY += fromShape.h * startPercent;
     }
 
     if (toRight) {
       lineEndX += toShape.w;
     } else if (!toLeft) {
-      lineEndX += toShape.w / 2;
+      lineEndX += toShape.w * endPercent;
     }
 
     if (toBottom) {
       lineEndY += toShape.h;
     } else if (!toTop) {
-      lineEndY += toShape.h / 2;
+      lineEndY += toShape.h * endPercent;
     }
 
     ctx.strokeStyle = color;
