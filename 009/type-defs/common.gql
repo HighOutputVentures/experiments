@@ -1,0 +1,19 @@
+scalar Cursor
+scalar DateTime
+scalar EmailAddress
+scalar JSON
+scalar Upload
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: Cursor
+}
+type Edge {
+  cursor: Cursor!
+  node: Node!
+}
+type Connection {
+  totalCount: Int!
+  edges: [Edge!]!
+  pageInfo: PageInfo!
+}

@@ -1,0 +1,14 @@
+
+type Card implements Node {
+  id: ID!
+  type: NodeType!
+
+  title: String!
+  description: String
+  assignee: Account
+  reporter: Account!
+  dateTimeStarted: DateTime
+  dateTimeFinished: DateTime
+  dateTimeCreated: DateTime!
+  cursor: Cursor
+}

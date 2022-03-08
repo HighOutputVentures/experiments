@@ -1,0 +1,23 @@
+enum NodeType {
+  ACCOUNT
+  PROJECT
+  SORT_CONFIGURATION
+  COLUMN
+  CARD
+}
+
+interface Node {
+  id: ID!
+  type: NodeType!
+} 
+
+type Query {
+  node(id: ID!): Node
+  nodes(type: NodeType, filter: JSON): Connection
+}
+
+type Mutation {
+  createNode(type: NodeType, input: JSON!): Boolean!
+  updateNode(id: ID!, input: JSON!): Boolean!
+  deleteNode(id: ID!): Boolean!
+}
