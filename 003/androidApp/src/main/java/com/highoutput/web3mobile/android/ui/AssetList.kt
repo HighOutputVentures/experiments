@@ -32,6 +32,7 @@ fun AssetList(navController: NavController, viewModel: MainViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text("Status: $connectionStatus")
+        Text("Address: $address")
         if (connectionStatus.isEmpty()) {
             Button(onClick = {
                 viewModel.resetSession()
