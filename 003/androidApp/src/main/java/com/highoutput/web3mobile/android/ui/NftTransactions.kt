@@ -30,12 +30,6 @@ fun NftTransactions(navHostController: NavHostController, viewModel: MainViewMod
     val endReached = viewModel.endReached.value
     val isLoading = viewModel.isLoading.value
 
-    LaunchedEffect(key1 = viewModel.address.value) {
-        if (viewModel.address.value.isNotEmpty() && state.transactions.isEmpty()) {
-            viewModel.loadNFTImages(viewModel.address.value)
-        }
-    }
-
     Column {
         OutlinedTextField(
             value = address,

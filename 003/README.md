@@ -93,6 +93,42 @@ problem is, Metamask does not show the function used to transfer the token expli
 case `safeTransferFrom`. Instead, it displays it as `unknown method`
 
 1. Encode the function using web3j (we will use the `safeTransferFrom` method)
+```
+val function = Function(
+   "safeTransferFrom",
+   listOf(
+     Address(from),
+     Address(to),
+     Uint256(BigInteger(tokenId)),
+   ),
+   listOf(object : TypeReference<Utf8String>() {}),
+)
+val encodedFunction = FunctionEncoder.encode(function)
+```
 2. Using WalletConnect, use the performMethodCall `SendTransaction` and apply the parameters. Making sure to supply
 the function we encoded earlier to the `data` parameter.
+```
+val txRequest = System.currentTimeMillis()
+val nonce = MainRepository.web3j.ethGetTransactionCount(
+   viewModel.address.value, DefaultBlockParameterName.LATEST).sendAsync().get();
+MainApplication.session?.performMethodCall(
+   Session.MethodCall.SendTransaction(
+       id = txRequest,
+       from = viewModel.address.value,
+       to = contractAddress,
+       nonce = nonce.transactionCount.toString(16),
+       gasPrice = DefaultGasProvider.GAS_PRICE.toString(16),
+       gasLimit = DefaultGasProvider.GAS_LIMIT.toString(16),
+       value = BigInteger.ZERO.toString(16),
+       data = encodedFunction
+   )
+) { resp ->
+   if (resp.id == txRequest) {
+       Log.d("RESPONSE", resp.result.toString())
+   }
+}
+val i = Intent(Intent.ACTION_VIEW)
+i.data = Uri.parse("wc:")
+context.startActivity(i)
+```
 

@@ -1,0 +1,21 @@
+
+type Column implements Node {
+  id: ID!
+  type: NodeType!
+
+  title: String!
+  cards: [SortConfiguration]!
+}
+
+input AddCardInput {
+  title: String!
+  description: String
+  assignee: Account
+  dateTimeStarted: DateTime
+  dateTimeFinished: DateTime
+}
+
+type Mutation {
+  addCards(input: AddCardInput!): Boolean!
+  removeCards(id: ID!): Boolean!
+}

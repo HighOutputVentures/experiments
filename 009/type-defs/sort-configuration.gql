@@ -1,0 +1,10 @@
+
+
+type SortConfiguration implements Node {
+  id: ID!
+  type: NodeType!
+
+  column: Column
+  card: Card
+  order: Number!
+}

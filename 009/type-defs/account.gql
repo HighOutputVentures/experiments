@@ -1,0 +1,19 @@
+
+type Account implements Node{
+  id: ID!
+  type: NodeType!
+
+  email: EmailAddress!
+  password: String
+}
+
+input AuthenticateAccountInput {
+  email: EmailAddress
+  password: String
+  token: String
+}
+
+type Mutation {
+  authenticateAccount(input: AuthenticateAccountInput!): Boolean!
+  revokeToken: Boolean!
+}

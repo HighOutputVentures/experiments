@@ -1,0 +1,20 @@
+
+type Project implements Node{
+  id: ID!
+  type: NodeType!
+
+  members: [Account]!
+  creator: Account!
+  dateTimeCreated: DateTime!
+
+  columns: [SortConfiguration!]!
+}
+
+input AddColumnInput {
+  title: String!
+}
+
+type Mutation {
+  addColumn(input: AddColumnInput!): Boolean!
+  removeColumn(id: ID!): Boolean!
+}
