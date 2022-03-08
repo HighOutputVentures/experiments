@@ -1,4 +1,3 @@
-use ethabi::{decode, param_type::ParamType, Token};
 use mongodb::{
     bson::doc,
     options::{ClientOptions, UpdateOptions},
@@ -13,6 +12,8 @@ use std::{
 };
 use tokio::{task, time::sleep, try_join};
 use web3::{
+    contract::{Contract, Options},
+    ethabi::{decode, param_type::ParamType, Token},
     signing::keccak256,
     transports::Http,
     types::{Address, BlockNumber, FilterBuilder, Log, H160, H256, U64},
@@ -136,6 +137,19 @@ impl Worker {
                         };
 
                         for log in logs {
+                            let contract = Contract::from_json(
+                                logs_worker_web3.eth(),
+                                log.address,
+                                include_bytes!("supports_interface_abi.json"),
+                            )
+                            .unwrap();
+
+                            let erc_721_interface_id: [u8; 4] =
+                                hex::decode("80ac58cd").unwrap()[0..4].try_into().unwrap();
+
+                            let erc_1155_interface_id: [u8; 4] =
+                                hex::decode("d9b67a26").unwrap()[0..4].try_into().unwrap();
+
                             let token_type = if log.topics[0] == erc_20_and_721_transfer_signature
                                 && log.topics.len() == 3
                             {
@@ -143,11 +157,51 @@ impl Worker {
                             } else if log.topics[0] == erc_20_and_721_transfer_signature
                                 && log.topics.len() == 4
                             {
-                                Some("ERC721")
+                                let supports_interface: bool = match contract
+                                    .query(
+                                        "supportsInterface",
+                                        (erc_721_interface_id,),
+                                        None,
+                                        Options::default(),
+                                        None,
+                                    )
+                                    .await
+                                {
+                                    Ok(value) => value,
+                                    Err(_) => {
+                                        continue;
+                                    }
+                                };
+
+                                if supports_interface {
+                                    Some("ERC721")
+                                } else {
+                                    None
+                                }
                             } else if log.topics[0] == erc_1155_transfer_single_signature
                                 || log.topics[0] == erc_1155_transfer_batch_signature
                             {
-                                Some("ERC1155")
+                                let supports_interface: bool = match contract
+                                    .query(
+                                        "supportsInterface",
+                                        (erc_1155_interface_id,),
+                                        None,
+                                        Options::default(),
+                                        None,
+                                    )
+                                    .await
+                                {
+                                    Ok(value) => value,
+                                    Err(_) => {
+                                        continue;
+                                    }
+                                };
+
+                                if supports_interface {
+                                    Some("ERC1155")
+                                } else {
+                                    None
+                                }
                             } else {
                                 None
                             };

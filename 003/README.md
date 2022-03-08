@@ -9,6 +9,8 @@
 
 ## Abstract
 
+
+
 ## Conclusion
 
 We can conclude that it is possible to connect directly to the blockchain with mobile alone with the
@@ -27,7 +29,7 @@ a close relation to web technologies. As well as the reason why OpenSea does not
 purchasing NFTs with their native mobile apps yet. Instead, only redirect the user to their web app
 to purchase an NFT.
 
-It is possible to build your own mobile wallet apps with the use of Web3J but we can say that dapps
+It is possible to build your own `mobile wallet` apps with the use of Web3J but we can say that dapps
 built for mobile, if not wallet app, only serves as displaying app or a showcase app.
 
 ## Resources
@@ -58,8 +60,7 @@ https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-s
 1. Fetch ERC721 transfer events
    from https://docs.etherscan.io/v/rinkeby-etherscan/api-endpoints/accounts#get-a-list-of-erc721-token-transfer-events-by-address
 2. Get the contract addresses of each transactions
-3. Loop through the contract addresses then query the smart contract using `ownerOf` to filter out
-   the transactions of a specific contract address
+3. Loop through the contract addresses then filter out transactions using `ownerOf` query from smart contract 
 4. Once you've filtered out the transactions, you may now query the smart contract using `tokenURI`
    to get the uri containing metadata
 5. The metadata will contain the `name`, `description`, `image`, etc. of the NFT
@@ -79,16 +80,19 @@ https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-s
 > Make sure to set your fields to nullable to avoid null exceptions.
 > If this happens, you may use web3j to query the `tokenURI`. From there, you may now get the missing metadata.
 
-If the image or tokenURI is formatted as `ipfs://id`. Convert it to `https://ipfs.io/ipfs/{id}` in
-order to access it directly on the web browser
+> 💡 IPFS format
+>
+> If the image or tokenURI is formatted as `ipfs://{id}`, convert it to `https://ipfs.io/ipfs/{id}` in
+> order to access it directly on the web browser
 
-#### Sending NFT to another address
 
-So it turns out that sending an NFT and signing it is possible using Metamask mobile. The only
-problem is, Metamask does not show explicitly the function used to transfer the token, in this
+#### Sending an NFT to another address
+
+So, it turns out that sending an NFT and signing the transaction is possible using Metamask mobile. The only
+problem is, Metamask does not show the function used to transfer the token explicitly, in this
 case `safeTransferFrom`. Instead, it displays it as `unknown method`
 
 1. Encode the function using web3j (we will use the `safeTransferFrom` method)
-2. Using WalletConnect, use the method call `SendTransaction` and apply the parameters. Then, supply
+2. Using WalletConnect, use the performMethodCall `SendTransaction` and apply the parameters. Making sure to supply
 the function we encoded earlier to the `data` parameter.
 

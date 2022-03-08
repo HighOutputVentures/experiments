@@ -1,4 +1,5 @@
 import requests
+
 from requests.auth import HTTPBasicAuth
 from decouple import config
 
@@ -20,13 +21,13 @@ query = {
         'window': {
             'date_histogram': {
                 'field': '@timestamp',
-                'fixed_interval': '10m'
+                'fixed_interval': '3m'
             },
             'aggs': {
                 'intervals': {
                     'date_histogram': {
                         'field': '@timestamp',
-                        'fixed_interval': '5s'
+                        'fixed_interval': '1s'
                     },
                     'aggs': {
                         'point': {

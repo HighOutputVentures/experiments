@@ -12,7 +12,6 @@ We should be able to:
 5. Tried out different development environment for development contracts
 6. Different technique of testing
 
-<!-- TODO: Finish up Abstract -->
 ## Abstract
 To develop a well-tested customized smart contract with the security and optimization in mind. In the first week we implemented the usage of `BulkTransfer` on a smart contract, `WorkflowModule`. By running `BulkTransfer` under the hood, we should make use of function selectors and transaction hash. We also tried implementing `UniSwap` in `WorkflowModule`, however could not since the `Rinkeby` test network is unstable for `UniSwap`. During the implementation phase we incorporate different kinds of techniques, simple tests, mocking tests and tests using the rinkeby network config from `Hardhat`. 
 
@@ -50,6 +49,7 @@ In this case, we can train developers to write smart contracts and flesh out ide
 * [https://github.com/aavegotchi/aavegotchi-contracts](https://github.com/aavegotchi/aavegotchi-contracts)
 * [https://github.com/crytic/not-so-smart-contracts](https://github.com/crytic/not-so-smart-contracts)
 * [https://github.com/ConsenSys/smart-contract-best-practices](https://github.com/ConsenSys/smart-contract-best-practices)
+* https://medium.com/coinmonks/gas-optimization-in-solidity-part-i-variables-9d5775e43dde
 
 
 ## Documentation
@@ -497,9 +497,6 @@ In this case, we can train developers to write smart contracts and flesh out ide
   }
   ```
 
-  **Reading `calldata` variables like `calldata` arrays and structs.**
-
-
   Benchmarking results:
 
   **WorkflowModule**
@@ -525,29 +522,76 @@ In this case, we can train developers to write smart contracts and flesh out ide
   Direct a single transfer
   - Actual Gas Fee `0.000133077500904927` ETH
 
-  Total: 0.00039923250303416696
+  Total: `0.00039923250303416696`
 
   Direct Bulk Transfer
-  - Estimated Gas Fee 0.000254ETH
-  - Actual Gas Fee 0.000253347501418746 ETH
+  - Actual Gas Fee `0.000253347501418746`
 
   Bulk Transfer
   Adding a Workflow
-  - Actual Gas Fee 0.001243105005469662 ETH  (3 Single Transfer into Bulk)
+  - Actual Gas Fee `0.001243105005469662`  (3 Single Transfer into Bulk)
 
   Execute Workflow
-  - Estimated Gas Fee 0.000317ETH (3 Single Transfer into Bulk)
-  - Actual Gas Fee 0.00031673250126693 (3 Single Transfer into Bulk)
+  - Actual Gas Fee `0.00031673250126693` (3 Single Transfer into Bulk)
 
   Workflow with Bulk Transfer (3 ST) and 3 Single Transfers
 
   Add Workflow
-  - Estimated Gas Fee 0.002272ETH
-  - Actual Gas Fee 0.002271610009995084
+  - Actual Gas Fee `0.002271610009995084`
 
   Execute Workflow
-  - Estimated Gas Fee 0.000533ETH
-  - Actual Gas Fee 0.0005333750025602
+  - Actual Gas Fee `0.0005333750025602`
+
+
+  Optimizing Variables:
+  **Reference data types**
+  Initialize struct like this:
+  ```solidity
+  Point storage p = Point()
+  p.x = 0;
+  p.y = 0;
+  ```
+
+  Instead of this:
+  ```solidity
+  Point storage p = Point(0, 0);
+  ```
+
+  **Memory vs Storage**
+  Performing operations on memory — or call data, which is similar to memory — is always cheaper than storage.
+  
+  A common way to reduce the number of storage operations is manipulating a local memory variable before assigning it to a storage variable.
+
+  ```solidity
+  uint256 return = 5; // assume 2 decimal places
+  uint256 totalReturn;
+  function updateTotalReturn(uint256 timesteps) external {
+      uint256 r = totalReturn || 1;
+      for (uint256 i = 0; i < timesteps; i++) {
+          r = r * return;
+      }
+      totalReturn = r;
+  }
+  ```
+  **Fixed vs Dynamic**
+  Fixed size variables are always cheaper than dynamic ones.
+
+  If we know how long an array should be, we specify a fixed size:
+
+  ```solidity
+  uint256[12] monthlyTransfers;
+  ```
+
+  **Mapping vs Array**
+  Most of the time it will be better to use a mapping instead of an array because of its cheaper operations.
+
+  However, an array can be the correct choice when using smaller data types.
+
+  **Initialization**
+  `uint256 value;` is cheaper than `uint256 value = 0;`
+
+  **Require strings**
+  `bytes32 data = "test";` is cheaper than `string data = "test";`
 </details>
 
 ----
