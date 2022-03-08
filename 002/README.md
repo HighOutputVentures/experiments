@@ -618,6 +618,9 @@ In this case, we can train developers to write smart contracts and flesh out ide
 
 ### Redesigning WorkflowModule
 ### V1
+Initially, we started to design a contract that can add a workflow and each workflow have specific functions.
+The problem here, cost too much when adding a workflow. So we decided to do it off-chain. Where we execute the workflow immediately given that the actions is already calculated off chain.
+
 - `#addWorkflow`
   - `IGnosisSafe _safe`
   - `address[] _delegates`
@@ -626,6 +629,7 @@ In this case, we can train developers to write smart contracts and flesh out ide
 - `#executeWorkflow`
   - `uint256 _workflow`
 
+So the new design, removes the capability of adding a workflow. We concentrate more on executing workflows that are encoded off-chain. This way we can save more gas fees. We also added signing of signatures so that non-owner can execute the workflow via the delegate parameter. We added nonce parameter so that we can prevent replay attacks.
 ### V2
 - ~`#addWorkflow`~
 - `executeWorkflow`
