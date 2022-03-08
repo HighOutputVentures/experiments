@@ -1,20 +1,15 @@
 package com.highoutput.web3mobile.android
 
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.highoutput.web3mobile.android.common.Resource
-import com.highoutput.web3mobile.android.models.NFT
 import com.highoutput.web3mobile.android.models.NFTResult
 import com.highoutput.web3mobile.android.ui.state.NFTTransactionsState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import org.walletconnect.Session
 import org.walletconnect.nullOnThrow
 
@@ -42,9 +37,9 @@ class MainViewModel : ViewModel(), Session.Callback {
     private val _isLoading = mutableStateOf(false)
     val isLoading: State<Boolean> = _isLoading
 
-    private var nftTransactions = mutableStateOf<List<NFTResult>>(listOf())
+    private var nftTransactions = mutableStateOf<List<NFTResult>>(mutableListOf())
     private var currPage = 1
-    private var cursor = ""
+    var cursor = ""
 
     init {
         initialSetup()
@@ -147,24 +142,28 @@ class MainViewModel : ViewModel(), Session.Callback {
         _connectionStatus.value = "SESSION APPROVED"
         _address.value = MainApplication.session?.approvedAccounts()?.first() ?: ""
         getBalance()
+        loadNFTImages(_address.value)
     }
 
     private fun sessionClear() {
         _connectionStatus.value = ""
         _address.value = ""
         _balance.value = ""
-        _state.value = NFTTransactionsState()
+        nftTransactions.value = mutableListOf()
+        cursor = ""
+        val state = _state.value.copy(
+            transactions = nftTransactions.value,
+        )
+        _state.value = state
     }
 
     fun resetSession() {
-        MainApplication.session?.kill()
         MainApplication.resetSession()
         MainApplication.session?.addCallback(this)
     }
 
     fun closeConnection() {
         MainApplication.session?.kill()
-        closeWeb3()
         sessionClear()
     }
 }

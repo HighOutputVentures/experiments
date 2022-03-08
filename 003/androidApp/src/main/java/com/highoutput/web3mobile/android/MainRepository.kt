@@ -194,6 +194,7 @@ class MainRepository {
             )
 
             val encodedFunction = FunctionEncoder.encode(function)
+            Log.d("FUNCTION", encodedFunction)
 
             emit(Resource.Success(encodedFunction))
         } catch (e: Exception) {
