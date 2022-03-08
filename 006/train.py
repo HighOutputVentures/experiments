@@ -1,4 +1,6 @@
 import os
+
+from env_vars import RESOLUTION
 os.add_dll_directory('C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/bin')
 
 import tensorflow as tf
@@ -11,7 +13,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from model import AnomalyDetector
 
 
-raw_data = get_samples(from_local=True)
+raw_data = get_samples()
 
 labels = raw_data[:, -1] # extract the labels
 data = raw_data[:, 0:-1] # extract the datapoints
@@ -48,10 +50,10 @@ print(f'no. of normal_test_data: {len(normal_test_data)}')
 print(f'no. of anomalous_train_data: {len(anomalous_train_data)}')
 print(f'no. of anomalous_test_data: {len(anomalous_test_data)}')
 
-# Plot a normal vs an anomalous response time window
+# # Plot a normal vs an anomalous response time window
 # plt.grid()
-# plt.plot(np.arange(120), normal_train_data[0], label='Normal Response Times')
-# plt.plot(np.arange(120), anomalous_train_data[0], label='Anomalous Response Times')
+# plt.plot(np.arange(RESOLUTION), normal_train_data[0], label='Normal Response Times')
+# plt.plot(np.arange(RESOLUTION), anomalous_train_data[0], label='Anomalous Response Times')
 # plt.legend()
 # plt.show()
 
@@ -62,25 +64,26 @@ autoencoder.compile(optimizer='adam', loss='mae')
 history = autoencoder.fit(
   normal_train_data,
   normal_train_data,
-  epochs=70,
+  epochs=50,
   batch_size=32,
   validation_data=(test_data, test_data),
-  shuffle=True
+  shuffle=True,
+  use_multiprocessing=True
 )
 
 # Plot the training loss and validation loss
-# plt.plot(history.history['loss'], label='Training Loss')
-# plt.plot(history.history['val_loss'], label='Validation Loss')
-# plt.legend()
-# plt.show()
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.legend()
+plt.show()
 
-# Plot reconstruction error of a normal data
+# # Plot reconstruction error of a normal data
 # normal_encoded_data = autoencoder.encoder(normal_test_data).numpy()
 # normal_decoded_data = autoencoder.decoder(normal_encoded_data).numpy()
 
 # plt.plot(normal_test_data[0], 'b')
 # plt.plot(normal_decoded_data[0], 'r')
-# plt.fill_between(np.arange(120), normal_decoded_data[0], normal_test_data[0], color='lightcoral')
+# plt.fill_between(np.arange(RESOLUTION), normal_decoded_data[0], normal_test_data[0], color='lightcoral')
 # plt.legend(labels=['Input', 'Reconstruction', 'Error'])
 # plt.show()
 
@@ -90,31 +93,29 @@ history = autoencoder.fit(
 
 # plt.plot(anomalous_test_data[0], 'b')
 # plt.plot(anomalous_decoded_data[0], 'r')
-# plt.fill_between(np.arange(120), anomalous_decoded_data[0], anomalous_test_data[0], color='lightcoral')
+# plt.fill_between(np.arange(RESOLUTION), anomalous_decoded_data[0], anomalous_test_data[0], color='lightcoral')
 # plt.legend(labels=['Input', 'Reconstruction', 'Error'])
 # plt.show()
 
-# Compute error threshold for anomaly detection
+# # Compute error threshold for anomaly detection
+# # Plot the loss distribution from normal vs anomalous
 normal_reconstructions = autoencoder.predict(normal_train_data)
 normal_train_loss = tf.keras.losses.mae(normal_reconstructions, normal_train_data)
 
 threshold = np.mean(normal_train_loss) + np.std(normal_train_loss)
 print('Threshold: ', threshold)
 
-# plt.hist(normal_train_loss[None,:], bins=50)
-# plt.xlabel('Train loss')
-# plt.ylabel('No of examples')
-# plt.show()
+plt.hist(normal_train_loss[None,:], bins=50)
+plt.xlabel('Loss')
+plt.ylabel('No of examples')
 
 
-# anomalous_reconstructions = autoencoder.predict(anomalous_test_data)
-# anomalous_train_loss = tf.keras.losses.mae(anomalous_reconstructions, anomalous_test_data)
+anomalous_reconstructions = autoencoder.predict(anomalous_test_data)
+anomalous_train_loss = tf.keras.losses.mae(anomalous_reconstructions, anomalous_test_data)
 
-# print('Anomalous Test Mean Loss', np.mean(anomalous_train_loss))
-# plt.hist(anomalous_train_loss[None, :], bins=50)
-# plt.ylabel('No of examples')
-# plt.title('Anomalous Test Loss')
-# plt.show()
+print('Anomalous Test Mean Loss', np.mean(anomalous_train_loss))
+plt.hist(anomalous_train_loss[None, :], bins=50)
+plt.show()
 
 def predict(model, data, threshold):
   reconstructions = model(data)
