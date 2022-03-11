@@ -12,6 +12,7 @@ export const clearScreen = ({ ctx, canvas }) => {
 
   ctx.beginPath();
 
+  ctx.setLineDash([]);
   ctx.clearRect(top, left, width, height);
   ctx.rect(top, left, width, height);
 
