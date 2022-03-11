@@ -13,14 +13,14 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from model import AnomalyDetector
 
 
-raw_data = get_samples()
+samples = get_samples()
 
-labels = raw_data[:, -1] # extract the labels
-data = raw_data[:, 0:-1] # extract the datapoints
+labels = samples[:, -1] # extract the labels
+datapoints = samples[:, 0:-1] # extract the datapoints
 
 # Split our data into training data and test data
 raw_train_data, raw_test_data, raw_train_labels, raw_test_labels = train_test_split(
-  data, labels, test_size=0.2, random_state=21
+  datapoints, labels, test_size=0.2, random_state=21
 )
 
 # Normalize the data to [0, 1]
@@ -39,14 +39,14 @@ test_data = tf.cast(normalized_raw_test_data, tf.float32)
 train_labels = raw_train_labels.astype(bool)
 test_labels = raw_test_labels.astype(bool)
 
-normal_train_data = train_data[train_labels]
-normal_test_data = test_data[test_labels]
+good_train_data = train_data[train_labels]
+good_test_data = test_data[test_labels]
 
 anomalous_train_data = train_data[~train_labels]
 anomalous_test_data = test_data[~test_labels]
 
-print(f'no. of normal_train_data: {len(normal_train_data)}')
-print(f'no. of normal_test_data: {len(normal_test_data)}')
+print(f'no. of normal_train_data: {len(good_train_data)}')
+print(f'no. of normal_test_data: {len(good_test_data)}')
 print(f'no. of anomalous_train_data: {len(anomalous_train_data)}')
 print(f'no. of anomalous_test_data: {len(anomalous_test_data)}')
 
@@ -62,18 +62,18 @@ autoencoder = AnomalyDetector()
 autoencoder.compile(optimizer='adam', loss='mae')
 
 history = autoencoder.fit(
-  normal_train_data,
-  normal_train_data,
+  good_train_data,
+  good_train_data,
   epochs=50,
   batch_size=32,
-  validation_data=(test_data, test_data),
+  # validation_data=(test_data, test_data),
   shuffle=True,
   use_multiprocessing=True
 )
 
 # Plot the training loss and validation loss
 plt.plot(history.history['loss'], label='Training Loss')
-plt.plot(history.history['val_loss'], label='Validation Loss')
+# plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.legend()
 plt.show()
 
@@ -99,13 +99,13 @@ plt.show()
 
 # # Compute error threshold for anomaly detection
 # # Plot the loss distribution from normal vs anomalous
-normal_reconstructions = autoencoder.predict(normal_train_data)
-normal_train_loss = tf.keras.losses.mae(normal_reconstructions, normal_train_data)
+reconstructions_for_good_data = autoencoder.predict(good_train_data)
+reconstructions_loss = tf.keras.losses.mae(reconstructions_for_good_data, good_train_data)
 
-threshold = np.mean(normal_train_loss) + np.std(normal_train_loss)
+threshold = np.mean(reconstructions_loss) + np.std(reconstructions_loss)
 print('Threshold: ', threshold)
 
-plt.hist(normal_train_loss[None,:], bins=50)
+plt.hist(reconstructions_loss[None,:], bins=50)
 plt.xlabel('Loss')
 plt.ylabel('No of examples')
 
@@ -117,9 +117,9 @@ print('Anomalous Test Mean Loss', np.mean(anomalous_train_loss))
 plt.hist(anomalous_train_loss[None, :], bins=50)
 plt.show()
 
-def predict(model, data, threshold):
-  reconstructions = model(data)
-  loss = tf.keras.losses.mae(reconstructions, data)
+def predict(model, sample, threshold):
+  reconstructions = model(sample)
+  loss = tf.keras.losses.mae(reconstructions, sample)
   return tf.math.less(loss, threshold)
 
 def print_stats(predictions, labels):
@@ -127,5 +127,5 @@ def print_stats(predictions, labels):
   print('Precision = {}'.format(precision_score(labels, predictions)))
   print('Recall = {}'.format(recall_score(labels, predictions)))
 
-preds = predict(autoencoder, test_data, threshold)
-print_stats(preds, test_labels)
+predictions = predict(autoencoder, test_data, threshold)
+print_stats(predictions, test_labels)

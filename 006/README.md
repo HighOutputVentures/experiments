@@ -30,7 +30,7 @@ My approach in solving this problem is to train a model for it to learn to be ve
 
 For this approach I'm going to use Autoencoder.
 
-![Autoencoder](./docs/autoencoder.png "Autoencoder")
+![Autoencoder](./docs/images/autoencoder.png "Autoencoder")
 
 In this experiment, I will be using Keras with TensorFlow as backend and Python as the programming language.
 
@@ -40,7 +40,11 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 
 1. [Setting Up The Development Environment](./docs/setting-up-the-development-environment.md)
 2. [Data Gathering](./docs/data-gathering.md)
-3. [Data Manipulation](./docs/data-manipulation.md)
+3. [Generating Samples](./docs/generating-samples.md)
+4. [Preparing Samples for Training](./docs/preparing-samples-for-training.md)
+5. [Designing The Model](./docs/designing-the-model.md)
+6. [Training The Model](./docs/training-the-model.md)
+7. [Validating The Model](./docs/validating_the_model.md)
 
 ## Resources
 - [Anomaly Detection: Definition, Best Practices and Use Cases](https://datrics.ai/anomaly-detection-best-practices)
