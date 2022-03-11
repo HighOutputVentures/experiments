@@ -150,63 +150,86 @@ impl Worker {
                             let erc_1155_interface_id: [u8; 4] =
                                 hex::decode("d9b67a26").unwrap()[0..4].try_into().unwrap();
 
-                            let token_type = if log.topics[0] == erc_20_and_721_transfer_signature
-                                && log.topics.len() == 3
-                            {
-                                Some("ERC20")
-                            } else if log.topics[0] == erc_20_and_721_transfer_signature
-                                && log.topics.len() == 4
-                            {
-                                let supports_interface: bool = match contract
-                                    .query(
-                                        "supportsInterface",
-                                        (erc_721_interface_id,),
-                                        None,
-                                        Options::default(),
-                                        None,
-                                    )
-                                    .await
-                                {
-                                    Ok(value) => value,
-                                    Err(_) => {
-                                        continue;
-                                    }
-                                };
+                            let mut token_type: Option<String> = None;
 
-                                if supports_interface {
-                                    Some("ERC721")
+                            match contract_address_collection
+                                .find_one(
+                                    doc! {
+                                        "address": format!("{:#x}", log.address),
+                                    },
+                                    None,
+                                )
+                                .await
+                            {
+                                Ok(contract_address) => {
+                                    if let Some(contract_address) = contract_address {
+                                        token_type = Some(contract_address.token_type)
+                                    }
+                                }
+                                Err(_) => {
+                                    panic!()
+                                }
+                            }
+
+                            if let None = token_type {
+                                token_type = if log.topics[0] == erc_20_and_721_transfer_signature
+                                    && log.topics.len() == 3
+                                {
+                                    Some("ERC20".to_string())
+                                } else if log.topics[0] == erc_20_and_721_transfer_signature
+                                    && log.topics.len() == 4
+                                {
+                                    let supports_interface: bool = match contract
+                                        .query(
+                                            "supportsInterface",
+                                            (erc_721_interface_id,),
+                                            None,
+                                            Options::default(),
+                                            None,
+                                        )
+                                        .await
+                                    {
+                                        Ok(value) => value,
+                                        Err(_) => {
+                                            continue;
+                                        }
+                                    };
+
+                                    if supports_interface {
+                                        Some("ERC721".to_string())
+                                    } else {
+                                        None
+                                    }
+                                } else if log.topics[0] == erc_1155_transfer_single_signature
+                                    || log.topics[0] == erc_1155_transfer_batch_signature
+                                {
+                                    let supports_interface: bool = match contract
+                                        .query(
+                                            "supportsInterface",
+                                            (erc_1155_interface_id,),
+                                            None,
+                                            Options::default(),
+                                            None,
+                                        )
+                                        .await
+                                    {
+                                        Ok(value) => value,
+                                        Err(_) => {
+                                            continue;
+                                        }
+                                    };
+
+                                    if supports_interface {
+                                        Some("ERC1155".to_string())
+                                    } else {
+                                        None
+                                    }
                                 } else {
                                     None
-                                }
-                            } else if log.topics[0] == erc_1155_transfer_single_signature
-                                || log.topics[0] == erc_1155_transfer_batch_signature
-                            {
-                                let supports_interface: bool = match contract
-                                    .query(
-                                        "supportsInterface",
-                                        (erc_1155_interface_id,),
-                                        None,
-                                        Options::default(),
-                                        None,
-                                    )
-                                    .await
-                                {
-                                    Ok(value) => value,
-                                    Err(_) => {
-                                        continue;
-                                    }
                                 };
+                            }
 
-                                if supports_interface {
-                                    Some("ERC1155")
-                                } else {
-                                    None
-                                }
-                            } else {
-                                None
-                            };
-
-                            if let Some(token_type) = token_type {
+                            if let Some(token_type) = &token_type {
                                 contract_address_collection
                                     .update_one(
                                         doc! {

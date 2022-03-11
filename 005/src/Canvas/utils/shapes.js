@@ -392,10 +392,5 @@ export const getShapeData = (rawShape) => {
     right: shape.x + shape.w,
     centerX: shape.x + (shape.w / 2),
     centerY: shape.y + (shape.h / 2),
-    type: shape.type,
-    fillColor: shape.fillColor,
-    lineColor: shape.lineColor,
-    lineWidth: shape.lineWidth,
-    debugDrawOutline: shape.drawDebugOutline,
   }
 }

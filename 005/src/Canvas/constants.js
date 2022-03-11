@@ -38,7 +38,7 @@ export const TEXT_DEFAULTS = {
 }
 
 export const DEFAULT_SHAPE = {
-  type: SHAPE_TYPE.box,
+  type: SHAPE_TYPE.rectangle,
   x: 0,
   y: 0,
   w: DEFAULT_SHAPE_W,
@@ -49,20 +49,19 @@ export const DEFAULT_SHAPE = {
   ...TEXT_DEFAULTS
 };
 
-/*
-export const DEFAULT_SHAPES = [
-  { x: 200, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
+export const DEFAULT_SHAPESx = [
+  { x: 400, y: 320, w: 100, h: 50, fillColor: 'darkgreen', text: 'a' },
   { x: 100, y: 120, w: 200, h: 100, debugDrawOutline: true, text: "TEST", textYPercent: 1.2, type: SHAPE_TYPE.boundary },
-  { x: 400, y: 517, w: 30, h: 75, fillColor: '#E75480' },
+  { x: 800, y: 517, w: 30, h: 75, fillColor: '#E75480' },
 ];
 
-export const DEFAULT_CONNECTIONS = [
+export const DEFAULT_CONNECTIONSx = [
   {
-    from: 0,
-    to: 2,
+    fromShape: 0,
+    toShape: 2,
     color: 'red',
     width: 5,
-    // pivotPoint: 0.75,
+    endPercent: 0.75,
 
     fromTop: true,
     // fromBottom: true,
@@ -77,19 +76,17 @@ export const DEFAULT_CONNECTIONS = [
     isDashed: true,
   },
   {
-    from: 0,
-    to: 1,
+    fromShape: 0,
+    toShape: 1,
     color: 'blue',
     width: 3,
     isStraightLine: true,
 
-    fromTop: true,
     fromLeft: true,
     toBottom: true,
-    toRight: true,
+    // endPercent: 1,
   },
 ];
-*/
 
 export const DEFAULT_SHAPES = [
   /*0*/ { x: 50, y: 50, w: 100, h: 200, text: "User", textYPercent: 1.1, type: SHAPE_TYPE.human },
@@ -125,22 +122,27 @@ export const DEFAULT_SHAPES = [
 ]
 
 export const DEFAULT_CONNECTIONS = [
-  { from: 1, to: 3, fromBottom: true, toTop: true, isDashed: true },
-  { from: 2, to: 4, fromBottom: true, toTop: true, isDashed: true },
+  // Wallets to boxes:
+  { fromShape: 1, toShape: 3, fromBottom: true, toTop: true, isDashed: true },
+  { fromShape: 2, toShape: 4, fromBottom: true, toTop: true, isDashed: true },
 
-  { from: 0, to: 5, toTop: true, isDashed: true, withArrow: false },
-  { from: 3, to: 6, fromBottom: true, toTop: true, isDashed: true, withArrow: false },
-  { from: 4, to: 7, fromBottom: true, toTop: true, isDashed: true, withArrow: false },
+  // User to bottom:
+  { fromShape: 0, toCoords: [100, 900], toTop: true, isDashed: true, withArrow: false },
 
-  { from: 8, to: 9, text: 'connect wallet', textYPercent: 0.53 },
-  { from: 11, to: 10, isDashed: true },
+  // Boxes to bottom:
+  { fromShape: 3, toCoords: [500, 900], fromBottom: true, toTop: true, isDashed: true, withArrow: false },
+  { fromShape: 4, toCoords: [850, 900], fromBottom: true, toTop: true, isDashed: true, withArrow: false },
 
-  { from: 12, to: 13, text: 'get nonce', textYPercent: 0.52, textXPercent: 0.7 },
-  { from: 15, to: 14, text: 'nonce', isDashed: true, textYPercent: 0.52, textXPercent: 0.7 },
+  // For the rest, refer to the "text":
+  { fromCoords: [100, 350], toShape: 3, toLeft: true, endPercent: 0.1, text: 'connect wallet', textYPercent: 0.53, },
+  { fromShape: 3, toCoords: [100, 400], fromLeft: true, startPercent: 0.175, isDashed: true },
 
-  { from: 16, to: 17, text: 'sign message', textYPercent: 0.52 },
-  { from: 19, to: 18, text: 'signature', isDashed: true, textYPercent: 0.52 },
+  { fromCoords: [100, 480], toShape: 4, endPercent: 0.3, toLeft: true, text: 'get nonce', textYPercent: 0.52, textXPercent: 0.7 },
+  { fromShape: 4, toCoords: [100, 530], fromLeft: true, startPercent: 0.4, text: 'nonce', isDashed: true, textYPercent: 0.52, textXPercent: 0.7 },
 
-  { from: 20, to: 21, text: 'verify message', textYPercent: 0.52, textXPercent: 0.7 },
-  { from: 23, to: 22, text: 'access token', isDashed: true, textYPercent: 0.52, textXPercent: 0.7 },
+  { fromCoords: [100, 630], toShape: 3, toLeft: true, endPercent: 0.575, text: 'sign message', textYPercent: 0.52 },
+  { fromShape: 3, toCoords: [100, 680], fromLeft: true, startPercent: 0.66, isDashed: true, text: 'signature', textYPercent: 0.52 },
+
+  { fromCoords: [100, 780], toShape: 4, toLeft: true, endPercent: 0.835, text: 'verify message', textYPercent: 0.52, textXPercent: 0.7 },
+  { fromShape: 4, toCoords: [100, 830], fromLeft: true, startPercent: 0.923, isDashed: true, text: 'access token', textXPercent: 0.7, textYPercent: 0.52 },
 ];
