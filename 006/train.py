@@ -59,21 +59,21 @@ print(f'no. of anomalous_test_data: {len(anomalous_test_data)}')
 
 # Model
 autoencoder = AnomalyDetector()
-autoencoder.compile(optimizer='adam', loss='mae')
+autoencoder.compile(optimizer='adam', loss='mse')
 
 history = autoencoder.fit(
   good_train_data,
   good_train_data,
   epochs=50,
   batch_size=32,
-  # validation_data=(test_data, test_data),
+  validation_data=(test_data, test_data),
   shuffle=True,
   use_multiprocessing=True
 )
 
 # Plot the training loss and validation loss
 plt.plot(history.history['loss'], label='Training Loss')
-# plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.legend()
 plt.show()
 
@@ -100,7 +100,7 @@ plt.show()
 # # Compute error threshold for anomaly detection
 # # Plot the loss distribution from normal vs anomalous
 reconstructions_for_good_data = autoencoder.predict(good_train_data)
-reconstructions_loss = tf.keras.losses.mae(reconstructions_for_good_data, good_train_data)
+reconstructions_loss = tf.keras.losses.mse(reconstructions_for_good_data, good_train_data)
 
 threshold = np.mean(reconstructions_loss) + np.std(reconstructions_loss)
 print('Threshold: ', threshold)
@@ -111,7 +111,7 @@ plt.ylabel('No of examples')
 
 
 anomalous_reconstructions = autoencoder.predict(anomalous_test_data)
-anomalous_train_loss = tf.keras.losses.mae(anomalous_reconstructions, anomalous_test_data)
+anomalous_train_loss = tf.keras.losses.mse(anomalous_reconstructions, anomalous_test_data)
 
 print('Anomalous Test Mean Loss', np.mean(anomalous_train_loss))
 plt.hist(anomalous_train_loss[None, :], bins=50)
@@ -119,7 +119,7 @@ plt.show()
 
 def predict(model, sample, threshold):
   reconstructions = model(sample)
-  loss = tf.keras.losses.mae(reconstructions, sample)
+  loss = tf.keras.losses.mse(reconstructions, sample)
   return tf.math.less(loss, threshold)
 
 def print_stats(predictions, labels):
