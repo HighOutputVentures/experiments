@@ -1,53 +1,32 @@
-# Welcome to Remix!
+## Authors
 
-- [Remix Docs](https://remix.run/docs)
+- [ALEXANDER SARITA](https://app.identifi.com/profile/00797e4189900e4762e3f459337dd735) (Frontend Developer)
 
-## Development
+## Goal Statements
 
-From your terminal:
+At the end of this experiment, we should be able to;
 
-```sh
-npm run dev
-```
+- Create a very simple Remix App
+- Explore how remix handles data
+- Explore different rendering techniques (SSR and CSR)
+- Compare it to NextJS
 
-This starts your app in development mode, rebuilding assets on file changes.
+## Abstract
 
-## Deployment
+With Remix, I was able to create a simple app that displays the current HOV employees in two ways, one is Server side generated
 
-First, build your app for production:
+and the other one is Client side generated, I wasnt able to implement the other new rendering techniques (ISR & SSG) as both are not
 
-```sh
-npm run build
-```
+yet available in Remix.
 
-Then run the app in production mode:
+## Conclusion
 
-```sh
-npm start
-```
+Remix is a pretty neat framework for react, I really like how it defaults to rendering the page on the server, uses hooks to fetch data from a server
 
-Now you'll need to pick a host to deploy it to.
+and submit data, built on top of react and uses file system type routing. however, I'd say NextJS is still the king for now; It offers alot more than
 
-### DIY
+current version of Remix.
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+## Resources
 
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
+- [ REMIX ](https://remix.run)
