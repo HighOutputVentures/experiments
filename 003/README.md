@@ -48,6 +48,8 @@ https://docs.etherscan.io/v/rinkeby-etherscan/api-endpoints/accounts#get-a-list-
 
 https://ethereum.stackexchange.com/questions/13387/how-to-query-the-state-of-a-smart-contract-using-web3j-in-android/13397
 
+https://docs.metamask.io/guide/registering-function-names.html
+
 ## Documentation
 
 ### 2 ways to fetch NFTs of a contract address
@@ -131,4 +133,23 @@ val i = Intent(Intent.ACTION_VIEW)
 i.data = Uri.parse("wc:")
 context.startActivity(i)
 ```
+
+#### Register Contract Method Name
+
+1. There are 2 separate contracts for mainnet and rinkeby
+   - Mainnet: https://etherscan.io/address/0x44691b39d1a75dc4e0a0346cbb15e310e6ed1e86#writeContract
+   - Rinkeby: https://rinkeby.etherscan.io/address/0x0c0831fb1ec7442485fb41a033ba188389a990b4
+2. Go to the contracts tab and choose `Write Contract`. There you will see the `register` method.
+3. Add your desired method name following this format:
+   - If no parameters
+   ```
+   getOwners()
+   ```
+   - If there are required parameters. **Make sure there are no spaces in between the commas of the parameters**
+   ```
+   execTransaction(address,uint256,bytes,uint8,uint256,uint256,uint256,address,address,bytes)
+   ```
+4. Click `write`
+5. Metamask will open to approve your transaction. You will need to pay the gas fee.
+6. Lastly, you can verify if the method name was successfuly registered by going to this website https://jenny.lol/function_signature_registry/. Paste in  the first 10 characters of your encoded contract ABI string eg. `0x42842e0e`. It should display the method name associated with that signature
 
