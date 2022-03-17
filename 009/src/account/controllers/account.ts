@@ -2,9 +2,10 @@ import Container from '../../library/container.ts';
 import AccountRepository from '../repository/account.ts';
 import { AccountSchema, IAccount } from '../types.ts';
 import ObjectId, { ObjectType } from '../../library/object-id.ts';
+import { BsonId } from '../../types.ts';
 
 export default class AccountController {
-	private repository: AccountRepository<AccountSchema>;
+	public repository: AccountRepository<AccountSchema>;
 
 	constructor(container: Container<IAccount>) {
 		this.repository = new AccountRepository(
@@ -13,20 +14,22 @@ export default class AccountController {
 	}
 
 	public generateId() {
-		return ObjectId.generate(ObjectType.ACCOUNT).oid;
+		return ObjectId.generate(ObjectType.ACCOUNT);
 	}
 
 	public async create(
-		params: Omit<AccountSchema, '_id' | 'dateTimeCreated'>,
+		params: Omit<AccountSchema, 'id' | 'dateTimeCreated'>,
 	) {
-		return this.repository.insertOne({
+		const id = this.generateId().oid;
+		await this.repository.insertOne({
 			...params,
-			_id: this.generateId(),
+			_id: id,
 			dateTimeCreated: new Date(),
 		});
+		return id;
 	}
 
-	public async findById(id: string) {
-		return this.repository.findOne({ id });
+	public async findById(id: BsonId) {
+		return this.repository.findOne({ _id: id });
 	}
 }

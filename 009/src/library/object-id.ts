@@ -1,10 +1,9 @@
 import { Bson } from '../config/deps.ts';
+import { BsonId } from '../types.ts';
 
 export enum ObjectType {
 	ACCOUNT = 0,
 }
-
-type BsonId = Bson.ObjectId;
 
 export default class ObjectId {
 	private value: Uint8Array;
@@ -14,6 +13,16 @@ export default class ObjectId {
 		this.value = value;
 		this.oid = new Bson.ObjectId(
 			ObjectId.bufferToHex(this.value),
+		);
+	}
+
+	static parse(value: BsonId) {
+		return new this(
+			Uint8Array.from(
+				value.toHexString().split(/(?=(?:..)*$)/).map((byte) =>
+					parseInt(byte, 16)
+				),
+			),
 		);
 	}
 

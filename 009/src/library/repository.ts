@@ -1,7 +1,7 @@
 import { Collection } from '../config/deps.ts';
 
 export default class Repository<T> {
-	private coll: Collection<T>;
+	public coll: Collection<T>;
 	constructor(coll: Collection<T>) {
 		this.coll = coll;
 	}
