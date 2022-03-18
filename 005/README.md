@@ -29,3 +29,19 @@ http://stackoverflow.com/a/36805543/281460
 
 
 https://gojs.net/latest/samples/flowchart.html
+https://codesandbox.io/s/quizzical-lake-szfyo?file=/src/App.js
+
+Most promising:
+bpmn.io
+
+Maybe not:
+gojs
+
+Worth looking at:
+mxGraph
+
+Nope:
+draw2d.org
+jointjs
+d3js
+mermaid
