@@ -59,7 +59,7 @@ print(f'no. of anomalous_test_data: {len(anomalous_test_data)}')
 
 # Model
 autoencoder = AnomalyDetector()
-autoencoder.compile(optimizer='sgd', loss='mse')
+autoencoder.compile(optimizer='adagrad', loss='mse')
 
 history = autoencoder.fit(
   good_train_data,
