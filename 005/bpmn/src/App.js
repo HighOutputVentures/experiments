@@ -9,7 +9,7 @@ function App() {
   const container = document.getElementById("container");
   
   useEffect(() => {
-    if (diagram.length === 0) {
+    if (diagram.length <= 0) {
       axios
         .get(
           "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn"
@@ -20,46 +20,44 @@ function App() {
         .catch((e) => {
           console.log(e);
         });
-    }
-  }, [diagram]);
-  
-  if (diagram.length > 0) {
-    const modeler = new Modeler({
-      container,
-      keyboard: {
-        bindTo: document
-      }
-    });
-    modeler
-      .importXML(diagram)
-      .then(({ warnings }) => {
-        if (warnings.length) {
-          console.log("Warnings", warnings);
+    } else {
+      const modeler = new Modeler({
+        container,
+        keyboard: {
+          bindTo: document
         }
-
-        const canvas = modeler.get("modeling");
-        canvas.setColor("CalmCustomerTask", {
-          stroke: "green",
-          fill: "yellow"
-        });
-      })
-      .catch((err) => {
-        console.log("error", err);
       });
-  }
+      
+      modeler
+        .importXML(diagram)
+        .then(({ warnings }) => {
+          if (warnings.length) {
+            console.log("Warnings", warnings);
+          }
+  
+          const canvas = modeler.get("modeling");
+          canvas.setColor("CalmCustomerTask", {
+            stroke: "green",
+            fill: "yellow"
+          });
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [diagram]);
 
   return (
-    <div className="App">
-      <div
-        id="container"
-        style={{
-          border: "1px solid #000000",
-          height: "90vh",
-          width: "90vw",
-          margin: "auto"
-        }}
-      ></div>
-    </div>
+    <div
+      id="container"
+      style={{
+        border: "1px solid #000000",
+        height: "90vh",
+        width: "90vw",
+        margin: "auto"
+      }}
+    />
   );
 }
 
