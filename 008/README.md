@@ -6,23 +6,23 @@
 
 At the end of this experiment, we should be able to;
 
-- learn if Svelte has support to testing
+- learn if Svelte has support for testing
 - know if Jest + testing library for svelte works in a SvelteKit setup
-- know how to use libraries for API mocking, ie. msw, nock
+- know how to use libraries for API mocking, i.e. MSW, nock
 - confirm if TDD can be done in Svelte development
 
 ## Abstract
 
-Weeks ago, the experiment to explore Svelte was concluded and we saw a potential use of it the projects to come. But what's missing and is considered important as the technology itself was testing. Svelte sure is matured enough to support testing in development, with the use of existing and proven libraries like Jest and testing library. Although, I must say that setting it up required a bit of digging to articles and tutorials in order to get the right config and make things work as smooth as possible.
+Weeks ago, the experiment to explore Svelte was concluded, and we saw a potential use of it in the projects to come. But what's missing and is considered necessary as the technology itself was testing. Svelte sure is mature enough to support testing in development, using existing and proven libraries like Jest and testing library. Although, I must say that setting it up required a bit of digging into articles and tutorials to get the correct config and make things work as smoothly as possible.
 
-The Jamclout svelte-clone project has this behavior to fire API request to BE, and so in order to test that behavior we have to implement HTTP interceptions and do API mocking. The problem that I had was that I followed the documentation on Apollo Client where it suggested to use it's MockedProvider. It didn't worked as expected, luckily, Roger saw my blocker and suggested to use nock or msw. I chose the latter to explore this on API mocking. Setting it up was a bit complicated, but after an hour or two, it worked as expected. And by the way, for the record, I have zero idea on what API mocking is all about and how it behaves before even beginning exploring it.
+The Jamclout svelte-clone project has this behavior to fire API requests to BE, and so to test that behavior, we have to implement HTTP interceptions and do API mocking. The problem that I had was that I followed the Apollo Client documentation where it suggested using its MockedProvider. It didn't work as expected; luckily, Roger saw my blocker and told me to use nock or MSW. I chose the latter to explore this on API mocking. Setting it up was a bit complicated, but it worked as expected after an hour or two. And by the way, for the record, I have zero ideas on what API mocking is all about and how it behaves before even beginning exploring it.
 
-During the last days of this experiment, I was worried that I may not doing things the right way. That just by seeing tutorials and articles online might not be the recommended way to do testing. And so, what I did was, I looked for courses online about Svelte with TDD and found one that suited my needs. I've downloaded the whole course from the resources of the internet and then started watching. As I watched the course, I've confirmed then that Svelte can really be done with TDD. I've also applied the testing techniques shown by the speaker to this experiment.
+During the last days of this experiment, I was worried that I may not do things the right way. Just seeing tutorials and articles online might not be the recommended way to do testing. And so, what I did was I looked for courses online about Svelte with TDD and found one that suited my needs. I've downloaded the whole course from the internet resources and then started watching. As I watched the course, I've confirmed then that Svelte can be done with TDD. I've also applied the testing techniques shown by the speaker to this experiment.
 
 ## Conclusion
 
-In the company, testing on Frontend was just starting to shape up and is yet to be holistically used in every software product we are to develop. Personally, I am still a work in progress learning the discipline myself. And so, this experiment did help me boost my desire to learn more about testing. Testing in Svelte is not that far in testing React. This is good since no need to learn different sets of techs just to achieve the desired output in testing Svelte and React.
-In conclusion, Svelte testing is so much possible with the use of existing libraries used in Reactjs. TDD is also practiced, evidently because of the courses online that I was able to search. The discipline to practice testing can be achieved and refined if we are to start as early as the development starts. Personally, this experiment not only allowed my to explore testing, but made me realized that there still so much room for improvements, and learn things slowly but surely.
+In the company, testing on Frontend was starting to shape up and is yet to be holistically used in every software product we are to develop. I am still a work in progress learning the discipline myself. And so, this experiment did help me boost my desire to learn more about testing. Testing in Svelte is not that far in testing React. This is good since there is no need to learn different sets of techs to achieve the desired output in testing Svelte and React.
+In conclusion, Svelte testing is so much possible with the use of existing libraries used in Reactjs. TDD is also practiced, evidently because of the courses online that I was able to search. The discipline to practice testing can be achieved and refined if we start as early as the development begins. Personally, this experiment allowed me to explore testing and made me realize that there is still so much room for improvements and learning things slowly but surely.
 
 ## Resources
 
