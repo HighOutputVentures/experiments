@@ -11,6 +11,10 @@ describe('Landing Page', () => {
 		it('shows the welcome text', () => {
 			const { getByText } = render(Layout);
 			expect(getByText('HOV Labs - Svelte with TDD')).toBeInTheDocument();
+			// render(Layout);
+			// const welcomeText = screen.getByRole('heading', { name: 'HOV Labs - Svelte with TDD' });
+			// expect(welcomeText).toBeTruthy();
+			// expect(welcomeText).toBeInTheDocument();
 		});
 	});
 });

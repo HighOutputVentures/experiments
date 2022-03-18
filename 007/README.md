@@ -30,7 +30,146 @@ token_ownerships
 
 ## Documentation
 
+### UML
+[Sequence Diagram](https://lucid.app/lucidchart/3246471e-80c4-4707-91c5-59e80803c565/edit?invitationId=inv_1e716336-e72e-409a-9690-1025220264ab)
+
+### Task Concurrency
+This worker utilizes two concurrent tasks/worker under the hood in order to process current and upcoming logs. The first one is the latest_block_worker, its only task is to keep track of the latest mined block to be used by the second worker as reference. The second one is the logs_worker, its task is to process/store all the logs in each block. 
+
+**Pseudo code**
+```rust
+let latest_block = Arc::new(Mutex::new(None));
+
+let logs_worker_latest_block = latest_block.clone();
+
+let latest_block_worker = task::spawn(async move {
+    loop {
+        *latest_block.lock().unwrap() = get_latest_block();
+    }
+});
+
+let logs_worker = task::spawn(async move {
+
+    let current_block = get_current_block();
+
+    loop {
+        let latest_block = *logs_worker_latest_block.lock().unwrap();
+
+        if current_block <= latest_block {
+            // process logs
+        }
+        
+        current_block += 1;
+    }
+});
+
+try_join!(latest_block_worker, logs_worker)
+```
+
+### Processing Logs
+**Fetching Filtered Logs**
+```rust
+let erc_20_and_721_transfer_signature = H256::from(keccak256("Transfer(address,address,uint256)".as_bytes()));
+let erc_1155_transfer_single_signature = H256::from(keccak256("TransferSingle(address,address,address,uint256,uint256)".as_bytes()));
+let erc_1155_transfer_batch_signature = H256::from(keccak256("TransferBatch(addressaddress,address,uint256[],uint256[])".as_bytes()));
+
+let signatures_filter = vec![
+    erc_20_and_721_transfer_signature,
+    erc_1155_transfer_single_signature,
+    erc_1155_transfer_batch_signature,
+];
+
+let filter = FilterBuilder::default()
+    .from_block(BlockNumber::Number(current_block))
+    .to_block(BlockNumber::Number(current_block))
+    .topics(Some(signatures_filter), None, None, None)
+    .build();
+
+let logs: Vec<Log> = match logs_worker_web3.eth().logs(filter).await {
+    Ok(logs) => logs,
+    Err(error) => {
+        // handle error
+    }
+};
+```
+
+**Utilizing EIP-165**
+```rust
+let contract = Contract::from_json(
+    logs_worker_web3.eth(),
+    log.address,
+    include_bytes!("supports_interface_abi.json"),
+)
+.unwrap();
+
+let erc_721_interface_id: [u8; 4] =
+    hex::decode("80ac58cd").unwrap()[0..4].try_into().unwrap();
+
+let supports_interface: bool = match contract
+    .query(
+        "supportsInterface",
+        (erc_721_interface_id,),
+        None,
+        Options::default(),
+        None,
+    )
+    .await
+{
+    Ok(value) => value,
+    Err(_) => {
+        continue;
+    }
+};
+
+if supports_interface {
+    // process
+}
+```
+
+**Decoding Quantity**
+```rust
+let decoded_quantity = match decode(
+    &vec![ParamType::Uint(256)],
+    &log.data.0,
+) {
+    Ok(decoded) => match decoded[0] {
+        Token::Uint(decoded_quantity) => decoded_quantity,
+        _ => {
+            // handle
+        },
+    },
+    Err(_) => {
+        // handle
+    },
+};
+
+let quantity = decoded_quantity.as_u128().to_f64().unwrap();
+```
+
+**Decoding Token ID**
+```rust
+let decoded_token_id = match decode(
+    &vec![ParamType::Uint(256)],
+    &log.topics[3].as_bytes(),
+) {
+    Ok(decoded) => match decoded[0] {
+        Token::Uint(token_id) => token_id,
+        _ => {
+            // handle
+        },
+    },
+    Err(_) => {
+        // handle
+    },
+};
+
+let token_id = decoded_token_id.to_string();
+```
+
 ## Conclusion
+
+Writing this worker service helps me understand and experience more the Rust programming language. Coming from a Node.js background, things such as the ownership model, static typings and no null behavior feels weird and hard the most. It takes time to get used to those but eventually you're just going to realize how much safer and performant applications we can build with those approaches. Right now, I don't recommend using Rust over Node.js for building a complete backend APIs for the sole reason that crates are still growing compared to npm packages. What is ideal and useful right now is to slowly adapt to Rust by creating cpu intensive libraries with Node.js, CLI tools and worker services. All in all it was a good learning experience and I definitely think that in the next few years(when there are more useful crates) we should start using Rust to completely write our backend APIs. 
+
 
 ## Resources
 
