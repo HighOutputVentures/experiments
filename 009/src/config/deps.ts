@@ -31,6 +31,8 @@ export {
 	MongoClient,
 } from 'https://deno.land/x/mongo@v0.29.2/mod.ts';
 
-export { buildSchemaFromTypeDefinitions } from 'https://deno.land/x/oak_graphql@0.6.3/graphql-tools/schema/buildSchemaFromTypeDefinitions.ts';
-
 export * as path from 'https://deno.land/std@0.129.0/path/mod.ts';
+
+export * as jsonwebtoken from 'https://deno.land/x/djwt@v2.4/mod.ts';
+
+export { deepMerge } from 'https://deno.land/std@0.130.0/collections/mod.ts';

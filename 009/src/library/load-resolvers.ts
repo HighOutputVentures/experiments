@@ -1,4 +1,4 @@
-import { path } from '../config/deps.ts';
+import { deepMerge, path } from '../config/deps.ts';
 
 export default async function loadResolvers(
 	pattern: string,
@@ -6,10 +6,10 @@ export default async function loadResolvers(
 	let resolvers: Record<string, unknown> = {};
 	for await (const file of Deno.readDir(pattern)) {
 		if (file.isDirectory) {
-			resolvers = {
-				...resolvers,
-				...await loadResolvers(path.join(pattern, file.name)),
-			};
+			resolvers = deepMerge(
+				resolvers,
+				await loadResolvers(path.join(pattern, file.name)),
+			);
 			continue;
 		}
 
@@ -20,7 +20,7 @@ export default async function loadResolvers(
 			file.name,
 		);
 		const result = await import(fileName);
-		resolvers = { ...resolvers, ...result.default };
+		resolvers = deepMerge(resolvers, result.default);
 	}
 	return resolvers;
 }

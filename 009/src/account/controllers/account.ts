@@ -18,7 +18,7 @@ export default class AccountController {
 	}
 
 	public async create(
-		params: Omit<AccountSchema, 'id' | 'dateTimeCreated'>,
+		params: Omit<AccountSchema, '_id' | 'dateTimeCreated'>,
 	) {
 		const id = this.generateId().oid;
 		await this.repository.insertOne({
@@ -29,7 +29,9 @@ export default class AccountController {
 		return id;
 	}
 
-	public async findById(id: BsonId) {
-		return this.repository.findOne({ _id: id });
+	public async findOne(
+		filter: Parameters<typeof this.repository.findOne>[0],
+	) {
+		return this.repository.findOne(filter);
 	}
 }

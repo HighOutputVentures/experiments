@@ -16,7 +16,6 @@ type Account implements Node {
 input AuthenticateAccountInput {
   email: EmailAddress!
   password: String
-  token: String
 }
 
 input CreateAccountInput {
@@ -27,6 +26,7 @@ input CreateAccountInput {
 
 type Query {
   node(id: OID!): Node
+  me: Account
 }
 
 type Mutation {
