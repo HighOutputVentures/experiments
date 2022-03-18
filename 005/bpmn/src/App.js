@@ -4,35 +4,31 @@ import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import axios from "axios";
 
+const EXAMPLE_URL = "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn";
+
 function App() {
-  const [diagram, diagramSet] = useState("");
+  const [diagram, setDiagram] = useState("");
+  const [isModelerInit, setModelerInit] = useState(false);
   const container = document.getElementById("container");
+
+  useEffect(() => {
+    axios.get(EXAMPLE_URL).then((r) => setDiagram(r.data)).catch(console.error);
+  }, []);
   
   useEffect(() => {
-    if (diagram.length <= 0) {
-      axios
-        .get(
-          "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn"
-        )
-        .then((r) => {
-          diagramSet(r.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } else {
+    if (!isModelerInit && diagram.length > 0) {
+      setModelerInit(true);
+      
       const modeler = new Modeler({
         container,
-        keyboard: {
-          bindTo: document
-        }
+        keyboard: { bindTo: document }
       });
       
       modeler
         .importXML(diagram)
         .then(({ warnings }) => {
           if (warnings.length) {
-            console.log("Warnings", warnings);
+            console.warn(warnings);
           }
   
           const canvas = modeler.get("modeling");
@@ -41,12 +37,10 @@ function App() {
             fill: "yellow"
           });
         })
-        .catch((err) => {
-          console.log("error", err);
-        });
+        .catch(console.error);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [diagram]);
+  }, [diagram, isModelerInit]);
 
   return (
     <div
