@@ -1,34 +1,30 @@
 import Container from '../../library/container.ts';
-import ProjectRepository from '../repository/project.ts';
-import { IProject } from '../types.ts';
+import Repository from '../repository/column.ts';
+import { ColumnSchema, IColumn } from '../types.ts';
 import ObjectId, { ObjectType } from '../../library/object-id.ts';
-import { BsonId, ProjectSchema } from '../../types.ts';
+import { BsonId } from '../../types.ts';
 
-export default class ProjectController {
-	public repository: ProjectRepository<ProjectSchema>;
+export default class {
+	public repository: Repository<ColumnSchema>;
 
-	constructor(container: Container<IProject>) {
-		this.repository = new ProjectRepository(
+	constructor(container: Container<IColumn>) {
+		this.repository = new Repository(
 			container.get('db'),
 		);
 	}
 
 	public generateId() {
-		return ObjectId.generate(ObjectType.PROJECT);
+		return ObjectId.generate(ObjectType.COLUMN);
 	}
 
 	public async create(
-		params: Omit<
-			ProjectSchema,
-			'_id' | 'dateTimeCreated' | 'members' | 'columns'
-		>,
+		params: Omit<ColumnSchema, '_id' | 'dateTimeCreated' | 'cards'>,
 	) {
 		const id = this.generateId().oid;
 		await this.repository.insertOne({
 			...params,
 			_id: id,
-			members: [],
-			columns: [],
+			cards: [],
 			dateTimeCreated: new Date(),
 		});
 		return id;

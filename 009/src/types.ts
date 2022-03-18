@@ -4,11 +4,13 @@ import DatabaseConnection from './config/db.ts';
 import { Bson } from './config/deps.ts';
 import Project from './project/mod.ts';
 import RankedNode from './ranked-node/mod.ts';
+import Column from './column/mod.ts';
 
 export interface IService {
 	account: Account;
 	project: Project;
 	rankedNode: RankedNode;
+	column: Column;
 	dbConnection: DatabaseConnection;
 }
 

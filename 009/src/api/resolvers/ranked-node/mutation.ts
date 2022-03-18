@@ -3,15 +3,6 @@ import { Context } from '../../types.ts';
 
 export default {
 	Mutation: {
-		async createRankedNode(
-			_: never,
-			args: {
-				input: { node: BsonId; rank: number };
-			},
-			ctx: Context,
-		) {
-			return ctx.services.rankedNode.controller.create(args.input);
-		},
 		async updateProject(
 			_: never,
 			args: {

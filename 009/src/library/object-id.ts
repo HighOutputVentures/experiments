@@ -5,6 +5,7 @@ export enum ObjectType {
 	ACCOUNT = 0,
 	PROJECT = 1,
 	RANKED_NODE = 2,
+	COLUMN = 3,
 }
 
 export default class ObjectId {

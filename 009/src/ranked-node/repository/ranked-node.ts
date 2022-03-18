@@ -8,8 +8,14 @@ export default class<T = RankedNodeSchema> extends Repository<T> {
 		this.coll.createIndexes({
 			indexes: [
 				{
-					key: { node: 1 },
-					name: 'node_1',
+					key: { parent: 1, child: 1 },
+					name: 'parent_1_child_1',
+					background: true,
+					unique: true,
+				},
+				{
+					key: { parent: 1 },
+					name: 'parent_1',
 					background: true,
 				},
 			],

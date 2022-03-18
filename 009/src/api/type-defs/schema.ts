@@ -32,9 +32,18 @@ type Project implements Node{
 
 type RankedNode implements Node {
   id: OID!
-  node: Node!
+  child: Node!
+  parent: Node!
   rank: Int!
   dateTimeCreated: DateTime!
+}
+
+type Column implements Node {
+  id: ID!
+
+  title: String!
+  project: Project!
+  cards: [RankedNode!]!
 }
 
 input AuthenticateAccountInput {
@@ -55,13 +64,17 @@ input UpdateProjectInput {
   title: String!
 }
 
-input CreateRankdedNodeInput {
-  node: OID!
+input UpdateRankdedNodeInput {
   rank: Int!
 }
 
-input UpdateRankdedNodeInput {
-  rank: Int!
+input CreateColumnInput {
+  title: String!
+  project: OID!
+}
+
+input UpdateColumnInput {
+  title: String!
 }
 
 type Query {
@@ -80,8 +93,11 @@ type Mutation {
   updateProject(id: OID!, input: UpdateProjectInput!): Boolean!
   deleteProject(id: OID!): Boolean!
 
-  createRankedNode(input: CreateRankdedNodeInput!): OID!
   updateRankedNode(id: OID!, input: UpdateRankdedNodeInput!): Boolean!
   deleteRankedNode(id: OID!): Boolean!
+  
+  createColumn(input: CreateColumnInput!): OID!
+  updateColumn(id: OID!, input: UpdateColumnInput!): Boolean!
+  deleteColumn(id: OID!): Boolean!
 }
 `;
