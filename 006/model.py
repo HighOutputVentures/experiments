@@ -10,7 +10,6 @@ class AnomalyDetector(Model):
   def __init__(self):
     super().__init__()
     self.encoder = tf.keras.Sequential([
-      layers.Dense(64, activation='sigmoid'),
       layers.Dense(32, activation='sigmoid'),
       layers.Dense(16, activation='sigmoid'),
       layers.Dense(8, activation='sigmoid'),
@@ -19,7 +18,6 @@ class AnomalyDetector(Model):
     self.decoder = tf.keras.Sequential([
       layers.Dense(16),
       layers.Dense(32),
-      layers.Dense(64),
       layers.Dense(180)
     ])
 
