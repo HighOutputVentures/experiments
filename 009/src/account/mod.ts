@@ -8,7 +8,7 @@ export default class Account {
 
 	constructor(dbConnection: DatabaseConnection) {
 		const container = new Container<IAccount>({
-			db: dbConnection.getDatabase('account'),
+			db: dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
 		});
 
 		this.controller = new AccountController(container);

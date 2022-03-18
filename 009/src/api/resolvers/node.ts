@@ -16,6 +16,10 @@ export default {
 					return ctx.services.project.controller.findOne({
 						_id: args.id,
 					});
+				case ObjectType.RANKED_NODE:
+					return ctx.services.rankedNode.controller.findOne({
+						_id: args.id,
+					});
 				default:
 					return null;
 			}
@@ -29,6 +33,8 @@ export default {
 					return 'Account';
 				case ObjectType.PROJECT:
 					return 'Project';
+				case ObjectType.RANKED_NODE:
+					return 'RankedNode';
 				default:
 					return undefined;
 			}

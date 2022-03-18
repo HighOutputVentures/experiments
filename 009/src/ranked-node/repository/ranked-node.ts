@@ -1,16 +1,15 @@
 import { Database } from '../../config/deps.ts';
 import Repository from '../../library/repository.ts';
-import { AccountSchema } from '../../types.ts';
+import { RankedNodeSchema } from '../types.ts';
 
-export default class Account<T = AccountSchema> extends Repository<T> {
+export default class<T = RankedNodeSchema> extends Repository<T> {
 	constructor(db: Database) {
-		super(db.collection<T>('account'));
+		super(db.collection<T>('ranked-node'));
 		this.coll.createIndexes({
 			indexes: [
 				{
-					key: { email: 1 },
-					name: 'email_1',
-					unique: true,
+					key: { node: 1 },
+					name: 'node_1',
 					background: true,
 				},
 			],

@@ -1,30 +1,29 @@
 import Container from '../../library/container.ts';
-import ProjectRepository from '../repository/project.ts';
-import { IProject } from '../types.ts';
+import Repository from '../repository/ranked-node.ts';
+import { IRankedNode, RankedNodeSchema } from '../types.ts';
 import ObjectId, { ObjectType } from '../../library/object-id.ts';
-import { BsonId, ProjectSchema } from '../../types.ts';
+import { BsonId } from '../../types.ts';
 
-export default class ProjectController {
-	public repository: ProjectRepository<ProjectSchema>;
+export default class {
+	public repository: Repository<RankedNodeSchema>;
 
-	constructor(container: Container<IProject>) {
-		this.repository = new ProjectRepository(
+	constructor(container: Container<IRankedNode>) {
+		this.repository = new Repository(
 			container.get('db'),
 		);
 	}
 
 	public generateId() {
-		return ObjectId.generate(ObjectType.PROJECT);
+		return ObjectId.generate(ObjectType.RANKED_NODE);
 	}
 
 	public async create(
-		params: Omit<ProjectSchema, '_id' | 'dateTimeCreated' | 'members'>,
+		params: Omit<RankedNodeSchema, '_id' | 'dateTimeCreated'>,
 	) {
 		const id = this.generateId().oid;
 		await this.repository.insertOne({
 			...params,
 			_id: id,
-			members: [],
 			dateTimeCreated: new Date(),
 		});
 		return id;

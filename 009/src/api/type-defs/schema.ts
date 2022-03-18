@@ -25,6 +25,16 @@ type Project implements Node{
   members: [Account]!
   creator: Account!
   dateTimeCreated: DateTime!
+
+  columns: [RankedNode!]!
+}
+
+
+type RankedNode implements Node {
+  id: OID!
+  node: Node!
+  rank: Int!
+  dateTimeCreated: DateTime!
 }
 
 input AuthenticateAccountInput {
@@ -45,6 +55,15 @@ input UpdateProjectInput {
   title: String!
 }
 
+input CreateRankdedNodeInput {
+  node: OID!
+  rank: Int!
+}
+
+input UpdateRankdedNodeInput {
+  rank: Int!
+}
+
 type Query {
   node(id: OID!): Node
   me: Account
@@ -60,5 +79,9 @@ type Mutation {
   createProject(input: CreateProjectInput!): OID!
   updateProject(id: OID!, input: UpdateProjectInput!): Boolean!
   deleteProject(id: OID!): Boolean!
+
+  createRankedNode(input: CreateRankdedNodeInput!): OID!
+  updateRankedNode(id: OID!, input: UpdateRankdedNodeInput!): Boolean!
+  deleteRankedNode(id: OID!): Boolean!
 }
 `;

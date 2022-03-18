@@ -80,6 +80,7 @@ export default class Server {
 				ctx.services = {
 					account: this.container.get('account'),
 					project: this.container.get('project'),
+					rankedNode: this.container.get('rankedNode'),
 				};
 				return ctx;
 			},

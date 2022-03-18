@@ -8,7 +8,7 @@ export default class Project {
 
 	constructor(dbConnection: DatabaseConnection) {
 		const container = new Container<IProject>({
-			db: dbConnection.getDatabase('project'),
+			db: dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
 		});
 
 		this.controller = new ProjectController(container);

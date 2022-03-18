@@ -1,7 +1,8 @@
 import Container from '../../library/container.ts';
 import AccountRepository from '../repository/account.ts';
-import { AccountSchema, IAccount } from '../types.ts';
+import { IAccount } from '../types.ts';
 import ObjectId, { ObjectType } from '../../library/object-id.ts';
+import { AccountSchema } from '../../types.ts';
 
 export default class AccountController {
 	public repository: AccountRepository<AccountSchema>;
