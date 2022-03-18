@@ -79,6 +79,7 @@ export default class Server {
 			context: (ctx: Context) => {
 				ctx.services = {
 					account: this.container.get('account'),
+					project: this.container.get('project'),
 				};
 				return ctx;
 			},

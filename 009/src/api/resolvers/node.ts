@@ -5,12 +5,15 @@ import { Context, Node } from '../types.ts';
 export default {
 	Query: {
 		async node(_: never, args: { id: BsonId }, ctx: Context) {
-			console.log(ctx.state);
 			const id = ObjectId.parse(args.id);
 
 			switch (id.type) {
 				case ObjectType.ACCOUNT:
 					return ctx.services.account.controller.findOne({
+						_id: args.id,
+					});
+				case ObjectType.PROJECT:
+					return ctx.services.project.controller.findOne({
 						_id: args.id,
 					});
 				default:
@@ -24,6 +27,8 @@ export default {
 			switch (id.type) {
 				case ObjectType.ACCOUNT:
 					return 'Account';
+				case ObjectType.PROJECT:
+					return 'Project';
 				default:
 					return undefined;
 			}

@@ -11,7 +11,7 @@ const key = await crypto.subtle.importKey(
 export const generateJWT = (id: string) =>
 	jsonwebtoken.create({ alg: 'HS512', typ: 'JWT' }, {
 		sub: id,
-		exp: jsonwebtoken.getNumericDate(60 * 60),
+		exp: jsonwebtoken.getNumericDate(30 * 24 * 60 * 60),
 	}, key);
 
 export const validateJWT = (

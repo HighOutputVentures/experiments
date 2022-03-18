@@ -13,4 +13,6 @@
 			hex.split(/(?=(?:..)*$)/).map((byte) => parseInt(byte, 16)),
 		),
 	);
+
+	// test
 })();

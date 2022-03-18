@@ -3,6 +3,7 @@ import { BsonId } from '../types.ts';
 
 export enum ObjectType {
 	ACCOUNT = 0,
+	PROJECT = 1,
 }
 
 export default class ObjectId {

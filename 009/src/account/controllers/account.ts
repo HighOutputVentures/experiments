@@ -2,7 +2,6 @@ import Container from '../../library/container.ts';
 import AccountRepository from '../repository/account.ts';
 import { AccountSchema, IAccount } from '../types.ts';
 import ObjectId, { ObjectType } from '../../library/object-id.ts';
-import { BsonId } from '../../types.ts';
 
 export default class AccountController {
 	public repository: AccountRepository<AccountSchema>;
@@ -33,5 +32,11 @@ export default class AccountController {
 		filter: Parameters<typeof this.repository.findOne>[0],
 	) {
 		return this.repository.findOne(filter);
+	}
+
+	public async find(
+		filter: Parameters<typeof this.repository.find>[0],
+	) {
+		return this.repository.find(filter).toArray();
 	}
 }
