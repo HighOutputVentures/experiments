@@ -45,3 +45,5 @@ draw2d.org
 jointjs
 d3js
 mermaid
+js-sequence-diagram
+yuml2svg
