@@ -59,7 +59,7 @@ print(f'no. of anomalous_test_data: {len(anomalous_test_data)}')
 
 # Model
 autoencoder = AnomalyDetector()
-autoencoder.compile(optimizer='adam', loss='mse')
+autoencoder.compile(optimizer='adagrad', loss='mse')
 
 history = autoencoder.fit(
   good_train_data,
@@ -73,7 +73,7 @@ history = autoencoder.fit(
 
 # Plot the training loss and validation loss
 plt.plot(history.history['loss'], label='Training Loss')
-plt.plot(history.history['val_loss'], label='Validation Loss')
+# plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.legend()
 plt.show()
 
