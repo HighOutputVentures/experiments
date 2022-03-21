@@ -16,8 +16,18 @@ type Query {
   nodes(type: NodeType, filter: JSON): Connection
 }
 
+input CreateAccountInput {
+  email: String
+}
+
+input CreateNodeInput {
+  type: NodeType
+  account: CreateAccountInput
+  project: somethinginput
+}
+
 type Mutation {
-  createNode(type: NodeType, input: JSON!): Boolean!
+  createNode( input: CreateNodeInput!): Boolean!
   updateNode(id: ID!, input: JSON!): Boolean!
   deleteNode(id: ID!): Boolean!
 }

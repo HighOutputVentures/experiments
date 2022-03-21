@@ -1,11 +1,11 @@
-import Server from './api/mod.ts';
-import Account from './account/mod.ts';
+import Server from './services/api/mod.ts';
+import Account from './services/account/mod.ts';
 import Container from './library/container.ts';
 import { IService } from './types.ts';
 import DatabaseConnection from './config/db.ts';
-import Project from './project/mod.ts';
-import RankedNode from './ranked-node/mod.ts';
-import Column from './column/mod.ts';
+import Project from './services/project/mod.ts';
+import RankedNode from './services/ranked-node/mod.ts';
+import Column from './services/column/mod.ts';
 
 (async () => {
 	const dbConnection = new DatabaseConnection();

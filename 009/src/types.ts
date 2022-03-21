@@ -1,10 +1,10 @@
-export * from './account/types.ts';
-import Account from './account/mod.ts';
+export * from './services/account/types.ts';
+import Account from './services/account/mod.ts';
 import DatabaseConnection from './config/db.ts';
 import { Bson } from './config/deps.ts';
-import Project from './project/mod.ts';
-import RankedNode from './ranked-node/mod.ts';
-import Column from './column/mod.ts';
+import Project from './services/project/mod.ts';
+import RankedNode from './services/ranked-node/mod.ts';
+import Column from './services/column/mod.ts';
 
 export interface IService {
 	account: Account;
@@ -29,5 +29,13 @@ export type AccountSchema = {
 	_id: Bson.ObjectId;
 	email: string;
 	password?: string;
+	dateTimeCreated: Date;
+};
+
+export type RankedNodeSchema = {
+	_id: Bson.ObjectId;
+	parent: Bson.ObjectId;
+	node: Bson.ObjectId;
+	rank: number;
 	dateTimeCreated: Date;
 };

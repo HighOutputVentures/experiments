@@ -34,6 +34,12 @@ export default class Repository<T> {
 		return this.coll.find(...args);
 	}
 
+	public countDocuments(
+		...args: Parameters<Collection<T>['countDocuments']>
+	) {
+		return this.coll.countDocuments(...args);
+	}
+
 	public findOne(...args: Parameters<Collection<T>['findOne']>) {
 		return this.coll.findOne(...args);
 	}

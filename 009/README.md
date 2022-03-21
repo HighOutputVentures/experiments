@@ -12,10 +12,18 @@ Create a Kanban Board GraphQL API that runs in deno with these features:
 
 [ ] Upload Files
 
-[ ] Manage Database (MongoDB)
+[X] Manage Database (MongoDB)
 
 [ ] Implement Cursor Based Pagination
 
+[ ] Implement GraphQL Directives
+
+[ ] Dockerize Deno
+
+[ ] CI/CD
+
+[ ] Going Live
+ 
 ## Abstract
 
 ## Conclusion
