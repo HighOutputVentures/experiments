@@ -9,27 +9,26 @@
 
 ## Abstract
 
+For the past couple of years, growth of web3 has been exponential but proof of concepts mostly focuses on the web technologies. Although there are some technologies available to use particularly for mobile, there are still limitations when it comes to the documentation and usage. This experiment aims to discover and demonstrate how can a mobile app directly interact with the blockchain and use existing third party wallet apps to verify transactions, much like of what the web can do. To visualize how it would work, we developed a sample mobile app wherein the user can login using their Metamask wallet, view NFTs associated with the address, and give the ability to gift an NFT to another user. Transaction were first created in the mobile app then sends it to the third-party wallet to confirm. The third-party wallet will then be responsible in executing the transaction. Contrary to what has been discussed in the Metamask repository issues involving the confirming of transaction, it is possible with for the third-party wallets to confirm transaction natively. This indicates that other transactions aside from sending an NFT is now possible with mobile, as long as it can be confirmed with well known third-party wallets.
 
 
 ## Conclusion
 
-We can conclude that it is possible to connect directly to the blockchain with mobile alone with the
+It is possible to connect directly to the blockchain with mobile alone with the
 use of Web3J and WalletConnect side by side. WalletConnect proves that it is possible to integrate third-patry
-wallets with the use of deep linking. However, there are still some limitation when it comes to
+wallets with the use of deep linking. However, there are still some limitations when it comes to
 developing dApps for mobile (natively). First, documentations are still limited. Second, some of the
 functions (`eth_signTransaction` which is one of the most important function) are not yet supported
 on the third-party mobile wallets, although they already support `eth_sign`, `eth_sendTransaction`
 etc. 
 
-With `eth_sendTransaction` is the only available option as of the moment, we can utilize this in order to
-confirm the transaction to the Metamask. The only downside in using this function is that, it
-doesn't explicitly display what method is being used in the smart contract as compared to the Metamask
-browser extension. This might be the reason why Metamask decided to build their mobile app using React Native as it has
+With `eth_sendTransaction` as the only available option as of the moment, we can utilize this in order to
+confirm the transaction to Metamask. This might be the reason why Metamask decided to build their mobile app using React Native as it has
 a close relation to web technologies. As well as the reason why OpenSea does not support
 purchasing NFTs with their native mobile apps yet. Instead, only redirect the user to their web app
 to purchase an NFT.
 
-It is possible to build your own `mobile wallet` apps with the use of Web3J but we can say that dapps
+It is possible to build your own `mobile wallet` apps with the use of Web3J but we can say that dApps
 built for mobile, if not wallet app, only serves as displaying app or a showcase app.
 
 ## Resources

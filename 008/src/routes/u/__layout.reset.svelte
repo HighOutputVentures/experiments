@@ -5,114 +5,108 @@
 	import Header from '$lib/header/Header.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import '../../app.css';
+	import CREATOR_ACCOUNT_DATA from '../../mocks/resolvers/mockData.json';
 
 	let creatorProfile;
 
 	export const load: Load = async ({ params }) => {
 		const creatorUsername = params.username;
-		const endpoint = 'https://beta-api.jamclout.com/graphql';
-		const headers = {
-			'content-type': 'application/json'
-		};
-		const graphqlQuery = {
-			operationName: 'GetProfile',
-			query: `query GetProfile($username: String!) {
-								creatorAccount(username: $username) {
-									... on CreatorAccount {
-										id
-										role
-										username
-										description
-										following
-										followersCount
-										followingCount
-										image_next {
-											id
-											url
-											blurhash
-										}
-										coverImage {
-											id
-											url
-										}
-										integrations {
-											id
-											type
-											followersCount
-											followingCount
-											url
-											createdAt
-											externalAccount {
-												username
-												image
-												description
-												createdAt
-												updatedAt
-												account {
-													emailAddress
-													role
-													createdAt
-													updatedAt
-												}
-												... on BitcloutExternalAccount {
-													id
-													publicKey
-													coinPrice
-												}
-											}
-										}
-										links {
-											id
-											link
-										}
-										topTippers {
-											id
-											externalAccount {
-												... on Node {
-													id
-												}
-												image
-												username
-											}
-											tipsSent
-										}
-										topInvestors {
-											id
-											externalAccount {
-												... on Node {
-													id
-												}
-												image
-												username
-											}
-											holdings
-										}
-									}
-								}
-							}`,
-			variables: {
-				username: creatorUsername
-			}
-		};
+		// const endpoint = 'https://beta-api.jamclout.com/graphql';
+		// const headers = {
+		// 	'content-type': 'application/json'
+		// };
+		// const graphqlQuery = {
+		// 	operationName: 'GetProfile',
+		// 	query: `query GetProfile($username: String!) {
+		// 						creatorAccount(username: $username) {
+		// 							... on CreatorAccount {
+		// 								id
+		// 								role
+		// 								username
+		// 								description
+		// 								following
+		// 								followersCount
+		// 								followingCount
+		// 								image_next {
+		// 									id
+		// 									url
+		// 									blurhash
+		// 								}
+		// 								coverImage {
+		// 									id
+		// 									url
+		// 								}
+		// 								integrations {
+		// 									id
+		// 									type
+		// 									followersCount
+		// 									followingCount
+		// 									url
+		// 									createdAt
+		// 									externalAccount {
+		// 										username
+		// 										image
+		// 										description
+		// 										createdAt
+		// 										updatedAt
+		// 										account {
+		// 											emailAddress
+		// 											role
+		// 											createdAt
+		// 											updatedAt
+		// 										}
+		// 										... on BitcloutExternalAccount {
+		// 											id
+		// 											publicKey
+		// 											coinPrice
+		// 										}
+		// 									}
+		// 								}
+		// 								links {
+		// 									id
+		// 									link
+		// 								}
+		// 								topTippers {
+		// 									id
+		// 									externalAccount {
+		// 										... on Node {
+		// 											id
+		// 										}
+		// 										image
+		// 										username
+		// 									}
+		// 									tipsSent
+		// 								}
+		// 								topInvestors {
+		// 									id
+		// 									externalAccount {
+		// 										... on Node {
+		// 											id
+		// 										}
+		// 										image
+		// 										username
+		// 									}
+		// 									holdings
+		// 								}
+		// 							}
+		// 						}
+		// 					}`,
+		// 	variables: {
+		// 		username: creatorUsername
+		// 	}
+		// };
 
-		const options = {
-			method: 'POST',
-			headers: headers,
-			body: JSON.stringify(graphqlQuery)
-		};
+		// const options = {
+		// 	method: 'POST',
+		// 	headers: headers,
+		// 	body: JSON.stringify(graphqlQuery)
+		// };
 
-		const response = await fetch(endpoint, options);
-		creatorProfile = await response.json();
-
-		if (response.ok) {
-			return {
-				props: { getProfileRes: creatorProfile }
-			};
-		}
+		// const response = await fetch(endpoint, options);
+		// creatorProfile = await response.json();
 
 		return {
-			status: response.status,
-			error: new Error('Could not fetch the profile')
+			props: { getProfileRes: { data: CREATOR_ACCOUNT_DATA } }
 		};
 	};
 </script>

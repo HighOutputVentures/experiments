@@ -5,9 +5,9 @@
 	let showModal = false;
 	export let creatorData;
 
-	function toggleModal() {
+	const toggleModal = () => {
 		showModal = !showModal;
-	}
+	};
 </script>
 
 <button
