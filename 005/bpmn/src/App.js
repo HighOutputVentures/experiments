@@ -9,6 +9,7 @@ const EXAMPLE_URL = "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/maste
 function App() {
   const [diagram, setDiagram] = useState("");
   const [isModelerInit, setModelerInit] = useState(false);
+  const [modeler, setModeler] = useState();
   const container = document.getElementById("container");
 
   useEffect(() => {
@@ -38,20 +39,42 @@ function App() {
           });
         })
         .catch(console.error);
+
+      setModeler(modeler);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [diagram, isModelerInit]);
 
+  const downloadXml = (data) => {
+    const element = document.createElement("a");
+    const file = new Blob([data], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "data.xml";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+  
+  const saveDiagram = async () => {
+    if (!modeler) return;
+
+    const result = await modeler.saveXML({ format: true });
+    downloadXml(result.xml);
+  }
+
   return (
-    <div
-      id="container"
-      style={{
-        border: "1px solid #000000",
-        height: "90vh",
-        width: "90vw",
-        margin: "auto"
-      }}
-    />
+    <>
+      <div
+        id="container"
+        style={{
+          border: "1px solid #000000",
+          height: "90vh",
+          width: "90vw",
+          margin: "auto"
+        }}
+      />
+
+      <button onClick={saveDiagram}>EXPORT</button>
+    </>
   );
 }
 
