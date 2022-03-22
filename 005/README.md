@@ -31,6 +31,9 @@ http://stackoverflow.com/a/36805543/281460
 https://gojs.net/latest/samples/flowchart.html
 https://codesandbox.io/s/quizzical-lake-szfyo?file=/src/App.js
 
+https://stackoverflow.com/questions/44656610/download-a-string-as-txt-file-in-react
+https://github.com/bpmn-io/webjar-bpmn-js/blob/master/examples/modeler/src/main/webapp/empty.bpmn
+
 Most promising:
 bpmn.io
 

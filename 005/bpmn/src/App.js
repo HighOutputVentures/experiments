@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Modeler from "bpmn-js/lib/Modeler";
 import "bpmn-js/dist/assets/diagram-js.css";
 import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
+import resizeTask from 'bpmn-js-task-resize/lib';
 import axios from "axios";
 
-const EXAMPLE_URL = "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn";
+// const BPMN_URL = "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn";
+// const BPMN_URL = "/empty.bpmn";
+const BPMN_URL = "/export.bpmn";
 
 function App() {
   const [diagram, setDiagram] = useState("");
@@ -13,7 +16,7 @@ function App() {
   const container = document.getElementById("container");
 
   useEffect(() => {
-    axios.get(EXAMPLE_URL).then((r) => setDiagram(r.data)).catch(console.error);
+    axios.get(BPMN_URL).then((r) => setDiagram(r.data)).catch(console.error);
   }, []);
   
   useEffect(() => {
@@ -22,7 +25,9 @@ function App() {
       
       const modeler = new Modeler({
         container,
-        keyboard: { bindTo: document }
+        keyboard: { bindTo: document },
+        additionalModules: [resizeTask],
+        taskResizingEnabled: true,
       });
       
       modeler
@@ -31,12 +36,6 @@ function App() {
           if (warnings.length) {
             console.warn(warnings);
           }
-  
-          const canvas = modeler.get("modeling");
-          canvas.setColor("CalmCustomerTask", {
-            stroke: "green",
-            fill: "yellow"
-          });
         })
         .catch(console.error);
 
@@ -49,7 +48,7 @@ function App() {
     const element = document.createElement("a");
     const file = new Blob([data], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
-    element.download = "data.xml";
+    element.download = "export.bpmn";
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   }
