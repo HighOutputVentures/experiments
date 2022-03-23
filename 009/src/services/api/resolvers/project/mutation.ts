@@ -34,6 +34,15 @@ export default {
 			},
 			ctx: Context,
 		) {
+			await ctx.services.column.controller.delete({
+				project: args.id,
+			});
+			await ctx.services.card.controller.delete({
+				project: args.id,
+			});
+			await ctx.services.rankedNode.controller.delete({
+				parent: args.id,
+			});
 			return ctx.services.project.controller.delete(args.id);
 		},
 		async addProjectMember(

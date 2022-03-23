@@ -6,6 +6,7 @@ export enum ObjectType {
 	PROJECT = 1,
 	RANKED_NODE = 2,
 	COLUMN = 3,
+	CARD = 4,
 }
 
 export default class ObjectId {

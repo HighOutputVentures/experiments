@@ -19,6 +19,10 @@ export default function retrieveNode(id: ObjectId, ctx: Context) {
 			return ctx.services.column.controller.findOne({
 				_id: id.oid,
 			});
+		case ObjectType.CARD:
+			return ctx.services.card.controller.findOne({
+				_id: id.oid,
+			});
 		default:
 			return null;
 	}

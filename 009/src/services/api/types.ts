@@ -4,6 +4,7 @@ import { BsonId } from '../../types.ts';
 import Project from '../project/mod.ts';
 import RankedNode from '../ranked-node/mod.ts';
 import Column from '../column/mod.ts';
+import Card from '../card/mod.ts';
 
 export type Node = {
 	_id: Bson.ObjectId;
@@ -16,6 +17,7 @@ export type Context =
 			project: Project;
 			rankedNode: RankedNode;
 			column: Column;
+			card: Card;
 		};
 	}
 	& ParameterizedContext<{

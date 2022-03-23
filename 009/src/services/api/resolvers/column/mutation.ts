@@ -19,16 +19,11 @@ export default {
 				{ parent: args.input.project },
 			);
 
-			const node = await ctx.services.rankedNode.controller.create({
+			await ctx.services.rankedNode.controller.create({
 				node: column,
 				parent: args.input.project,
 				rank: columnCount + 1,
 			});
-
-			await ctx.services.project.controller.addColumn(
-				args.input.project,
-				node,
-			);
 
 			return column;
 		},
@@ -51,7 +46,12 @@ export default {
 			},
 			ctx: Context,
 		) {
-			return ctx.services.column.controller.delete(args.id);
+			await ctx.services.rankedNode.controller.delete({
+				parent: args.id,
+			});
+			return ctx.services.column.controller.delete({
+				_id: args.id,
+			});
 		},
 	},
 };

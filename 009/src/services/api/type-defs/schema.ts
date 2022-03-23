@@ -46,6 +46,18 @@ type Column implements Node {
   cards: [RankedNode!]!
 }
 
+type Card implements Node {
+  id: OID!
+
+  title: String!
+  description: String
+  assignee: Account
+  reporter: Account!
+  dateTimeStarted: DateTime
+  dateTimeFinished: DateTime
+  dateTimeCreated: DateTime!
+}
+
 input AuthenticateAccountInput {
   email: EmailAddress!
   password: String
@@ -82,6 +94,23 @@ input AddProjectMemberInput {
   project: OID!
 }
 
+input CreateCardInput {
+  title: String!
+  description: String
+  assignee: OID
+  project: OID!
+  dateTimeStarted: DateTime
+  dateTimeFinished: DateTime
+}
+
+input UpdateCardInput {
+  title: String
+  description: String
+  assignee: OID
+  dateTimeStarted: DateTime
+  dateTimeFinished: DateTime
+}
+
 type Query {
   node(id: OID!): Node
   me: Account
@@ -106,5 +135,9 @@ type Mutation {
   createColumn(input: CreateColumnInput!): OID!
   updateColumn(id: OID!, input: UpdateColumnInput!): Boolean!
   deleteColumn(id: OID!): Boolean!
+
+  createCard(input: CreateCardInput!): OID!
+  updateCard(id: OID!, input: UpdateCardInput!): Boolean!
+  deleteCard(id: OID!): Boolean!
 }
 `;

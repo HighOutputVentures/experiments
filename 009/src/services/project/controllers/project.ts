@@ -28,7 +28,6 @@ export default class ProjectController {
 			...params,
 			_id: id,
 			members: [],
-			columns: [],
 			dateTimeCreated: new Date(),
 		});
 		return id;
@@ -36,16 +35,6 @@ export default class ProjectController {
 
 	public async update(...args: Parameters<typeof this.repository.updateOne>) {
 		await this.repository.updateOne(args[0], { $set: args[1] });
-		return true;
-	}
-
-	public async addColumn(
-		project: BsonId,
-		column: BsonId,
-	) {
-		await this.repository.updateOne({
-			_id: project,
-		}, { $push: { columns: { $each: [column] } } });
 		return true;
 	}
 
@@ -59,8 +48,8 @@ export default class ProjectController {
 		return true;
 	}
 
-	public async delete(id: BsonId) {
-		await this.repository.deleteOne(id);
+	public async delete(...args: Parameters<typeof this.repository.deleteOne>) {
+		await this.repository.deleteOne(...args);
 		return true;
 	}
 

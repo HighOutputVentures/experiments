@@ -21,6 +21,8 @@ export default {
 					return 'RankedNode';
 				case ObjectType.COLUMN:
 					return 'Column';
+				case ObjectType.CARD:
+					return 'Card';
 				default:
 					return undefined;
 			}

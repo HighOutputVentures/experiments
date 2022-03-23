@@ -1,8 +1,8 @@
 import Container from '../../../library/container.ts';
 import Repository from '../repository/column.ts';
-import { ColumnSchema, IColumn } from '../types.ts';
+import { IColumn } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
-import { BsonId } from '../../../types.ts';
+import { ColumnSchema } from '../../../types.ts';
 
 export default class {
 	public repository: Repository<ColumnSchema>;
@@ -24,7 +24,6 @@ export default class {
 		await this.repository.insertOne({
 			...params,
 			_id: id,
-			cards: [],
 			dateTimeCreated: new Date(),
 		});
 		return id;
@@ -35,8 +34,8 @@ export default class {
 		return true;
 	}
 
-	public async delete(id: BsonId) {
-		await this.repository.deleteOne(id);
+	public async delete(...args: Parameters<typeof this.repository.deleteOne>) {
+		await this.repository.deleteOne(args);
 		return true;
 	}
 

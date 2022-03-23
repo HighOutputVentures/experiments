@@ -6,6 +6,7 @@ import DatabaseConnection from './config/db.ts';
 import Project from './services/project/mod.ts';
 import RankedNode from './services/ranked-node/mod.ts';
 import Column from './services/column/mod.ts';
+import Card from './services/card/mod.ts';
 
 (async () => {
 	const dbConnection = new DatabaseConnection();
@@ -15,6 +16,7 @@ import Column from './services/column/mod.ts';
 		project: new Project(dbConnection),
 		rankedNode: new RankedNode(dbConnection),
 		column: new Column(dbConnection),
+		card: new Card(dbConnection),
 		dbConnection,
 	});
 

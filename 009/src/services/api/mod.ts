@@ -82,6 +82,7 @@ export default class Server {
 					project: this.container.get('project'),
 					rankedNode: this.container.get('rankedNode'),
 					column: this.container.get('column'),
+					card: this.container.get('card'),
 				};
 				return ctx;
 			},

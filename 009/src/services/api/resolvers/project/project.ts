@@ -18,7 +18,7 @@ export default {
 		},
 		columns(parent: ProjectSchema, _: never, ctx: Context) {
 			return ctx.services.rankedNode.controller.find({
-				_id: { $in: parent.columns },
+				parent: parent._id,
 			});
 		},
 	},

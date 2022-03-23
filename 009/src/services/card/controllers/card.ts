@@ -1,25 +1,25 @@
 import Container from '../../../library/container.ts';
-import Repository from '../repository/ranked-node.ts';
-import { IRankedNode } from '../types.ts';
+import Repository from '../repository/card.ts';
+import { ICard } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
-import { BsonId, RankedNodeSchema } from '../../../types.ts';
+import { CardSchema } from '../../../types.ts';
 
 export default class {
-	public repository: Repository<RankedNodeSchema>;
+	public repository: Repository<CardSchema>;
 
-	constructor(container: Container<IRankedNode>) {
+	constructor(container: Container<ICard>) {
 		this.repository = new Repository(
 			container.get('db'),
 		);
 	}
 
 	public generateId() {
-		return ObjectId.generate(ObjectType.RANKED_NODE);
+		return ObjectId.generate(ObjectType.CARD);
 	}
 
 	public async create(
-		params: Omit<RankedNodeSchema, '_id' | 'dateTimeCreated'>,
-	): Promise<BsonId> {
+		params: Omit<CardSchema, '_id' | 'dateTimeCreated'>,
+	) {
 		const id = this.generateId().oid;
 		await this.repository.insertOne({
 			...params,
@@ -35,25 +35,19 @@ export default class {
 	}
 
 	public async delete(...args: Parameters<typeof this.repository.deleteOne>) {
-		await this.repository.deleteOne(...args);
+		await this.repository.deleteOne(args);
 		return true;
 	}
 
 	public async findOne(
-		...args: Parameters<typeof this.repository.findOne>
+		filter: Parameters<typeof this.repository.findOne>[0],
 	) {
-		return this.repository.findOne(...args);
+		return this.repository.findOne(filter);
 	}
 
 	public async find(
 		filter: Parameters<typeof this.repository.find>[0],
 	) {
-		return this.repository.find(filter).sort({ rank: 1 }).toArray();
-	}
-
-	public async count(
-		filter: Parameters<typeof this.repository.countDocuments>[0],
-	) {
-		return this.repository.countDocuments(filter);
+		return this.repository.find(filter).toArray();
 	}
 }

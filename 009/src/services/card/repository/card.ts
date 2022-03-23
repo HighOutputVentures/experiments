@@ -1,10 +1,10 @@
 import { Database } from '../../../config/deps.ts';
 import Repository from '../../../library/repository.ts';
-import { ColumnSchema } from '../../../types.ts';
+import { CardSchema } from '../../../types.ts';
 
-export default class<T = ColumnSchema> extends Repository<T> {
+export default class<T = CardSchema> extends Repository<T> {
 	constructor(db: Database) {
-		super(db.collection<T>('column'));
+		super(db.collection<T>('card'));
 		this.coll.createIndexes({
 			indexes: [
 				{
