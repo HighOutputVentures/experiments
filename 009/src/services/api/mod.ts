@@ -5,6 +5,7 @@ import {
 	applyGraphQL,
 	Bson,
 	GraphQLError,
+	oakCors,
 	Router,
 } from '../../config/deps.ts';
 import typeDefs from './type-defs/schema.ts';
@@ -13,6 +14,7 @@ import Container from '../../library/container.ts';
 import { IService } from '../../types.ts';
 import { Context } from './types.ts';
 import { validateJWT } from '../../library/jwt.ts';
+import uploadFile from '../../library/upload-file.ts';
 
 export default class Server {
 	port: number;
@@ -25,11 +27,19 @@ export default class Server {
 		this.container = container;
 		this.initializeMiddlewares();
 		this.initializeAuthorization();
+
 		this.initializeSchema();
+		this.initializeUploads();
 	}
 
 	public initializeMiddlewares() {
 		// this.app.use(logger.logger);
+
+		this.app.use(
+			oakCors({
+				origin: true,
+			}),
+		);
 	}
 
 	public initializeAuthorization() {
@@ -69,6 +79,10 @@ export default class Server {
 		);
 	}
 
+	public initializeUploads() {
+		this.app.use(uploadFile);
+	}
+
 	public async initializeSchema() {
 		const resolvers = await loadResolvers('./src/services/api/resolvers');
 		const GraphQLService = await applyGraphQL<Router>({
@@ -76,7 +90,7 @@ export default class Server {
 			path: '/graphql',
 			typeDefs: typeDefs,
 			resolvers,
-			context: (ctx: Context) => {
+			context: async (ctx: Context) => {
 				ctx.services = {
 					account: this.container.get('account'),
 					project: this.container.get('project'),
@@ -84,10 +98,10 @@ export default class Server {
 					column: this.container.get('column'),
 					card: this.container.get('card'),
 				};
+
 				return ctx;
 			},
 		});
-
 		this.app.use(GraphQLService.routes(), GraphQLService.allowedMethods());
 	}
 

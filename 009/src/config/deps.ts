@@ -36,3 +36,11 @@ export * as path from 'https://deno.land/std@0.129.0/path/mod.ts';
 export * as jsonwebtoken from 'https://deno.land/x/djwt@v2.4/mod.ts';
 
 export { deepMerge } from 'https://deno.land/std@0.130.0/collections/mod.ts';
+
+export * as multiParser from 'https://deno.land/x/multiparser@v2.1.0/mod.ts';
+
+export { oakCors } from 'https://deno.land/x/cors@v1.2.2/mod.ts';
+
+export { readerFromStreamReader } from 'https://deno.land/std@0.131.0/io/mod.ts';
+
+export * as bytes from 'https://deno.land/std@0.89.0/bytes/mod.ts';
