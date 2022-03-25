@@ -7,14 +7,10 @@ export default {
 			return parent._id;
 		},
 		creator(parent: ProjectSchema, _: never, ctx: Context) {
-			return ctx.services.account.controller.findOne({
-				_id: parent.creator,
-			});
+			return ctx.loaders.Account.load(parent.creator);
 		},
 		members(parent: ProjectSchema, _: never, ctx: Context) {
-			return ctx.services.account.controller.find({
-				_id: { $in: parent.members },
-			});
+			return ctx.loaders.Account.loadMany(parent.members);
 		},
 		columns(parent: ProjectSchema, _: never, ctx: Context) {
 			return ctx.services.rankedNode.controller.find({

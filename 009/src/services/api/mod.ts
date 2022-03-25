@@ -15,6 +15,7 @@ import { IService } from '../../types.ts';
 import { Context } from './types.ts';
 import { validateJWT } from '../../library/jwt.ts';
 import uploadFile from '../../library/upload-file.ts';
+import loaders from './loaders/mod.ts';
 
 export default class Server {
 	port: number;
@@ -45,7 +46,7 @@ export default class Server {
 	public initializeAuthorization() {
 		this.app.use(
 			async (
-				ctx: Omit<Context, 'services'>,
+				ctx: Omit<Context, 'services' | 'loaders'>,
 				// deno-lint-ignore no-explicit-any
 				next: () => Promise<any>,
 			) => {
@@ -98,6 +99,8 @@ export default class Server {
 					column: this.container.get('column'),
 					card: this.container.get('card'),
 				};
+
+				ctx.loaders = loaders(ctx);
 
 				return ctx;
 			},

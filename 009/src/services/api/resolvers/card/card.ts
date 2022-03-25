@@ -8,14 +8,10 @@ export default {
 		},
 		assignee(parent: CardSchema, _: never, ctx: Context) {
 			if (!parent.assignee) return null;
-			return ctx.services.account.controller.findOne({
-				_id: parent.assignee,
-			});
+			return ctx.loaders.Account.load(parent.assignee);
 		},
 		reporter(parent: CardSchema, _: never, ctx: Context) {
-			return ctx.services.account.controller.findOne({
-				_id: parent.reporter,
-			});
+			return ctx.loaders.Account.load(parent.reporter);
 		},
 	},
 };

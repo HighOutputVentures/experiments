@@ -101,7 +101,7 @@ function getNameOnly(headerLineByte: Uint8Array) {
 }
 
 export default async function uploadFile(
-	ctx: Omit<Context, 'services'>,
+	ctx: Omit<Context, 'services' | 'loaders'>,
 	// deno-lint-ignore no-explicit-any
 	next: () => Promise<any>,
 ) {
