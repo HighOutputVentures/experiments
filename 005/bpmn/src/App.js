@@ -5,9 +5,15 @@ import "bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 import resizeTask from 'bpmn-js-task-resize/lib';
 import axios from "axios";
 
+import nyanDrawModule from './lib/nyan/draw';
+import nyanPaletteModule from './lib/nyan/palette';
+import userDrawModule from './lib/user/draw';
+import userPaletteModule from './lib/user/palette';
+
 // const BPMN_URL = "https://cdn.staticaly.com/gh/bpmn-io/bpmn-js-examples/master/colors/resources/pizza-collaboration.bpmn";
 // const BPMN_URL = "/empty.bpmn";
 const BPMN_URL = "/export.bpmn";
+// const BPMN_URL = "/temp.bpmn";
 
 function App() {
   const [diagram, setDiagram] = useState("");
@@ -26,7 +32,13 @@ function App() {
       const modeler = new Modeler({
         container,
         keyboard: { bindTo: document },
-        additionalModules: [resizeTask],
+        additionalModules: [
+          resizeTask,
+          // nyanDrawModule,
+          // nyanPaletteModule,
+          userDrawModule,
+          userPaletteModule,
+        ],
         taskResizingEnabled: true,
       });
       
