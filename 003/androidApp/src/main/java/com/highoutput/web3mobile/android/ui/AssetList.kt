@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.highoutput.web3mobile.android.MainApplication
 import com.highoutput.web3mobile.android.MainViewModel
 import org.walletconnect.Session
 
 @Composable
-fun AssetList(navController: NavController, viewModel: MainViewModel) {
+fun AssetList(navController: NavController, viewModel: MainViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val connectionStatus = viewModel.connectionStatus.value
     val address = viewModel.address.value
