@@ -3,6 +3,7 @@ package com.highoutput.web3mobile.android
 import android.app.Application
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import org.komputing.khex.extensions.toNoPrefixHexString
 import org.walletconnect.Session
@@ -14,6 +15,7 @@ import org.walletconnect.nullOnThrow
 import java.io.File
 import java.util.*
 
+@HiltAndroidApp
 class MainApplication : Application() {
 
     override fun onCreate() {

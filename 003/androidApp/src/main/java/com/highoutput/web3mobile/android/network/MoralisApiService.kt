@@ -7,9 +7,9 @@ import com.ralphordanza.samplekmm.android.BuildConfig
 import retrofit2.Response
 import retrofit2.http.*
 
-interface EtherscanApiService {
+interface MoralisApiService {
 
-    @Headers("x-api-key: ${BuildConfig.MORALIS_API_KEY}")
+    @Headers("X-API-Key: ${BuildConfig.MORALIS_API_KEY}")
     @GET("{address}/nft")
     suspend fun getTransactionsViaAddress(
         @Path("address") address: String,

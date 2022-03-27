@@ -29,19 +29,23 @@ import com.highoutput.web3mobile.android.ui.AssetList
 import com.highoutput.web3mobile.android.ui.NftTransactions
 import com.highoutput.web3mobile.android.ui.Screen
 import com.highoutput.web3mobile.android.ui.SendNFT
+import dagger.hilt.android.AndroidEntryPoint
 import org.walletconnect.Session
 import org.web3j.crypto.Hash
+import org.web3j.protocol.Web3j
 import org.web3j.utils.Convert
 import java.nio.charset.StandardCharsets
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var viewModel: MainViewModel
 
+    @Inject
+    lateinit var web3j: Web3j
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this@MainActivity).get(MainViewModel::class.java)
 
         val items = listOf(
             Screen.AssetList,
@@ -83,11 +87,11 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController,
                     startDestination = Screen.AssetList.route,
                     Modifier.padding(innerPadding)) {
-                    composable(Screen.AssetList.route) { AssetList(navController, viewModel) }
+                    composable(Screen.AssetList.route) { AssetList(navController) }
                     navigation(startDestination = "username", route = "login") {
                         composable(
                             Screen.NftTransactions.route,
-                        ) { NftTransactions(navController, viewModel) }
+                        ) { NftTransactions(navController) }
                         composable(
                             Screen.SendNFT.route + "/{tokenId}/{contractAddress}",
                             arguments = listOf(
@@ -103,8 +107,8 @@ class MainActivity : ComponentActivity() {
                                 }
                             ),
                         ) { entry ->
-                            SendNFT(navController,
-                                viewModel,
+                            SendNFT(navController = navController,
+                                web3j = web3j,
                                 tokenId = entry.arguments?.getString("tokenId") ?: "",
                                 contractAddress = entry.arguments?.getString("contractAddress")
                                     ?: "")
