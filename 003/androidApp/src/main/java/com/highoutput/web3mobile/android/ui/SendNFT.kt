@@ -9,6 +9,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.highoutput.web3mobile.android.MainApplication
 import com.highoutput.web3mobile.android.MainRepository
@@ -29,7 +30,8 @@ import java.math.BigInteger
 @Composable
 fun SendNFT(
     navController: NavController,
-    viewModel: MainViewModel,
+    viewModel: MainViewModel = hiltViewModel(),
+    web3j: Web3j,
     tokenId: String,
     contractAddress: String,
 ) {
@@ -47,16 +49,16 @@ fun SendNFT(
                 viewModel.sendNFT(to = to, tokenId = tokenId, contractAddress = contractAddress) {
                     //USED WALLET CONNECT TO SIGN TRANSACTION
                     val txRequest = System.currentTimeMillis()
-                    val nonce = MainRepository.web3j.ethGetTransactionCount(
+                    val nonce = web3j.ethGetTransactionCount(
                         viewModel.address.value, DefaultBlockParameterName.LATEST).sendAsync().get();
                     MainApplication.session?.performMethodCall(
                         Session.MethodCall.SendTransaction(
                             txRequest,
                             from = viewModel.address.value,
-                            contractAddress,
-                            nonce.transactionCount.toString(16),
-                            DefaultGasProvider.GAS_PRICE.toString(16),
-                            DefaultGasProvider.GAS_LIMIT.toString(16),
+                            to = contractAddress,
+                            nonce = nonce.transactionCount.toString(16),
+                            gasPrice = DefaultGasProvider.GAS_PRICE.toString(16),
+                            gasLimit = DefaultGasProvider.GAS_LIMIT.toString(16),
                             value = BigInteger.ZERO.toString(16),
                             data = it
                         )

@@ -8,16 +8,19 @@ import androidx.lifecycle.viewModelScope
 import com.highoutput.web3mobile.android.common.Resource
 import com.highoutput.web3mobile.android.models.NFTResult
 import com.highoutput.web3mobile.android.ui.state.NFTTransactionsState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.walletconnect.Session
 import org.walletconnect.nullOnThrow
+import javax.inject.Inject
 
 const val PAGE_SIZE = 10
 
-class MainViewModel : ViewModel(), Session.Callback {
-
-    private val repository = MainRepository()
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel(),
+    Session.Callback {
 
     private val _address = mutableStateOf("")
     val address: State<String> = _address
@@ -28,14 +31,11 @@ class MainViewModel : ViewModel(), Session.Callback {
     private val _balance = mutableStateOf("")
     val balance: State<String> = _balance
 
-    private val _state = mutableStateOf(NFTTransactionsState())
-    val state: State<NFTTransactionsState> = _state
+    private val _state = MutableStateFlow(NFTTransactionsState())
+    val state = _state
 
     private val _endReached = mutableStateOf(false)
     val endReached: State<Boolean> = _endReached
-
-    private val _isLoading = mutableStateOf(false)
-    val isLoading: State<Boolean> = _isLoading
 
     private var nftTransactions = mutableStateOf<List<NFTResult>>(mutableListOf())
     private var currPage = 1
@@ -47,22 +47,28 @@ class MainViewModel : ViewModel(), Session.Callback {
     }
 
     fun loadNFTImages(address: String) {
-        _isLoading.value = true
         repository.loadNFTImage(address, PAGE_SIZE, cursor).onEach { response ->
             when (response) {
                 is Resource.Success -> {
                     response.data?.let {
-                        _isLoading.value = false
                         nftTransactions.value += it.result
+                        _endReached.value = currPage * PAGE_SIZE >= it.total!!
+                        cursor = it.cursor ?: ""
+                        currPage++
+
                         val state = _state.value.copy(
                             transactions = nftTransactions.value,
                             isLoading = false,
                         )
                         _state.value = state
-                        _endReached.value = currPage * PAGE_SIZE >= it.total!!
-                        cursor = it.cursor ?: ""
-                        currPage++
                     }
+                }
+                is Resource.Loading -> {
+                    val state = _state.value.copy(
+                        isLoading = true,
+                        error = "",
+                    )
+                    _state.value = state
                 }
                 is Resource.Error -> {
                     val state = _state.value.copy(
@@ -115,6 +121,7 @@ class MainViewModel : ViewModel(), Session.Callback {
     private fun initialSetup() {
         val session = nullOnThrow { MainApplication.session } ?: return
         session.addCallback(this)
+        sessionApproved()
     }
 
     override fun onMethodCall(call: Session.MethodCall) {
@@ -149,10 +156,9 @@ class MainViewModel : ViewModel(), Session.Callback {
         _connectionStatus.value = ""
         _address.value = ""
         _balance.value = ""
-        nftTransactions.value = mutableListOf()
         cursor = ""
         val state = _state.value.copy(
-            transactions = nftTransactions.value,
+            transactions = mutableListOf(),
         )
         _state.value = state
     }
@@ -164,6 +170,7 @@ class MainViewModel : ViewModel(), Session.Callback {
 
     fun closeConnection() {
         MainApplication.session?.kill()
+        MainApplication.session?.removeCallback(this)
         sessionClear()
     }
 }
