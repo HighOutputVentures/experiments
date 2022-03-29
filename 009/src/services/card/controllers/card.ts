@@ -3,11 +3,12 @@ import Repository from '../repository/card.ts';
 import { ICard } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
 import { CardSchema } from '../../../types.ts';
+import { CardService } from '../mod.ts';
 
 export default class {
 	public repository: Repository<CardSchema>;
 
-	constructor(container: Container<ICard>) {
+	constructor(container: CardService) {
 		this.repository = new Repository(
 			container.get('db'),
 		);

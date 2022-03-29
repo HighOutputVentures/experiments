@@ -1,10 +1,5 @@
 import { Bson, ParameterizedContext } from '../../config/deps.ts';
-import Account from '../account/mod.ts';
-import { BsonId } from '../../types.ts';
-import Project from '../project/mod.ts';
-import RankedNode from '../ranked-node/mod.ts';
-import Column from '../column/mod.ts';
-import Card from '../card/mod.ts';
+import { BsonId, IService } from '../../types.ts';
 import loaders from './loaders/mod.ts';
 export type Node = {
 	_id: Bson.ObjectId;
@@ -12,13 +7,7 @@ export type Node = {
 
 export type Context =
 	& {
-		services: {
-			account: Account;
-			project: Project;
-			rankedNode: RankedNode;
-			column: Column;
-			card: Card;
-		};
+		services: Omit<IService, 'dbConnection'>;
 	}
 	& {
 		loaders: ReturnType<typeof loaders>;

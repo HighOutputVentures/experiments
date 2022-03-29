@@ -1,13 +1,12 @@
-import Container from '../../../library/container.ts';
 import Repository from '../repository/column.ts';
-import { IColumn } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
 import { ColumnSchema } from '../../../types.ts';
+import { ColumnService } from '../mod.ts';
 
 export default class {
 	public repository: Repository<ColumnSchema>;
 
-	constructor(container: Container<IColumn>) {
+	constructor(container: ColumnService) {
 		this.repository = new Repository(
 			container.get('db'),
 		);

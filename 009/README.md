@@ -8,13 +8,11 @@ Create a Kanban Board GraphQL API that runs in deno with these features:
 
 [ ] Authenticate with OTP
 
-[ ] Implement Dataloaders
+[X] Implement Dataloaders
 
-[ ] Upload Files
+[X] Upload Files
 
 [X] Manage Database (MongoDB)
-
-[ ] Implement Cursor Based Pagination
 
 [ ] Implement GraphQL Directives
 

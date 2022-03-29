@@ -1,18 +1,18 @@
 export * from './services/account/types.ts';
-import Account from './services/account/mod.ts';
+import { AccountService } from './services/account/mod.ts';
 import DatabaseConnection from './config/db.ts';
 import { Bson } from './config/deps.ts';
-import Project from './services/project/mod.ts';
-import RankedNode from './services/ranked-node/mod.ts';
-import Column from './services/column/mod.ts';
-import Card from './services/card/mod.ts';
+import { ProjectService } from './services/project/mod.ts';
+import { RankedNodeService } from './services/ranked-node/mod.ts';
+import { ColumnService } from './services/column/mod.ts';
+import { CardService } from './services/card/mod.ts';
 
 export interface IService {
-	account: Account;
-	project: Project;
-	rankedNode: RankedNode;
-	column: Column;
-	card: Card;
+	account: AccountService;
+	project: ProjectService;
+	rankedNode: RankedNodeService;
+	column: ColumnService;
+	card: CardService;
 	dbConnection: DatabaseConnection;
 }
 

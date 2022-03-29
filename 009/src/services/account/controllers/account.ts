@@ -1,13 +1,12 @@
-import Container from '../../../library/container.ts';
 import AccountRepository from '../repository/account.ts';
-import { IAccount } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
 import { AccountSchema } from '../../../types.ts';
+import Account from '../mod.ts';
 
 export default class AccountController {
 	public repository: AccountRepository<AccountSchema>;
 
-	constructor(container: Container<IAccount>) {
+	constructor(container: typeof Account) {
 		this.repository = new AccountRepository(
 			container.get('db'),
 		);
@@ -39,5 +38,11 @@ export default class AccountController {
 		filter: Parameters<typeof this.repository.find>[0],
 	) {
 		return this.repository.find(filter).toArray();
+	}
+
+	public async deleteMany(
+		filter: Parameters<typeof this.repository.deleteMany>[0],
+	) {
+		return this.repository.deleteMany(filter);
 	}
 }

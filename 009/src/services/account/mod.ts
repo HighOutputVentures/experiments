@@ -3,14 +3,18 @@ import Container from '../../library/container.ts';
 import { IAccount } from './types.ts';
 import AccountController from './controllers/account.ts';
 
-export default class Account {
-	public controller: AccountController;
+export class AccountService extends Container<Partial<IAccount>> {
+	public initialize(dbConnection: DatabaseConnection) {
+		const db = dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno');
+		this.bind('db').to(db);
+		this.bind('controller').to(
+			new AccountController(this),
+		);
+	}
 
-	constructor(dbConnection: DatabaseConnection) {
-		const container = new Container<IAccount>({
-			db: dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
-		});
-
-		this.controller = new AccountController(container);
+	public get controller() {
+		return this.get<AccountController>('controller');
 	}
 }
+
+export default new AccountService();

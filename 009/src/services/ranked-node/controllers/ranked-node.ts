@@ -1,13 +1,12 @@
-import Container from '../../../library/container.ts';
 import Repository from '../repository/ranked-node.ts';
-import { IRankedNode } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
 import { BsonId, RankedNodeSchema } from '../../../types.ts';
+import { RankedNodeService } from '../mod.ts';
 
 export default class {
 	public repository: Repository<RankedNodeSchema>;
 
-	constructor(container: Container<IRankedNode>) {
+	constructor(container: RankedNodeService) {
 		this.repository = new Repository(
 			container.get('db'),
 		);

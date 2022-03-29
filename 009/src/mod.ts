@@ -11,12 +11,17 @@ import Card from './services/card/mod.ts';
 (async () => {
 	const dbConnection = new DatabaseConnection();
 	await dbConnection.connect();
+
+	[Account, Project, RankedNode, Column, Card].forEach((service) =>
+		service.initialize(dbConnection)
+	);
+
 	const container = new Container<IService>({
-		account: new Account(dbConnection),
-		project: new Project(dbConnection),
-		rankedNode: new RankedNode(dbConnection),
-		column: new Column(dbConnection),
-		card: new Card(dbConnection),
+		account: Account,
+		project: Project,
+		rankedNode: RankedNode,
+		column: Column,
+		card: Card,
 		dbConnection,
 	});
 

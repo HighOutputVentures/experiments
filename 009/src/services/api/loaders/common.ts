@@ -16,7 +16,9 @@ export default function <T = { _id: BsonId }>(
 			},
 			{},
 		)(
-			await ctx.services[service].controller.find({
+			await ctx.services[service].get<
+				{ find: (args: unknown) => Promise<{ _id: BsonId }[]> }
+			>('controller').find({
 				_id: { $in: ids as BsonId[] },
 			}),
 		);

@@ -3,14 +3,19 @@ import Container from '../../library/container.ts';
 import { ICard } from './types.ts';
 import Controller from './controllers/card.ts';
 
-export default class {
-	public controller: Controller;
+export class CardService extends Container<Partial<ICard>> {
+	public initialize(dbConnection: DatabaseConnection) {
+		this.bind('db').to(
+			dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
+		);
+		this.bind('controller').to(
+			new Controller(this),
+		);
+	}
 
-	constructor(dbConnection: DatabaseConnection) {
-		const container = new Container<ICard>({
-			db: dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
-		});
-
-		this.controller = new Controller(container);
+	public get controller() {
+		return this.get<Controller>('controller');
 	}
 }
+
+export default new CardService();

@@ -1,13 +1,12 @@
-import Container from '../../../library/container.ts';
 import ProjectRepository from '../repository/project.ts';
-import { IProject } from '../types.ts';
 import ObjectId, { ObjectType } from '../../../library/object-id.ts';
 import { BsonId, ProjectSchema } from '../../../types.ts';
+import { ProjectService } from '../mod.ts';
 
 export default class ProjectController {
 	public repository: ProjectRepository<ProjectSchema>;
 
-	constructor(container: Container<IProject>) {
+	constructor(container: ProjectService) {
 		this.repository = new ProjectRepository(
 			container.get('db'),
 		);

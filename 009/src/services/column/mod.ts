@@ -3,14 +3,19 @@ import Container from '../../library/container.ts';
 import { IColumn } from './types.ts';
 import Controller from './controllers/column.ts';
 
-export default class {
-	public controller: Controller;
+export class ColumnService extends Container<IColumn> {
+	public initialize(dbConnection: DatabaseConnection) {
+		this.bind('db').to(
+			dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
+		);
+		this.bind('controller').to(
+			new Controller(this),
+		);
+	}
 
-	constructor(dbConnection: DatabaseConnection) {
-		const container = new Container<IColumn>({
-			db: dbConnection.getDatabase(Deno.env.get('MONGO_DB') || 'deno'),
-		});
-
-		this.controller = new Controller(container);
+	public get controller() {
+		return this.get<Controller>('controller');
 	}
 }
+
+export default new ColumnService();
