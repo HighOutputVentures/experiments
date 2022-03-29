@@ -38,13 +38,13 @@ export default class {
 		return true;
 	}
 
-	public async findOne(
+	public findOne(
 		filter: Parameters<typeof this.repository.findOne>[0],
 	) {
 		return this.repository.findOne(filter);
 	}
 
-	public async find(
+	public find(
 		filter: Parameters<typeof this.repository.find>[0],
 	) {
 		return this.repository.find(filter).toArray();

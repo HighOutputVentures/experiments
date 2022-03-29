@@ -27,7 +27,7 @@ export default {
 
 			return column;
 		},
-		async updateColumn(
+		updateColumn(
 			_: never,
 			args: {
 				id: BsonId;

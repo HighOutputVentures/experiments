@@ -5,7 +5,7 @@ import { Context } from '../../types.ts';
 
 export default {
 	Mutation: {
-		async createAccount(
+		createAccount(
 			_: never,
 			args: {
 				input: Parameters<

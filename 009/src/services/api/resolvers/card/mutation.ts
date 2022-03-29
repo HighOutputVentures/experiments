@@ -53,7 +53,7 @@ export default {
 
 			return node;
 		},
-		async updateCard(
+		updateCard(
 			_: never,
 			args: {
 				id: BsonId;
@@ -72,7 +72,7 @@ export default {
 				args.input,
 			);
 		},
-		async deleteCard(
+		deleteCard(
 			_: never,
 			args: {
 				id: BsonId;

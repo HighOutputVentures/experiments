@@ -3,7 +3,7 @@ import { Context } from '../../types.ts';
 
 export default {
 	Mutation: {
-		async createProject(
+		createProject(
 			_: never,
 			args: {
 				input: { title: string };
@@ -15,7 +15,7 @@ export default {
 				creator: ctx.state.user.id,
 			});
 		},
-		async updateProject(
+		updateProject(
 			_: never,
 			args: {
 				id: BsonId;

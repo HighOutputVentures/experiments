@@ -28,19 +28,19 @@ export default class AccountController {
 		return id;
 	}
 
-	public async findOne(
+	public findOne(
 		filter: Parameters<typeof this.repository.findOne>[0],
 	) {
 		return this.repository.findOne(filter);
 	}
 
-	public async find(
+	public find(
 		filter: Parameters<typeof this.repository.find>[0],
 	) {
 		return this.repository.find(filter).toArray();
 	}
 
-	public async deleteMany(
+	public deleteMany(
 		filter: Parameters<typeof this.repository.deleteMany>[0],
 	) {
 		return this.repository.deleteMany(filter);

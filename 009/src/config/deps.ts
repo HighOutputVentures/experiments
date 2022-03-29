@@ -45,7 +45,6 @@ export { readerFromStreamReader } from 'https://deno.land/std@0.131.0/io/mod.ts'
 
 export * as bytes from 'https://deno.land/std@0.89.0/bytes/mod.ts';
 
-// @deno-types="https://raw.githubusercontent.com/graphql/dataloader/master/src/index.d.ts"
-export { default as DataLoader } from 'https://dev.jspm.io/dataloader';
+export { default as DataLoader } from 'https://cdn.skypack.dev/dataloader@2.0.0?dts';
 
 export * as R from 'https://deno.land/x/ramda@v0.27.2/mod.ts';

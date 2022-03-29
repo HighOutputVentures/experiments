@@ -38,19 +38,19 @@ export default class {
 		return true;
 	}
 
-	public async findOne(
+	public findOne(
 		...args: Parameters<typeof this.repository.findOne>
 	) {
 		return this.repository.findOne(...args);
 	}
 
-	public async find(
+	public find(
 		filter: Parameters<typeof this.repository.find>[0],
 	) {
 		return this.repository.find(filter).sort({ rank: 1 }).toArray();
 	}
 
-	public async count(
+	public count(
 		filter: Parameters<typeof this.repository.countDocuments>[0],
 	) {
 		return this.repository.countDocuments(filter);

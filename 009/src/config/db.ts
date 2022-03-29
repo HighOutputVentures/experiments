@@ -7,14 +7,14 @@ export default class DatabaseConnection {
 		this.client = new MongoClient();
 	}
 
-	public async connect(uri?: string) {
+	public connect(uri?: string) {
 		return this.client.connect(
 			uri || Deno.env.get('MONGODB_URI') ||
 				'mongodb://localhost:27017/deno',
 		);
 	}
 
-	public async stop() {
+	public stop() {
 		return this.client.close();
 	}
 

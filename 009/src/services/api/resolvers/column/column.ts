@@ -1,4 +1,4 @@
-import { ColumnSchema, RankedNodeSchema } from '../../../../types.ts';
+import { RankedNodeSchema } from '../../../../types.ts';
 import { Context, Node } from '../../types.ts';
 
 export default {

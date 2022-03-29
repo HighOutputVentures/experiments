@@ -5,12 +5,12 @@ import { Context, Node } from '../types.ts';
 
 export default {
 	Query: {
-		async node(_: never, args: { id: BsonId }, ctx: Context) {
+		node(_: never, args: { id: BsonId }, ctx: Context) {
 			return retrieveNode(ObjectId.parse(args.id), ctx);
 		},
 	},
 	Node: {
-		async __resolveType(node: Node) {
+		__resolveType(node: Node) {
 			const id = ObjectId.parse(node._id);
 			switch (id.type) {
 				case ObjectType.ACCOUNT:

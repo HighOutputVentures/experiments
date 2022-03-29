@@ -3,7 +3,7 @@ import { Context } from '../../types.ts';
 
 export default {
 	Mutation: {
-		async updateRankedNode(
+		updateRankedNode(
 			_: never,
 			args: {
 				id: BsonId;
@@ -16,7 +16,7 @@ export default {
 				args.input,
 			);
 		},
-		async deleteRankedNode(
+		deleteRankedNode(
 			_: never,
 			args: {
 				id: BsonId;
