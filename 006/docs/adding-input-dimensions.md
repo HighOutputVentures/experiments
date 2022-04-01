@@ -26,7 +26,7 @@ The frequency domain representation of a signal allows you to observe several ch
 ![FFT 3](./images/fft-v3.png "FFT3")
 
 ### Plot of sample in frequency domain (with hamming window) and mean removed
-![FFT 4](./images/fft-v3.png "FFT4")
+![FFT 4](./images/fft-v4.png "FFT4")
 
 ## Resources
 1. [Partial Introduction to Frequency-Domain Analysis](https://www.mathworks.com/help/signal/ug/practical-introduction-to-frequency-domain-analysis.html)
