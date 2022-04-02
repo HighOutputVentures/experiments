@@ -45,6 +45,7 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 7. [Validating The Model](./docs/validating_the_model.md)
 8. [Optimizations](./docs//optimizations.md)
 9. [Adding Input Dimensions](./docs/adding-input-dimensions.md)
+10. Using Sliding Window For Dataset
 
 ## Resources
 1. [Anomaly Detection: Definition, Best Practices and Use Cases](https://datrics.ai/anomaly-detection-best-practices)
