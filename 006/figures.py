@@ -32,7 +32,7 @@ for idx, sample in enumerate(normal_data[0:30]):
 
 for idx, sample in enumerate(anomalous_data[0:30]):
   plt.grid()
-  plt.plot(np.arange(RESOLUTION), sample)
+  plt.plot(np.arange(RESOLUTION))
   # plt.ylim(0, 30000)
   plt.savefig(f'figures/anomalous/{idx+1}.png')
   plt.clf()

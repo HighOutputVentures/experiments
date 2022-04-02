@@ -9,7 +9,7 @@ ELASTICSEARCH_URI = config('ELASTICSEARCH_URI')
 ELASTICSEARCH_USERNAME = config('ELASTICSEARCH_USERNAME')
 ELASTICSEARCH_PASSWORD = config('ELASTICSEARCH_PASSWORD')
 
-def get_query_body(gte, lte):
+def get_query_body(gte, lt):
     return {
         "size": 0,
         "query": {
@@ -29,7 +29,7 @@ def get_query_body(gte, lte):
                         "range": {
                             "@timestamp": {
                                 "gte": gte,
-                                "lte": lte
+                                "lt": lt
                             }
                         }
                     }
@@ -58,25 +58,27 @@ def get_query_body(gte, lte):
 
 
 
-def fetch_logs(dateString):
-  print(f'Retrieving data for {dateString}')
-  lte = moment.date(dateString).add(minute=3).isoformat().replace('+00:00', '.000Z')
-  r = requests.post(
-    url=ELASTICSEARCH_URI,
-    json=get_query_body(dateString, lte),
-    auth=HTTPBasicAuth(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD)
-  )
+def fetch_logs(startDateString, endDateString):
+  gte = startDateString
+  filename = f"{startDateString.replace(':', '-')} to {endDateString.replace(':', '-')}"
 
-  points = [str(round(item['point']['values']['95.0'] or 0, 2)) for item in r.json()['aggregations']['window']['buckets']]
+  while (gte != endDateString):
+    print(f'Retrieving data for {gte}')
+    lte = moment.date(gte).add(minute=3).isoformat().replace('+00:00', '.000Z')
+    r = requests.post(
+      url=ELASTICSEARCH_URI,
+      json=get_query_body(gte, lte),
+      auth=HTTPBasicAuth(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD)
+    )
 
-  dataOutFile = open('data/running-window.csv', 'a+')
-  dataOutFile.write(','.join(points) + "\n")
-  dataOutFile.close()
+    points = [str(round(item['point']['values']['95.0'] or 0, 2)) for item in r.json()['aggregations']['window']['buckets']]
 
-  lastDateFile = open('data/last-date.txt', 'w')
-  lastDateFile.write(dateString)
-  lastDateFile.close()
+    dataOutFile = open(f'data/running-window/{filename}.csv', 'a+')
+    dataOutFile.write(','.join(points) + "\n")
+    dataOutFile.close()
 
-  fetch_logs(moment.date(dateString).add(second=1).isoformat().replace('+00:00', '.000Z'))
+    lastDateFile = open(f'data/{filename}.txt', 'w')
+    lastDateFile.write(gte)
+    lastDateFile.close()
 
-# fetch_logs('2022-03-30T00:00:00.000Z')
+    gte = moment.date(gte).add(second=1).isoformat().replace('+00:00', '.000Z')
