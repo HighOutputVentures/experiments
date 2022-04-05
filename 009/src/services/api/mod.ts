@@ -1,5 +1,4 @@
 // deno-lint-ignore-file require-await
-import logger from 'https://deno.land/x/oak_logger@1.0.0/mod.ts';
 import {
 	Application,
 	applyGraphQL,
@@ -22,8 +21,8 @@ export default class Server {
 	app: Application;
 	container: Container<IService>;
 
-	constructor(container: Container<IService>, port?: number) {
-		this.port = port || 9090;
+	constructor(container: Container<IService>, port?: string) {
+		this.port = parseInt(port || '9090');
 		this.app = new Application();
 		this.container = container;
 		this.initializeMiddlewares();

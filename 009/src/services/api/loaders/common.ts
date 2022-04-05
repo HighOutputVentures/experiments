@@ -1,5 +1,5 @@
 import { DataLoader, R } from '../../../config/deps.ts';
-import { AccountSchema, BsonId } from '../../../types.ts';
+import { BsonId } from '../../../types.ts';
 import { Context } from '../types.ts';
 
 export default function <T = { _id: BsonId }>(

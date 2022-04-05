@@ -8,10 +8,10 @@ export default class DatabaseConnection {
 	}
 
 	public connect(uri?: string) {
-		return this.client.connect(
-			uri || Deno.env.get('MONGODB_URI') ||
-				'mongodb://localhost:27017/deno',
-		);
+		const mongoURI = uri || Deno.env.get('MONGODB_URI') ||
+			'mongodb://localhost:27017/deno';
+		console.log('uri', mongoURI);
+		return this.client.connect(mongoURI);
 	}
 
 	public stop() {

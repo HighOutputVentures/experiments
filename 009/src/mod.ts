@@ -25,5 +25,5 @@ import Card from './services/card/mod.ts';
 		dbConnection,
 	});
 
-	await new Server(container).start();
+	await new Server(container, Deno.env.get('PORT')).start();
 })();
