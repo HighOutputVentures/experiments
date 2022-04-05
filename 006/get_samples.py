@@ -4,6 +4,7 @@ import os
 
 from env_vars import RESOLUTION
 from fetch_logs import fetch_logs
+from get_fft import get_fft
 
 def load_json(filename):
   data = json.load(open(f'data/response_times/{filename}'))
@@ -18,7 +19,8 @@ def generate_points(sample):
     for m in sample['intervals']['buckets']
   ]
   label = 1.0 if len(list(filter(lambda x: x > 5000, points))) < 10 else 0.0
-  return points + [label]
+  fft = get_fft(numpy.array(points))
+  return points + fft + [label]
 
 def get_samples():
   files = os.listdir('data/response_times/')

@@ -73,7 +73,7 @@ history = autoencoder.fit(
 
 # Plot the training loss and validation loss
 plt.plot(history.history['loss'], label='Training Loss')
-# plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.legend()
 plt.show()
 
