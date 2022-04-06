@@ -1,4 +1,9 @@
-import { Node, NodeType } from "./Node";
+import { Node } from "./Node";
+
+export enum NodeType {
+  Editor = 'EDITOR',
+  Text = 'TEXT',
+}
 
 export class Editor extends Node {
   constructor(private elem: HTMLDivElement) {
@@ -9,10 +14,7 @@ export class Editor extends Node {
     return this.elem;
   }
 
-  public serialize(): { type: NodeType; } & Record<string, unknown> {
-    return {
-      type: NodeType.Editor,
-      nodes: [],
-    };
+  public serialize(): [] {
+    return [];
   }
 }

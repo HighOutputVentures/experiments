@@ -4,7 +4,8 @@
   "description": "HOV Editor",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "spack"
   },
   "author": "High Output Ventures",
   "license": "ISC",

@@ -1,4 +1,4 @@
-import { Node, NodeType } from "./Node";
+import { Node } from "./Node";
 
 export class TextNode extends Node {
   private elem: HTMLDivElement;
@@ -7,16 +7,15 @@ export class TextNode extends Node {
     super();
 
     this.elem = document.createElement("div");
+    this.elem.contentEditable = "true";
+    this.elem.innerText = data;
   }
 
   public getHTMLElement(): HTMLElement {
     return this.elem;
   }
 
-  public serialize(): { type: NodeType; } & Record<string, unknown> {
-    return {
-      type: NodeType.Text,
-      data: this.data,
-    };
+  public serialize(): string {
+    return this.data;
   }
 }
