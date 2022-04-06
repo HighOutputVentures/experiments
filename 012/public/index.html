@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Text Editor</title>
+
+    <script type="module">
+      import { Editor, TextNode } from './web.js';
+
+      window.addEventListener('DOMContentLoaded', e => {
+        const node = new TextNode('**bold** `code`');
+        const editor = document.querySelector('#editor');
+
+        editor.appendChild(node.getHTMLElement());
+        console.log(editor);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="editor"></div>
+  </body>
+</html>

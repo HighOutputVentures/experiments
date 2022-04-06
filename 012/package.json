@@ -4,6 +4,7 @@
   "description": "HOV Editor",
   "main": "dist/index.js",
   "scripts": {
+    "start": "npx spack && node app.js",
     "test": "jest",
     "build": "spack"
   },
@@ -16,5 +17,8 @@
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
   }
 }
