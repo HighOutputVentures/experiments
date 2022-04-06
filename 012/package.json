@@ -1,0 +1,19 @@
+{
+  "name": "hov-editor",
+  "version": "0.1.0",
+  "description": "HOV Editor",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "High Output Ventures",
+  "license": "ISC",
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.163",
+    "@swc/jest": "^0.2.20",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "jest": "^27.5.1"
+  }
+}
