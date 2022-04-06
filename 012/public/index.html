@@ -5,6 +5,8 @@
 
     <title>Text Editor</title>
 
+    <link rel="stylesheet" href="styles.css">
+
     <script type="module">
       import { Editor, TextNode } from './web.js';
 
@@ -13,7 +15,6 @@
         const editor = document.querySelector('#editor');
 
         editor.appendChild(node.getHTMLElement());
-        console.log(editor);
       });
     </script>
   </head>

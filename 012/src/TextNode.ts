@@ -12,6 +12,12 @@ export class TextNode extends Node {
   }
 
   public getHTMLElement(): HTMLElement {
+    let text = this.elem.innerText;
+
+    text = text.replace(/\*{2}(.+)\*{2}/g, "<span class='bold'>$1</span>");
+    text = text.replace(/`(.+)`/g, "<span class='code'>$1</span>");
+
+    this.elem.innerHTML = text;
     return this.elem;
   }
 
