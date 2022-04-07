@@ -6,6 +6,10 @@
   font-style: italic;
 }
 
+.strikethrough {
+  text-decoration: line-through;
+}
+
 .code {
   background-color: lightgray;
   padding: 8px;
