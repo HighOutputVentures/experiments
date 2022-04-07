@@ -13,11 +13,19 @@
     <script type="module">
       const { Editor, TextNode } = HOVEditor;
 
+      const TEST_STRINGS = [
+        "**bold** __also bold__ *italic* ~~strike through~~ `code` ***bold and italic*** **bold and nested _italic_**",
+        "> this **is** a quote",
+        "not a > quote",
+      ];
+
       window.addEventListener('DOMContentLoaded', e => {
-        const node = new TextNode('**bold** __also bold__ *italic* ~~strike through~~ `code` ***bold and italic*** **bold and nested _italic_**');
         const editor = document.querySelector('#editor');
 
-        editor.appendChild(node.getHTMLElement());
+        TEST_STRINGS.forEach(x => {
+          const node = new TextNode(x);
+          editor.appendChild(node.getHTMLElement());
+        });
       });
     </script>
   </body>
