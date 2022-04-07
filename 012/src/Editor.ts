@@ -14,7 +14,6 @@ export class Editor extends Node {
     this.elem = htmlElem;
   }
 
-
   public getHTMLElement(): HTMLElement {
     return this.elem;
   }
