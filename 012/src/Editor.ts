@@ -6,9 +6,14 @@ export enum NodeType {
 }
 
 export class Editor extends Node {
-  constructor(private elem: HTMLDivElement) {
+  private elem: HTMLDivElement;
+
+  constructor(private htmlElem: HTMLDivElement) {
     super();
+
+    this.elem = htmlElem;
   }
+
 
   public getHTMLElement(): HTMLElement {
     return this.elem;

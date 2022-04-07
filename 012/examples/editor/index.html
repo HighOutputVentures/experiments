@@ -20,11 +20,12 @@
       ];
 
       window.addEventListener('DOMContentLoaded', e => {
-        const editor = document.querySelector('#editor');
+        const editor = new Editor(document.querySelector('#editor'));
 
         TEST_STRINGS.forEach(x => {
           const node = new TextNode(x);
-          editor.appendChild(node.getHTMLElement());
+
+          editor.getHTMLElement().appendChild(node.getHTMLElement());
         });
       });
     </script>

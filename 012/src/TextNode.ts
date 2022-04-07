@@ -2,6 +2,7 @@ import { Node } from "./Node";
 
 export class TextNode extends Node {
   private elem: HTMLDivElement;
+  public text: string;
 
   constructor(private data: string) {
     super();
@@ -9,39 +10,56 @@ export class TextNode extends Node {
     this.elem = document.createElement("div");
     this.elem.contentEditable = "true";
     this.elem.className = "text-node";
-    this.elem.innerText = data;
+
+    this.text = data;
+    this.setInnerHtmlFromText();
+
+    this.elem.addEventListener("focus", this.setInnerHtmlToText.bind(this));
+    this.elem.addEventListener("input", this.setTextToInput.bind(this));
+    this.elem.addEventListener("blur", this.setInnerHtmlFromText.bind(this));
   }
 
-  public getHTMLElement(): HTMLElement {
-    let text = this.elem.innerText;
+  private setInnerHtmlFromText(): void {
+    let html = this.text || "";
 
     // Check if a quote:
     let isAQuote = false;
-    if (text.startsWith(">")) {
+    if (html.startsWith(">")) {
       isAQuote = true;
-      text = text.slice(1);
+      html = html.slice(1);
     }
 
     // Apply bold:
-    text = text.replace(/\*{2}([^\*]+)\*{2}/g, "<span class='bold'>$1</span>");
-    text = text.replace(/_{2}([^_]+)_{2}/g, "<span class='bold'>$1</span>");
+    html = html.replace(/\*{2}([^\*]+)\*{2}/g, "<span class='bold'>$1</span>");
+    html = html.replace(/_{2}([^_]+)_{2}/g, "<span class='bold'>$1</span>");
 
     // Apply italic:
-    text = text.replace(/\*([^\*]+)\*/g, "<span class='italic'>$1</span>");
-    text = text.replace(/_([^_]+)_/g, "<span class='italic'>$1</span>");
+    html = html.replace(/\*([^\*]+)\*/g, "<span class='italic'>$1</span>");
+    html = html.replace(/_([^_]+)_/g, "<span class='italic'>$1</span>");
 
     // Apply strikethrough:
-    text = text.replace(/~~([^~]+)~~/g, "<span class='strikethrough'>$1</span>");
+    html = html.replace(/~~([^~]+)~~/g, "<span class='strikethrough'>$1</span>");
 
     // Apply code:
-    text = text.replace(/`([^\`]+)`/g, "<span class='code'>$1</span>");
+    html = html.replace(/`([^\`]+)`/g, "<span class='code'>$1</span>");
 
     // Apply quote (if needed):
     if (isAQuote) {
-      text = `<span class='quote'>${text}</span>`;
+      html = `<span class='quote'>${html}</span>`;
     }
 
-    this.elem.innerHTML = text;
+    this.elem.innerHTML = html;
+  }
+
+  private setInnerHtmlToText(): void {
+    this.elem.innerHTML = this.text;
+  }
+
+  private setTextToInput(event): void {
+    this.text = event.target.textContent;
+  }
+
+  public getHTMLElement(): HTMLElement {
     return this.elem;
   }
 
