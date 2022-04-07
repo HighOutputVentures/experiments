@@ -2,6 +2,10 @@
   font-weight: bold;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .code {
   background-color: lightgray;
   padding: 8px;
