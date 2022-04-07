@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "spack"
+    "bundle": "browserify dist/index.js -t swcify > dist/bundle.js",
+    "build": "swc src/ -d dist/"
   },
   "author": "High Output Ventures",
   "license": "ISC",
@@ -15,6 +16,8 @@
     "@swc/jest": "^0.2.20",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
-    "jest": "^27.5.1"
+    "browserify": "^17.0.0",
+    "jest": "^27.5.1",
+    "swcify": "^1.0.1"
   }
 }
