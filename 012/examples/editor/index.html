@@ -4,9 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Editor</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div id="editor"></div>
     <script src="../../dist/bundle.js"></script>
+
+    <script type="module">
+      const { Editor, TextNode } = HOVEditor;
+
+      window.addEventListener('DOMContentLoaded', e => {
+        const node = new TextNode('**bold** *italic* ~~strike through~~ `code` ***bold and italic*** **bold and nested _italic_**');
+        const editor = document.querySelector('#editor');
+
+        editor.appendChild(node.getHTMLElement());
+      });
+    </script>
   </body>
 </html>
