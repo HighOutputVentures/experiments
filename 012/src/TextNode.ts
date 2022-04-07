@@ -15,8 +15,13 @@ export class TextNode extends Node {
     let text = this.elem.innerText;
 
     text = text.replace(/\*{2}([^\*]+)\*{2}/g, "<span class='bold'>$1</span>");
+    text = text.replace(/_{2}([^_]+)_{2}/g, "<span class='bold'>$1</span>");
+
     text = text.replace(/\*([^\*]+)\*/g, "<span class='italic'>$1</span>");
+    text = text.replace(/_([^_]+)_/g, "<span class='italic'>$1</span>");
+
     text = text.replace(/~~([^~]+)~~/g, "<span class='strikethrough'>$1</span>");
+
     text = text.replace(/`([^\`]+)`/g, "<span class='code'>$1</span>");
 
     this.elem.innerHTML = text;
