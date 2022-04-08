@@ -24,6 +24,12 @@
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
+.link {
+  color: #4078c0;
+  text-decoration: none;
+  background-color: transparent;
+}
+
 .quote {
   padding: 0 15px;
   color: #777;

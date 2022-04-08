@@ -43,6 +43,10 @@ export class TextNode extends Node {
     // Apply code:
     html = html.replace(/`([^\`]+)`/g, "<code class='code'>$1</code>");
 
+    // Create hyperlinks:
+    html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, "<a class='link' href='$2'>$1</a>");
+    // TODO You can't actually click the link yet because contentEditable
+
     // Apply quote (if needed):
     if (isAQuote) {
       html = `<span class='quote'>${html}</span>`;
