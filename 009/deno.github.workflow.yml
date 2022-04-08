@@ -1,0 +1,100 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# This workflow will install Deno then run Deno lint and test.
+# For more information see: https://github.com/denoland/setup-deno
+
+name: Deno
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  target:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@004814556e37c54a2f6e31384c9e18e983317366
+        with:
+          deno-version: v1.20.3
+      
+      - uses: actions/cache@v2
+        with:
+          path: affected
+          key: affected-${{ github.sha }}
+
+      - uses: actions/cache@v2
+        env:
+          cache-name: deno
+        with:
+          path: |
+            ~/.cache/deno
+          key: ${{ env.cache-name }}-${{ runner.os }}-d63cadb3
+          restore-keys: |
+            ${{ env.cache-name }}-${{ runner.os }}-d63cadb3
+
+      - name: Cache deps
+        run: deno cache src/config/deps.ts
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@004814556e37c54a2f6e31384c9e18e983317366
+        with:
+          deno-version: v1.20.3
+          
+      - name: Run format
+        run: deno fmt --check
+      - name: Run lint
+        run: deno lint
+  test:
+    needs:
+      - target
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@004814556e37c54a2f6e31384c9e18e983317366
+        with:
+          deno-version: v1.20.3
+      
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: '4.2'
+
+      - uses: actions/cache@v2
+        with:
+          path: affected
+          key: affected-${{ github.sha }}
+
+      - uses: actions/cache@v2
+        env:
+          cache-name: deno
+        with:
+          path: |
+            ~/.cache/deno
+          key: ${{ env.cache-name }}-${{ runner.os }}-d63cadb3
+          restore-keys: |
+            ${{ env.cache-name }}-${{ runner.os }}-d63cadb3
+
+      - name: Run test
+        run: deno test -A --unstable
+      
