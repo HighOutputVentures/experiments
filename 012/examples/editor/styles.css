@@ -14,9 +14,14 @@
   text-decoration: line-through;
 }
 
+/*Some styles copied from https://jbt.github.io/markdown-editor/:*/
 .code {
-  background-color: lightgray;
-  padding: 8px;
+  background-color: rgba(0,0,0,0.04);
+  font-size: 85%;
+  padding: 0.2em 0;
+  margin: 0;
+  border-radius: 3px;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
 .quote {

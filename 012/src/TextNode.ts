@@ -41,7 +41,7 @@ export class TextNode extends Node {
     html = html.replace(/~~([^~]+)~~/g, "<span class='strikethrough'>$1</span>");
 
     // Apply code:
-    html = html.replace(/`([^\`]+)`/g, "<span class='code'>$1</span>");
+    html = html.replace(/`([^\`]+)`/g, "<code class='code'>$1</code>");
 
     // Apply quote (if needed):
     if (isAQuote) {
