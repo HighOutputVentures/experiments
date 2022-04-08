@@ -1,3 +1,5 @@
+## Authors
+* [meosjin](https://image.tmdb.org/t/p/original/u5yw8rQl4Qw0AMBmqkfdxrRkYx7.jpg)
 ## Overview
 Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust. Created by Ryan Dahl - the original creator of Node.js. The project is intended to fix some design problems in NodeJS.
 
