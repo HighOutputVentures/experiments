@@ -1,6 +1,7 @@
 import json
 import numpy
 import os
+import matplotlib.pyplot as plt
 
 from env_vars import RESOLUTION
 from fetch_logs import fetch_logs
