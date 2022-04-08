@@ -1,7 +1,7 @@
 import { Collection } from '../config/deps.ts';
 
 export default class Repository<T> {
-	private coll: Collection<T>;
+	public coll: Collection<T>;
 	constructor(coll: Collection<T>) {
 		this.coll = coll;
 	}
@@ -32,6 +32,12 @@ export default class Repository<T> {
 
 	public find(...args: Parameters<Collection<T>['find']>) {
 		return this.coll.find(...args);
+	}
+
+	public countDocuments(
+		...args: Parameters<Collection<T>['countDocuments']>
+	) {
+		return this.coll.countDocuments(...args);
 	}
 
 	public findOne(...args: Parameters<Collection<T>['findOne']>) {

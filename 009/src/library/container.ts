@@ -12,6 +12,14 @@ export default class Container<T = Record<string, unknown>> {
 		return { to };
 	}
 
+	public rebind<V = T[keyof T]>(key: keyof T) {
+		const to = (value: V) => {
+			(this.deps as Record<string, unknown>)[key as string] = value;
+		};
+
+		return { to };
+	}
+
 	public get<V = T[keyof T]>(key: keyof T): V {
 		return (this.deps as Record<string, unknown>)[key as string] as V;
 	}

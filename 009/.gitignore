@@ -1,1 +1,4 @@
 cache
+bucket
+node_modules
+./scratch.ts
