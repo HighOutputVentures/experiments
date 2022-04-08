@@ -11,7 +11,7 @@
     <script src="../../dist/bundle.js"></script>
 
     <script type="module">
-      const { Editor, TextNode } = HOVEditor;
+      const { Editor } = HOVEditor;
 
       const TEST_STRINGS = [
         "**bold** __also bold__ *italic* ~~strike through~~ `code` ***bold and italic*** **bold and nested _italic_**",
@@ -24,11 +24,7 @@
       window.addEventListener('DOMContentLoaded', e => {
         const editor = new Editor(document.querySelector('#editor'));
 
-        TEST_STRINGS.forEach(x => {
-          const node = new TextNode(x);
-
-          editor.getHTMLElement().appendChild(node.getHTMLElement());
-        });
+        TEST_STRINGS.forEach(x => editor.appendText(x));
       });
     </script>
   </body>
