@@ -9,7 +9,7 @@ Deno is a simple, modern and secure runtime for JavaScript and TypeScript that u
 
 - DenoJS has built-in dependency inspector, code formatter, linter, and test runner. For complete list of Deno built-in tools check [here](https://deno.land/manual/tools?msclkid=15986b89b58511ec8c4a85e698e1c67c).
 
-- Deno requires explicit permissions. Files are being executed inside a sandbox, so it has no access to the file system. There is a prompt for asking permissions when you run a .ts file. For complete list of Deno permissions, check [here](https://deno.land/manual/getting_started/permissions#permissions-list). NodeJS application by default have access to all, though in HOV we haven't encountered such requirement. It is said that Deno has this permissions to utilize the v8 security features. 
+- Deno requires explicit permissions. Files are being executed inside a sandbox, so it has no access to the file system. There is a prompt for asking permissions when you run a .ts file. For complete list of Deno permissions, check [here](https://deno.land/manual/getting_started/permissions#permissions-list). NodeJS application by default have access to all, though in Node I haven't encountered such requirement. It is said that Deno has this permissions to utilize the v8 security features. 
 
 - Deno API has been designed to leverage the modern javascript features. Deno supports top level await, means you can use await in your main script without having to wrap it in an async function. 
 
