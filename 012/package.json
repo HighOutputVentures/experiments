@@ -1,0 +1,25 @@
+{
+  "name": "hov-editor",
+  "version": "0.1.0",
+  "description": "HOV Editor",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "bundle": "browserify dist/index.js -t swcify > dist/bundle.js",
+    "compile": "swc src/ -d dist/",
+    "build": "npm run compile && npm run bundle"
+  },
+  "author": "High Output Ventures",
+  "license": "ISC",
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.163",
+    "@swc/jest": "^0.2.20",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "browserify": "^17.0.0",
+    "http-server": "^14.1.0",
+    "jest": "^27.5.1",
+    "swcify": "^1.0.1"
+  }
+}
