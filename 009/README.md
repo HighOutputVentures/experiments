@@ -1,4 +1,51 @@
-## Authors
+## Overview
+Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust. Created by Ryan Dahl - the original creator of Node.js. The project is intended to fix some design problems in NodeJS.
+
+### Deno and NodeJS Comparison
+
+- Deno ships with a single executable file so installing and using it is very quick and flexible. NodeJS has a pre-built installer for your platform or you can use external version manager like `nvm` to install multiple NodeJS version.
+
+- Supports TypeScript out of the box (to surface more typing errors at compiling time). If we tried to run code written with TypeScript in NodeJS without using ts-node (or any other additional package), we would immediately get errors about the unknown syntax.
+
+- DenoJS has built-in dependency inspector, code formatter, linter, and test runner. For complete list of Deno built-in tools check [here](https://deno.land/manual/tools?msclkid=15986b89b58511ec8c4a85e698e1c67c).
+
+- Deno requires explicit permissions. Files are being executed inside a sandbox, so it has no access to the file system. There is a prompt for asking permissions when you run a .ts file. For complete list of Deno permissions, check [here](https://deno.land/manual/getting_started/permissions#permissions-list). NodeJS application by default have access to all, though in HOV we haven't encountered such requirement. It is said that Deno has this permissions to utilize the v8 security features. 
+
+- Deno API has been designed to leverage the modern javascript features. Deno supports top level await, means you can use await in your main script without having to wrap it in an async function. 
+
+- Deno is browser compatible. Building apps that run in the browser is a completely different thing than building a Node.js application.
+
+- NodeJS uses package managers which is by default `npm` to install packages and import them. However, DenoJS can import packages directly as URL or file paths.
+   ```
+  import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+  ```
+
+- DenoJS does not use package.json due to some of its unnecessary information. Package.json is necessary for NodeJS applications to maintain and manage dependencies. 
+  
+  _If only relative files and URLs were used when importing, the path defines the version. There is no need to list dependencies_ - Ryan Dahl
+
+- No more node_modules in Deno, in NodeJS it massively complicates the module resolution algorithm. You can cache the modules in Deno and keep all the modules in one place. Example if you have two projects: 
+  - In NodeJS, those projects will have their own separate node_modules even with same modules used. 
+  - In DenoJS, you can cache the module and reuse it in the other project.
+
+    You also don't need to import the whole package, e.g. when you import ramda and you only need specific functions, it will only cache and use the required files. 
+  ```
+  // instead of import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+  import map from "https://deno.land/x/ramda@v0.27.2/source/map.js";
+  ```
+
+  ![cache-ramda](./docs/assets/cache-ramda.PNG)
+
+    It also cache the source files so the next time you lint your project, it will only lint the files that has changes.
+
+- NodeJS has wider community than DenoJS. NodeJS has a lot of npm packages and sdks that are not supported in Deno, though there are module cdn that converts npm packages to be compatible in Deno, it does not cover all the packages so there is still a chance that the library you're using in NodeJS is not available in DenoJS. 
+
+- Deno will always break on unhandled exceptions unlike NodeJS. In NodeJS, it does not stop the process immediately, it will be sent to an event `Uncaught Exception`, where you can catch it there do safe shutdown.
+
+## Author's Take
+  Deno was created to fix NodeJS design that was there a long time already that devs got "used" to it. Regardless of those quirks, Node.js is still more stable than Deno and is a relatively long-running project, and one of the leading runtimes for building cloud native microservices and backend applications. 
+  
+  I've read somewhere that we should not see Deno as replacement of Nodejs but as an alternative. Most devs in HOV are familiar already in NodeJS, and it wouldn't take that much effort to learn Deno, so i think i'm open to use Deno especially in solutions that requires standalone scripts.
 
 ## Goal Statements
 
@@ -16,33 +63,11 @@ Create a Kanban Board GraphQL API that runs in deno with these features:
 
 [ ] Implement GraphQL Directives
 
-[ ] Dockerize Deno
+[X] Dockerize Deno
 
-[ ] CI/CD
+[X] CI/CD
 
 [ ] Going Live
- 
-## Abstract
-
-## Conclusion
-
-## Resources
-
-- [deno](https://deno.land)
-
-- [oak_graphql](https://deno.land/x/oak_graphql@0.6.2)
-
-- [vscode_deno](https://deno.land/manual@v1.16.4/vscode_deno)
-
-- [linter](https://deno.land/manual@v1.16.4/tools/linter)
-
-- [node/module](https://deno.land/std@0.131.0/node/module.ts)
-
-- [jspm](https://jspm.org/)
-
-- [skypack](https://www.skypack.dev/blog/2021/02/skypack-npm-packages-in-deno/?msclkid=b1d7e517b49311ec92bf4819b0376ab6/)
-
-- [testing](https://deno.land/manual/testing?msclkid=b59202a3b49411eca923f8e15be0f1d4)
 
 ## Getting Started
 
@@ -239,3 +264,24 @@ flags.
   ```
   deno test --jobs 3
   ```
+## Resources
+
+- [deno](https://deno.land)
+
+- [oak_graphql](https://deno.land/x/oak_graphql@0.6.2)
+
+- [vscode_deno](https://deno.land/manual@v1.16.4/vscode_deno)
+
+- [linter](https://deno.land/manual@v1.16.4/tools/linter)
+
+- [node/module](https://deno.land/std@0.131.0/node/module.ts)
+
+- [jspm](https://jspm.org/)
+
+- [skypack](https://www.skypack.dev/blog/2021/02/skypack-npm-packages-in-deno/?msclkid=b1d7e517b49311ec92bf4819b0376ab6/)
+
+- [testing](https://deno.land/manual/testing?msclkid=b59202a3b49411eca923f8e15be0f1d4)
+
+- https://binary-studio.com/2021/10/05/deno-js-ts-runtime/?msclkid=76a4a06db57a11ec9639a2639312b77f
+ - https://deno.land/manual/getting_started/permissions#permissions-list
+ - https://deno.land/manual/tools?msclkid=15986b89b58511ec8c4a85e698e1c67c
