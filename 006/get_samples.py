@@ -4,7 +4,6 @@ import os
 import matplotlib.pyplot as plt
 
 from env_vars import RESOLUTION
-from fetch_logs import fetch_logs
 from get_fft import get_fft
 
 def load_json(filename):
@@ -19,8 +18,15 @@ def generate_points(sample):
     m['point']['values']['95.0'] or 0
     for m in sample['intervals']['buckets']
   ]
+  plt.title('Original sample')
+  plt.plot(points)
+  plt.show()
   label = 1.0 if len(list(filter(lambda x: x > 5000, points))) < 10 else 0.0
   fft = get_fft(numpy.array(points))
+
+  plt.title('Sample converted to FFT')
+  plt.plot(fft)
+  plt.show()
   return points + fft + [label]
 
 def get_samples():

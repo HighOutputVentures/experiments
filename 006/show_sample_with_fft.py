@@ -8,6 +8,6 @@ data = samples[:, 0:-1]
 
 sample = data[0]
 
-
+plt.title('Sample with FFT')
 plt.plot(np.arange(len(sample)), sample)
 plt.show()
