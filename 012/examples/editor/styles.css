@@ -2,14 +2,6 @@
   padding: 8px;
 }
 
-.bold {
-  font-weight: bold;
-}
-
-.italic {
-  font-style: italic;
-}
-
 .strikethrough {
   text-decoration: line-through;
 }

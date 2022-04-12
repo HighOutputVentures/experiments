@@ -1,8 +1,8 @@
 import { Node } from "./Node";
+import sanitizeHtml from "sanitize-html";
 
 export class TextNode extends Node {
   private elem: HTMLDivElement;
-  public text: string;
 
   constructor(private data: string) {
     super();
@@ -10,17 +10,21 @@ export class TextNode extends Node {
     this.elem = document.createElement("div");
     this.elem.contentEditable = "true";
     this.elem.className = "text-node";
+    this.elem.innerHTML = data;
 
-    this.text = data;
-    this.setInnerHtmlFromText();
+    this.updateInnerHtml();
 
-    this.elem.addEventListener("focus", this.setInnerHtmlToText.bind(this));
-    this.elem.addEventListener("input", this.setTextToInput.bind(this));
-    this.elem.addEventListener("blur", this.setInnerHtmlFromText.bind(this));
+    this.elem.addEventListener("input", this.updateInnerHtml.bind(this));
   }
 
-  private setInnerHtmlFromText(): void {
-    let html = this.text || "";
+  private updateInnerHtml(): void {
+    let html = this.elem.innerHTML || "";
+
+    // Sanitize:
+    html = sanitizeHtml(html, {
+      allowedTags: ["b", "i", "em", "strong", "a", "p", "h1"],
+      allowedAttributes: { a: ["href"] }
+    });
 
     // Check if a quote:
     let isAQuote = false;
@@ -45,22 +49,58 @@ export class TextNode extends Node {
 
     // Create hyperlinks:
     html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, "<a class='link' href='$2'>$1</a>");
-    // TODO You can't actually click the link yet because contentEditable
 
-    // Apply quote (if needed):
-    if (isAQuote) {
-      html = `<span class='quote'>${html}</span>`;
+    if (this.elem.innerHTML !== html) {
+      const oldTextContent = this.elem.textContent;
+      this.elem.innerHTML = html;
+      const newTextContent = this.elem.textContent;
+
+      // TODO The code below is meant to reposition the cursor
+      // as when we modify innerHTML, it moves.
+      //
+      // While this does currently work:
+      //  (1) it is probably inefficient
+      //  (2) it does NOT work in IE (https://developer.mozilla.org/en-US/docs/Web/API/Selection/modify)
+      //
+      // The "correct" answer probably involves Range
+      // but I was unable to get that working.
+      // Others, feel free to give it a try --Daniel
+
+      const [longerText, shorterText] =
+        oldTextContent.length > newTextContent.length
+          ? [oldTextContent, newTextContent] // should always be true (for now)
+          : [newTextContent, oldTextContent]
+
+      const shorterTextLength = shorterText.length;
+      const longerTextLength = longerText.length;
+
+      let a: number, b: number, c: number;
+
+      // Determine how long util the longer (i.e. old) and
+      // shorter (i.e. new) text are the same:
+      for (a = 0; a < shorterTextLength; a++) {
+        if (longerText[a] !== shorterText[a]) break;
+      }
+
+      // Determine how long the longer text
+      // stays different from the shorter one:
+      for (b = 0; (a+b) < longerTextLength; b++) {
+        if (longerText[a+b] === shorterText[a]) break;
+      }
+
+      // Determine how long after that the longer and
+      // shorter text are the same:
+      for (c = 0; (a+c) < shorterTextLength; c++) {
+        if (longerText[a+b+c] !== shorterText[a+c]) break;
+      }
+
+      const sel = window.getSelection();
+      sel.extend(this.elem, 0);
+      for (let i = 0; i < (a+c); i++) {
+        // @ts-expect-error
+        sel.modify('move', 'forward', "character");
+      }
     }
-
-    this.elem.innerHTML = html;
-  }
-
-  private setInnerHtmlToText(): void {
-    this.elem.innerHTML = this.text;
-  }
-
-  private setTextToInput(event): void {
-    this.text = event.target.textContent;
   }
 
   public getHTMLElement(): HTMLElement {
