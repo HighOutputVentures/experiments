@@ -34,21 +34,27 @@ export class TextNode extends Node {
     }
 
     // Apply bold:
-    html = html.replace(/\*{2}([^\*]+)\*{2}/g, "<span class='bold'>$1</span>");
-    html = html.replace(/_{2}([^_]+)_{2}/g, "<span class='bold'>$1</span>");
+    html = html.replace(/\*{2}([^*]+)\*{2}/g, "<b>$1</b>");
+    html = html.replace(/_{2}([^_]+)_{2}/g, "<b>$1</b>");
 
     // Apply italic:
-    html = html.replace(/\*([^\*]+)\*/g, "<span class='italic'>$1</span>");
-    html = html.replace(/_([^_]+)_/g, "<span class='italic'>$1</span>");
+    html = html.replace(/(^|[^\*])\*([^*]+)\*/g, "$1<i>$2</i>");
+    html = html.replace(/(^|[^_])_([^_]+)_/g, "$1<i>$2</i>");
 
     // Apply strikethrough:
     html = html.replace(/~~([^~]+)~~/g, "<span class='strikethrough'>$1</span>");
 
-    // Apply code:
-    html = html.replace(/`([^\`]+)`/g, "<code class='code'>$1</code>");
+    // Disabled for now:
+    // // Apply code:
+    // html = html.replace(/`([^\`]+)`/g, "<code class='code'>$1</code>");
 
-    // Create hyperlinks:
-    html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, "<a class='link' href='$2'>$1</a>");
+    // // Create hyperlinks:
+    // html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, "<a class='link' href='$2'>$1</a>");
+
+    // Apply quote (if needed):
+    if (isAQuote) {
+      html = `<span class='quote'>${html}</span>`;
+    }
 
     if (this.elem.innerHTML !== html) {
       const oldTextContent = this.elem.textContent;
