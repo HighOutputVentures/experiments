@@ -2,3 +2,10 @@ cache
 bucket
 node_modules
 ./scratch.ts
+*.log
+.cache
+.DS_Store
+*bak
+.history
+.temp/**
+**/target
