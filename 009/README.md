@@ -69,6 +69,8 @@ Create a Kanban Board GraphQL API that runs in deno with these features:
 
 [X] CI/CD
 
+[X] Foreign Function Interface API
+
 [ ] Going Live
 
 ## Getting Started
