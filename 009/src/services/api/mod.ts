@@ -4,7 +4,7 @@ import {
 	applyGraphQL,
 	Bson,
 	GraphQLError,
-	oakCors,
+	ParameterizedContext,
 	Router,
 } from '../../config/deps.ts';
 import typeDefs from './type-defs/schema.ts';
@@ -34,12 +34,21 @@ export default class Server {
 
 	public initializeMiddlewares() {
 		// this.app.use(logger.logger);
+		const router = new Router();
+		router
+			.get('/', (context: ParameterizedContext) => {
+				context.response.body = 'Hello Deno!';
+			});
 
+		this.app.use(router.routes());
+		this.app.use(router.allowedMethods());
+		/*
 		this.app.use(
 			oakCors({
 				origin: true,
 			}),
 		);
+		*/
 	}
 
 	public initializeAuthorization() {
@@ -108,7 +117,7 @@ export default class Server {
 	}
 
 	public async start() {
-		console.log(`http://localhost:${this.port}/graphql`);
-		await this.app.listen(`localhost:${this.port}`);
+		console.log(`http://0.0.0.0:${this.port}/graphql`);
+		await this.app.listen(`0.0.0.0:${this.port}`);
 	}
 }

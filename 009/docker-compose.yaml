@@ -4,11 +4,11 @@ services:
     image: mongo:4-focal
     ports:
       - 27017:27017
-  app:
+  kanban:
     image: kanban
     restart: always
     environment:
-      - PORT=9090
+      - HTTP_PORT=9090
       - MONGODB_URI=mongodb://mongo/deno
     ports:
       - 9090:9090

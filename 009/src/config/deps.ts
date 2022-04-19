@@ -9,7 +9,6 @@ export {
 } from 'https://deno.land/x/oak@v10.4.0/mod.ts';
 export type {
 	Context as ParameterizedContext,
-	RouterContext,
 } from 'https://deno.land/x/oak@v10.4.0/mod.ts';
 
 export {
