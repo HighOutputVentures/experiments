@@ -48,28 +48,20 @@ autoencoder.compile(optimizer='adam', loss='mse')
 ## Choice of Optimizer
 Here are comparisons of training loss for each optimizer (still using the same 12-hour data from the training section):
 
-### AdaGrad
 ![Training Loss](./images/adagrad-train-loss.png "Training Loss")
 
-### RMSprop
 ![Training Loss](./images/rmsprop-train-loss.png "Training Loss")
 
-### Adadelta
 ![Training Loss](./images/adadelta-train-loss.png "Training Loss")
 
-### Adam
 ![Training Loss](./images/adam-train-loss.png "Training Loss")
 
-### Adamax
 ![Training Loss](./images/adamax-train-loss.png "Training Loss")
 
-### Nadam
 ![Training Loss](./images/nadam-train-loss.png "Training Loss")
 
-### Ftrl
 ![Training Loss](./images/ftrl-train-loss.png "Training Loss")
 
-### SGD
 ![Training Loss](./images/sgd-train-loss.png "Training Loss")
 
 ## Resources
