@@ -1,60 +1,63 @@
 # Data Gathering
 
-## Elasticsearch Query
+1. Logs for internal API response times are gathered from Elastic search.
+2. For every second, the 95th percentile of all response times (at that period of 1 second) will be taken as our raw datapoints.
 
-Here's the query that was used to retrieve the logs:
-```json
-{
-    "size": 0,
-    "query": {
-        "bool": {
-            "must": [
-                { "match": { "json.tags": "client, transaction" } },
-                { "exists": { "field": "json.message.responseTime" } },
-                {
-                    "range": {
-                        "@timestamp": {
-                            "gte": "2022-03-10T12:00:00.000Z",
-                            "lt": "2022-03-11T00:00:00.000Z"
-                        }
-                    }
-                }
-            ]
-        }
-    },
-    "aggs": {
-        "window": {
-            "date_histogram": {
-                "field": "@timestamp",
-                "fixed_interval": "3m"
+    The query body sent to Elastic is generated from here: [`get_query_body(gte, lte)`](../get_elastic_query_body.py)
+
+    With the limitations of the Elastic instance used, we are only able to get response times logs of 1 second-interval for a period of 12 hours. For that reason, we will be splitting our queries for every 12 hours.
+
+    Here's an example of data (truncated) returned by Elastic:
+    ```json
+    {
+        "took": 1383,
+        "timed_out": false,
+        "hits": {
+            "total": {
+                "value": 10000,
+                "relation": "gte"
             },
-            "aggs": {
-                "intervals": {
-                    "date_histogram": {
-                        "field": "@timestamp",
-                        "fixed_interval": "1s"
-                    },
-                    "aggs": {
+            "max_score": null,
+            "hits": []
+        },
+        "aggregations": {
+            "window": {
+                "buckets": [
+                    {
+                        "key_as_string": "2022-04-20T00:00:01.000Z",
+                        "key": 1650412801000,
+                        "doc_count": 2,
                         "point": {
-                            "percentiles": {
-                                "field": "json.message.responseTime",
-                                "percents": [ 95 ]
+                            "values": {
+                                "95.0": 198.0
+                            }
+                        }
+                    },
+                    {
+                        "key_as_string": "2022-04-20T00:00:02.000Z",
+                        "key": 1650412802000,
+                        "doc_count": 0,
+                        "point": {
+                            "values": {
+                                "95.0": null
+                            }
+                        }
+                    },
+                    {
+                        "key_as_string": "2022-04-20T00:00:03.000Z",
+                        "key": 1650412803000,
+                        "doc_count": 4,
+                        "point": {
+                            "values": {
+                                "95.0": 1856.0
                             }
                         }
                     }
-                }
+                ]
             }
         }
     }
-}
-```
+    ```
 
-Sample response can be found [here](../data/response_times/).
-
-## Breakdown of Query
-
-- Retrieved only the logs where `json.tags` matches with `'client, transaction'`. These are internal client requests within the Wallet environment.
-- `@timestamp` range was also supplied to retrieve logs only in the span of 12 hours. This is the maximum number of buckets that can be retrieved with 1-second resolution per 3-minute aggregation.
-- For the aggregations:
-    1. Logs are grouped for every 3-minute `fixed_interval`.
-    2. For each of those 3-minute interval group, a sub-aggregation is added to group logs for every 1-second `fixed_interval` and computed for the 95th percentile of responseTime for every 1-second interval.
+    These logs are then saved in different files.
+3. To achieve the goal of overfitting the model with good data, datapoints are queried from Elastic with given timestamps corresponding to those days that have no reports of system unresponsiveness and that the system is considered to be operating normally.

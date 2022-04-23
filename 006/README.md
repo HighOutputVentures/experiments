@@ -4,29 +4,14 @@
 ## Goal Statements
 
 The goal of this experiment is to establish and demonstrate a workflow in solving or building Data Science applications using ML tools.
-This experiment will include (but not limited to) the following objectives:
 
-1. To identify the requirements for the application or problem to be solved.
-    - What type of problem is being solved?
-    - What algorithm is more appropriate to use to solve the problem?
-2. To know the methodologies in data preprocessing.
-    - Acquiring/Gathering data.
-    - Data manipulation or clean up.
-    - Encoding data
-    - Splitting of dataset (training and test datasets)
-    - Feature scaling
-3. To design and build models.
-4. To be able to train and validate models.
-
-This experiment does not aim towards complex methodologies or even very high accuracy of models built but rather focuses more on the processes and workflow needed in dealing with such problems.
+This experiment does not aim towards complex methodologies or even very accurate results but rather focuses more on the processes and workflow needed in dealing with such problems.
 
 ## Abstract
 
-In this experiment, I am going to build a model that detects anomaly in the logs generated in OneWallet system. The model will tell us whether a given set of logs in a fixed and consistent time window is good or anomalous.
+This experiment aims to build a model that detects anomaly in the logs generated in OneWallet particularly the response times of internal APIs.
 
-As this experiment aims to establish a set of processes, to reduce complexity, I am going to focus on logs that pertains to the response times of internal APIs in OneWallet.
-
-My approach in solving this problem is to train a model for it to learn to be very good at processing a time series of logs that we consider to be normal or good, but fails to a high degree in processing a time series of logs that are anomalous. More specifically, the model should generate a significantly greater loss in processing an anomalous set of logs compared to processing a good set of logs.
+The approach in detecting anomaly is by overfitting the model with good data. That is, the model will be trained with only good data (or at least a very huge percentage of it). So that, the model will be very good at processing a time series of logs that are good, but perform really bad in processing a time series of logs that are anomalous.
 
 For this approach I'm going to use Autoencoder.
 
@@ -40,16 +25,13 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 2. [Data Gathering](./docs/data-gathering.md)
 3. [Generating Samples](./docs/generating-samples.md)
 4. [Preparing Samples for Training](./docs/preparing-samples-for-training.md)
-5. [Designing The Model](./docs/designing-the-model.md)
-6. [Training The Model](./docs/training-the-model.md)
-7. [Validating The Model](./docs/validating_the_model.md)
+5. [Designing the Model](./docs/designing-the-model.md)
+6. [Training the Model](./docs/training-the-model.md)
+7. [Validating the Model](./docs/validating_the_model.md)
 8. [Optimizations](./docs//optimizations.md)
 9. [Adding Input Dimensions](./docs/adding-input-dimensions.md)
+10. Saving and Reusing the Model
 10. Application
-
-## Recommendations
-1. Using Sliding Window For Dataset
-2. Assigning reliable labels for test data
 
 ## Resources
 1. [Anomaly Detection: Definition, Best Practices and Use Cases](https://datrics.ai/anomaly-detection-best-practices)
