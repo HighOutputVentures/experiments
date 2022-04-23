@@ -11,7 +11,7 @@ This experiment does not aim towards complex methodologies or even very accurate
 
 This experiment aims to build a model that detects anomaly in the logs generated in OneWallet particularly the response times of internal APIs.
 
-The approach in detecting anomaly is by overfitting the model with good data. That is, the model will be trained with only good data (or at least a very huge percentage of it). So that, the model will be very good at processing a time series of logs that are good, but perform really bad in processing a time series of logs that are anomalous.
+The approach in detecting anomaly is by overfitting the model with good data. That is, the model will be trained with only good data (or at least a very huge percentage of it) so that the model will be very good at processing a time series of logs that are good, but perform really bad in processing a time series of logs that are anomalous.
 
 For this approach I'm going to use Autoencoder.
 

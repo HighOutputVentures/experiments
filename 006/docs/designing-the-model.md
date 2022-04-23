@@ -23,4 +23,4 @@ Code for the model can be found [here](../model.py).
       layers.Dense(180, activation='sigmoid')
     ])
     ```
-*Note: The activiation functions used here are based of examples from the resources and no optimizations were considered yet.*
+*Note: The activiation functions used here are based on examples from the resources and no optimizations were considered yet.*
