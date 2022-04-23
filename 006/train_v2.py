@@ -28,18 +28,18 @@ test_data = (original_test_data - min_val) / (max_val - min_val)
 train_data = tf.cast(train_data, tf.float32)
 test_data = tf.cast(test_data, tf.float32)
 
-autoencoder = AnomalyDetector()
-autoencoder.compile(optimizer='adagrad', loss='mse')
+autoencoder = AnomalyDetector(dimension=271)
+autoencoder.compile(optimizer='adam', loss='mse')
 
 history = autoencoder.fit(
-  train_data,
-  train_data,
+  x=train_data,
+  y=train_data,
   epochs=20,
   batch_size=128,
   shuffle=True,
 )
 
-autoencoder.save('saved_model/my_model')
+# autoencoder.save('saved_model/my_model')
 
 plt.plot(history.history['loss'], label='Training Loss')
 plt.show()
@@ -69,6 +69,7 @@ def print_stats(predictions, labels):
 predictions = predict(autoencoder, test_data, threshold)
 
 for idx, value in enumerate(predictions):
-  plt.title('Good' if value else 'Anomalous')
-  plt.plot(original_test_data[idx])
-  plt.show()
+  if value != True:
+    plt.title('Anomalous')
+    plt.plot(original_test_data[idx][0:180])
+    plt.show()

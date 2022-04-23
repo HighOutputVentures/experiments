@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 from env_vars import RESOLUTION
-from get_samples import get_samples
+from prepare_samples import get_samples
 
 samples = get_samples()
 

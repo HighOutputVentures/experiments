@@ -20,10 +20,9 @@ Based on the information above, we choose:
 
 ```python
 class AnomalyDetector(Model):
-  def __init__(self):
+  def __init__(self, dimension):
     super().__init__()
     self.encoder = tf.keras.Sequential([
-      layers.Dense(64, activation='sigmoid'),
       layers.Dense(32, activation='sigmoid'),
       layers.Dense(16, activation='sigmoid'),
       layers.Dense(8, activation='sigmoid'),
@@ -32,8 +31,7 @@ class AnomalyDetector(Model):
     self.decoder = tf.keras.Sequential([
       layers.Dense(16),
       layers.Dense(32),
-      layers.Dense(64),
-      layers.Dense(180)
+      layers.Dense(dimension)
     ])
 
   def call(self, x):
@@ -43,57 +41,35 @@ class AnomalyDetector(Model):
 ```
 
 ```python
-autoencoder = AnomalyDetector()
-autoencoder.compile(optimizer='ftrl', loss='mse')
+autoencoder = AnomalyDetector(dimension=180)
+autoencoder.compile(optimizer='adam', loss='mse')
 ```
 
-With this configuration used, we are able to get significant improvements on our results:
-```
-Accuracy = 0.9600409836065574
-Precision = 0.9989035087719298
-Recall = 0.9599578503688093
-```
-
-## Choosing Optimizer
+## Choice of Optimizer
+Here are comparisons of training loss for each optimizer (still using the same 12-hour data from the training section):
 
 ### AdaGrad
-
-`loss: 0.0011`
 ![Training Loss](./images/adagrad-train-loss.png "Training Loss")
 
 ### RMSprop
-
-`loss: 4.0535e-05`
 ![Training Loss](./images/rmsprop-train-loss.png "Training Loss")
 
 ### Adadelta
-
-`loss: 0.0069`
 ![Training Loss](./images/adadelta-train-loss.png "Training Loss")
 
 ### Adam
-
-`loss: 4.0756e-05`
 ![Training Loss](./images/adam-train-loss.png "Training Loss")
 
 ### Adamax
-
-`loss: 4.0533e-05`
 ![Training Loss](./images/adamax-train-loss.png "Training Loss")
 
 ### Nadam
-
-`loss: 4.0730e-05`
 ![Training Loss](./images/nadam-train-loss.png "Training Loss")
 
 ### Ftrl
-
-`loss: 4.1727e-05`
 ![Training Loss](./images/ftrl-train-loss.png "Training Loss")
 
 ### SGD
-
-`loss: 5.1800e-05`
 ![Training Loss](./images/sgd-train-loss.png "Training Loss")
 
 ## Resources

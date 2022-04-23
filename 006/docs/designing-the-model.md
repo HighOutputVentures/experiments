@@ -1,11 +1,14 @@
 # Designing The Model
 
+An autoencoder is a type of artificial neural network that seeks to learn to copy its input to its output as close as possible. It does so by encoding the input into a lower dimensional latent representation, then decoding the latent representation back to the same input dimension.
+
+![Autoencoder](./images/autoencoder.png "Autoencoder")
+
 Code for the model can be found [here](../model.py).
 
-1. Add multilayer dense network to generate a latent representation from (180 to 8 resolution) of the datapoints.
+1. Add a multilayer dense network to generate a latent representation from (180 to 8 resolution).
     ```python
     self.encoder = tf.keras.Sequential([
-      layers.Dense(64, activation='relu'),
       layers.Dense(32, activation='relu'),
       layers.Dense(16, activation='relu'),
       layers.Dense(8, activation='relu'),
@@ -17,15 +20,7 @@ Code for the model can be found [here](../model.py).
     self.decoder = tf.keras.Sequential([
       layers.Dense(16, activation='relu'),
       layers.Dense(32, activation='relu'),
-      layers.Dense(64, activation='relu'),
       layers.Dense(180, activation='sigmoid')
     ])
     ```
-
-3. Add `call` function which will perform steps 1 and 2 for a given sample.
-    ```
-    def call(self, x):
-      encoded = self.encoder(x)
-      decoded = self.decoder(encoded)
-      return decoded
-    ```
+*Note: The activiation functions used here are based of examples from the resources and no optimizations were considered yet.*

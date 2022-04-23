@@ -7,18 +7,18 @@ from tensorflow.python.keras import layers
 from tensorflow.python.keras.models import Model
 
 class AnomalyDetector(Model):
-  def __init__(self):
+  def __init__(self, dimension):
     super().__init__()
     self.encoder = tf.keras.Sequential([
-      layers.Dense(180, activation='sigmoid'),
       layers.Dense(32, activation='sigmoid'),
+      layers.Dense(16, activation='sigmoid'),
       layers.Dense(8, activation='sigmoid'),
     ])
 
     self.decoder = tf.keras.Sequential([
+      layers.Dense(16),
       layers.Dense(32),
-      layers.Dense(180),
-      layers.Dense(271)
+      layers.Dense(dimension)
     ])
 
   def call(self, x):

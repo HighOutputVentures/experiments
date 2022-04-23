@@ -2,3 +2,4 @@
 /__pycache__
 .env
 /data/running-window
+/raw_data

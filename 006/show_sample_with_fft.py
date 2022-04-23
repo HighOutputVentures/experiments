@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from get_samples import get_samples
+from prepare_samples import get_samples
 
 samples = get_samples()
 data = samples[:, 0:-1]
