@@ -1,8 +1,8 @@
 # Training The Model
 
-Code for training the model can also be found [here](../train.py).
+Code for training the model can be found [here](../train.py).
 
-1. Get our samples.
+1. Get the samples.
     ```python
     samples = prepare_samples(start_date, end_date)
     ```
