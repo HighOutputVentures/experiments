@@ -82,9 +82,6 @@ The process is pretty straightforward:
     ])
     ```
 The images below are training loss of each optimizer using samples with appended FFT and with the added hidden layers (64, and 128).
-```python
-
-```
 
 *Note: Data used here are the same 12-hour data used from previous sections. Also same values for `epoch=20` and `batch_size=128`*
 
