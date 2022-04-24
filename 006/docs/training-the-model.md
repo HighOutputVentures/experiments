@@ -28,7 +28,6 @@ Code for training the model can be found [here](../train.py).
     )
     ```
     Here's a plot of the training loss (using only a length of 12-hour data):
-
     ![Train Loss](./images/train_loss.png "Train Loss")
 4. Save the model.
     ```python
