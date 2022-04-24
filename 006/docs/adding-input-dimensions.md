@@ -19,7 +19,7 @@ Code for appending the FFT to a sample can be found here: [`add_fft_to_sample(sa
     sample_detrended = detrend(data=sample, type='constant')
     ```
 
-    below is a plot of the sample after detrending. Notice how the values are shifted down.
+    Below is a plot of the sample after detrending. Notice how the values are shifted down.
 
     ![Sample Mean Removed](./images/sample-mean-removed.png "Sample Mean Removed")
 
