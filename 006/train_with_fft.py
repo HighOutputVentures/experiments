@@ -1,4 +1,5 @@
 import os
+from add_fft_to_sample import add_fft_to_sample
 
 from env_vars import RESOLUTION
 from model import AnomalyDetector
@@ -7,15 +8,12 @@ os.add_dll_directory('C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/b
 
 import tensorflow as tf
 import matplotlib.pyplot as plt
+import numpy as np
 
 start_date = '2022-04-20T00:00:00.000Z'
 end_date = '2022-04-20T12:00:00.000Z'
 
-samples = prepare_samples(start_date, end_date)
-
-plt.title('Original Sample')
-plt.plot(samples[0])
-plt.show()
+samples = np.array([add_fft_to_sample(sample) for sample in prepare_samples(start_date, end_date)])
 
 min_val = tf.reduce_min(samples)
 max_val = tf.reduce_max(samples)
@@ -34,18 +32,19 @@ optimizers = [
   'sgd'
 ]
 
-autoencoder = AnomalyDetector(dimension=180)
-autoencoder.compile(optimizer='adam', loss='mse')
+print(f'Sample length: {len(normalized_samples[0])}')
 
-history = autoencoder.fit(
-  x=training_data,
-  y=training_data,
-  epochs=20,
-  batch_size=128,
-  shuffle=True,
-)
+for optimizer in optimizers:
+  autoencoder = AnomalyDetector(dimension=len(normalized_samples[0]))
+  autoencoder.compile(optimizer=optimizer, loss='mse')
 
-plt.plot(history.history['loss'], label='Training Loss')
-plt.show()
+  history = autoencoder.fit(
+    x=training_data,
+    y=training_data,
+    epochs=20,
+    batch_size=128
+  )
 
-autoencoder.save('/anomaly_detection')
+  plt.title(f'Training Loss: {optimizer}')
+  plt.plot(history.history['loss'], label='Training Loss')
+  plt.show()

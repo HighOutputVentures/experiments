@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.signal import detrend
 
 def get_fft(sample, plot=False):
   if plot:
@@ -7,7 +8,7 @@ def get_fft(sample, plot=False):
     plt.plot(sample)
     plt.show()
 
-  sample -= sample.mean()
+  sample = detrend(data=sample, type='constant')
 
   if plot:
     plt.title('Sample after mean is removed')

@@ -13,4 +13,4 @@ def get_running_window_samples():
     data.extend(json.load(open(f'./raw_data/running-window/{file}')))
     print(f'File {file} appended. Length: {len(data)}')
 
-  return np.array([sample + get_fft(np.array(sample)) for sample in data])
+  return np.array([sample + get_fft(np.array(sample), plot=True) for sample in data])
