@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 from get_elastic_data import get_elastic_data
 
@@ -17,8 +18,18 @@ def extract_values(raw_data):
     raw_data.json()['aggregations']['window']['buckets']
   ])
 
-def prepare_samples(start, end):
+def prepare_samples(start, end, distort=False, shuffle=False):
   raw_data = get_elastic_data(start=start, end=end)
   values = extract_values(raw_data)
+
+  if distort:
+    random_index = random.randint(0, len(values))
+    for n in range(0, 20, 2):
+      values[random_index + n] += random.randint(0, 10000)
+
   samples = get_sliding_data(values, 180)
+
+  if shuffle:
+    np.random.shuffle(samples)
+
   return samples;

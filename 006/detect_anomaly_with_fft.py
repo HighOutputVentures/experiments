@@ -14,18 +14,18 @@ now = arrow.utcnow()
 end = now.format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
 start = now.shift(minutes=-5).format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
 
-samples = np.array(prepare_samples(start, end, distort=True, shuffle=True))
+samples = np.array([add_fft_to_sample(sample) for sample in prepare_samples(start, end, distort=True, shuffle=True)])
 
 min_val = 0.0
-max_val = 26270.0
-threshold = 0.0022350012
+max_val = 156346.29010459644
+threshold = 0.00026678958
 
 test_data = (samples - min_val) / (max_val - min_val)
 test_data = tf.cast(test_data, tf.float32)
 
 print(len(samples))
 
-model = tf.saved_model.load('./saved_models/without_fft')
+model = tf.saved_model.load('./saved_models/with_fft')
 
 
 def predict(model, sample, threshold):

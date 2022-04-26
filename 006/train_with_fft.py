@@ -9,41 +9,43 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 
-start_date = '2022-04-20T00:00:00.000Z'
-end_date = '2022-04-20T12:00:00.000Z'
+samples = prepare_samples(
+    '2022-04-25T00:00:00.000Z',
+    '2022-04-25T12:00:00.000Z'
+  ) + prepare_samples(
+    '2022-04-25T12:00:00.000Z',
+    '2022-04-26T00:00:00.000Z'
+  )
 
-samples = np.array([add_fft_to_sample(sample) for sample in prepare_samples(start_date, end_date)])
+samples = np.array([add_fft_to_sample(sample) for sample in samples])
 
 min_val = tf.reduce_min(samples)
 max_val = tf.reduce_max(samples)
 
+print(f'min: {min_val}, max: {max_val}')
+
 normalized_samples = (samples - min_val) / (max_val - min_val)
 training_data = tf.cast(normalized_samples, tf.float32)
 
-optimizers = [
-  'adagrad',
-  'rmsprop',
-  'adadelta',
-  'adam',
-  'adamax',
-  'nadam',
-  'ftrl',
-  'sgd'
-]
+autoencoder = AnomalyDetector(dimension=len(normalized_samples[0]))
+autoencoder.compile(optimizer='adam', loss='mse')
 
-print(f'Sample length: {len(normalized_samples[0])}')
+history = autoencoder.fit(
+  x=training_data,
+  y=training_data,
+  epochs=20,
+  batch_size=128,
+  shuffle=True,
+)
 
-for optimizer in optimizers:
-  autoencoder = AnomalyDetector(dimension=len(normalized_samples[0]))
-  autoencoder.compile(optimizer=optimizer, loss='mse')
+autoencoder.save('saved_models/with_fft')
 
-  history = autoencoder.fit(
-    x=training_data,
-    y=training_data,
-    epochs=20,
-    batch_size=128
-  )
+plt.plot(history.history['loss'], label='Training Loss')
+plt.show()
 
-  plt.title(f'Training Loss: {optimizer}')
-  plt.plot(history.history['loss'], label='Training Loss')
-  plt.show()
+
+reconstructions_of_train_data = autoencoder.predict(training_data)
+reconstructions_loss = tf.keras.losses.mse(reconstructions_of_train_data, training_data)
+
+threshold = np.mean(reconstructions_loss) + np.std(reconstructions_loss)
+print('Threshold: ', threshold)
