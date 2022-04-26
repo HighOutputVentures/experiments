@@ -4,7 +4,7 @@ An autoencoder is a type of artificial neural network that seeks to learn to cop
 
 ![Autoencoder](./images/autoencoder.png "Autoencoder")
 
-Code for the model can be found [here](../model.py).
+Code for the model can be found [here](../python//model.py).
 
 1. Add a multilayer dense network to generate a latent representation from (180 to 8 resolution).
     ```python

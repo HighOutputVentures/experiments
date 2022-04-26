@@ -4,7 +4,7 @@ The goal of this step is to take the data from Elastic and prepare them into sam
 
 To achieve the goal of overfitting the model with good data, datapoints are queried from Elastic with given timestamps corresponding to those times that have no reports of unresponsiveness and that the system is considered to be operating normally.
 
-The code for gathering the raw data and generating the samples can be found here: [`prepare_samples.py`](../prepare_samples.py)
+The code for gathering the raw data and generating the samples can be found here: [`prepare_samples.py`](../python/prepare_samples.py)
 
 1. The raw datapoints are gathered from Elastic using a query that groups the logs of response times and computes the 95th percentile response time for every interval of 1 second.
     ```python

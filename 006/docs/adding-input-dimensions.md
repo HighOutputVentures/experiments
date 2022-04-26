@@ -11,7 +11,7 @@ plt.plot(sample)
 
 ## Appending the FFT to Samples
 
-Code for appending the FFT to a sample can be found here: [`add_fft_to_sample(sample)`](../add_fft_to_sample.py)
+Code for appending the FFT to a sample can be found here: [`add_fft_to_sample(sample)`](../python/add_fft_to_sample.py)
 
 1. Detrend the data. FFT is generally used for infinite-length of signals but since we are chopping up our signal into finite-length segments, we are making an approximation. Detrending the signal makes this approximation better. In here, we are using `scipy.signal.detrend` with `type='constant'` which will just subtract the mean from the data.
 

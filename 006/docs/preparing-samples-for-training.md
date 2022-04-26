@@ -2,7 +2,7 @@
 
 
 
-The code for preparing samples can be found here: [`prepare_samples.py`](../prepare_samples.py)
+The code for preparing samples can be found here: [`prepare_samples.py`](../python/prepare_samples.py)
 
 
 

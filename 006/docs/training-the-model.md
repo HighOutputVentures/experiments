@@ -1,6 +1,6 @@
 # Training The Model
 
-Code for training the model can be found [here](../train.py).
+Code for training the model can be found [here](../python/train.py).
 
 1. Get the samples.
     ```python
