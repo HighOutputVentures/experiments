@@ -5,7 +5,7 @@
 
 ## Goal Statements
 
-We are aiming to create a work flow to provide recommendations to improve performance and help them monitor and trace the performance results using Lighthouse and all other tools that comes with it
+We are aiming to create a work flow to provide recommendations to improve performance and help monitor/trace the performance results using Lighthouse and all other tools that comes with it
 
 ## Abstract
 
