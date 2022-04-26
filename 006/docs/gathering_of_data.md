@@ -1,4 +1,4 @@
-# Gathering of Sample Data
+# Gathering of Data
 
 The goal of this step is to take the data from Elastic and prepare them into samples that will be processed by the model for training.
 
