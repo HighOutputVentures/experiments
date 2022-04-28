@@ -15,6 +15,12 @@ samples = prepare_samples(
   ) + prepare_samples(
     '2022-04-25T12:00:00.000Z',
     '2022-04-26T00:00:00.000Z'
+  ) + prepare_samples(
+    '2022-04-26T00:00:00.000Z',
+    '2022-04-26T12:00:00.000Z'
+  ) + prepare_samples(
+    '2022-04-26T12:00:00.000Z',
+    '2022-04-27T00:00:00.000Z'
   )
 
 samples = np.array([add_fft_to_sample(sample) for sample in samples])
@@ -38,7 +44,7 @@ history = autoencoder.fit(
   shuffle=True,
 )
 
-autoencoder.save('saved_models/with_fft')
+autoencoder.save_weights('../saved_weights/with_fft/v1')
 
 plt.plot(history.history['loss'], label='Training Loss')
 plt.show()

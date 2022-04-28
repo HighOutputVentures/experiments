@@ -1,6 +1,7 @@
 import os
 
 from add_fft_to_sample import add_fft_to_sample
+from model import AnomalyDetector
 os.add_dll_directory('C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6/bin')
 
 import arrow
@@ -12,20 +13,22 @@ from prepare_samples import prepare_samples
 
 now = arrow.utcnow()
 end = now.format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
-start = now.shift(minutes=-5).format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
+start = now.shift(hours=-1).format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
 
-samples = np.array([add_fft_to_sample(sample) for sample in prepare_samples(start, end, distort=True, shuffle=True)])
+samples = np.array([add_fft_to_sample(sample) for sample in prepare_samples(start, end, distort=False, shuffle=True)])
 
 min_val = 0.0
-max_val = 156346.29010459644
-threshold = 0.00026678958
+max_val = 316623.48433236044
+threshold = 7.368802e-05
 
 test_data = (samples - min_val) / (max_val - min_val)
 test_data = tf.cast(test_data, tf.float32)
 
 print(len(samples))
 
-model = tf.saved_model.load('./saved_models/with_fft')
+model = AnomalyDetector(dimension=len(samples[0]))
+model.compile(optimizer='adam', loss='mse')
+model.load_weights('../saved_weights/with_fft/v1')
 
 
 def predict(model, sample, threshold):
