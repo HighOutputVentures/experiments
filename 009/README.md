@@ -268,6 +268,10 @@ flags.
   ```
   deno test --jobs 3
   ```
+## [Foreign Function Interface API](./ffi/README.md)
+
+## [Benchmark](./benchmark/README.md)
+
 ## Resources
 
 - [deno](https://deno.land)
@@ -287,5 +291,5 @@ flags.
 - [testing](https://deno.land/manual/testing?msclkid=b59202a3b49411eca923f8e15be0f1d4)
 
 - https://binary-studio.com/2021/10/05/deno-js-ts-runtime/?msclkid=76a4a06db57a11ec9639a2639312b77f
- - https://deno.land/manual/getting_started/permissions#permissions-list
- - https://deno.land/manual/tools?msclkid=15986b89b58511ec8c4a85e698e1c67c
+- https://deno.land/manual/getting_started/permissions#permissions-list
+- https://deno.land/manual/tools?msclkid=15986b89b58511ec8c4a85e698e1c67c

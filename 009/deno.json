@@ -4,7 +4,7 @@
   },
   "lint": {
     "files": {
-      "include": ["src/"],
+      "include": ["src/", "ffi/", "benchmark/"],
       "exclude": ["src/testdata/"]
     },
     "rules": {
@@ -15,7 +15,7 @@
   },
   "fmt": {
     "files": {
-      "include": ["src/", "ffi/"],
+      "include": ["src/", "ffi/", "benchmark/deno"],
       "exclude": ["src/testdata/"]
     },
     "options": {
