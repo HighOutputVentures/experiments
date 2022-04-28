@@ -17,6 +17,12 @@ samples = prepare_samples(
   ) + prepare_samples(
     '2022-04-25T12:00:00.000Z',
     '2022-04-26T00:00:00.000Z'
+  ) + prepare_samples(
+    '2022-04-26T00:00:00.000Z',
+    '2022-04-26T12:00:00.000Z'
+  ) + prepare_samples(
+    '2022-04-26T12:00:00.000Z',
+    '2022-04-27T00:00:00.000Z'
   )
 
 min_val = tf.reduce_min(samples)
@@ -38,7 +44,9 @@ history = autoencoder.fit(
   shuffle=True,
 )
 
-autoencoder.save('saved_models/without_fft')
+# autoencoder.save('saved_models/without_fft', save_format='h5')
+
+autoencoder.save_weights('../saved_weights/without_fft/v1')
 
 plt.plot(history.history['loss'], label='Training Loss')
 plt.show()
