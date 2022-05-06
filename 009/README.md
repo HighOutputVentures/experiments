@@ -55,23 +55,17 @@ At the end of this experiment, we should be able to;
 
 Create a Kanban Board GraphQL API that runs in deno with these features:
 
-[ ] Authenticate with OTP
-
 [X] Implement Dataloaders
 
 [X] Upload Files
 
 [X] Manage Database (MongoDB)
 
-[ ] Implement GraphQL Directives
-
 [X] Dockerize Deno
 
 [X] CI/CD
 
 [X] Foreign Function Interface API
-
-[ ] Going Live
 
 ## Getting Started
 
@@ -269,6 +263,8 @@ flags.
   deno test --jobs 3
   ```
 ## [Foreign Function Interface API](./ffi/README.md)
+
+## [WebAssembly](./wasm/README.md)
 
 ## [Benchmark](./benchmark/README.md)
 

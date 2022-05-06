@@ -29,8 +29,8 @@ const dylib = Deno.dlopen(fromFileUrl(libName), {
 	'mul': { parameters: [sign, sign], result: sign },
 });
 
-let a = 35;
-let b = 34;
+const a = 35;
+const b = 34;
 
 console.log(
 	`Addition of ${a} and ${b}: ${dylib.symbols.add(a, b)}`,

@@ -4,7 +4,7 @@
   },
   "lint": {
     "files": {
-      "include": ["src/", "ffi/", "benchmark/"],
+      "include": ["src/", "ffi/", "benchmark/", "wasm/"],
       "exclude": ["src/testdata/"]
     },
     "rules": {
@@ -15,7 +15,7 @@
   },
   "fmt": {
     "files": {
-      "include": ["src/", "ffi/", "benchmark/deno"],
+      "include": ["src/", "ffi/", "benchmark/deno", "wasm/"],
       "exclude": ["src/testdata/"]
     },
     "options": {
@@ -28,6 +28,7 @@
   },
   "tasks": {
     "ffi": "cd ffi && ./build.sh && deno run --allow-ffi --allow-read --unstable mod.ts",
+    "wasm": "cd wasm && deno run --allow-read --unstable mod.ts",
     "start": "deno lint && deno run --allow-read --allow-write --allow-env --allow-net src/mod.ts",
     "test": "deno test  --allow-read --allow-write --allow-env --allow-net"
   }
