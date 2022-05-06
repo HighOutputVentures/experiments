@@ -1,0 +1,15 @@
+[
+  {
+    "url": "http://localhost:3000/",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\Users\\yode\\Documents\\improveme\\results\\localhost-_-2022_05_06_01_51_45.report.html",
+    "jsonPath": "C:\\Users\\yode\\Documents\\improveme\\results\\localhost-_-2022_05_06_01_51_45.report.json",
+    "summary": {
+      "performance": 0.28,
+      "accessibility": 0.83,
+      "best-practices": 1,
+      "seo": 0.75,
+      "pwa": 0.2
+    }
+  }
+]
