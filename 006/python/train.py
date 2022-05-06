@@ -44,8 +44,7 @@ history = autoencoder.fit(
   shuffle=True,
 )
 
-# autoencoder.save('saved_models/without_fft', save_format='h5')
-
+autoencoder.save('saved_models/without_fft')
 autoencoder.save_weights('../saved_weights/without_fft/v1')
 
 plt.plot(history.history['loss'], label='Training Loss')

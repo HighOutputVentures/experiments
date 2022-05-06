@@ -13,7 +13,7 @@ from prepare_samples import prepare_samples
 
 now = arrow.utcnow()
 end = now.format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
-start = now.shift(hours=-1).format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
+start = now.shift(minutes=-5).format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z'
 
 samples = np.array([add_fft_to_sample(sample) for sample in prepare_samples(start, end, distort=False, shuffle=True)])
 
