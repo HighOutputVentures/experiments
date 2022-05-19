@@ -25,8 +25,8 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 5. [Training the Model](./docs/training-the-model.md)
 6. [Optimizations](./docs/optimizations.md)
 7. [Adding Input Dimensions](./docs/adding-input-dimensions.md)
-8. Application
-9. Using the Model on a different runtime
+8. [Using the Model](./docs/using-the-model-in-actual-applications.md)
+9. [Saving Keras Models to Be Used for Tensorflow.js](./docs/saving-keras-models-to-be-imported-for-tensorflow-js.md)
 
 ## Resources
 1. [Anomaly Detection: Definition, Best Practices and Use Cases](https://datrics.ai/anomaly-detection-best-practices)

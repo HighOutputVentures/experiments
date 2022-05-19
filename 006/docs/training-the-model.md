@@ -33,3 +33,6 @@ Code for training the model can be found [here](../python/train.py).
     ```python
     autoencoder.save('/anomaly_detection')
     ```
+5. Save the following parameters:
+    - `min` and `max` used for the normalization
+    - `threshold` - derived threshold error that classifies whether a sample is anomalous or not
