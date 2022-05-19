@@ -25,3 +25,9 @@
       'file://../tfjs_without_fft/model.json',
     );
     ```
+
+4. Use `model.predict` to get the reconstructions of sample data.
+    ```typescript
+    const tensor = tf.tensor(normalizedSample);
+    const reconstructions = model.predict(tensor.reshape([-1, 180])).dataSync();
+    ```
