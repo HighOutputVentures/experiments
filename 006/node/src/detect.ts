@@ -87,12 +87,15 @@ export default async function detect() {
   logger.info({
     loss: mse,
     threshold: THRESHOLD,
+    anomalous: mse > THRESHOLD,
+    gte,
+    lte,
   });
 
   if (mse > THRESHOLD) {
-    await SlackAPI.chat.post({
-      channel: 'wallet-incident-alerts',
-      text: 'An anomaly on the response times have been detected.',
-    });
+    // await SlackAPI.chat.post({
+    //   channel: 'wallet-incident-alerts',
+    //   text: 'An anomaly on the response times have been detected.',
+    // });
   }
 }
