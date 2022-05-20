@@ -9,6 +9,8 @@ const MIN_VALUE = 0.0;
 const MAX_VALUE = 50869.4;
 const THRESHOLD = 0.0009913438;
 
+tf.setBackend('cpu');
+
 const queryBody = (gte: string, lte: string) => ({
   size: 0,
   query: {
