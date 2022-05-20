@@ -8,7 +8,7 @@ app.use((ctx) => {
   ctx.body = 'Wallet System Anomaly Detection';
 });
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 80);
 
 const job = new CronJob('*/1 * * * *', detect);
 
