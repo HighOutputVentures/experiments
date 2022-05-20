@@ -25,6 +25,8 @@
     "ramda": "^0.28.0"
   },
   "scripts": {
-    "ts-node": "env $(cat .env) ts-node --files --transpile-only"
+    "ts-node": "env $(cat .env) ts-node --files --transpile-only",
+    "start": "node ./build/index.js",
+    "build": "rimraf ./build && tsc -p tsconfig.json"
   }
 }
