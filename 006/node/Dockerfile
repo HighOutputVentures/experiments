@@ -1,4 +1,11 @@
-FROM node:16.13.0-alpine3.14
+FROM node:buster-slim
+
+RUN apt-get update && \
+  apt-get install -y build-essential \
+  wget \
+  make \
+  gcc \
+  libc6-dev
 
 WORKDIR /srv/node
 COPY . /srv/node
