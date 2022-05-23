@@ -12,7 +12,7 @@ export const RemotionVideo: React.FC = () => {
 			<Composition
 				id="Confetti"
 				component={Confetti}
-				durationInFrames={30 * 5}
+				durationInFrames={30 * 10}
 				height={1280}
 				width={1280}
 				fps={30}

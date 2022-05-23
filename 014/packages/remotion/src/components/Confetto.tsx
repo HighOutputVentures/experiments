@@ -17,21 +17,25 @@ const Confetto: React.FC<{
 		frame: frame - delay,
 		config: {
 			damping: 1000,
-			mass: 200,
+			mass: 300,
 			// Stiffness: 1000,
 		},
 	});
 
 	const top = interpolate(drop, [0, 1], [-0.2, 1.1]);
 
-	return type === 'scribble' ? (
-		<ScribbleIcon
-			x={x}
-			size={type === 'scribble' ? size / 2 : size}
-			top={top}
-		/>
-	) : (
-		<DonutIcon x={x} size={size * 2} top={top} />
+	return (
+		<>
+			{type === 'scribble' && (
+				<ScribbleIcon
+					x={x}
+					size={type === 'scribble' ? size / 2 : size}
+					top={top}
+				/>
+			)}
+
+			{type === 'donut' && <DonutIcon x={x} size={size / 2} top={top} />}
+		</>
 	);
 };
 

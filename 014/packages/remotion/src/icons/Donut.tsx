@@ -1,8 +1,8 @@
 import React from 'react';
 import {random} from 'remotion';
 
-const viewSizeX = 327;
-const viewSizeY = 322;
+const viewSizeX = 63;
+const viewSizeY = 63;
 
 const DonutIcon: React.FC<{
 	x: string;
