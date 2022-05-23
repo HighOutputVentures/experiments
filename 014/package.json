@@ -1,0 +1,12 @@
+{
+  "name": "014",
+  "private": true,
+  "version": "1.0.0",
+  "description": "To run an experiment on a Remotion, a package that can render video out of Reactjs code",
+  "scripts": {},
+  "author": "Glevinzon Dapal",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ]
+}
