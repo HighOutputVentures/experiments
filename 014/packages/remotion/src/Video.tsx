@@ -3,10 +3,28 @@ import {HelloWorld} from './HelloWorld';
 import {Logo} from './HelloWorld/Logo';
 import {Subtitle} from './HelloWorld/Subtitle';
 import {Title} from './HelloWorld/Title';
+import MyComp from './MyComp/MyComp';
+import Confetti from './Confetti';
 
 export const RemotionVideo: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="Confetti"
+				component={Confetti}
+				durationInFrames={30 * 5}
+				height={1280}
+				width={1280}
+				fps={30}
+			/>
+			<Composition
+				id="MyComp"
+				component={MyComp}
+				durationInFrames={150}
+				height={720}
+				width={1280}
+				fps={30}
+			/>
 			<Composition
 				id="HelloWorld"
 				component={HelloWorld}
