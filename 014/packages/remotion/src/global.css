@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Inter&display=swap');
+
+body {
+	font-family: 'Inter', sans-serif;
+	color: #fff;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
