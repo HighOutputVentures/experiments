@@ -1,22 +1,29 @@
 import {Composition} from 'remotion';
+import image from './assets/arjaysitoy.png';
+import BirthdayCard from './birthday-card';
 import {HelloWorld} from './HelloWorld';
 import {Logo} from './HelloWorld/Logo';
 import {Subtitle} from './HelloWorld/Subtitle';
 import {Title} from './HelloWorld/Title';
 import MyComp from './MyComp/MyComp';
-import Confetti from './Confetti';
 
 export const RemotionVideo: React.FC = () => {
 	return (
 		<>
 			<Composition
-				id="Confetti"
-				component={Confetti}
+				id="BirthdayCard"
 				durationInFrames={30 * 10}
-				height={1280}
-				width={1280}
 				fps={30}
+				width={1280}
+				height={1280}
+				component={BirthdayCard}
+				defaultProps={{
+					image,
+					celebrant: 'Arjay Sitoy',
+					dateOfBirth: 'April 2, 2022',
+				}}
 			/>
+
 			<Composition
 				id="MyComp"
 				component={MyComp}
