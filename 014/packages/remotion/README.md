@@ -1,51 +1,67 @@
-# Remotion video
+## Remotion
 
-<p align="center">
-  <a href="https://github.com/remotion-dev/logo">
-    <img src="https://github.com/remotion-dev/logo/raw/main/withtitle/element-0.png">
-  </a>
-</p>
+<br>
+<br>
 
-Welcome to your Remotion project!
+**Essential Components**
 
-## Commands
+- `Sequence` - Sequence component lets you control what component(s) appear on your video based on the frame.
+- `AbsoluteFill` - Automatically centers a component in the screen
+- `Img` - A component to be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
+- `Audio`- Component to be used when rendering an audio which accepts a lot of useful props
 
-**Install Dependencies**
+<br>
+<br>
 
-```console
-npm i
-```
+**How Tos**
 
-**Start Preview**
+- How to use `Sequence`
 
-```console
-npm start
-```
+  - To use the `Sequence` component you just need to import it from `remotion` package and use it inside your custom components
+    <br><br>
 
-**Render video**
+  ```typescript
+  import {Sequence} from 'remotion';
 
-```console
-npm run build
-```
+  const MyComponent = () => {
+  	return (
+  		<>
+  			<Sequence from={<number>}>...</Sequence>
+  		</>
+  	);
+  };
+  ```
 
-**Upgrade Remotion**
+  - To control the order of what component shows up on the screen at a specific frame, you can pass a `from` props which tells `Sequence` what frame a particular component should be rendered and to hide it we could pass `durationInFrames` (and both accepts a number)
+    <br><br>
 
-```console
-npm run upgrade
-```
+  ```typescript
+  import {Sequence} from 'remotion';
 
-## Docs
+  const MyComponent = () => {
+  	return (
+  		<>
+  			<Sequence from={0} /* from frame 0 */>
+  				<Component1 />
+  			</Sequence>
+  			<Sequence from={5} durationInFrames={10} /* from frame 5 to frame 10 */>
+  				<Component2 />
+  			</Sequence>
+  			<Sequence from={10} /* from frame 10 to frame 10 */>
+  				<Component3 />
+  			</Sequence>
+  		</>
+  	);
+  };
+  ```
 
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
+  On the example above, output will be a video and when played will first show the `<Component1>` then `Component2`, and finally `Component3` but at the same time `Component2` will be unmounted.
 
-## Help
+  ```
+  Frame: 1 ---- 5 ---- 10 - 11 ---- x
+         C1     C1     C1 - C1 ...
+                C2     C2
+                       C3 - C3 ...
+  ```
 
-We provide help [on our Discord server](https://discord.gg/6VzzNDwUwV).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
-
-## License
-
-Notice that for some entities a company license is needed. Read [the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+- How to use `AbsoluteFill`
