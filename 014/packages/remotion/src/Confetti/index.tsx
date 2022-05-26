@@ -19,6 +19,7 @@ const Confetti: React.FC = () => {
 			{drops.map((d, k) => {
 				return (
 					<Confetto
+						key={JSON.stringify({...d, k})}
 						x={d.x}
 						delay={d.delay}
 						size={d.size}
