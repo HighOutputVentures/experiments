@@ -1,5 +1,4 @@
 import {Composition} from 'remotion';
-import image from './assets/arjaysitoy.png';
 import BirthdayCard from './birthday-card';
 import {HelloWorld} from './HelloWorld';
 import {Logo} from './HelloWorld/Logo';
@@ -12,13 +11,13 @@ export const RemotionVideo: React.FC = () => {
 		<>
 			<Composition
 				id="BirthdayCard"
-				durationInFrames={30 * 10}
+				durationInFrames={30 * 25}
 				fps={30}
 				width={1280}
 				height={1280}
 				component={BirthdayCard}
 				defaultProps={{
-					image,
+					image: 'arjaysitoy.png',
 					celebrant: 'Arjay Sitoy',
 					dateOfBirth: 'April 2, 2022',
 				}}
