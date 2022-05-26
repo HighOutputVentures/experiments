@@ -37,8 +37,9 @@ const BirthdayCard = (props: BirthdayCardProps) => {
 	);
 };
 
+const shouldShowRingtone = true;
 const Ringtone = () => {
-	return <Audio src={ringtone} startFrom={0} />;
+	return shouldShowRingtone ? <Audio src={ringtone} startFrom={0} /> : null;
 };
 
 const greeting = 'May you have a wonderful day today!';
@@ -48,11 +49,11 @@ const Slide1 = ({celebrant, image, dateOfBirth}: BirthdayCardProps) => {
 
 	const multiplier = 14;
 	const charsShown =
-		frame > 4 * multiplier ? Math.floor((frame - multiplier * 4) / 2) : 0;
+		frame > 4 * multiplier ? Math.floor((frame - multiplier * 4) / 1.15) : 0;
 	const textToShow = greeting.slice(0, charsShown);
 
 	return (
-		<Sequence from={0} layout="none" durationInFrames={443}>
+		<Sequence from={0} layout="none" durationInFrames={300}>
 			<Sequence from={1} layout="none">
 				<Img src={staticFile('hov-logo.png')} height={80} width={80} />
 			</Sequence>
@@ -84,10 +85,20 @@ const Slide1 = ({celebrant, image, dateOfBirth}: BirthdayCardProps) => {
 				<DateOfBirth>{dateOfBirth}</DateOfBirth>
 			</Sequence>
 
-			<Scribbles />
 			<Sequence from={74}>
 				<Donuts />
 			</Sequence>
+
+			<Scribbles />
+			<Shine />
+		</Sequence>
+	);
+};
+
+const Shine = () => {
+	return (
+		<Sequence from={125} durationInFrames={15}>
+			<AbsoluteFill className="shine" />
 		</Sequence>
 	);
 };
@@ -117,21 +128,25 @@ const donuts: DonutItem[] = [
 ];
 
 const Donuts = () => {
+	const start = 0;
+
 	return (
 		<>
-			{donuts.map(({color, position}) => {
+			{donuts.map(({color, position}, index) => {
 				return (
-					<DonutUnstyled
-						key={uuid()}
-						style={{
-							fill: color,
-							width: 32,
-							height: 32,
-							position: 'absolute',
-							...position,
-							top: position.top + '%',
-						}}
-					/>
+					<Sequence from={start + index}>
+						<DonutUnstyled
+							key={uuid()}
+							style={{
+								fill: color,
+								width: 32,
+								height: 32,
+								position: 'absolute',
+								...position,
+								top: position.top + '%',
+							}}
+						/>
+					</Sequence>
 				);
 			})}
 		</>
@@ -141,20 +156,30 @@ const Donuts = () => {
 const Scribbles = () => {
 	const frame = useCurrentFrame();
 	const duration = 5;
+	const startFrame = 86;
+	const step = 15;
+
+	const negate = (n: number) => n * -1;
 
 	return (
 		<AbsoluteFill>
-			<Sequence from={152}>
+			<Sequence from={startFrame}>
 				<Scribble1
 					height={175}
 					style={{
 						position: 'absolute',
 						top: 45,
-						left:
-							interpolate(frame, [152, 152 + duration], [100, 50], {
-								extrapolateRight: 'clamp',
-								extrapolateLeft: 'clamp',
-							}) * -1,
+						left: negate(
+							interpolate(
+								frame,
+								[startFrame, startFrame + duration],
+								[100, 50],
+								{
+									extrapolateRight: 'clamp',
+									extrapolateLeft: 'clamp',
+								}
+							)
+						),
 					}}
 				/>
 				<Scribble4
@@ -162,26 +187,33 @@ const Scribbles = () => {
 					style={{
 						position: 'absolute',
 						right: -155,
-						top:
-							interpolate(frame, [152, 152 + duration], [50, 5], {
+						top: negate(
+							interpolate(frame, [startFrame, startFrame + duration], [50, 5], {
 								extrapolateRight: 'clamp',
 								extrapolateLeft: 'clamp',
-							}) * -1,
+							})
+						),
 					}}
 				/>
 			</Sequence>
 
-			<Sequence from={220}>
+			<Sequence from={startFrame + step}>
 				<Scribble2
 					height={175}
 					style={{
 						position: 'absolute',
 						top: '50%',
-						left:
-							interpolate(frame, [220, 220 + duration], [200, 100], {
-								extrapolateRight: 'clamp',
-								extrapolateLeft: 'clamp',
-							}) * -1,
+						left: negate(
+							interpolate(
+								frame,
+								[startFrame + step, startFrame + step + duration],
+								[200, 100],
+								{
+									extrapolateRight: 'clamp',
+									extrapolateLeft: 'clamp',
+								}
+							)
+						),
 					}}
 				/>
 				<Scribble5
@@ -189,26 +221,38 @@ const Scribbles = () => {
 					style={{
 						position: 'absolute',
 						top: '50%',
-						right:
-							interpolate(frame, [220, 220 + duration], [200, 90], {
-								extrapolateRight: 'clamp',
-								extrapolateLeft: 'clamp',
-							}) * -1,
+						right: negate(
+							interpolate(
+								frame,
+								[startFrame + step, startFrame + step + duration],
+								[200, 90],
+								{
+									extrapolateRight: 'clamp',
+									extrapolateLeft: 'clamp',
+								}
+							)
+						),
 					}}
 				/>
 			</Sequence>
 
-			<Sequence from={250}>
+			<Sequence from={startFrame + step * 2}>
 				<Scribble3
 					height={175}
 					style={{
 						position: 'absolute',
 						top: '80%',
-						left:
-							interpolate(frame, [250, 250 + duration], [100, 50], {
-								extrapolateRight: 'clamp',
-								extrapolateLeft: 'clamp',
-							}) * -1,
+						left: negate(
+							interpolate(
+								frame,
+								[startFrame + step * 2, startFrame + step * 2 + duration],
+								[100, 50],
+								{
+									extrapolateRight: 'clamp',
+									extrapolateLeft: 'clamp',
+								}
+							)
+						),
 					}}
 				/>
 				<Scribble6
@@ -216,11 +260,17 @@ const Scribbles = () => {
 					style={{
 						position: 'absolute',
 						top: '80%',
-						right:
-							interpolate(frame, [250, 250 + duration], [180, 90], {
-								extrapolateRight: 'clamp',
-								extrapolateLeft: 'clamp',
-							}) * -1,
+						right: negate(
+							interpolate(
+								frame,
+								[startFrame + step * 2, startFrame + step * 2 + duration],
+								[180, 90],
+								{
+									extrapolateRight: 'clamp',
+									extrapolateLeft: 'clamp',
+								}
+							)
+						),
 					}}
 				/>
 			</Sequence>
@@ -229,7 +279,11 @@ const Scribbles = () => {
 };
 
 const Slide2 = () => {
-	return null;
+	return (
+		<Sequence from={300}>
+			<div>Greetings</div>
+		</Sequence>
+	);
 };
 
 const Selfie = styled.div`
