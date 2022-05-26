@@ -2,13 +2,14 @@ import {
 	AbsoluteFill,
 	Audio,
 	Img,
+	interpolate,
 	Sequence,
 	staticFile,
 	useCurrentFrame,
 } from 'remotion';
 import styled from 'styled-components';
+import {v4 as uuid} from 'uuid';
 import ringtone from '../assets/ringtone.mp3';
-import Confetti from '../Confetti';
 import '../global.css';
 import {DonutUnstyled} from '../icons/donut-unstyled';
 import {Scribble1} from '../icons/scribble1';
@@ -37,11 +38,7 @@ const BirthdayCard = (props: BirthdayCardProps) => {
 };
 
 const Ringtone = () => {
-	return (
-		<div>
-			<Audio src={ringtone} startFrom={0} />
-		</div>
-	);
+	return <Audio src={ringtone} startFrom={0} />;
 };
 
 const greeting = 'May you have a wonderful day today!';
@@ -88,10 +85,8 @@ const Slide1 = ({celebrant, image, dateOfBirth}: BirthdayCardProps) => {
 			</Sequence>
 
 			<Scribbles />
-
 			<Sequence from={74}>
 				<Donuts />
-				<Confetti />
 			</Sequence>
 		</Sequence>
 	);
@@ -101,81 +96,132 @@ type StringOrNumber = string | number;
 
 type DonutItem = {
 	color: string;
-	showsAtFrame: number;
-	position: Partial<{
-		top: StringOrNumber;
-		left: StringOrNumber;
-		right: StringOrNumber;
-		bottom: StringOrNumber;
-	}>;
+	position: {
+		top: number;
+		left?: StringOrNumber;
+		right?: StringOrNumber;
+	};
 };
 
 const donuts: DonutItem[] = [
-	{color: '#75AEE5', position: {top: '8%', left: '30%'}, showsAtFrame: 0},
-	{color: '#F3B344', position: {top: '10%', right: '30%'}, showsAtFrame: 0},
-	{color: '#E44C85', position: {top: '32%', left: '5%'}, showsAtFrame: 0},
-	{color: '#33C9B0', position: {top: '35%', right: '10%'}, showsAtFrame: 0},
-	{color: '#7070DD', position: {top: '42%', left: '25%'}, showsAtFrame: 0},
-	{color: '#33C9B0', position: {top: '64%', left: '10%'}, showsAtFrame: 0},
-	{color: '#75AEE5', position: {top: '71%', right: '15%'}, showsAtFrame: 0},
-	{color: '#E44C85', position: {top: '78%', right: '2%'}, showsAtFrame: 0},
-	{color: '#7070DD', position: {top: '88%', right: '12%'}, showsAtFrame: 0},
-	{color: '#F3B344', position: {top: '94%', left: '23%'}, showsAtFrame: 0},
+	{color: '#75AEE5', position: {top: 8, left: '30%'}},
+	{color: '#F3B344', position: {top: 10, right: '30%'}},
+	{color: '#E44C85', position: {top: 32, left: '5%'}},
+	{color: '#33C9B0', position: {top: 35, right: '10%'}},
+	{color: '#7070DD', position: {top: 42, left: '25%'}},
+	{color: '#33C9B0', position: {top: 64, left: '10%'}},
+	{color: '#75AEE5', position: {top: 71, right: '15%'}},
+	{color: '#E44C85', position: {top: 78, right: '2%'}},
+	{color: '#7070DD', position: {top: 88, right: '12%'}},
+	{color: '#F3B344', position: {top: 94, left: '23%'}},
 ];
 
 const Donuts = () => {
 	return (
 		<>
-			{donuts.map(({color, position, showsAtFrame}) => (
-				<Sequence from={showsAtFrame}>
+			{donuts.map(({color, position}) => {
+				return (
 					<DonutUnstyled
+						key={uuid()}
 						style={{
 							fill: color,
 							width: 32,
 							height: 32,
 							position: 'absolute',
 							...position,
+							top: position.top + '%',
 						}}
 					/>
-				</Sequence>
-			))}
+				);
+			})}
 		</>
 	);
 };
 
 const Scribbles = () => {
+	const frame = useCurrentFrame();
+	const duration = 5;
+
 	return (
 		<AbsoluteFill>
 			<Sequence from={152}>
 				<Scribble1
 					height={175}
-					style={{position: 'absolute', left: -50, top: 45}}
+					style={{
+						position: 'absolute',
+						top: 45,
+						left:
+							interpolate(frame, [152, 152 + duration], [100, 50], {
+								extrapolateRight: 'clamp',
+								extrapolateLeft: 'clamp',
+							}) * -1,
+					}}
 				/>
 				<Scribble4
 					height={175}
-					style={{position: 'absolute', right: -155, top: -5}}
+					style={{
+						position: 'absolute',
+						right: -155,
+						top:
+							interpolate(frame, [152, 152 + duration], [50, 5], {
+								extrapolateRight: 'clamp',
+								extrapolateLeft: 'clamp',
+							}) * -1,
+					}}
 				/>
 			</Sequence>
 
 			<Sequence from={220}>
 				<Scribble2
 					height={175}
-					style={{position: 'absolute', left: -100, top: '50%'}}
+					style={{
+						position: 'absolute',
+						top: '50%',
+						left:
+							interpolate(frame, [220, 220 + duration], [200, 100], {
+								extrapolateRight: 'clamp',
+								extrapolateLeft: 'clamp',
+							}) * -1,
+					}}
 				/>
 				<Scribble5
 					height={175}
-					style={{position: 'absolute', right: -90, top: '50%'}}
+					style={{
+						position: 'absolute',
+						top: '50%',
+						right:
+							interpolate(frame, [220, 220 + duration], [200, 90], {
+								extrapolateRight: 'clamp',
+								extrapolateLeft: 'clamp',
+							}) * -1,
+					}}
 				/>
 			</Sequence>
 
 			<Sequence from={250}>
 				<Scribble3
 					height={175}
-					style={{position: 'absolute', left: -50, top: '80%'}}
+					style={{
+						position: 'absolute',
+						top: '80%',
+						left:
+							interpolate(frame, [250, 250 + duration], [100, 50], {
+								extrapolateRight: 'clamp',
+								extrapolateLeft: 'clamp',
+							}) * -1,
+					}}
 				/>
 				<Scribble6
 					height={175}
-					style={{position: 'absolute', right: -90, top: '80%'}}
+					style={{
+						position: 'absolute',
+						top: '80%',
+						right:
+							interpolate(frame, [250, 250 + duration], [180, 90], {
+								extrapolateRight: 'clamp',
+								extrapolateLeft: 'clamp',
+							}) * -1,
+					}}
 				/>
 			</Sequence>
 		</AbsoluteFill>
