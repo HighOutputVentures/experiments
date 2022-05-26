@@ -47,7 +47,7 @@
   			<Sequence from={5} durationInFrames={10} /* from frame 5 to frame 10 */>
   				<Component2 />
   			</Sequence>
-  			<Sequence from={10} /* from frame 10 to frame 10 */>
+  			<Sequence from={10} /* from frame 10 */>
   				<Component3 />
   			</Sequence>
   		</>
