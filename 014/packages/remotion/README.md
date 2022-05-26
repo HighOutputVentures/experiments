@@ -5,6 +5,7 @@
 
 **Essential Components**
 
+- `Composition` -
 - `Sequence` - Sequence component lets you control what component(s) appear on your video based on the frame.
 - `AbsoluteFill` - Automatically centers a component in the screen
 - `Img` - A component to be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
