@@ -36,7 +36,7 @@
   export const Video = () => {
   	return (
   		<>
-  			<AwesomeComponent
+  			<Composition
   				id="AwesomeComponent"
   				component={AwesomeComponent}
   				width={1080}
