@@ -5,15 +5,16 @@
 
 **Components/Hooks/Utils**
 
-- `Composition` -
-- `Sequence` - Sequence component lets you control what component(s) appear on your video based on the frame.
-- `AbsoluteFill` - Automatically centers a component in the screen
-- `Img` - A component to be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
-- `Audio` - Component to be used when rendering an audio which accepts a lot of useful props
-- `Video` -
-- `useCurrentFrame` -
-- `useVideoConfig` -
-- `interpolate` -
+- [x] `Composition`
+- [x] `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
+- [x] `AbsoluteFill` automatically centers a component in the screen
+- [x] `Img` can be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
+- [x] `Audio` component to be used when rendering an audio which accepts a lot of useful props
+- [ ] `Video`
+- [x] `useCurrentFrame` returns the current frame index/number
+- [x] `useVideoConfig` returns the video settings. `fps`, `durationInFrames`, `width`, `height`, `id`, `defaultProps`. More info [here](https://www.remotion.dev/docs/use-video-config)
+- [x] `interpolate` helps in creating animations. Example if we want a `fade in` effect, it will generate an opacity value for us to be used at a certain point of time
+- [ ] `spring`
 
 <br>
 <br>
@@ -69,4 +70,28 @@
                        C3 - C3 ...
   ```
 
-- How to use `interpolate` - interpolate is used to create effects in zoom. examples of animation could be slide in/out
+- How to use `interpolate`
+  <br><br>
+
+  ```typescript
+  import {interpolate, useCurrentFrame} from 'remotion';
+
+  const frame = useCurrentFrame();
+  const opacity = interpolate(
+  	frame,
+  	[0, 50] /* from frame 0 to 50 */,
+  	[0, 1] /* start at opacity 1 to 0 */
+  );
+
+  export const Component = () => {
+  	return (
+  		<div
+  			style={{
+  				opacity,
+  			}}
+  		>
+  			...
+  		</div>
+  	);
+  };
+  ```
