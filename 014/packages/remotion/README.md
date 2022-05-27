@@ -3,13 +3,17 @@
 <br>
 <br>
 
-**Essential Components**
+**Components/Hooks/Utils**
 
 - `Composition` -
 - `Sequence` - Sequence component lets you control what component(s) appear on your video based on the frame.
 - `AbsoluteFill` - Automatically centers a component in the screen
 - `Img` - A component to be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
-- `Audio`- Component to be used when rendering an audio which accepts a lot of useful props
+- `Audio` - Component to be used when rendering an audio which accepts a lot of useful props
+- `Video` -
+- `useCurrentFrame` -
+- `useVideoConfig` -
+- `interpolate` -
 
 <br>
 <br>
@@ -65,4 +69,4 @@
                        C3 - C3 ...
   ```
 
-- How to use `AbsoluteFill`
+- How to use `interpolate` - interpolate is used to create effects in zoom. examples of animation could be slide in/out
