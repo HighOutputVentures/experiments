@@ -1,9 +1,8 @@
-import {random, AbsoluteFill} from 'remotion';
 import React, {useMemo} from 'react';
-
+import {AbsoluteFill, random} from 'remotion';
 import Confetto from '../components/Confetto';
 
-const dropCount = 100;
+const dropCount = 50;
 
 const Confetti: React.FC = () => {
 	const drops = useMemo(() => {
@@ -20,6 +19,7 @@ const Confetti: React.FC = () => {
 			{drops.map((d, k) => {
 				return (
 					<Confetto
+						key={JSON.stringify({...d, k})}
 						x={d.x}
 						delay={d.delay}
 						size={d.size}
