@@ -8,6 +8,7 @@ import {
 } from 'remotion';
 import styled from 'styled-components';
 import {v4 as uuid} from 'uuid';
+import Confetti from '../Confetti';
 import {DonutUnstyled} from '../icons/donut-unstyled';
 import {Scribble1} from '../icons/scribble1';
 import {Scribble2} from '../icons/scribble2';
@@ -71,6 +72,10 @@ export const Slide1 = ({
 
 			<Scribbles />
 			<Shine />
+
+			<Sequence from={100}>
+				<Confetti />
+			</Sequence>
 		</Sequence>
 	);
 };
