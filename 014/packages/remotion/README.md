@@ -24,27 +24,30 @@
 **How Tos**
 
 - How to use `Composition`
+
+  - using composition is pretty straight forward. you just have to invoke it inside your entry point which is `src/index.ts` then pass in the required props.
+
   <br>
 
-```typescript
-import {Composition} from 'remotion';
-import {AwesomeComponent} from './awesome-component';
+  ```typescript
+  import {Composition} from 'remotion';
+  import {AwesomeComponent} from './awesome-component';
 
-export const MyVideo = () => {
-	return (
-		<>
-			<AwesomeComponent
-				id="AwesomeComponent"
-				component={AwesomeComponent}
-				width={1080}
-				height={1080}
-				fps={30}
-				durationInFrames={30 * 10}
-			/>
-		</>
-	);
-};
-```
+  export const Video = () => {
+  	return (
+  		<>
+  			<AwesomeComponent
+  				id="AwesomeComponent"
+  				component={AwesomeComponent}
+  				width={1080}
+  				height={1080}
+  				fps={30}
+  				durationInFrames={30 * 10}
+  			/>
+  		</>
+  	);
+  };
+  ```
 
 - How to use `AbsoluteFill`
   <br>
