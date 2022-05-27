@@ -9,6 +9,7 @@
 - [x] `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
 - [x] `AbsoluteFill` automatically centers a component in the screen
 - [x] `Img` can be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
+- [x] `staticFile` is typically used to import assets eg. images under `src/public`
 - [x] `Audio` component to be used when rendering an audio which accepts a lot of useful props
 - [ ] `Video`
 - [x] `useCurrentFrame` returns the current frame index/number
