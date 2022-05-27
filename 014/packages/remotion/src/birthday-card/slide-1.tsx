@@ -152,8 +152,8 @@ const Scribbles = () => {
 						left: negate(
 							interpolate(
 								frame,
-								[startFrame, startFrame + duration],
-								[100, 50],
+								[startFrame, startFrame + duration], // [0, 50]
+								[100, 50], // [0, 1]
 								{
 									extrapolateRight: 'clamp',
 									extrapolateLeft: 'clamp',
