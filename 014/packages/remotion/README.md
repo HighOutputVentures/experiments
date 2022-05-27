@@ -5,7 +5,7 @@
 
 **Components/Hooks/Utils**
 
-- [x] `Composition` is used to register a component to be displayed as video
+- [x] `Composition` is used to register a component to be displayed as video.
 - [x] `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
 - [x] `AbsoluteFill` automatically centers a component in the screen
 - [x] `Img` can be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
@@ -22,6 +22,29 @@
 <br>
 
 **How Tos**
+
+- How to use `Composition`
+  <br>
+
+```typescript
+import {Composition} from 'remotion';
+import {AwesomeComponent} from './awesome-component';
+
+export const MyVideo = () => {
+	return (
+		<>
+			<AwesomeComponent
+				id="AwesomeComponent"
+				component={AwesomeComponent}
+				width={1080}
+				height={1080}
+				fps={30}
+				durationInFrames={30 * 10}
+			/>
+		</>
+	);
+};
+```
 
 - How to use `AbsoluteFill`
   <br>
