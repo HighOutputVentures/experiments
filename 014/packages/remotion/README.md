@@ -106,7 +106,7 @@ export const Component = () => {
   			<Sequence from={0} /* from frame 0 */>
   				<Component1 />
   			</Sequence>
-  			<Sequence from={5} durationInFrames={10} /* from frame 5 to frame 10 */>
+  			<Sequence from={5} durationInFrames={6} /* from frame 5 to frame 10 */>
   				<Component2 />
   			</Sequence>
   			<Sequence from={10} /* from frame 10 */>
