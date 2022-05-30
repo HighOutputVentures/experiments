@@ -26,8 +26,4 @@ const plugins = [
     url: "/plugins/video",
     name: "@remotion/video",
   },
-  {
-    url: "/plugins/three",
-    name: "@remotion/three",
-  },
 ];
