@@ -14,7 +14,7 @@ export default function App() {
         <div className="bg-zinc-800 shadow-md">
           <Player
             fps={30}
-            durationInFrames={30 * 100}
+            durationInFrames={30 * 30}
             component={Example}
             compositionWidth={650}
             compositionHeight={550}

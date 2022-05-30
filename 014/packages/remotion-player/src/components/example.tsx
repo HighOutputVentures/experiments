@@ -10,10 +10,7 @@ interface ExampleProps {
 export default function Example({text, controls, setControls}: ExampleProps) {
   const frame = useCurrentFrame();
 
-  // second * fps = currentFrame
-  const second = frame / 30;
-  const notifyIncomingAd = second >= 5 && second < 10;
-  const playAd = second >= 10 && second <= 14;
+  const second = frame / 30; // second * fps = currentFrame
 
   React.useEffect(() => {}, []);
 
@@ -25,13 +22,15 @@ export default function Example({text, controls, setControls}: ExampleProps) {
         </Wrapper>
       </Sequence>
 
-      {playAd && <div>Playing ad</div>}
-
-      {notifyIncomingAd && (
+      <Sequence from={30 * 10} durationInFrames={30 * 5}>
         <div className="absolute bottom-24 right-0 border-l-4 border-amber-700 bg-zinc-700 bg-opacity-50 p-4 text-sm">
-          Ads in {Math.ceil(10 - second)}
+          Ads in {Math.ceil(15 - second)}
         </div>
-      )}
+      </Sequence>
+
+      <Sequence from={30 * 15} durationInFrames={30 * 5}>
+        <div>Playing ad</div>
+      </Sequence>
     </div>
   );
 }
