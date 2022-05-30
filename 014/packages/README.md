@@ -14,9 +14,14 @@
 - [x] `useCurrentFrame` returns the current frame index/number
 - [x] `useVideoConfig` returns the video settings. `fps`, `durationInFrames`, `width`, `height`, `id`, `defaultProps`. More info [here](https://www.remotion.dev/docs/use-video-config)
 - [x] `interpolate` helps in creating animations. Example if we want a `fade in` effect, it will generate an opacity value for us to be used at a certain point of time
-- [ ] `Video`
+- [x] `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
 - [ ] `spring`
-- [ ] `interpolateColors`
+
+**Plugins**
+
+- [ ] `@remotion/player`
+- [ ] `@remotion/three`
+- [ ] `@remotion/lambda`
 
 <br>
 <br>
@@ -30,22 +35,22 @@
   <br>
 
   ```typescript
-  import {Composition} from 'remotion';
-  import {AwesomeComponent} from './awesome-component';
+  import {Composition} from "remotion";
+  import {AwesomeComponent} from "./awesome-component";
 
   export const Video = () => {
-  	return (
-  		<>
-  			<Composition
-  				id="AwesomeComponent"
-  				component={AwesomeComponent}
-  				width={1080}
-  				height={1080}
-  				fps={30}
-  				durationInFrames={30 * 10}
-  			/>
-  		</>
-  	);
+    return (
+      <>
+        <Composition
+          id="AwesomeComponent"
+          component={AwesomeComponent}
+          width={1080}
+          height={1080}
+          fps={30}
+          durationInFrames={30 * 10}
+        />
+      </>
+    );
   };
   ```
 
@@ -54,11 +59,11 @@
 
 ```typescript
 export const Component = () => {
-	return (
-		<AbsoluteFill>
-			<SomeComponent />
-		</AbsoluteFill>
-	);
+  return (
+    <AbsoluteFill>
+      <SomeComponent />
+    </AbsoluteFill>
+  );
 };
 ```
 
@@ -66,14 +71,14 @@ export const Component = () => {
 
 ```css
 .absolute-fill {
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 ```
 
@@ -98,22 +103,22 @@ export const Component = () => {
     <br><br>
 
   ```typescript
-  import {Sequence} from 'remotion';
+  import {Sequence} from "remotion";
 
   const MyComponent = () => {
-  	return (
-  		<>
-  			<Sequence from={0} /* from frame 0 */>
-  				<Component1 />
-  			</Sequence>
-  			<Sequence from={5} durationInFrames={6} /* from frame 5 to frame 10 */>
-  				<Component2 />
-  			</Sequence>
-  			<Sequence from={10} /* from frame 10 */>
-  				<Component3 />
-  			</Sequence>
-  		</>
-  	);
+    return (
+      <>
+        <Sequence from={0} /* from frame 0 */>
+          <Component1 />
+        </Sequence>
+        <Sequence from={5} durationInFrames={6} /* from frame 5 to frame 10 */>
+          <Component2 />
+        </Sequence>
+        <Sequence from={10} /* from frame 10 */>
+          <Component3 />
+        </Sequence>
+      </>
+    );
   };
   ```
 
@@ -130,27 +135,74 @@ export const Component = () => {
   <br><br>
 
   ```typescript
-  import {interpolate, useCurrentFrame} from 'remotion';
+  import {interpolate, useCurrentFrame} from "remotion";
 
   const frame = useCurrentFrame();
   const opacity = interpolate(
-  	frame,
-  	[0, 50] /* from frame 0 to 50 */,
-  	[0, 1] /* start at opacity 1 to 0 */
+    frame,
+    [0, 50] /* from frame 0 to 50 */,
+    [0, 1] /* start at opacity 1 to 0 */
   );
 
   export const Component = () => {
-  	return (
-  		<div
-  			style={{
-  				opacity,
-  			}}
-  		>
-  			...
-  		</div>
-  	);
+    return (
+      <div
+        style={{
+          opacity,
+        }}
+      >
+        ...
+      </div>
+    );
   };
   ```
 
   On the example above, the code will output a `div` component with a `fade-in` effect.
   The animation will start at frame `0` and will end at frame `50`.
+
+- How to use `@remotion/player`
+  <br>
+  **NOTE :**
+  To use this plugin you have to bootstrap a new react app (using something like `vite`, `next`, `cra` or etc.).
+  <br>
+  To get started with, open the folder that you've just bootstraped and run the command below
+
+  ```
+  npm i remotion @remotion/player
+  ```
+
+  Next is to create a sample component and place this content
+
+  ```typescript
+  export default function Example() {
+    return (
+      <>
+        <Sequence from={0} durationInFrames={15}>
+          Hello
+        </Sequence>
+        <Sequence from={15}>World</Sequence>
+      </>
+    );
+  }
+  ```
+
+  Now, go to `app.js` or `index.js` or whatever your app's entrypoint is and paste the snippet below
+
+  ```typescript
+  import Example from "~/components/example.tsx";
+
+  export default function App() {
+    return (
+      <>
+        <Player
+          component={Example}
+          durationInFrames={30 * 100}
+          compositionWidth={400}
+          compositionHeight={400}
+          fps={30}
+          controls
+        />
+      </>
+    );
+  }
+  ```
