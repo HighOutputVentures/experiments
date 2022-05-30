@@ -5,7 +5,6 @@ import TextField from "../components/textfield";
 
 export default function RemotionVideo() {
   const [text, setText] = React.useState("");
-  const [controls, setControls] = React.useState(true);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -17,11 +16,9 @@ export default function RemotionVideo() {
             component={Example}
             compositionWidth={650}
             compositionHeight={550}
-            controls={controls}
+            controls
             inputProps={{
               text,
-              controls,
-              setControls,
             }}
           />
         </div>
