@@ -3,6 +3,10 @@ import * as React from "react";
 import {
   AbsoluteFill,
   Audio,
+  continueRender,
+  delayRender,
+  interpolateColors,
+  Loop,
   Sequence,
   useCurrentFrame,
   useVideoConfig,
@@ -25,15 +29,15 @@ export default function Example({text}: ExampleProps) {
 
   return (
     <div>
-      {!playingAd && (
-        <Sequence from={0}>
-          <Ringtone />
+      <Sequence from={0} showInTimeline={playingAd}>
+        <Ringtone />
 
+        <Loop durationInFrames={50}>
           <AnimatedText>
             {text && text.trim().length > 0 ? text : "Random string"}
           </AnimatedText>
-        </Sequence>
-      )}
+        </Loop>
+      </Sequence>
 
       <Sequence from={30 * 10} durationInFrames={30 * 5}>
         <IncomingAdMsg />
@@ -62,11 +66,11 @@ function Ringtone({paused}: {paused?: boolean}) {
 
   return (
     <>
-      <div className="absolute left-1/2 top-32 flex h-[50px] -translate-x-1/2 items-end gap-2">
+      <div className="absolute left-1/2 top-32 z-50 flex h-[50px] -translate-x-1/2 items-end gap-2">
         {visualization.map((v) => (
           <div
             key={uuid()}
-            className="w-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-400"
+            className="w-4 bg-gradient-to-r from-blue-600 to-indigo-400"
             style={{
               height: v * 25,
             }}
@@ -80,11 +84,37 @@ function Ringtone({paused}: {paused?: boolean}) {
 }
 
 function AnimatedText({children}: {children: React.ReactNode}) {
+  const frame = useCurrentFrame();
+  const [handle] = React.useState(() => delayRender());
+  const [loading, setLoading] = React.useState(true);
+
+  const color = interpolateColors(frame, [0, 50], ["#22D3EE", "#F43F5E"]);
+
+  const doSomethingSync = React.useCallback(async () => {
+    try {
+      await fetch("https://jsonplaceholder.typicode.com/users");
+    } catch (error) {
+    } finally {
+      setLoading(false);
+      continueRender(handle);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    doSomethingSync();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <div className="absolute flex h-full w-full items-center justify-center">
-      <h2 className="bg-gradient-to-r from-red-400 to-amber-600 bg-clip-text font-mono text-6xl text-transparent">
+      <h2 style={{color}} className="font-mono text-6xl text-transparent">
         {children}
       </h2>
+
+      {/* <h2 className="bg-gradient-to-r from-red-400 to-amber-600 bg-clip-text font-mono text-6xl text-transparent">
+        {children}
+      </h2> */}
     </div>
   );
 }
