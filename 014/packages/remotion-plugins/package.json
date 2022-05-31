@@ -8,12 +8,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@remotion/media-utils": "^3.0.12",
     "@remotion/player": "^3.0.12",
+    "@types/uuid": "^8.3.4",
     "clsx": "^1.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
-    "remotion": "^3.0.12"
+    "remotion": "^3.0.12",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
