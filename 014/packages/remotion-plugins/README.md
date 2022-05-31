@@ -99,3 +99,21 @@
     );
   }
   ```
+
+- `usePlayingState`
+
+  ```typescript
+  import {usePlayingState} from "remotion/dist/timeline-position-state";
+
+  export default function Component() {
+    const [state, setState] = usePlayingState();
+
+    console.log(state); // boolean
+
+    const fn = () => {
+      setState(<boolean>)
+    }
+
+    ...
+  }
+  ```
