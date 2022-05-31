@@ -21,20 +21,41 @@ interface ExampleProps {
   text?: string;
 }
 
+const promise = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  });
+};
+
 export default function Example({text}: ExampleProps) {
   const frame = useCurrentFrame();
   const playsAdAt = 30 * 15;
   const stopsAdAt = playsAdAt + 30 * 5;
   const playingAd = playsAdAt >= frame && stopsAdAt <= frame;
 
+  const [handle] = React.useState(() => delayRender());
+  const [loading, setLoading] = React.useState(true);
+
+  const doSomethingSync = React.useCallback(async () => {
+    await promise();
+    setLoading(false);
+    continueRender(handle);
+  }, []);
+
+  React.useEffect(() => {
+    doSomethingSync();
+  }, []);
+
+  if (loading) return <div className="p-4">Loading...</div>;
+
   return (
     <div>
       <Sequence from={0} showInTimeline={playingAd}>
         <Ringtone />
 
-        <Loop durationInFrames={50}>
+        <Loop durationInFrames={60}>
           <AnimatedText>
-            {text && text.trim().length > 0 ? text : "Random string"}
+            {text && text.trim().length > 0 ? text : "type something"}
           </AnimatedText>
         </Loop>
       </Sequence>
@@ -78,33 +99,14 @@ function Ringtone({paused}: {paused?: boolean}) {
         ))}
       </div>
 
-      {playingState && <Audio src={ringtone} volume={0.5} />}
+      {playingState && <Audio startFrom={0} src={ringtone} volume={0.5} />}
     </>
   );
 }
 
 function AnimatedText({children}: {children: React.ReactNode}) {
   const frame = useCurrentFrame();
-  const [handle] = React.useState(() => delayRender());
-  const [loading, setLoading] = React.useState(true);
-
   const color = interpolateColors(frame, [0, 50], ["#22D3EE", "#F43F5E"]);
-
-  const doSomethingSync = React.useCallback(async () => {
-    try {
-      await fetch("https://jsonplaceholder.typicode.com/users");
-    } catch (error) {
-    } finally {
-      setLoading(false);
-      continueRender(handle);
-    }
-  }, []);
-
-  React.useEffect(() => {
-    doSomethingSync();
-  }, []);
-
-  if (loading) return null;
 
   return (
     <div className="absolute flex h-full w-full items-center justify-center">
