@@ -132,3 +132,6 @@
     return <div style={{color}}>{text}</div>;
   }
   ```
+
+- `Loop`
+- `delayRender` and `continueRender`
