@@ -1,7 +1,7 @@
 - `Player`
 
   ```typescript
-  import {Player, PlayerRef} from "@remotion/player";
+  import {Player} from "@remotion/player";
   import {Sequence} from "remotion";
 
   function MyVideo() {
