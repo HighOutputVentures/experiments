@@ -117,3 +117,18 @@
     ...
   }
   ```
+
+- `interpolateColors`
+
+  ```typescript
+  import {interpolateColors, useCurrentFrame} from "remotion";
+
+  export default function Component({text}: {text: string}) {
+    const frame = useCurrentFrame();
+    const color = interpolateColors(frame, [0, 100], ["red", "blue"]);
+
+    console.log(color); // rgba color between red and blue
+
+    return <div style={{color}}>{text}</div>;
+  }
+  ```
