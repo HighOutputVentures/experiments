@@ -38,7 +38,7 @@
   import {useAudioData, visualizeAudio} from "@remotion/media-utils";
 
   export default function Component() {
-    const audioData = useAudioData(audio);
+    const audioData = useAudioData(audio); // use `getAudioData` if outside a react component
 
     if (!audioData) return <>Failed to get audio info</>;
 
