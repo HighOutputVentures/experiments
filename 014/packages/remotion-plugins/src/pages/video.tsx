@@ -1,4 +1,4 @@
-import {Player, PlayerRef} from "@remotion/player";
+import {Player} from "@remotion/player";
 import * as React from "react";
 import Example from "../components/example";
 import TextField from "../components/textfield";
@@ -16,7 +16,8 @@ export default function RemotionVideo() {
             component={Example}
             compositionWidth={650}
             compositionHeight={550}
-            controls
+            controls={false}
+            autoPlay
             inputProps={{
               text,
             }}
