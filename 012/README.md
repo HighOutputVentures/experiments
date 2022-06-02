@@ -18,10 +18,8 @@ Engineer Goals:
 - add all possible tool/blocks, inline tool and block tune that we can use or the user can use [done]
 - try to use react and react dom framework in render method to make development faster and flexible, and so other engineers will have easy time to adapt [done]
 - integrate chakra-ui framework to ease customizing the UI [done]
-
-- create our own text plugin (that can do '@' mention and '/' command) [in-progress]
-- [feature request for the codex-team](https://github.com/codex-team/editor.js/issues/2070)
-
+- create our own text plugin (that can do '@' mention) [done]
+- create our own text plugin ('/' command) [in-progress] [feature request for the codex-team](https://github.com/codex-team/editor.js/issues/2070)
 - create our own line tool plugin [to-do]
 - create our own block tune plugin [to-do]
 - publish it in npm [to-do]
@@ -59,6 +57,9 @@ In conclusion, I already think that we can use this one and just improve it alon
 - [ReactDOM to render react inside render method](https://reactjs.org/docs/react-dom.html)
 - [ui framework](https://chakra-ui.com/)
 - [react render sample](https://raw.githubusercontent.com/Walkthroughs/editorjs-react-tool/master/src/tools/timeline/tool.js)[react component](https://raw.githubusercontent.com/Walkthroughs/editorjs-react-tool/master/src/tools/timeline/eventTimeline.js)
+- [text cursor location and range of caret](https://javascript.info/selection-range)
+- [div position where selection is](https://stackoverflow.com/questions/2031518/javascript-selection-range-coordinates)
+- [inserting in text caret position](http://jsfiddle.net/jwvha/1/)
 
 ## Documentation
 
