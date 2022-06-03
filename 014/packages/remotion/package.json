@@ -1,7 +1,8 @@
 {
 	"name": "remotion",
+	"author": "Glevinzon Dapal",
 	"version": "1.0.0",
-	"description": "My Remotion video",
+	"description": "To run an experiment on a Remotion, a package that can render video out of Reactjs code",
 	"scripts": {
 		"start": "remotion preview src/index.tsx",
 		"build": "remotion render src/index.tsx BirthdayCard out/video.mp4",
@@ -9,7 +10,7 @@
 		"test": "eslint src --ext ts,tsx,js,jsx && tsc"
 	},
 	"repository": {},
-	"license": "UNLICENSED",
+	"license": "ISC",
 	"dependencies": {
 		"@remotion/bundler": "^3.0.10",
 		"@remotion/cli": "^3.0.10",
