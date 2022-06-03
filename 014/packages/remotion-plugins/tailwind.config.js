@@ -10,13 +10,8 @@ module.exports = {
         black: 900,
       },
       fontFamily: {
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
         secondary: ["Cardo", "sans-serif"],
-      },
-      extend: {
-        fontFamily: {
-          sans: ["Inter", ...defaultTheme.fontFamily.sans],
-          mono: ["Inconsolata", ...defaultTheme.fontFamily.mono],
-        },
       },
     },
   },
