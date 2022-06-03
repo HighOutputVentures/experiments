@@ -1,3 +1,1 @@
-export default function CreateNew() {
-  return null;
-}
+export {default} from "~/features/create-new/step-3";
