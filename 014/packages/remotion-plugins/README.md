@@ -1,9 +1,9 @@
-## Remotion
+# Remotion
 
 <br>
 <br>
 
-**Components/Hooks/Utils**
+## Components/Hooks/Utils
 
 - [x] `Composition` is used to register a component to be displayed as video.
 - [x] `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
@@ -17,7 +17,7 @@
 - [x] `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
 - [ ] `spring`
 
-**Plugins**
+## Plugins
 
 - [ ] `@remotion/player`
 - [ ] `@remotion/three`
@@ -26,7 +26,7 @@
 <br>
 <br>
 
-**How Tos**
+## How Tos
 
 - How to use `Composition`
 
@@ -91,11 +91,11 @@ export const Component = () => {
   import {Sequence} from 'remotion';
 
   const MyComponent = () => {
-  	return (
-  		<>
-  			<Sequence from={<number>}>...</Sequence>
-  		</>
-  	);
+   return (
+    <>
+     <Sequence from={<number>}>...</Sequence>
+    </>
+   );
   };
   ```
 
@@ -167,7 +167,7 @@ export const Component = () => {
   <br>
   To get started with, open the folder that you've just bootstraped and run the command below
 
-  ```
+  ```bash
   npm i remotion @remotion/player
   ```
 
@@ -206,6 +206,9 @@ export const Component = () => {
     );
   }
   ```
+
+  <br>
+  <br>
 
 ## Remotion Plugins
 
@@ -445,14 +448,10 @@ export const Component = () => {
 
 - Unexpected `Audio` behaviour in `StrictMode`
   **Refs**
-- https://github.com/remotion-dev/remotion/issues/957
-- https://github.com/remotion-dev/remotion/issues/723
+  - <https://github.com/remotion-dev/remotion/issues/957>
+  - <https://github.com/remotion-dev/remotion/issues/723>
 
 ## Limitations
 
 - Download the composed video
-- https://github.com/remotion-dev/remotion/issues/655
-
-```
-
-```
+  - <https://github.com/remotion-dev/remotion/issues/655>
