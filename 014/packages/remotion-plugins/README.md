@@ -15,11 +15,11 @@
 - [x] `useVideoConfig` returns the video settings. `fps`, `durationInFrames`, `width`, `height`, `id`, `defaultProps`. More info [here](https://www.remotion.dev/docs/use-video-config)
 - [x] `interpolate` helps in creating animations. Example if we want a `fade in` effect, it will generate an opacity value for us to be used at a certain point of time
 - [x] `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
-- [ ] `spring`
+- [x] `spring`
 
 ## Plugins
 
-- [ ] `@remotion/player`
+- [x] `@remotion/player`
 - [ ] `@remotion/three`
 - [ ] `@remotion/lambda`
 
