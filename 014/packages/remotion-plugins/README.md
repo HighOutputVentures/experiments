@@ -141,7 +141,7 @@ export const Component = () => {
   const opacity = interpolate(
     frame,
     [0, 50] /* from frame 0 to 50 */,
-    [0, 1] /* start at opacity 1 to 0 */
+    [0, 1] /* start at opacity 1 to 0 */,
   );
 
   export const Component = () => {
@@ -206,3 +206,253 @@ export const Component = () => {
     );
   }
   ```
+
+## Remotion Plugins
+
+<br>
+<br>
+
+- `Player` - used to render a your composition in a React component. eg. rendering a video on a landing page
+
+  ```typescript
+  import {Player, PlayerRef} from "@remotion/player";
+  import {Sequence} from "remotion";
+
+  function MyVideo() {
+    return (
+      <>
+        <Sequence from={0}>Hello</Sequence>
+        ...
+      </>
+    );
+  }
+
+  export default function Component() {
+    const ref = useRef<PlayerRef>(null);
+
+    const play = () => {
+      if (ref.current?.paused) {
+        ref.current?.play();
+      }
+    };
+
+    return (
+      <>
+      <Player
+        ref={ref}
+        fps={30}
+        durationInFrames={30 * 15}
+        component={MyVideo}
+        compositionWidth={650}
+        compositionHeight={550}
+        inputProps={
+          {
+            /* props to be passed down to `MyVideo` component  */
+          }
+        }
+      />
+
+      <button onClick={play}>
+      </>
+
+    );
+  }
+  ```
+
+  **Other props**
+
+  - loop
+  - autoPlay
+  - showVolumeControls
+  - allowFullscreen
+  - clickToPlay
+  - doubleClickToFullscreen
+  - spaceKeyToPlayOrPause
+  - errorFallback
+    <br>
+    <br>
+
+- `useAudioData` - used to get the information of an audio
+
+  ```typescript
+  import {useAudioData} from "@remotion/media-utils";
+
+  export default function Component() {
+    const audioData = useAudioData(audio); // use `getAudioData` if outside a react component
+
+    if (!audioData) return <>Failed to get audio info</>;
+
+    console.log(
+      audioData.channelWaveforms, // [Float32Array, Float32Array]
+      audioData.durationInSeconds, // number
+      audioData.isRemote, // boolean
+      audioData.numberOfChannels, // number
+      audioData.resultId, // string
+      audioData.sampleRate, // number
+    );
+
+    return (
+      <>
+        <pre>{JSON.stringify(audioData, null, 4)}</pre>
+      </>
+    );
+  }
+  ```
+
+- `visualizeAudio` - returns an array of values describing the amplitude of each frequency range
+
+  ```typescript
+  import {useAudioData, visualizeAudio} from "@remotion/media-utils";
+  import {useCurrentFrame, useVideoConfig} from "remotion";
+
+  export default function Component() {
+    const frame = useCurrentFrame();
+    const {fps} = useVideoConfig();
+    const audioData = useAudioData(audio);
+    const visualization = visualizeAudio({
+      fps,
+      frame,
+      audioData,
+      numberOfSamples: 8,
+    });
+
+    console.log(visualization); // Array with length of `numberOfSamples`
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-end",
+          gap: 8,
+        }}
+      >
+        {visualization.map((value) => (
+          <div
+            style={{
+              width: 16,
+              height: value * 10,
+              backgroundColor: "blue",
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+  ```
+
+- `usePlayingState` - hook that returns a state if whether **Player** is playing or not and a dispatch function to play/pause the **Player**
+
+  ```typescript
+  import {usePlayingState} from "remotion/dist/timeline-position-state";
+
+  export default function Component() {
+    const [state, setState] = usePlayingState();
+
+    console.log(state); // boolean
+
+    const fn = () => {
+      setState(<boolean>) // stops or plays the Player
+    }
+
+    ...
+  }
+  ```
+
+- `interpolateColors` - this is the same to [interpolate](https://www.remotion.dev/docs/interpolate) but is specific to colors
+
+  ```typescript
+  import {interpolateColors, useCurrentFrame} from "remotion";
+
+  export default function Component({text}: {text: string}) {
+    const frame = useCurrentFrame();
+    const color = interpolateColors(frame, [0, 100], ["red", "blue"]);
+
+    console.log(color); // rgba color between red and blue
+
+    return <div style={{color}}>{text}</div>;
+  }
+  ```
+
+- `getVideoMetadata` - gets video information. much like `getAudioData` but returns a promise
+
+  ```typescript
+  import {getVideoMetadata, VideoMetadata} from "@remotion/media-utils";
+  import * as React from "react";
+
+  export default function useVideoMetadata(videoSrc: string) {
+    const [metadata, setMetaData] = React.useState<VideoMetadata | null>(null);
+
+    React.useEffect(() => {
+      getVideoMetadata(videoSrc).then(setMetaData);
+    }, [videoSrc]);
+
+    if (metadata) {
+      console.log(metadata.aspectRatio); // number
+      console.log(metadata.durationInSeconds); // number
+      console.log(metadata.isRemote); // boolean
+      console.log(metadata.height); // number
+      console.log(metadata.width); // number
+    }
+
+    return metadata;
+  }
+  ```
+
+- `Loop`
+
+  ```typescript
+  import {Loop} from "remotion";
+
+  export default function LoopedComponent() {
+    return (
+      <Loop durationInFrames={50} times={3}>
+        Your content goes here
+      </Loop>
+    );
+  }
+  ```
+
+- `delayRender` and `continueRender` - signals the player to not render the frame yet until `continueRender` is called
+
+  ```typescript
+  const handle = useEffect(() => delayRender());
+
+  // after fetching
+  continueRender(handle);
+  ```
+
+- `spring`
+
+  ```typescript
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+
+  const marginTop = spring({
+    frame,
+    from: 0,
+    to: 50,
+    fps,
+    config: {
+      mass: 1, // the weight. reducing this will make animation faster
+      damping: 10,
+      stiffness: 100, // affects how bouncy is the animation
+      overshootClamping: false,
+    },
+  });
+  ```
+
+## Issues
+
+- Unexpected `Audio` behaviour in `StrictMode`
+  **Refs**
+- https://github.com/remotion-dev/remotion/issues/957
+- https://github.com/remotion-dev/remotion/issues/723
+
+## Limitations
+
+- Download the composed video
+- https://github.com/remotion-dev/remotion/issues/655
+
+```
+
+```
