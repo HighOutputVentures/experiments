@@ -1,137 +1,34 @@
-- `Player`
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-  ```typescript
-  import {Player} from "@remotion/player";
-  import {Sequence} from "remotion";
+## Getting Started
 
-  function MyVideo() {
-    return (
-      <>
-        <Sequence from={0}>Hello</Sequence>
-        ...
-      </>
-    );
-  }
+First, run the development server:
 
-  export default function Component() {
-    return (
-      <Player
-        fps={30}
-        durationInFrames={30 * 30}
-        component={MyVideo}
-        compositionWidth={650}
-        compositionHeight={550}
-        controls
-        inputProps={
-          {
-            /* props to be passed down to `MyVideo` component  */
-          }
-        }
-      />
-    );
-  }
-  ```
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-- `useAudioData`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-  ```typescript
-  import {useAudioData, visualizeAudio} from "@remotion/media-utils";
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-  export default function Component() {
-    const audioData = useAudioData(audio); // use `getAudioData` if outside a react component
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-    if (!audioData) return <>Failed to get audio info</>;
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-    console.log(
-      audioData.channelWaveforms, // [Float32Array, Float32Array]
-      audioData.durationInSeconds, // number
-      audioData.isRemote, // boolean
-      audioData.numberOfChannels, // number
-      audioData.resultId, // string
-      audioData.sampleRate // number
-    );
+## Learn More
 
-    return (
-      <>
-        <pre>{JSON.stringify(audioData, null, 4)}</pre>
-      </>
-    );
-  }
-  ```
+To learn more about Next.js, take a look at the following resources:
 
-- `visualizeAudio`
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-  ```typescript
-  import {useAudioData, visualizeAudio} from "@remotion/media-utils";
-  import {useCurrentFrame, useVideoConfig} from "remotion";
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-  export default function Component() {
-    const frame = useCurrentFrame();
-    const {fps} = useVideoConfig();
-    const audioData = useAudioData(audio);
-    const visualization = visualizeAudio({
-      fps,
-      frame,
-      audioData,
-      numberOfSamples: 8,
-    });
+## Deploy on Vercel
 
-    console.log(visualization); // Array with length of `numberOfSamples`
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-end",
-          gap: 8,
-        }}
-      >
-        {visualization.map((value) => (
-          <div
-            style={{
-              width: 16,
-              height: value * 10,
-              backgroundColor: "blue",
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-  ```
-
-- `usePlayingState`
-
-  ```typescript
-  import {usePlayingState} from "remotion/dist/timeline-position-state";
-
-  export default function Component() {
-    const [state, setState] = usePlayingState();
-
-    console.log(state); // boolean
-
-    const fn = () => {
-      setState(<boolean>)
-    }
-
-    ...
-  }
-  ```
-
-- `interpolateColors`
-
-  ```typescript
-  import {interpolateColors, useCurrentFrame} from "remotion";
-
-  export default function Component({text}: {text: string}) {
-    const frame = useCurrentFrame();
-    const color = interpolateColors(frame, [0, 100], ["red", "blue"]);
-
-    console.log(color); // rgba color between red and blue
-
-    return <div style={{color}}>{text}</div>;
-  }
-  ```
-
-- `Loop`
-- `delayRender` and `continueRender`
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
