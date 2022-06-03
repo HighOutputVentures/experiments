@@ -6,7 +6,6 @@ module.exports = {
     extend: {
       fontWeight: {
         normal: 400,
-        semibold: 600,
         bold: 700,
         black: 900,
       },
