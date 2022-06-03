@@ -7,7 +7,7 @@ import {
 } from "remotion";
 import Confetti from "~/components/confetti";
 import ICelebrant from "~/types/celebrant";
-import utils from "~/utils";
+import dateFormatter from "~/utils/date-formatter";
 import Donuts from "./donuts";
 import Scribbles from "./scribbles";
 
@@ -45,7 +45,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
 
       <Sequence from={5 * multiplier} layout="none">
         <p className="mt-8">
-          {utils.date.formatter.format(new Date(data.dateOfBirth))}
+          {dateFormatter.format(new Date(data.dateOfBirth))}
         </p>
       </Sequence>
 

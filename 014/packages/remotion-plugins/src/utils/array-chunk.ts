@@ -1,6 +1,6 @@
 export default function arrayChunk<T extends Array<unknown>>(
   array: T,
-  size: number
+  size: number,
 ) {
   const chunks: T[number][][] = [];
   const copy = [...array];
