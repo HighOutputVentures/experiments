@@ -6,27 +6,133 @@
 
 ## Repository
 
-- [git hub repository](https://github.com/HighOutputVentures/highoutput-library)
-  @branch hov-neyar
+- [git hub repository](https://github.com/HighOutputVentures/highoutput-library/tree/main/packages/neyar)
+- [npm package](https://www.npmjs.com/package/@highoutput/neyar)
 
 ## Goal Statements
 
 We are aiming to create an customizable editor plugin (notion like usage) to integrate mainly in [identifi](https://app.identifi.com/) or other projects; can also adapt to any new feature plugin product team may want to insert; to resolve formatting text concern and to ease building a document type of page.
 
-Engineer Goals:
+### Engineering Goal:
 
-- add all possible tool/blocks, inline tool and block tune that we can use or the user can use [done]
-- try to use react and react dom framework in render method to make development faster and flexible, and so other engineers will have easy time to adapt [done]
-- integrate chakra-ui framework to ease customizing the UI [done]
-- create our own text plugin (that can do '@' mention) [done]
-- create our own text plugin ('/' command) [in-progress] [feature request for the codex-team](https://github.com/codex-team/editor.js/issues/2070)
-- create our own line tool plugin [to-do]
-- create our own block tune plugin [to-do]
-- publish it in npm [to-do]
-- integrate it in identifi as a beta with a seperate page [to-do]
+- add all possible [tools and blocks](https://github.com/orgs/editor-js/repositories) that we can use or the user can use
 
-- create react wrapper to ease implementation in react projects [to-do]
-- integrate storybook for demo and documentation [to-do]
+```typescript
+import EditorJS from "@editorjs/editorjs";
+
+/** Editor.js Plugin */
+import Header from "@editorjs/header";
+import Code from "@editorjs/code";
+import Paragraph from "@editorjs/paragraph";
+import CheckList from "@editorjs/checklist";
+import Qoute from "@editorjs/quote";
+import Delimiter from "@editorjs/delimiter";
+import ToggleBlock from "editorjs-toggle-block";
+import List from "@editorjs/list";
+import NestedList from "@editorjs/nested-list";
+import ImageTool from "@editorjs/image";
+import SimpleImage from "@editorjs/simple-image";
+import Link from "@editorjs/link";
+import Attaches from "@editorjs/attaches";
+import Embed from "@editorjs/embed";
+import Table from "@editorjs/table";
+import Raw from "@editorjs/raw";
+
+export {
+  EditorJS,
+  Header,
+  Code,
+  Paragraph, // default text block
+  Qoute,
+  Delimiter,
+  ToggleBlock,
+  List,
+  NestedList,
+  CheckList,
+  ImageTool,
+  SimpleImage,
+  Link, // link with preview
+  Attaches,
+  Embed,
+  Table,
+  Raw,
+};
+
+/** Other Library */
+import DragDrop from "editorjs-drag-drop";
+import Undo from "editorjs-undo";
+
+export { DragDrop, Undo };
+
+/** Editor.js Inline Tools */
+import Marker from "@editorjs/marker";
+import InlineCode from "@editorjs/inline-code";
+import Underline from "@editorjs/underline";
+import LinkAutocomplete from "@editorjs/link-autocomplete";
+
+export { Marker, InlineCode, Underline, LinkAutocomplete };
+
+/** Editor.js block tune tool */
+import AlignmentTuneTool from "editorjs-text-alignment-blocktune";
+
+export { AlignmentTuneTool };
+```
+
+- created our own text plugin class (reference: https://editorjs.io/the-first-plugin)
+
+```typescript
+// class file
+class NeyarText {
+  render() {
+    return document.createElement("div"); // render element here
+  }
+}
+```
+
+```typescript
+// usage
+import { EditorJS, NeyarText } from "@hightoutput/neyar";
+
+const editor = new EditorJS({
+  holder: "editor",
+  tools: {
+    neyarText: {
+      class: NeyarText,
+    },
+  },
+  defaultBlock: "neyarText",
+});
+```
+
+- use of **react** and **reactDOM** framework in render method to make development faster and flexible; coding html in jsx/tsx form is faster rather than doing traditional javascript creating element and use of hook are very handy in manipulating complicated state handling , and so that other front end engineers will have easy time to adapt coding within is project.
+
+```typescript
+// *.tsx (file)
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+/**
+   * neyar text block is rendered here
+   */
+  render() {
+    const rootNode = document.createElement('div');
+    this.nodes.holder = rootNode;
+
+    const root = createRoot(rootNode); // create a react dom with the created div element
+
+    root.render(
+      <NeyarTextComponent
+        data={this.data.neyarText}
+        blockIndex={this.api.blocks.getCurrentBlockIndex() + 1}
+        mentions={this.config.mentions || []}
+      />
+    ); // render react component in from the create react dom
+
+    return this.nodes.holder || ''; // return component rendered
+  }
+```
+
+- created our own text plugin that can do **'@' mention** to test how customazible the plugin is.
 
 ## Abstract
 
@@ -44,26 +150,29 @@ In conclusion, I already think that we can use this one and just improve it alon
 
 ## Resources
 
-- [Editor.js](https://editorjs.io/base-concepts)
-- [Editor.js Plugin Repository](https://github.com/orgs/editor-js/repositories)
-- [List of plugins and projects of editor.js](https://github.com/editor-js/awesome-editorjs)
-- [Contenteditable](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable)
-- [Event Target](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
-- [Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
-- [SWC Compiler](https://swc.rs/)
-- [Browserify](bundler)
+- [editor.js documentation](https://editorjs.io/base-concepts)
+- [editor.js repository](https://github.com/orgs/editor-js/repositories)
+- [list of plugins and projects of editor.js](https://github.com/editor-js/awesome-editorjs)
+- [creating plugin](https://editorjs.io/the-first-plugin)
+- [creating a plugin react render sample](https://raw.githubusercontent.com/Walkthroughs/editorjs-react-tool/master/src/tools/timeline/tool.js)[react component](https://raw.githubusercontent.com/Walkthroughs/editorjs-react-tool/master/src/tools/timeline/eventTimeline.js)
+- [enabling inline toolbar](https://editorjs.io/enable-inline-toolbar)
+- [creating block settings](https://editorjs.io/making-a-block-settings)
+
+- [swc complier](https://swc.rs/)
+- [browserify](bundler)
 - [tsdx zero config package](https://tsdx.io/)
-- [React for component build](https://reactjs.org/)
-- [ReactDOM to render react inside render method](https://reactjs.org/docs/react-dom.html)
+- [react for component build](https://reactjs.org/)
+- [reactDOM to render react inside render method](https://reactjs.org/docs/react-dom.html)
 - [ui framework](https://chakra-ui.com/)
-- [react render sample](https://raw.githubusercontent.com/Walkthroughs/editorjs-react-tool/master/src/tools/timeline/tool.js)[react component](https://raw.githubusercontent.com/Walkthroughs/editorjs-react-tool/master/src/tools/timeline/eventTimeline.js)
+
 - [text cursor location and range of caret](https://javascript.info/selection-range)
 - [div position where selection is](https://stackoverflow.com/questions/2031518/javascript-selection-range-coordinates)
 - [inserting in text caret position](http://jsfiddle.net/jwvha/1/)
+- [contenteditable](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable)
+- [event target](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
+- [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
-## Documentation
-
-### Usage
+## Usage
 
 ```html
 <div id="editor"></div>
@@ -139,3 +248,8 @@ import {
   AlignmentTuneTool,
 } from "@hightoutput/neyar";
 ```
+
+## Feature request and Support
+
+- ('/' command) [feature request for the codex-team](https://github.com/codex-team/editor.js/issues/2070)
+- [markdown format support](https://github.com/codex-team/editor.js/issues/709)

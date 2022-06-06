@@ -6,7 +6,11 @@
 
 ## Goal Statements
 
-At the end of this experiment, we should be able to;
+At the end of this experiment, we should be able to
+- Phase 1:
+  - Explore Tools within the Spline Editor
+    - create a small library/collections of tutorials on how to use spline tool
+  - To recreate the Hero section background with 3D model, in HOV context 
 
 ## Abstract
 
