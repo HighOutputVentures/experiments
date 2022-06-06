@@ -5,22 +5,18 @@ import FileField from "~/components/file-field";
 import IconButton from "~/components/icon-button";
 import Textfield from "~/components/textfield";
 import Layout from "../layout";
+import {Schema} from "../types";
 import useStore from "../use-store";
+
+const defaultValues: Partial<Schema["celebrant"]> = {
+  name: "",
+  dateOfBirth: new Date(),
+};
 
 export default function CreateNewStep1() {
   const store = useStore();
   const router = useRouter();
-
-  const [values, setValues] = React.useState<{
-    name: string | null;
-    image: File | null;
-    dateOfBirth: Date | null;
-  }>({
-    name: null,
-    image: null,
-    dateOfBirth: null,
-  });
-
+  const [values, setValues] = React.useState(defaultValues);
   const isValid = !!(values.name && values.image && values.dateOfBirth);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,11 +40,7 @@ export default function CreateNewStep1() {
 
   React.useEffect(() => {
     return () => {
-      setValues({
-        name: null,
-        image: null,
-        dateOfBirth: null,
-      });
+      setValues(defaultValues);
     };
   }, []);
 
@@ -75,10 +67,11 @@ export default function CreateNewStep1() {
           required
           className="mt-6"
           placeholder="Date of Birth"
+          value={values.dateOfBirth?.toDateString()}
           onChange={(e) =>
             setValues((o) => ({
               ...o,
-              dateOfBirth: e.target.valueAsDate,
+              dateOfBirth: e.target.valueAsDate ?? undefined,
             }))
           }
         />
@@ -88,19 +81,12 @@ export default function CreateNewStep1() {
           label="Photo"
           className="mt-6"
           onChange={(e) => {
-            const filelist = e.target.files;
+            const files = e.target.files;
 
-            if (filelist && filelist.length > 0) {
-              setValues((o) => ({
-                ...o,
-                image: filelist[0],
-              }));
-            } else {
-              setValues((o) => ({
-                ...o,
-                image: null,
-              }));
-            }
+            setValues((o) => ({
+              ...o,
+              image: files && files.length > 0 ? files[0] : undefined,
+            }));
           }}
         />
 
