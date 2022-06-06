@@ -1,47 +1,35 @@
 import {Player, PlayerRef} from "@remotion/player";
+import Head from "next/head";
 import {useRouter} from "next/router";
 import * as React from "react";
-import useCreateCardStore from "~/hooks/use-create-card-store";
-import BirthdayCard from "../../../components/birthday-card";
-import constants from "../../../config/constants";
+import {v4 as uuid} from "uuid";
+import BirthdayCard from "~/components/birthday-card";
+import constants from "~/config/constants";
+import useFileToImgSrc from "~/hooks/use-file-to-img-src";
+import dateFormatter from "~/utils/date-formatter";
+import Layout from "../layout";
+import useStore from "../use-store";
 
 export default function CreateNewStep3() {
-  const store = useCreateCardStore();
+  const store = useStore();
   const router = useRouter();
   const playerRef = React.useRef<PlayerRef>(null);
-  const [image, setImage] = React.useState("");
-
-  const createPreview = React.useCallback(() => {
-    if (!store.data) return;
-
-    const reader = new FileReader();
-
-    reader.addEventListener("load", function () {
-      const src = reader.result;
-
-      if (typeof src === "string") setImage(src);
-    });
-
-    reader.readAsDataURL(store.data.celebrant.image);
-  }, [store.data]);
+  const {src: image, loading} = useFileToImgSrc(store.data?.celebrant.image);
 
   React.useEffect(() => {
-    if (!(store.data && store.data.messages.length >= 1))
-      router.push("/create-new");
-
-    createPreview();
-  }, [createPreview, router, store.data]);
-
-  React.useEffect(() => {
-    return () => {
-      setImage("");
-    };
-  }, []);
+    if (!store.data) router.push("/create-new");
+  }, [router, store.data]);
 
   if (!store.data) return null;
 
+  if (loading) <Loader />;
+
   return (
-    <div>
+    <Layout>
+      <Head>
+        <title>Happy Birthday, {store.data.celebrant.name}!</title>
+      </Head>
+
       <div className="border border-gray-200">
         <Player
           ref={playerRef}
@@ -52,13 +40,22 @@ export default function CreateNewStep3() {
           compositionHeight={640}
           controls
           inputProps={{
-            name: store.data.celebrant.name,
-            image,
-            dateOfBirth: store.data.celebrant.dateOfBirth,
             messages: store.data.messages,
+            celebrant: {
+              id: uuid(),
+              name: store.data.celebrant.name,
+              image,
+              dateOfBirth: dateFormatter.format(
+                store.data.celebrant.dateOfBirth,
+              ),
+            },
           }}
         />
       </div>
-    </div>
+    </Layout>
   );
+}
+
+function Loader() {
+  return <div className="p-2 text-sm text-gray-400">Loading...</div>;
 }

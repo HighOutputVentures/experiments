@@ -4,11 +4,11 @@ import * as React from "react";
 import FileField from "~/components/file-field";
 import IconButton from "~/components/icon-button";
 import Textfield from "~/components/textfield";
-import useCreateCardStore from "~/hooks/use-create-card-store";
 import Layout from "../layout";
+import useStore from "../use-store";
 
 export default function CreateNewStep1() {
-  const store = useCreateCardStore();
+  const store = useStore();
   const router = useRouter();
 
   const [values, setValues] = React.useState<{

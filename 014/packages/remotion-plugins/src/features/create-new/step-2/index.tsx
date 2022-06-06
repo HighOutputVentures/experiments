@@ -6,9 +6,9 @@ import {v4 as uuid} from "uuid";
 import FileField from "~/components/file-field";
 import IconButton from "~/components/icon-button";
 import Textfield from "~/components/textfield";
-import useCreateCardStore from "~/hooks/use-create-card-store";
 import Layout from "../layout";
 import {Schema} from "../types";
+import useStore from "../use-store";
 import MessageList from "./message-list";
 
 type IMessage = Schema["messages"][number];
@@ -16,7 +16,7 @@ type IMessage = Schema["messages"][number];
 const defaultMsgValue: IMessage = {body: "", author: "", id: ""};
 
 export default function CreateNewStep2() {
-  const store = useCreateCardStore();
+  const store = useStore();
   const router = useRouter();
   const inputRef = React.useRef<HTMLInputElement>(null);
 
