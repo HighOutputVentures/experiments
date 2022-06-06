@@ -18,6 +18,7 @@ const defaultMsgValue: IMessage = {body: "", author: "", id: ""};
 export default function CreateNewStep2() {
   const store = useStore();
   const router = useRouter();
+  const fileRef = React.useRef<HTMLInputElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const [preview, setPreview] = React.useState(false);
@@ -45,6 +46,9 @@ export default function CreateNewStep2() {
     setValue(defaultMsgValue);
 
     inputRef.current?.focus();
+    if (fileRef.current) {
+      fileRef.current.value = "";
+    }
   };
 
   const next = () => {
@@ -99,6 +103,7 @@ export default function CreateNewStep2() {
         </div>
 
         <FileField
+          ref={fileRef}
           label="Sender Photo"
           className="mt-6"
           onChange={(e) => {
