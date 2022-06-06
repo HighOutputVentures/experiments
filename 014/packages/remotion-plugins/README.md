@@ -20,7 +20,8 @@
 ## Plugins
 
 - [x] `@remotion/player`
-- [ ] `@remotion/three`
+- [x] `@remotion/three`
+- [x] `@remotion/gif`
 - [ ] `@remotion/lambda`
 
 <br>
