@@ -1,15 +1,19 @@
 import {ChevronRightIcon, PlusSmIcon} from "@heroicons/react/outline";
 import {useRouter} from "next/router";
 import * as React from "react";
+import TextareaAutosize from "react-textarea-autosize";
 import {v4 as uuid} from "uuid";
+import FileField from "~/components/file-field";
 import IconButton from "~/components/icon-button";
 import Textfield from "~/components/textfield";
 import useCreateCardStore from "~/hooks/use-create-card-store";
-import IMessage from "~/types/message";
 import Layout from "../layout";
+import {Schema} from "../types";
 import MessageList from "./message-list";
 
-const defaultMsgValue: IMessage = {id: "", body: "", author: ""};
+type IMessage = Schema["messages"][number];
+
+const defaultMsgValue: IMessage = {body: "", author: "", id: ""};
 
 export default function CreateNewStep2() {
   const store = useCreateCardStore();
@@ -80,15 +84,34 @@ export default function CreateNewStep2() {
             }}
           />
 
-          <textarea
+          <TextareaAutosize
             value={value.body}
             placeholder="Message"
-            className="mt-4 block w-full resize-none rounded-md border border-gray-200 p-2 outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
+            className="mt-4 block w-full resize-none rounded-md border border-gray-200 p-2 outline-none transition-colors duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
             onChange={(e) => {
               setValue((o) => ({
                 ...o,
                 body: e.target.value,
               }));
+            }}
+          />
+
+          <FileField
+            className="mt-4"
+            onChange={(e) => {
+              const filelist = e.target.files;
+
+              if (filelist && filelist.length > 0) {
+                setValue((o) => ({
+                  ...o,
+                  image: filelist[0],
+                }));
+              } else {
+                setValue((o) => ({
+                  ...o,
+                  image: undefined,
+                }));
+              }
             }}
           />
 

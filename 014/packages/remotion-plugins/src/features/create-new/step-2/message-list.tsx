@@ -3,16 +3,16 @@ import {
   ChevronRightIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import IMessage from "~/types/message";
+import {Schema} from "../types";
 import Empty from "./empty";
 import Message from "./message";
 import PaginationButton from "./pagination-button";
 
 interface MessageListProps {
   open?: boolean;
-  messages: IMessage[];
+  messages: Schema["messages"];
   onClose?: () => void;
-  onDelete?: (message: IMessage) => void;
+  onDelete?: (message: Schema["messages"][number]) => void;
 }
 
 export default function MessageList({

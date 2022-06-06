@@ -1,10 +1,22 @@
 import create from "zustand";
 import {devtools} from "zustand/middleware";
-import IBirthdayCard from "~/types/birthday-card";
+
+type Input = {
+  celebrant: {
+    name: string;
+    image: File;
+    dateOfBirth: Date;
+  };
+  messages: Array<{
+    body: string;
+    author: string;
+    image?: File;
+  }>;
+};
 
 interface Store {
-  data?: IBirthdayCard;
-  update: (data: IBirthdayCard) => void;
+  data?: Input;
+  update: (data: Input) => void;
   clear: () => void;
 }
 

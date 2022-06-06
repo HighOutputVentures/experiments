@@ -1,6 +1,7 @@
 import {ChevronRightIcon} from "@heroicons/react/outline";
 import {useRouter} from "next/router";
 import * as React from "react";
+import FileField from "~/components/file-field";
 import IconButton from "~/components/icon-button";
 import Textfield from "~/components/textfield";
 import useCreateCardStore from "~/hooks/use-create-card-store";
@@ -30,6 +31,7 @@ export default function CreateNewStep1() {
     if (!(name && image && dateOfBirth)) return;
 
     store.update({
+      messages: [],
       celebrant: {
         name,
         image,
@@ -80,11 +82,9 @@ export default function CreateNewStep1() {
             }
           />
 
-          <input
-            type="file"
+          <FileField
             required
-            className="mt-4 block w-full text-sm text-gray-500 outline-none file:mr-4 file:rounded-full file:border-0 file:bg-blue-50 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-blue-600 hover:file:bg-blue-100"
-            accept="image/png,image/jpg,image/jpeg"
+            className="mt-4"
             onChange={(e) => {
               const filelist = e.target.files;
 
