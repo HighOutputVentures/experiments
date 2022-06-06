@@ -16,6 +16,7 @@
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-textarea-autosize": "^8.3.4",
     "remotion": "^3.0.15",
     "sharp": "^0.30.6",
     "uuid": "^8.3.2",
