@@ -6,7 +6,7 @@
 
 ## Repository
 
-- [git hub repository](https://github.com/HighOutputVentures/highoutput-library)
+- [git hub repository](https://github.com/HighOutputVentures/highoutput-library/tree/main/packages/neyar)
 - [npm package](https://www.npmjs.com/package/@highoutput/neyar)
 
 ## Goal Statements
