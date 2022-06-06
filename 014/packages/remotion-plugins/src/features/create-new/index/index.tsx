@@ -73,7 +73,7 @@ export default function CreateNewStep1() {
           type="date"
           label="Date of birth"
           required
-          className="mt-4"
+          className="mt-6"
           placeholder="Date of Birth"
           onChange={(e) =>
             setValues((o) => ({
@@ -86,7 +86,7 @@ export default function CreateNewStep1() {
         <FileField
           required
           label="Photo"
-          className="mt-4"
+          className="mt-6"
           onChange={(e) => {
             const filelist = e.target.files;
 

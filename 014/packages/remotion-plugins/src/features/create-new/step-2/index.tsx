@@ -62,7 +62,7 @@ export default function CreateNewStep2() {
 
   return (
     <Layout className="w-[375px]">
-      <form className="mt-12" onSubmit={handleSubmit}>
+      <form className="mt-12" noValidate onSubmit={handleSubmit}>
         <Textfield
           ref={inputRef}
           label="Sender"
@@ -78,7 +78,7 @@ export default function CreateNewStep2() {
           }}
         />
 
-        <div className="mt-4">
+        <div className="mt-6">
           <label className="mb-2 flex items-center text-sm">
             Message
             <span className="ml-0.5 text-red-500">*</span>
@@ -100,7 +100,7 @@ export default function CreateNewStep2() {
 
         <FileField
           label="Sender Photo"
-          className="mt-4"
+          className="mt-6"
           onChange={(e) => {
             const filelist = e.target.files;
 
