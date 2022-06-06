@@ -67,7 +67,7 @@ export default function CreateNewStep1() {
           required
           className="mt-6"
           placeholder="Date of Birth"
-          value={values.dateOfBirth?.toDateString()}
+          value={values.dateOfBirth ? formatter.format(values.dateOfBirth) : ""}
           onChange={(e) =>
             setValues((o) => ({
               ...o,
@@ -101,3 +101,9 @@ export default function CreateNewStep1() {
     </Layout>
   );
 }
+
+const formatter = new Intl.DateTimeFormat("fr-CA", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
