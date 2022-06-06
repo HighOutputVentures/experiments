@@ -14,7 +14,9 @@ import useStore from "../use-store";
 export default function CreateNewStep3() {
   const store = useStore();
   const router = useRouter();
-  const {src: image, loading} = useFileToImgSrc(store.data?.celebrant.image);
+  const {src: image, loading: loadingImage} = useFileToImgSrc(
+    store.data?.celebrant.image,
+  );
 
   React.useEffect(() => {
     if (!store.data) router.push("/create-new");
@@ -25,14 +27,14 @@ export default function CreateNewStep3() {
   return (
     <Layout>
       <Head>
-        {loading && <title>Loading...</title>}
-        {!loading && (
+        {loadingImage && <title>Loading...</title>}
+        {!loadingImage && (
           <title>Happy Birthday, {store.data.celebrant.name}!</title>
         )}
       </Head>
 
-      {loading && <Spinner />}
-      {!loading && (
+      {loadingImage && <Spinner />}
+      {!loadingImage && (
         <div className="border border-gray-100">
           <Player
             fps={constants.FPS}
