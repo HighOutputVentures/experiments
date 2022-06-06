@@ -31,7 +31,9 @@ export default function Layout({children}: {children: React.ReactNode}) {
         </div>
 
         <main className="flex grow flex-col items-center justify-center">
-          {children}
+          <div className="w-[375px]">
+            <div>{children}</div>
+          </div>
         </main>
       </div>
     </>

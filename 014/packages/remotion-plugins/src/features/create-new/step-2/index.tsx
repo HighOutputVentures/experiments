@@ -1,4 +1,4 @@
-import {ChevronRightIcon, PlusSmIcon} from "@heroicons/react/outline";
+import {ChevronRightIcon, MailIcon, PlusSmIcon} from "@heroicons/react/outline";
 import {useRouter} from "next/router";
 import * as React from "react";
 import TextareaAutosize from "react-textarea-autosize";
@@ -63,18 +63,13 @@ export default function CreateNewStep2() {
   return (
     <Layout>
       <div>
-        <button
-          className="text-sm transition-colors duration-300 hover:text-blue-500"
-          onClick={() => setPreview(true)}
-        >
-          Messages: {messages.length}
-        </button>
-
-        <form className="mt-4 w-[350px]" onSubmit={handleSubmit}>
+        <form className="mt-12" onSubmit={handleSubmit}>
           <Textfield
             ref={inputRef}
+            label="Sender"
+            required
             autoFocus
-            placeholder="Name"
+            placeholder="Sender"
             value={value.author}
             onChange={(e) => {
               setValue((o) => ({
@@ -84,19 +79,28 @@ export default function CreateNewStep2() {
             }}
           />
 
-          <TextareaAutosize
-            value={value.body}
-            placeholder="Message"
-            className="mt-4 block w-full resize-none rounded-md border border-gray-200 p-2 outline-none transition-colors duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
-            onChange={(e) => {
-              setValue((o) => ({
-                ...o,
-                body: e.target.value,
-              }));
-            }}
-          />
+          <div className="mt-4">
+            <label className="mb-2 flex items-center text-sm">
+              Message
+              <span className="ml-0.5 text-red-500">*</span>
+            </label>
+
+            <TextareaAutosize
+              value={value.body}
+              placeholder="Message"
+              minRows={2}
+              className="block w-full resize-none rounded-md border border-gray-200 p-2 outline-none transition-colors duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
+              onChange={(e) => {
+                setValue((o) => ({
+                  ...o,
+                  body: e.target.value,
+                }));
+              }}
+            />
+          </div>
 
           <FileField
+            label="Sender Photo"
             className="mt-4"
             onChange={(e) => {
               const filelist = e.target.files;
@@ -117,7 +121,22 @@ export default function CreateNewStep2() {
 
           <div className="mt-16 flex justify-center gap-4">
             <IconButton type="submit" icon={PlusSmIcon} />
+
+            <div className="group relative">
+              <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-400 text-[9px] text-white">
+                <div>{messages.length}</div>
+              </div>
+
+              <IconButton
+                type="button"
+                icon={MailIcon}
+                onClick={() => setPreview(true)}
+                title="Review messages"
+              />
+            </div>
+
             <IconButton
+              type="button"
               icon={ChevronRightIcon}
               onClick={next}
               disabled={messages.length <= 0}

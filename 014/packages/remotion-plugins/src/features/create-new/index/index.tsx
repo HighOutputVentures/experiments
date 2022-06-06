@@ -54,7 +54,7 @@ export default function CreateNewStep1() {
 
   return (
     <Layout>
-      <div className="w-[350px]">
+      <div>
         <form onSubmit={handleSubmit} noValidate autoComplete="off">
           <Textfield
             label="Celebrant"
