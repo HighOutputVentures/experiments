@@ -61,100 +61,96 @@ export default function CreateNewStep2() {
   if (!store.data) return null;
 
   return (
-    <Layout>
-      <div>
-        <form className="mt-12" onSubmit={handleSubmit}>
-          <Textfield
-            ref={inputRef}
-            label="Sender"
-            required
-            autoFocus
-            placeholder="Sender"
-            value={value.author}
+    <Layout className="w-[375px]">
+      <form className="mt-12" onSubmit={handleSubmit}>
+        <Textfield
+          ref={inputRef}
+          label="Sender"
+          required
+          autoFocus
+          placeholder="Sender"
+          value={value.author}
+          onChange={(e) => {
+            setValue((o) => ({
+              ...o,
+              author: e.target.value,
+            }));
+          }}
+        />
+
+        <div className="mt-4">
+          <label className="mb-2 flex items-center text-sm">
+            Message
+            <span className="ml-0.5 text-red-500">*</span>
+          </label>
+
+          <TextareaAutosize
+            value={value.body}
+            placeholder="Message"
+            minRows={2}
+            className="block w-full resize-none rounded-md border border-gray-200 p-2 outline-none transition-colors duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
             onChange={(e) => {
               setValue((o) => ({
                 ...o,
-                author: e.target.value,
+                body: e.target.value,
               }));
             }}
           />
+        </div>
 
-          <div className="mt-4">
-            <label className="mb-2 flex items-center text-sm">
-              Message
-              <span className="ml-0.5 text-red-500">*</span>
-            </label>
+        <FileField
+          label="Sender Photo"
+          className="mt-4"
+          onChange={(e) => {
+            const filelist = e.target.files;
 
-            <TextareaAutosize
-              value={value.body}
-              placeholder="Message"
-              minRows={2}
-              className="block w-full resize-none rounded-md border border-gray-200 p-2 outline-none transition-colors duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
-              onChange={(e) => {
-                setValue((o) => ({
-                  ...o,
-                  body: e.target.value,
-                }));
-              }}
-            />
-          </div>
+            if (filelist && filelist.length > 0) {
+              setValue((o) => ({
+                ...o,
+                image: filelist[0],
+              }));
+            } else {
+              setValue((o) => ({
+                ...o,
+                image: undefined,
+              }));
+            }
+          }}
+        />
 
-          <FileField
-            label="Sender Photo"
-            className="mt-4"
-            onChange={(e) => {
-              const filelist = e.target.files;
+        <div className="mt-16 flex justify-center gap-4">
+          <IconButton type="submit" icon={PlusSmIcon} />
 
-              if (filelist && filelist.length > 0) {
-                setValue((o) => ({
-                  ...o,
-                  image: filelist[0],
-                }));
-              } else {
-                setValue((o) => ({
-                  ...o,
-                  image: undefined,
-                }));
-              }
-            }}
-          />
-
-          <div className="mt-16 flex justify-center gap-4">
-            <IconButton type="submit" icon={PlusSmIcon} />
-
-            <div className="group relative">
-              <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-400 text-[9px] text-white">
-                <div>{messages.length}</div>
-              </div>
-
-              <IconButton
-                type="button"
-                icon={MailIcon}
-                onClick={() => setPreview(true)}
-                title="Review messages"
-              />
+          <div className="group relative">
+            <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-400 text-[9px] text-white">
+              <div>{messages.length}</div>
             </div>
 
             <IconButton
               type="button"
-              icon={ChevronRightIcon}
-              onClick={next}
-              disabled={messages.length <= 0}
+              icon={MailIcon}
+              onClick={() => setPreview(true)}
+              title="Review messages"
             />
           </div>
-        </form>
 
-        <MessageList
-          open={preview}
-          onClose={() => setPreview(false)}
-          messages={messages}
-          onDelete={(subject) => {
-            setMessages((current) =>
-              current.filter(({id}) => id !== subject.id),
-            );
-          }}
-        />
-      </div>
+          <IconButton
+            type="button"
+            icon={ChevronRightIcon}
+            onClick={next}
+            disabled={messages.length <= 0}
+          />
+        </div>
+      </form>
+
+      <MessageList
+        open={preview}
+        onClose={() => setPreview(false)}
+        messages={messages}
+        onDelete={(subject) => {
+          setMessages((current) => current.filter(({id}) => id !== subject.id));
+        }}
+      />
     </Layout>
   );
 }

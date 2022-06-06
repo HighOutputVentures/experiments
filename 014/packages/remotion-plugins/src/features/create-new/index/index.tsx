@@ -53,67 +53,65 @@ export default function CreateNewStep1() {
   }, []);
 
   return (
-    <Layout>
-      <div>
-        <form onSubmit={handleSubmit} noValidate autoComplete="off">
-          <Textfield
-            label="Celebrant"
-            autoFocus
-            required
-            value={values.name ?? ""}
-            placeholder="Celebrant"
-            onChange={(e) =>
+    <Layout className="w-[375px]">
+      <form onSubmit={handleSubmit} noValidate autoComplete="off">
+        <Textfield
+          label="Celebrant"
+          autoFocus
+          required
+          value={values.name ?? ""}
+          placeholder="Celebrant"
+          onChange={(e) =>
+            setValues((o) => ({
+              ...o,
+              name: e.target.value,
+            }))
+          }
+        />
+
+        <Textfield
+          type="date"
+          label="Date of birth"
+          required
+          className="mt-4"
+          placeholder="Date of Birth"
+          onChange={(e) =>
+            setValues((o) => ({
+              ...o,
+              dateOfBirth: e.target.valueAsDate,
+            }))
+          }
+        />
+
+        <FileField
+          required
+          label="Photo"
+          className="mt-4"
+          onChange={(e) => {
+            const filelist = e.target.files;
+
+            if (filelist && filelist.length > 0) {
               setValues((o) => ({
                 ...o,
-                name: e.target.value,
-              }))
-            }
-          />
-
-          <Textfield
-            type="date"
-            label="Date of birth"
-            required
-            className="mt-4"
-            placeholder="Date of Birth"
-            onChange={(e) =>
+                image: filelist[0],
+              }));
+            } else {
               setValues((o) => ({
                 ...o,
-                dateOfBirth: e.target.valueAsDate,
-              }))
+                image: null,
+              }));
             }
+          }}
+        />
+
+        <div className="mt-16 flex justify-center">
+          <IconButton
+            type="submit"
+            icon={ChevronRightIcon}
+            disabled={!isValid}
           />
-
-          <FileField
-            required
-            label="Photo"
-            className="mt-4"
-            onChange={(e) => {
-              const filelist = e.target.files;
-
-              if (filelist && filelist.length > 0) {
-                setValues((o) => ({
-                  ...o,
-                  image: filelist[0],
-                }));
-              } else {
-                setValues((o) => ({
-                  ...o,
-                  image: null,
-                }));
-              }
-            }}
-          />
-
-          <div className="mt-16 flex justify-center">
-            <IconButton
-              type="submit"
-              icon={ChevronRightIcon}
-              disabled={!isValid}
-            />
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </Layout>
   );
 }

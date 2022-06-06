@@ -4,13 +4,17 @@ import {useRouter} from "next/router";
 import * as React from "react";
 import useStore from "./use-store";
 
-export default function Layout({children}: {children: React.ReactNode}) {
+export default function Layout({
+  children,
+  ...props
+}: React.ComponentProps<"div">) {
   const store = useStore();
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    await router.push("/");
+
     store.clear();
-    router.push("/");
   };
 
   return (
@@ -31,9 +35,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
         </div>
 
         <main className="flex grow flex-col items-center justify-center">
-          <div className="w-[375px]">
-            <div>{children}</div>
-          </div>
+          <div {...props}>{children}</div>
         </main>
       </div>
     </>
