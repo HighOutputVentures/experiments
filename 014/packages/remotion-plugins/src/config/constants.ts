@@ -1,7 +1,7 @@
 const FPS = 30;
 
-const config = {
+const constants = {
   FPS,
 };
 
-export default config;
+export default constants;
