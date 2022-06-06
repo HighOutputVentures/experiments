@@ -57,6 +57,7 @@ export default function CreateNewStep1() {
       <div className="w-[350px]">
         <form onSubmit={handleSubmit} noValidate autoComplete="off">
           <Textfield
+            label="Celebrant"
             autoFocus
             required
             value={values.name ?? ""}
@@ -71,6 +72,7 @@ export default function CreateNewStep1() {
 
           <Textfield
             type="date"
+            label="Date of birth"
             required
             className="mt-4"
             placeholder="Date of Birth"
@@ -84,6 +86,7 @@ export default function CreateNewStep1() {
 
           <FileField
             required
+            label="Photo"
             className="mt-4"
             onChange={(e) => {
               const filelist = e.target.files;
