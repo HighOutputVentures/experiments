@@ -14,7 +14,9 @@ const useStore = create<Store>()(
       return set({data});
     },
     clear() {
-      return set({}, true);
+      return set({
+        data: undefined,
+      });
     },
   })),
 );

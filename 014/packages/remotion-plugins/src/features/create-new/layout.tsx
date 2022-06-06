@@ -1,9 +1,18 @@
 import {ArrowNarrowLeftIcon} from "@heroicons/react/solid";
 import Head from "next/head";
-import Link from "next/link";
+import {useRouter} from "next/router";
 import * as React from "react";
+import useStore from "./use-store";
 
 export default function Layout({children}: {children: React.ReactNode}) {
+  const store = useStore();
+  const router = useRouter();
+
+  const handleClick = () => {
+    store.clear();
+    router.push("/");
+  };
+
   return (
     <>
       <Head>
@@ -12,12 +21,13 @@ export default function Layout({children}: {children: React.ReactNode}) {
 
       <div className="flex min-h-screen flex-col">
         <div className="p-4">
-          <Link href="/" passHref>
-            <a className="flex w-fit items-center gap-2 text-sm">
-              <ArrowNarrowLeftIcon className="h-4 w-4" />
-              <span>Go back</span>
-            </a>
-          </Link>
+          <button
+            className="flex w-fit items-center gap-2 text-sm"
+            onClick={handleClick}
+          >
+            <ArrowNarrowLeftIcon className="h-4 w-4" />
+            <span>Go back</span>
+          </button>
         </div>
 
         <main className="flex grow flex-col items-center justify-center">
