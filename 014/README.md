@@ -49,10 +49,6 @@ At the end of this experiment, we should be able to
 
 <br/>
 
-[![Watch the video](https://img.youtube.com/vi/sff_CdWw_-c/hqdefault.jpg)](https://www.youtube.com/watch?v=sff_CdWw_-c)
-
-<br/>
-
 ---
 
 ## Documentation
@@ -216,6 +212,10 @@ At the end of this experiment, we should be able to
 
   On the example above, the code will output a `div` component with a `fade-in` effect.
   The animation will start at frame `0` and will end at frame `50`.
+
+  [![Watch the video](https://img.youtube.com/vi/sff_CdWw_-c/hqdefault.jpg)](https://www.youtube.com/watch?v=sff_CdWw_-c)
+
+  <br/>
 
 - How to use `@remotion/player`
   <br>
