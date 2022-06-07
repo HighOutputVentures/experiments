@@ -445,6 +445,61 @@
   });
   ```
 
+- `Series` and `Series.Sequence` - series works just like sequence. The difference is that you don't have to worry about the `durationInFrames`. Say for example we have this
+
+  ```typescript
+  export default function Component() {
+    return (
+      <Series>
+        <Series.Sequence from={0}>
+          <Component1 />
+        </Series.Sequence>
+        <Series.Sequence from={15}>
+          <Component2 />
+        </Series.Sequence>
+        <Series.Sequence from={30}>
+          <Component3 />
+        </Series.Sequence>
+      </Series>
+    );
+  }
+  ```
+
+  At frame `0`, `First` component appears then once video hits frame `15`, `Second` component will replace `First` component. So it would be
+
+  ```
+  F: 0  --- 15 --- 30 --- n
+     C1 --- C2 --- C3 --- C3
+  ```
+
+- `@remotion/three` - a plugin to render `react-three-fiber` components inside composition
+
+```javascript
+import {ThreeCanvas} from "@remotion/three";
+import {useVideoConfig} from "remotion";
+
+function Component() {
+  const {width, height} = useVideoConfig();
+
+  return (
+    <ThreeCanvas
+      orthographic={false}
+      width={width}
+      height={height}
+      camera={{
+        fov: 75,
+        position: [0, 0, 470],
+      }}
+      style={{
+        backgroundColor: "white",
+      }}
+    >
+      <boxGeometry args={[100, 100, 100]} />
+    </ThreeCanvas>
+  );
+}
+```
+
 ## Issues
 
 - Unexpected `Audio` behaviour in `StrictMode`
