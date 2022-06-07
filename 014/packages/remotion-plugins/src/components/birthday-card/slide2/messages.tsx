@@ -71,16 +71,17 @@ const Message = ({
       key={uuid()}
       className={clsx(
         className,
-        "absolute top-[50%] flex w-[65%] translate-y-[-50%] flex-col gap-[1rem] rounded-md bg-[#1a1d21] p-6 text-[#fff] shadow-md",
+        "absolute top-[50%] flex w-[65%] translate-y-[-50%] flex-col gap-[1rem] rounded-md bg-zinc-800 p-6 text-white shadow-md",
       )}
       {...props}
     >
       <div className="flex gap-2">
-        <div className="relative h-[40px] w-[40px]">
+        <div className="relative h-[40px] w-[40px] shrink-0 grow-0">
           <Image layout="fill" src="/robot.svg" alt="" />
         </div>
+
         <div>
-          <p className="text-sm">
+          <p className="text-xs text-gray-300 line-clamp-1">
             Greetings from <span className="text-blue-400">@{data.author}</span>
           </p>
           <p
