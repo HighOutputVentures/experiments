@@ -13,9 +13,14 @@ A [React](https://beta.reactjs.org/) library for creating and rendering videos i
 - [Glevinzon Dapal](https://app.identifi.com/profile/00a0128bdc38887a855480f7c38ffe84)
 - [John Paul Calvo](https://app.identifi.com/profile/00207ec81649ceb1e43f13873ec5498a)
 
+---
+
 ## Goal Statements
 
-At the end of this experiment, we should be able to;
+At the end of this experiment, we should be able to
+
+1. Explore remotion and its tools within
+1. Add new flavour to the current setup where we only use static/text content. If we can generate video using a service that we developed ourselves, it will open opportunities for us to level up our content creation, and hopefully can turn into a potential product.
 
 ---
 
@@ -30,6 +35,23 @@ At the end of this experiment, we should be able to;
 ## Resources
 
 - https://www.remotion.dev/
+- https://www.figma.com/file/rLuqhBp8fYX1Wr6ysfk65M/Banner-Assets-Q2-Y2022?node-id=223%3A2482
+
+[![Watch the video](https://img.youtube.com/vi/deg8bOoziaE/hqdefault.jpg)](https://www.youtube.com/watch?v=deg8bOoziaE)
+
+<br/>
+
+[![Watch the video](https://img.youtube.com/vi/1cD_F3j8a5c/hqdefault.jpg)](https://www.youtube.com/watch?v=1cD_F3j8a5c)
+
+<br/>
+
+[![Watch the video](https://img.youtube.com/vi/VOX98RoITMk/hqdefault.jpg)](https://www.youtube.com/watch?v=VOX98RoITMk)
+
+<br/>
+
+[![Watch the video](https://img.youtube.com/vi/sff_CdWw_-c/hqdefault.jpg)](https://www.youtube.com/watch?v=sff_CdWw_-c)
+
+<br/>
 
 ---
 
