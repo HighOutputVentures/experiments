@@ -1,9 +1,45 @@
 # Remotion
 
-<br>
+A [React](https://beta.reactjs.org/) library for creating and rendering videos inside a react component
+
+<br/>
+
+![https://www.remotion.dev/](/remotion.png)
+
+<br/>
+
+## Authors
+
+- [Glevinzon Dapal](https://app.identifi.com/profile/00a0128bdc38887a855480f7c38ffe84)
+- [John Paul Calvo](https://app.identifi.com/profile/00207ec81649ceb1e43f13873ec5498a)
+
+## Goal Statements
+
+At the end of this experiment, we should be able to;
+
+---
+
+## Abstract
+
+---
+
+## Conclusion
+
+---
+
+## Resources
+
+- https://www.remotion.dev/
+
+---
+
+## Documentation
+
 <br>
 
-## Components/Hooks/Utils
+### Components/Hooks/Utils
+
+<br>
 
 - [x] `Composition` is used to register a component to be displayed as video.
 - [x] `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
@@ -17,7 +53,7 @@
 - [x] `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
 - [x] `spring`
 
-## Plugins
+### Plugins
 
 - [x] `@remotion/player`
 - [x] `@remotion/three`
@@ -27,7 +63,7 @@
 <br>
 <br>
 
-## How Tos
+### How Tos
 
 - How to use `Composition`
 
@@ -92,11 +128,11 @@
   import {Sequence} from 'remotion';
 
   const MyComponent = () => {
-   return (
+  return (
     <>
-     <Sequence from={<number>}>...</Sequence>
+    <Sequence from={<number>}>...</Sequence>
     </>
-   );
+  );
   };
   ```
 
@@ -127,9 +163,9 @@
 
   ```
   Frame: 1 ---- 5 ---- 10 - 11 ---- x
-         C1     C1     C1 - C1 ...
+        C1     C1     C1 - C1 ...
                 C2     C2
-                       C3 - C3 ...
+                      C3 - C3 ...
   ```
 
 - How to use `interpolate`
@@ -211,10 +247,10 @@
   <br>
   <br>
 
-## Remotion Plugins
+### Remotion Plugins
 
-<br>
-<br>
+  <br>
+  <br>
 
 - `Player` - used to render a your composition in a React component. eg. rendering a video on a landing page
 
@@ -445,31 +481,24 @@
   });
   ```
 
-- `Series` and `Series.Sequence` - series works just like sequence. The difference is that you don't have to worry about the `durationInFrames`. Say for example we have this
+- `Series` and `Series.Sequence`
 
   ```typescript
   export default function Component() {
     return (
       <Series>
-        <Series.Sequence from={0}>
+        <Series.Sequence durationInFrames={15}>
           <Component1 />
         </Series.Sequence>
-        <Series.Sequence from={15}>
+        <Series.Sequence durationInFrames={30}>
           <Component2 />
         </Series.Sequence>
-        <Series.Sequence from={30}>
+        <Series.Sequence durationInFrames={45}>
           <Component3 />
         </Series.Sequence>
       </Series>
     );
   }
-  ```
-
-  At frame `0`, `First` component appears then once video hits frame `15`, `Second` component will replace `First` component. So it would be
-
-  ```
-  F: 0  --- 15 --- 30 --- n
-     C1 --- C2 --- C3 --- C3
   ```
 
 - `@remotion/three` - a plugin to render `react-three-fiber` components inside composition
@@ -500,14 +529,14 @@ function Component() {
 }
 ```
 
-## Issues
+### Issues
 
 - Unexpected `Audio` behaviour in `StrictMode`
   **Refs**
   - <https://github.com/remotion-dev/remotion/issues/957>
   - <https://github.com/remotion-dev/remotion/issues/723>
 
-## Limitations
+### Limitations
 
 - Download the composed video
   - <https://github.com/remotion-dev/remotion/issues/655>
