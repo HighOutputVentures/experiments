@@ -557,5 +557,5 @@ function Component() {
 
 ### Limitations
 
-- Download the composed video
+- Download the composed video when using `Player` on demand. Eg. on button click
   - <https://github.com/remotion-dev/remotion/issues/655>
