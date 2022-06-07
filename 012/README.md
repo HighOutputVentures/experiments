@@ -104,7 +104,7 @@ const editor = new EditorJS({
 });
 ```
 
-- use of **react** and **reactDOM** framework in render method to make development faster and flexible; coding html in jsx/tsx form is faster rather than doing traditional javascript creating element and use of hook are very handy in manipulating complicated state handling , and so that other front end engineers will have easy time to adapt coding within is project.
+- use of **react** and **reactDOM** framework in render method to make development faster and flexible; coding html in jsx/tsx form is faster rather than doing traditional javascript creating element and use of hook are very handy in manipulating complicated state handling , and so that other front end engineers will have easy time to adapt coding within is project. [link for more explanation of it's advantages](https://sparkling-hurricane-0c8.notion.site/Advantages-of-using-react-in-editor-js-fc89bd6f7ce14004a22d1d11a61227b5)
 
 ```typescript
 // *.tsx (file)
