@@ -4,7 +4,7 @@ A [React](https://beta.reactjs.org/) library for creating and rendering videos i
 
 <br/>
 
-![https://www.remotion.dev/](/remotion.png)
+![https://www.remotion.dev/](./remotion.png)
 
 <br/>
 
