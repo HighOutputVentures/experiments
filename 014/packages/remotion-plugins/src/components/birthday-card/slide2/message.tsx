@@ -22,7 +22,7 @@ export default function Message({
       )}
       {...props}
     >
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         <div className="relative h-[40px] w-[40px] shrink-0 grow-0">
           <Image layout="fill" src="/robot.svg" alt="" />
         </div>
