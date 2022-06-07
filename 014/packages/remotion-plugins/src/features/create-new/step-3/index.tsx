@@ -10,6 +10,7 @@ import useFileToImgSrc from "~/hooks/use-file-to-img-src";
 import dateFormatter from "~/utils/date-formatter";
 import Layout from "../layout";
 import useStore from "../use-store";
+import {useDurationInFrames} from "./hooks";
 
 export default function CreateNewStep3() {
   const store = useStore();
@@ -18,27 +19,32 @@ export default function CreateNewStep3() {
     store.data?.celebrant.image,
   );
 
+  const {durationInFrames, loading: calculatingDurationInFrames} =
+    useDurationInFrames();
+
   React.useEffect(() => {
     if (!store.data) router.push("/create-new");
   }, [router, store.data]);
 
   if (!store.data) return null;
 
+  const shouldShowLoading = calculatingDurationInFrames || loadingImage;
+
   return (
     <Layout>
       <Head>
-        {loadingImage && <title>Loading...</title>}
-        {!loadingImage && (
+        {shouldShowLoading && <title>Loading...</title>}
+        {!shouldShowLoading && (
           <title>Happy Birthday, {store.data.celebrant.name}!</title>
         )}
       </Head>
 
-      {loadingImage && <Spinner />}
-      {!loadingImage && (
+      {shouldShowLoading && <Spinner />}
+      {!shouldShowLoading && (
         <div className="border border-gray-100">
           <Player
             fps={constants.FPS}
-            durationInFrames={constants.FPS * 30}
+            durationInFrames={durationInFrames}
             component={BirthdayCard}
             compositionWidth={640}
             compositionHeight={640}

@@ -4,8 +4,10 @@ import {
   Sequence,
   staticFile,
   useCurrentFrame,
+  useVideoConfig,
 } from "remotion";
 import Confetti from "~/components/confetti";
+import constants from "~/config/constants";
 import ICelebrant from "~/types/celebrant";
 import dateFormatter from "~/utils/date-formatter";
 import Donuts from "./donuts";
@@ -13,6 +15,7 @@ import Scribbles from "./scribbles";
 
 export default function Slide1({data}: {data: ICelebrant}) {
   const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
 
   const multiplier = 14;
   const charsShown =
@@ -20,7 +23,11 @@ export default function Slide1({data}: {data: ICelebrant}) {
   const textToShow = "May you have a wonderful day today!".slice(0, charsShown);
 
   return (
-    <Sequence from={0} layout="none" durationInFrames={300}>
+    <Sequence
+      from={0}
+      layout="none"
+      durationInFrames={constants.slideOneDuration * fps}
+    >
       <Sequence from={1} layout="none">
         <Img src={staticFile("hov-logo.png")} height={40} width={40} />
       </Sequence>

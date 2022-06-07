@@ -1,4 +1,5 @@
 import * as React from "react";
+import constants from "~/config/constants";
 import useStore from "../use-store";
 
 export function useDurationInFrames() {
@@ -10,8 +11,8 @@ export function useDurationInFrames() {
     const totalMessages = store.data?.messages.length ?? 0;
 
     // calc logic
-    const firstSlideDuration = 0;
-    const messageDuration = 0;
+    const firstSlideDuration = constants.slideOneDuration * constants.FPS;
+    const messageDuration = constants.messageDuration * constants.FPS;
 
     setDurationInFrames(messageDuration * totalMessages + firstSlideDuration);
     setLoading(false);
