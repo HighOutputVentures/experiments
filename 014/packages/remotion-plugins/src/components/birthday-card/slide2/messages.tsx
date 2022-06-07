@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import * as React from "react";
 import {interpolate, Sequence, useCurrentFrame, useVideoConfig} from "remotion";
 import {v4 as uuid} from "uuid";
@@ -74,14 +75,21 @@ const Message = ({
       )}
       {...props}
     >
-      <p className="text-sm">
-        Greetings from <span className="text-blue-400">@{data.author}</span>
-      </p>
-      <p
-        dangerouslySetInnerHTML={{
-          __html: data.body,
-        }}
-      />
+      <div className="flex gap-2">
+        <div className="relative h-[40px] w-[40px]">
+          <Image layout="fill" src="/robot.svg" alt="" />
+        </div>
+        <div>
+          <p className="text-sm">
+            Greetings from <span className="text-blue-400">@{data.author}</span>
+          </p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: data.body,
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
