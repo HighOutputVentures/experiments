@@ -4,14 +4,10 @@
 
 ## Goal Statements
 
-At the end of this experiment, we should be able to create story for documenting and giving test demo for reusable component of a react project.
+At the end of this experiment, we should be able to create a react ui-framework that will be applicable with our design system and integrate react storybook for documentation and testing reusable components.
 
 - Phase 1:
-  - Explore on how to write stories
-    - create an react application then build reusable component within it
-    - stories then can be run locally and test reusable component inside it
-  - Explore on how to write docs
-    - create a good documentation of reusable component within the storybook
+  - Explore the created [hov-ui-framework](https://github.com/HighOutputVentures/hov-ui-framework)
 
 ## Abstract
 
