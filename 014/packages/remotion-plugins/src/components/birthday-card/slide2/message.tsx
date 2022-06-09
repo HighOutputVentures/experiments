@@ -37,7 +37,7 @@ export default function Message({
           <p className="text-xs text-gray-300 line-clamp-1">
             Greetings from <span className="text-blue-400">@{data.author}</span>
           </p>
-          <p>
+          <p className="break-all">
             {words.map((word, index) => {
               return (
                 <span
