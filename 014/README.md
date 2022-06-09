@@ -24,7 +24,7 @@ At the end of this experiment, we should be able to
 
 <br>
 
-![figma screenshot](./figma.png)
+![screenshot from slack](./slack-screenshot.png)
 
 <br>
 
