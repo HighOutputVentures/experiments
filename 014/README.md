@@ -565,6 +565,7 @@ At the end of this experiment, we should be able to
 - Unexpected `Audio` behaviour in `StrictMode`
   - <https://github.com/remotion-dev/remotion/issues/957>
   - <https://github.com/remotion-dev/remotion/issues/723>
+  - <https://www.remotion.dev/docs/player/autoplay>
 
 ### Limitations
 
