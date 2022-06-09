@@ -30,6 +30,7 @@ export default function Landing() {
               fps={30}
               durationInFrames={30 * 60 * 60}
               autoPlay
+              loop
             />
           </div>
         </main>
