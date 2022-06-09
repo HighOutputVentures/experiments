@@ -21,6 +21,9 @@ export default function Examples() {
                 Series & Series.Sequence
               </LinkBox>
             </li>
+            <li>
+              <LinkBox href="/examples/spring">spring</LinkBox>
+            </li>
           </ul>
         </nav>
       </div>
