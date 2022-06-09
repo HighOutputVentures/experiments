@@ -13,7 +13,7 @@ export default function Messages({data}: {data: IMessage[]}) {
       {data.map((msg, index) => {
         const duration = fps * 5;
         const startsAtFrame = index > 0 ? duration * index : index;
-        const shouldExit = startsAtFrame + duration - 15;
+        const exitsAtFrame = startsAtFrame + duration - 15;
 
         const opacityFadeIn = interpolate(
           frame,
@@ -27,7 +27,7 @@ export default function Messages({data}: {data: IMessage[]}) {
 
         const opacityFadeOut = interpolate(
           frame,
-          [shouldExit, shouldExit + 15],
+          [exitsAtFrame, exitsAtFrame + 15],
           [1, 0],
           {
             extrapolateLeft: "clamp",
@@ -46,7 +46,7 @@ export default function Messages({data}: {data: IMessage[]}) {
               key={uuid()}
               className="left-1/2 -translate-x-1/2"
               style={{
-                opacity: shouldExit ? opacityFadeOut : opacityFadeIn,
+                opacity: frame >= exitsAtFrame ? opacityFadeOut : opacityFadeIn,
               }}
             />
           </Sequence>
