@@ -22,6 +22,12 @@ At the end of this experiment, we should be able to
 1. Explore remotion and its tools within
 1. Add new flavour to the current setup where we only use static/text content. If we can generate video using a service that we developed ourselves, it will open opportunities for us to level up our content creation, and hopefully can turn into a potential product.
 
+<br>
+
+![figma screenshot](./figma.png)
+
+<br>
+
 ---
 
 ## Abstract
