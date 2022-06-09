@@ -63,7 +63,7 @@ function Component() {
             marginTop: `${mt}%`,
           }}
         >
-          <Image src="/hov-logo-dark.png" alt="" width={40} height={40} />
+          <Image src="/hov-logo-dark.png" alt="" width={48} height={48} />
         </div>
       </Sequence>
     </div>
