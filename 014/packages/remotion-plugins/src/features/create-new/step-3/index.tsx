@@ -35,7 +35,7 @@ export default function CreateNewStep3() {
       <Head>
         {shouldShowLoading && <title>Loading...</title>}
         {!shouldShowLoading && (
-          <title>Happy Birthday, {store.data.celebrant.name}!</title>
+          <title>Happy birthday, {store.data.celebrant.name}!</title>
         )}
       </Head>
 
