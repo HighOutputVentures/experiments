@@ -28,7 +28,8 @@ export default function SpringExample() {
               compositionWidth={400}
               compositionHeight={400}
               controls
-            />{" "}
+              autoPlay
+            />
           </div>
         )}
       </div>
