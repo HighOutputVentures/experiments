@@ -1,32 +1,38 @@
-import {Composition} from "remotion";
-import {v4 as uuid} from "uuid";
-import BirthdayCard from "../components/birthday-card";
-import dateFormatter from "../utils/date-formatter";
+import {AbsoluteFill, Composition, Loop} from "remotion";
+import styled from "styled-components";
 
 export function Video() {
   return (
     <Composition
       id="Video"
       fps={30}
-      durationInFrames={30 * 10}
       width={640}
       height={640}
-      component={BirthdayCard}
-      defaultProps={{
-        celebrant: {
-          id: uuid(),
-          name: "Arjay",
-          dateOfBirth: dateFormatter.format(new Date()),
-          image: "",
-        },
-        messages: [
-          {
-            id: uuid(),
-            body: "Lorem ipsum",
-            author: "Stella",
-          },
-        ],
-      }}
+      component={Component}
+      durationInFrames={15 * 30}
     />
   );
 }
+
+function Component() {
+  return (
+    <Loop durationInFrames={30 * 5}>
+      <AbsoluteFill
+        style={{
+          backgroundColor: "white",
+        }}
+      >
+        <Ball />
+      </AbsoluteFill>
+    </Loop>
+  );
+}
+
+const Ball = styled.div`
+  font-size: 4rem;
+  font-weight: bolder;
+  background-color: #f97316;
+  height: 12rem;
+  width: 12rem;
+  border-radius: 100%;
+`;
