@@ -10,8 +10,9 @@ module.exports = {
         black: 900,
       },
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        secondary: ["Cardo", "sans-serif"],
+        sans: ["'Inter'", ...defaultTheme.fontFamily.sans],
+        secondary: ["'Cardo'", ...defaultTheme.fontFamily.sans],
+        monospace: ["'Fira Code'", "monospace"],
       },
     },
   },
