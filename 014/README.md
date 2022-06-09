@@ -534,31 +534,31 @@ At the end of this experiment, we should be able to
 
 - `@remotion/three` - a plugin to render `react-three-fiber` components inside composition
 
-```javascript
-import {ThreeCanvas} from "@remotion/three";
-import {useVideoConfig} from "remotion";
+  ```javascript
+  import {ThreeCanvas} from "@remotion/three";
+  import {useVideoConfig} from "remotion";
 
-function Component() {
-  const {width, height} = useVideoConfig();
+  function Component() {
+    const {width, height} = useVideoConfig();
 
-  return (
-    <ThreeCanvas
-      orthographic={false}
-      width={width}
-      height={height}
-      camera={{
-        fov: 75,
-        position: [0, 0, 470],
-      }}
-      style={{
-        backgroundColor: "white",
-      }}
-    >
-      <boxGeometry args={[100, 100, 100]} />
-    </ThreeCanvas>
-  );
-}
-```
+    return (
+      <ThreeCanvas
+        orthographic={false}
+        width={width}
+        height={height}
+        camera={{
+          fov: 75,
+          position: [0, 0, 470],
+        }}
+        style={{
+          backgroundColor: "white",
+        }}
+      >
+        <boxGeometry args={[100, 100, 100]} />
+      </ThreeCanvas>
+    );
+  }
+  ```
 
 ### Issues
 
