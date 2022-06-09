@@ -53,28 +53,29 @@ At the end of this experiment, we should be able to
 
 ## Documentation
 
+<br>
+
 ### Components/Hooks/Utils
 
 <br>
 
-- [x] `Composition` is used to register a component to be displayed as video.
-- [x] `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
-- [x] `AbsoluteFill` automatically centers a component in the screen
-- [x] `Img` can be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
-- [x] `staticFile` is typically used to import assets eg. images under `src/public`
-- [x] `Audio` component to be used when rendering an audio which accepts a lot of useful props
-- [x] `useCurrentFrame` returns the current frame index/number
-- [x] `useVideoConfig` returns the video settings. `fps`, `durationInFrames`, `width`, `height`, `id`, `defaultProps`. More info [here](https://www.remotion.dev/docs/use-video-config)
-- [x] `interpolate` helps in creating animations. Example if we want a `fade in` effect, it will generate an opacity value for us to be used at a certain point of time
-- [x] `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
-- [x] `spring`
+- `Composition` is used to register a component to be displayed as video.
+- `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
+- `AbsoluteFill` automatically centers a component in the screen
+- `Img` can be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
+- `staticFile` is typically used to import assets eg. images under `src/public`
+- `Audio` component to be used when rendering an audio which accepts a lot of useful props
+- `useCurrentFrame` returns the current frame index/number
+- `useVideoConfig` returns the video settings. `fps`, `durationInFrames`, `width`, `height`, `id`, `defaultProps`. More info [here](https://www.remotion.dev/docs/use-video-config)
+- `interpolate` helps in creating animations. Example if we want a `fade in` effect, it will generate an opacity value for us to be used at a certain point of time
+- `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
+- `spring`
 
 ### Plugins
 
-- [x] `@remotion/player`
-- [x] `@remotion/three`
-- [x] `@remotion/gif`
-- [ ] `@remotion/lambda`
+- `@remotion/player`
+- `@remotion/three`
+- `@remotion/gif`
 
 <br>
 <br>
@@ -481,7 +482,7 @@ At the end of this experiment, we should be able to
   continueRender(handle);
   ```
 
-- `spring`
+- `spring` - is use to add more effect to animations like making it smoother or bouncy. We can also tandem this to interpolate so we can control what frame the animation starts and ends
 
   ```typescript
   const frame = useCurrentFrame();
@@ -500,6 +501,10 @@ At the end of this experiment, we should be able to
     },
   });
   ```
+
+  <br>
+
+  [![Watch the video](https://img.youtube.com/vi/GE8ZqrKqE5g/hqdefault.jpg)](https://www.youtube.com/watch?v=GE8ZqrKqE5g)
 
 - `Series` and `Series.Sequence`
 
