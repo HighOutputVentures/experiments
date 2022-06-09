@@ -12,7 +12,7 @@ export default function Examples() {
 
       <div className="flex min-h-screen items-center justify-center">
         <nav>
-          <ul className="flex w-[300px] flex-col gap-2 text-sm">
+          <ul className="flex w-[350px] flex-col gap-2 text-sm">
             <li>
               <LinkBox href="/examples/remotion-three">@remotion/three</LinkBox>
             </li>
