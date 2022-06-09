@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "video:start": "remotion preview src/remotion/index.tsx",
+    "video:start": "remotion preview src/remotion/index.tsx --port 3001",
     "video:build": "remotion render src/remotion/index.tsx Video out/video.mp4"
   },
   "dependencies": {
