@@ -5,10 +5,10 @@ import {
 	interpolate,
 	Sequence,
 	staticFile,
-	useCurrentFrame,
+	useCurrentFrame
 } from 'remotion';
 import styled from 'styled-components';
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 export const Slide2 = () => {
 	return (
