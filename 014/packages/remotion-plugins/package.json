@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "video": "remotion preview src/remotion/index.tsx"
+    "video:start": "remotion preview src/remotion/index.tsx",
+    "video:build": "remotion render src/remotion/index.tsx Video out/video.mp4"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
