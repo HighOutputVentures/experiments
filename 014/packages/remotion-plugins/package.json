@@ -16,6 +16,7 @@
     "@remotion/media-utils": "^3.0.15",
     "@remotion/player": "^3.0.15",
     "@remotion/three": "^3.0.18",
+    "@types/styled-components": "^5.1.25",
     "clsx": "^1.1.1",
     "next": "12.1.6",
     "react": "18.1.0",
@@ -23,6 +24,7 @@
     "react-textarea-autosize": "^8.3.4",
     "remotion": "^3.0.15",
     "sharp": "^0.30.6",
+    "styled-components": "^5.3.5",
     "three": "^0.141.0",
     "uuid": "^8.3.2",
     "zustand": "^4.0.0-rc.1"
