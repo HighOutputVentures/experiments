@@ -60,6 +60,7 @@ export default function CreateNewStep3() {
                 ),
               },
             }}
+            numberOfSharedAudioTags={0}
           />
         </div>
       )}
