@@ -7,9 +7,9 @@ import BirthdayCard from "~/components/birthday-card";
 import Spinner from "~/components/spinner";
 import constants from "~/config/constants";
 import useFileToImgSrc from "~/hooks/use-file-to-img-src";
+import useStore from "~/hooks/use-store";
 import dateFormatter from "~/utils/date-formatter";
 import Layout from "../layout";
-import useStore from "../use-store";
 import {useDurationInFrames} from "./hooks";
 
 export default function CreateNewStep3() {

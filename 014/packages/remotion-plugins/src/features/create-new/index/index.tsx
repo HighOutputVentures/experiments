@@ -4,9 +4,9 @@ import * as React from "react";
 import FileField from "~/components/file-field";
 import IconButton from "~/components/icon-button";
 import Textfield from "~/components/textfield";
+import useStore from "~/hooks/use-store";
 import Layout from "../layout";
 import {Schema} from "../types";
-import useStore from "../use-store";
 
 const defaultValues: Partial<Schema["celebrant"]> = {
   name: "",

@@ -1,6 +1,6 @@
 import * as React from "react";
 import constants from "~/config/constants";
-import useStore from "../use-store";
+import useStore from "~/hooks/use-store";
 
 export function useDurationInFrames() {
   const store = useStore();
@@ -10,11 +10,13 @@ export function useDurationInFrames() {
   const calcDIF = React.useCallback(() => {
     const totalMessages = store.data?.messages.length ?? 0;
 
-    // calc logic
     const firstSlideDuration = constants.slideOneDuration * constants.FPS;
     const messageDuration = constants.messageDuration * constants.FPS;
+    const lastSlideDuration = constants.lastSlideDuration * constants.FPS;
 
-    setDurationInFrames(messageDuration * totalMessages + firstSlideDuration);
+    setDurationInFrames(
+      messageDuration * totalMessages + firstSlideDuration + lastSlideDuration,
+    );
     setLoading(false);
   }, [store.data?.messages.length]);
 

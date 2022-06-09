@@ -1,6 +1,6 @@
 import create from "zustand";
 import {devtools} from "zustand/middleware";
-import {Schema} from "./types";
+import {Schema} from "../features/create-new/types";
 
 interface Store {
   data?: Schema;
