@@ -6,11 +6,13 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "video": "remotion preview src/remotion/index.tsx"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@react-three/fiber": "^8.0.22",
+    "@remotion/cli": "^3.0.18",
     "@remotion/media-utils": "^3.0.15",
     "@remotion/player": "^3.0.15",
     "@remotion/three": "^3.0.18",
