@@ -17,11 +17,11 @@ const Confetto: React.FC<{
     frame: frame - delay,
     config: {
       damping: 1000,
-      mass: 300,
+      mass: 50,
     },
   });
 
-  const top = interpolate(drop, [0, 1], [-0.2, 1.1]);
+  const top = interpolate(drop, [0, 1], [-0.2, 1.5]);
 
   return (
     <>

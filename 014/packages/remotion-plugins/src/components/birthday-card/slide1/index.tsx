@@ -1,6 +1,7 @@
 import {
   AbsoluteFill,
   Img,
+  interpolate,
   Sequence,
   staticFile,
   useCurrentFrame,
@@ -22,6 +23,21 @@ export default function Slide1({data}: {data: ICelebrant}) {
     frame > 4 * multiplier ? Math.floor((frame - multiplier * 4) / 1.15) : 0;
   const textToShow = "May you have a wonderful day today!".slice(0, charsShown);
 
+  const logoMarginTop = interpolate(frame, [0, multiplier - 8], [-48, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const userPhotoScaleValue = interpolate(
+    frame,
+    [4 * multiplier, 4 * multiplier + (multiplier - 8)],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
+
   return (
     <Sequence
       from={0}
@@ -29,7 +45,12 @@ export default function Slide1({data}: {data: ICelebrant}) {
       durationInFrames={constants.slideOneDuration * fps}
     >
       <Sequence from={1} layout="none">
-        <Img src={staticFile("hov-logo.png")} height={40} width={40} />
+        <Img
+          src={staticFile("hov-logo.png")}
+          height={40}
+          width={40}
+          style={{marginTop: logoMarginTop}}
+        />
       </Sequence>
 
       <Sequence from={multiplier} layout="none">
@@ -38,7 +59,13 @@ export default function Slide1({data}: {data: ICelebrant}) {
 
       <Sequence from={2 * multiplier} layout="none">
         <div className="my-8 h-[210px] w-[210px] overflow-hidden rounded-full">
-          <Img src={data.image} alt="" />
+          <Img
+            src={data.image}
+            alt=""
+            style={{
+              transform: `scale(${userPhotoScaleValue})`,
+            }}
+          />
         </div>
       </Sequence>
 
