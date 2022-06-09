@@ -30,7 +30,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
 
   const userPhotoScaleValue = interpolate(
     frame,
-    [4 * multiplier, 4 * multiplier + (multiplier - 8)],
+    [3 * multiplier, 3 * multiplier + (multiplier - 8)],
     [0, 1],
     {
       extrapolateLeft: "clamp",
