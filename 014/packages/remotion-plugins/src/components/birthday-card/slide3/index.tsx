@@ -16,8 +16,8 @@ export default function Slide3() {
       from={slide1Duration + slide2Duration}
       durationInFrames={constants.lastSlideDuration * fps}
     >
-      <AbsoluteFill className="items-center justify-center">
-        <p className="text-black">Thanks for watching</p>
+      <AbsoluteFill className="items-center justify-center bg-black text-white">
+        <p>Thanks for watching</p>
       </AbsoluteFill>
     </Sequence>
   );

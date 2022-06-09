@@ -11,7 +11,7 @@ export default function BirthdayCard({celebrant, messages}: IBirthdayCard) {
 
   const startFrame = durationInFrames - (constants.lastSlideDuration + 2) * fps;
 
-  const volume = interpolate(frame, [startFrame, durationInFrames], [2, 0], {
+  const volume = interpolate(frame, [startFrame, durationInFrames], [0.3, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
