@@ -1,14 +1,8 @@
-import {
-  AbsoluteFill,
-  Composition,
-  Loop,
-  spring,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
-import styled from "styled-components";
+import {AbsoluteFill, Composition, getInputProps} from "remotion";
 
 export function Video() {
+  const props = getInputProps();
+
   return (
     <Composition
       id="Video"
@@ -16,56 +10,31 @@ export function Video() {
       width={640}
       height={640}
       component={Component}
-      durationInFrames={15 * 30}
+      durationInFrames={15 * 5}
+      defaultProps={props}
     />
   );
 }
 
-const colors = ["#67E8F9", "#22D3EE", "#06B6D4", "#0891B2"];
-
-function Component() {
-  const frame = useCurrentFrame();
-  const {fps} = useVideoConfig();
-
+function Component(props: Record<string, unknown>) {
   return (
-    <Loop durationInFrames={30 * 5}>
-      <AbsoluteFill
+    <AbsoluteFill
+      style={{
+        color: "#000",
+        backgroundColor: "white",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <code
         style={{
-          backgroundColor: "white",
+          padding: "2rem",
+          fontFamily: "monospace",
+          backgroundColor: "#FFEDD5",
         }}
       >
-        {colors.map((backgroundColor, to) => {
-          const marginLeft = spring({
-            frame,
-            fps,
-            from: 0,
-            to,
-            config: {
-              overshootClamping: false,
-              stiffness: 60,
-            },
-          });
-
-          return (
-            <Square
-              key={backgroundColor}
-              style={{
-                backgroundColor,
-                marginLeft: `${marginLeft * 15}%`,
-              }}
-            />
-          );
-        })}
-      </AbsoluteFill>
-    </Loop>
+        <pre>{JSON.stringify(props, null, 2)}</pre>
+      </code>
+    </AbsoluteFill>
   );
 }
-
-const Square = styled.div`
-  height: 300px;
-  width: 100px;
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translateY(-50%);
-`;

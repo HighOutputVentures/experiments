@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "video:start": "remotion preview src/remotion/index.tsx --port 3001",
-    "video:build": "remotion render src/remotion/index.tsx Video out/video.mp4"
+    "video:build": "remotion render src/remotion/index.tsx Video out/video.mp4 --props '{\"name\":\"john doe\",\"gender\":\"male\",\"dateOfBirth\":\"1980-20-01\"}'"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
