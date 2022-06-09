@@ -1,1 +1,1 @@
-export {default} from "~/features/create-new/step-2";
+export {default} from "../../features/create-new/step-2";

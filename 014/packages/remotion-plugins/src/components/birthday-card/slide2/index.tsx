@@ -1,5 +1,5 @@
 import {AbsoluteFill, Img, Sequence, staticFile} from "remotion";
-import IMessage from "~/types/message";
+import IMessage from "../../../types/message";
 import Donuts from "./donuts";
 import Messages from "./messages";
 import Scribbles from "./scribbles";

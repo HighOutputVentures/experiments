@@ -1,7 +1,7 @@
 import * as React from "react";
 import {interpolate, Sequence, useCurrentFrame, useVideoConfig} from "remotion";
 import {v4 as uuid} from "uuid";
-import IMessage from "~/types/message";
+import IMessage from "../../../types/message";
 import Message from "./message";
 
 export default function Messages({data}: {data: IMessage[]}) {

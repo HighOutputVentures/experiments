@@ -1,6 +1,6 @@
 import * as React from "react";
-import constants from "~/config/constants";
-import useStore from "~/hooks/use-store";
+import constants from "../../../config/constants";
+import useStore from "../../../hooks/use-store";
 
 export function useDurationInFrames() {
   const store = useStore();

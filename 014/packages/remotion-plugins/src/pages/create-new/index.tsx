@@ -1,1 +1,1 @@
-export {default} from "~/features/create-new/index";
+export {default} from "../../features/create-new/index";

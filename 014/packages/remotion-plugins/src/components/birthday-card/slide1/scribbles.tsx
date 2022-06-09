@@ -1,10 +1,10 @@
 import {AbsoluteFill, interpolate, Sequence, useCurrentFrame} from "remotion";
-import {Scribble1} from "~/components/icons/scribble1";
-import {Scribble2} from "~/components/icons/scribble2";
-import {Scribble3} from "~/components/icons/scribble3";
-import {Scribble4} from "~/components/icons/scribble4";
-import {Scribble5} from "~/components/icons/scribble5";
-import {Scribble6} from "~/components/icons/scribble6";
+import {Scribble1} from "../../icons/scribble1";
+import {Scribble2} from "../../icons/scribble2";
+import {Scribble3} from "../../icons/scribble3";
+import {Scribble4} from "../../icons/scribble4";
+import {Scribble5} from "../../icons/scribble5";
+import {Scribble6} from "../../icons/scribble6";
 
 export default function Scribbles() {
   const frame = useCurrentFrame();

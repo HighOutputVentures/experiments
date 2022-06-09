@@ -7,10 +7,10 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import Confetti from "~/components/confetti";
-import constants from "~/config/constants";
-import ICelebrant from "~/types/celebrant";
-import dateFormatter from "~/utils/date-formatter";
+import Confetti from "../../../components/confetti";
+import constants from "../../../config/constants";
+import ICelebrant from "../../../types/celebrant";
+import dateFormatter from "../../../utils/date-formatter";
 import Donuts from "./donuts";
 import Scribbles from "./scribbles";
 

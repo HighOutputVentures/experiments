@@ -2,8 +2,8 @@ import clsx from "clsx";
 import Image from "next/image";
 import * as React from "react";
 import {v4 as uuid} from "uuid";
-import useFileToImgSrc from "~/hooks/use-file-to-img-src";
-import IMessage from "~/types/message";
+import useFileToImgSrc from "../../../hooks/use-file-to-img-src";
+import IMessage from "../../../types/message";
 
 interface MessageProps {
   data: IMessage;

@@ -1,7 +1,7 @@
 import {TrashIcon} from "@heroicons/react/solid";
 import Image from "next/image";
 import * as React from "react";
-import useFileToImgSrc from "~/hooks/use-file-to-img-src";
+import useFileToImgSrc from "../../../hooks/use-file-to-img-src";
 import {Schema} from "../types";
 
 interface MessageProps {

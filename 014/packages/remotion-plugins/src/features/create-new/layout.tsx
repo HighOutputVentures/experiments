@@ -2,7 +2,7 @@ import {ArrowNarrowLeftIcon} from "@heroicons/react/solid";
 import Head from "next/head";
 import {useRouter} from "next/router";
 import * as React from "react";
-import useStore from "~/hooks/use-store";
+import useStore from "../../hooks/use-store";
 
 export default function Layout({
   children,

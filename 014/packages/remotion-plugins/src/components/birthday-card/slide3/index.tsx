@@ -1,6 +1,6 @@
 import {AbsoluteFill, Sequence, useVideoConfig} from "remotion";
-import constants from "~/config/constants";
-import useStore from "~/hooks/use-store";
+import constants from "../../../config/constants";
+import useStore from "../../../hooks/use-store";
 
 export default function Slide3() {
   const store = useStore();

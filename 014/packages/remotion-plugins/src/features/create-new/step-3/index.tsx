@@ -3,12 +3,12 @@ import Head from "next/head";
 import {useRouter} from "next/router";
 import * as React from "react";
 import {v4 as uuid} from "uuid";
-import BirthdayCard from "~/components/birthday-card";
-import Spinner from "~/components/spinner";
-import constants from "~/config/constants";
-import useFileToImgSrc from "~/hooks/use-file-to-img-src";
-import useStore from "~/hooks/use-store";
-import dateFormatter from "~/utils/date-formatter";
+import BirthdayCard from "../../../components/birthday-card";
+import Spinner from "../../../components/spinner";
+import constants from "../../../config/constants";
+import useFileToImgSrc from "../../../hooks/use-file-to-img-src";
+import useStore from "../../../hooks/use-store";
+import dateFormatter from "../../../utils/date-formatter";
 import Layout from "../layout";
 import {useDurationInFrames} from "./hooks";
 
