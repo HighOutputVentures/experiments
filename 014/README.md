@@ -560,6 +560,44 @@ At the end of this experiment, we should be able to
   }
   ```
 
+- `getInputProps` - a function to be called to receive the parsed json value of data passed in cli via `--props`. Note that this should be invoked on the parent component or the component where you place all your compositions. Say for example we have the following code
+  <br>
+
+  ```typescript
+  export function Video() {
+    const props = getInputProps();
+
+    return (
+      <Composition
+        id="Video"
+        fps={30}
+        width={640}
+        height={640}
+        component={Component}
+        durationInFrames={15 * 5}
+        defaultProps={props}
+      />
+    );
+  }
+  ```
+
+  now, if we run this script
+
+  ```
+  remotion render src/remotion/index.tsx Video out/video.mp4 --props '{"key1":"value1","key2":"value2"}'
+  ```
+
+  the value of `props` would be as follows
+
+  ```javascript
+  {
+    key1: "value1",
+    key2: "value2",
+  }
+  ```
+
+  this comes handy if we want to have a dynamic data in the composition (`Composition` component **NOT** `Player`) that we want to download
+
 ### Issues
 
 - Unexpected `Audio` behaviour in `StrictMode`
