@@ -1,5 +1,4 @@
 import {
-  AbsoluteFill,
   Img,
   interpolate,
   Sequence,
@@ -89,10 +88,6 @@ export default function Slide1({data}: {data: ICelebrant}) {
       </Sequence>
 
       <Scribbles />
-
-      <Sequence from={125} durationInFrames={15}>
-        <AbsoluteFill className="shine" />
-      </Sequence>
 
       <Sequence from={100}>
         <Confetti />
