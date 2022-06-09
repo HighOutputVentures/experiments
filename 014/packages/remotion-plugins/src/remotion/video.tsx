@@ -1,4 +1,11 @@
-import {AbsoluteFill, Composition, Loop} from "remotion";
+import {
+  AbsoluteFill,
+  Composition,
+  Loop,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import styled from "styled-components";
 
 export function Video() {
@@ -14,7 +21,12 @@ export function Video() {
   );
 }
 
+const colors = ["#67E8F9", "#22D3EE", "#06B6D4", "#0891B2"];
+
 function Component() {
+  const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
+
   return (
     <Loop durationInFrames={30 * 5}>
       <AbsoluteFill
@@ -22,17 +34,38 @@ function Component() {
           backgroundColor: "white",
         }}
       >
-        <Ball />
+        {colors.map((backgroundColor, index) => {
+          const marginLeft = spring({
+            frame,
+            fps,
+            from: 0,
+            to: index,
+            config: {
+              overshootClamping: false,
+              stiffness: 60,
+            },
+          });
+
+          return (
+            <Square
+              key={backgroundColor}
+              style={{
+                backgroundColor,
+                marginLeft: `${marginLeft * 15}%`,
+              }}
+            />
+          );
+        })}
       </AbsoluteFill>
     </Loop>
   );
 }
 
-const Ball = styled.div`
-  font-size: 4rem;
-  font-weight: bolder;
-  background-color: #f97316;
-  height: 12rem;
-  width: 12rem;
-  border-radius: 100%;
+const Square = styled.div`
+  height: 300px;
+  width: 100px;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
 `;
