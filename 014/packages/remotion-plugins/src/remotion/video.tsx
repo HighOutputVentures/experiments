@@ -34,12 +34,12 @@ function Component() {
           backgroundColor: "white",
         }}
       >
-        {colors.map((backgroundColor, index) => {
+        {colors.map((backgroundColor, to) => {
           const marginLeft = spring({
             frame,
             fps,
             from: 0,
-            to: index,
+            to,
             config: {
               overshootClamping: false,
               stiffness: 60,
