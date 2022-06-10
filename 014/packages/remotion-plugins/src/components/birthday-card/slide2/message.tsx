@@ -41,7 +41,7 @@ export default function Message({
             {words.map((word, index) => {
               return (
                 <span
-                  className="mr-1"
+                  className="mr-1 whitespace-nowrap"
                   key={uuid()}
                   style={{
                     opacity: calcOpacity(words, index, frame),
