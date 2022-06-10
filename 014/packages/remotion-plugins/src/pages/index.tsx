@@ -1,9 +1,8 @@
-import {ArrowRightIcon} from "@heroicons/react/outline";
-import {Player} from "@remotion/player";
+import {CheckIcon, DuplicateIcon, SearchIcon} from "@heroicons/react/solid";
+import clsx from "clsx";
 import Head from "next/head";
-import Link from "next/link";
+import Image from "next/image";
 import * as React from "react";
-import {Img, interpolate, Sequence, useCurrentFrame} from "remotion";
 
 export default function Landing() {
   const [loading, setLoading] = React.useState(true);
@@ -20,18 +19,23 @@ export default function Landing() {
         <title>Remotion Expirement</title>
       </Head>
 
-      <div className="flex min-h-screen flex-col">
-        <main className="flex grow flex-col items-center justify-center">
-          <div>
-            <Player
-              component={Balloon}
-              compositionHeight={600}
-              compositionWidth={500}
-              fps={30}
-              durationInFrames={30 * 60 * 60}
-              autoPlay
-              loop
-            />
+      <div>
+        <main className="">
+          <div className="mx-auto w-[600px] p-16">
+            <div className="flex w-full items-center justify-between rounded-sm border border-gray-200 text-sm">
+              <input
+                type="text"
+                placeholder="Search"
+                className="p-3 outline-none"
+              />
+
+              <SearchIcon className="mr-4 h-4 w-4 fill-gray-400" />
+            </div>
+
+            <div className="mt-16 flex flex-col gap-2">
+              <Item />
+              <Item />
+            </div>
           </div>
         </main>
       </div>
@@ -39,41 +43,63 @@ export default function Landing() {
   );
 }
 
-function Balloon() {
-  const frame = useCurrentFrame();
+function Item() {
+  const [copied, setCopied] = React.useState(false);
 
-  const scale = interpolate(frame, [0, 8], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const SVGIcon = copied ? CheckIcon : DuplicateIcon;
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    await navigator.clipboard.writeText("http://localhost:3000/videos/<id>");
+    setCopied(true);
+  };
+
+  React.useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (copied) {
+      timeout = setTimeout(() => setCopied(false), 3000);
+    }
+
+    return () => {
+      timeout && clearTimeout(timeout);
+    };
+  }, [copied]);
+
+  React.useEffect(() => {
+    return () => {
+      setCopied(false);
+    };
+  }, []);
 
   return (
-    <div className="relative h-[600px] w-[500px]">
-      <div className="absolute left-1/2 top-[25%] flex -translate-x-1/2 items-center justify-center">
-        <Sequence from={0} layout="none">
-          <Img
-            draggable={false}
-            src="/balloons.svg"
-            alt=""
-            width={300}
-            height={400}
-            style={{
-              transform: `scale(${scale})`,
-            }}
-          />
-        </Sequence>
+    <a
+      href="http://localhost:3000/video/1"
+      rel="noreferrer"
+      target="_blank"
+      className="flex items-center gap-2 border border-gray-200 p-4 transition-all duration-300 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50"
+    >
+      <div className="relative h-[48px] w-[48px]">
+        <Image src="/robot.svg" alt="" layout="fill" />
       </div>
 
-      <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2">
-        <Sequence from={10} layout="none">
-          <Link href="/create-new" passHref>
-            <a className="flex h-min w-fit items-center gap-4 rounded-md border border-gray-200 p-3 px-5 text-sm outline-none transition-all duration-300 hover:border-gray-300 focus:border-blue-400">
-              <span>Create birthday video</span>
-              <ArrowRightIcon className="h-4 w-4" />
-            </a>
-          </Link>
-        </Sequence>
+      <div className="grow">
+        <div>John</div>
+        <div className="text-xs text-gray-500">Created 3 days ago</div>
       </div>
-    </div>
+
+      <button title="Copy link" onClick={handleClick}>
+        <SVGIcon
+          className={clsx(
+            "h-6 w-6",
+            copied && "fill-green-400",
+            !copied &&
+              "fill-gray-300 transition-all duration-300 hover:fill-gray-400",
+          )}
+        />
+      </button>
+    </a>
   );
 }
