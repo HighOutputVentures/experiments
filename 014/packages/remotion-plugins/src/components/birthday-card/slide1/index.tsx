@@ -1,3 +1,4 @@
+import {ReactNode} from "react";
 import {
   Img,
   interpolate,
@@ -58,7 +59,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
       </Sequence>
 
       <Sequence from={2 * multiplier} layout="none">
-        <div className="my-8 h-[210px] w-[210px] overflow-hidden rounded-full">
+        <div className="my-8 h-[210px] w-[210px] shrink-0 grow-0 overflow-hidden rounded-full">
           <Img
             src={data.image}
             alt=""
@@ -70,7 +71,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
       </Sequence>
 
       <Sequence from={3 * multiplier} layout="none">
-        <h2 className="text-[2rem]">{data.name}</h2>
+        <Name>{data.name}</Name>
       </Sequence>
 
       <Sequence from={4 * multiplier} layout="none">
@@ -97,6 +98,23 @@ export default function Slide1({data}: {data: ICelebrant}) {
         <Shine />
       </Sequence>
     </Sequence>
+  );
+}
+
+function Name({children}: {children: ReactNode}) {
+  const frame = useCurrentFrame();
+  const width = interpolate(frame, [0, 30], [0, 80], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  return (
+    <h2
+      className="h-[44px] overflow-hidden text-center text-[2rem]"
+      style={{width: `${width}%`}}
+    >
+      {children}
+    </h2>
   );
 }
 
