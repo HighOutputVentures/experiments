@@ -1,10 +1,10 @@
 import {AbsoluteFill, Img, Sequence, staticFile} from "remotion";
-import IMessage from "../../../types/message";
+import IBirthdayCard from "../../../types/birthday-card";
 import Donuts from "./donuts";
 import Messages from "./messages";
 import Scribbles from "./scribbles";
 
-export default function Slide2({data}: {data: IMessage[]}) {
+export default function Slide2({data}: {data: IBirthdayCard}) {
   return (
     <Sequence from={300}>
       <AbsoluteFill className="items-center bg-white p-8 text-black">
@@ -19,7 +19,7 @@ export default function Slide2({data}: {data: IMessage[]}) {
         </div>
 
         <main className="z-10 grow overflow-hidden p-4">
-          <Messages data={data} />
+          <Messages data={data.messages} />
         </main>
       </AbsoluteFill>
       <Scribbles />

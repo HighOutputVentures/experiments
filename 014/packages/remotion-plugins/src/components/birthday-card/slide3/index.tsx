@@ -9,13 +9,12 @@ import {
   useVideoConfig,
 } from "remotion";
 import constants from "../../../config/constants";
-import useStore from "../../../hooks/use-store";
+import IBirthdayCard from "../../../types/birthday-card";
 
-export default function Slide3() {
-  const store = useStore();
+export default function Slide3({data}: {data: IBirthdayCard}) {
   const {fps} = useVideoConfig();
 
-  const totalMessages = store.data?.messages.length ?? 0;
+  const totalMessages = data.messages.length ?? 0;
   const slide1Duration = constants.slideOneDuration * constants.FPS;
   const slide2Duration =
     constants.messageDuration * constants.FPS * totalMessages;

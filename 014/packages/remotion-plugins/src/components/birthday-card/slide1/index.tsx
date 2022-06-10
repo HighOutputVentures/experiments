@@ -10,14 +10,15 @@ import {
 import styled from "styled-components";
 import Confetti from "../../../components/confetti";
 import constants from "../../../config/constants";
-import ICelebrant from "../../../types/celebrant";
+import IBirthdayCard from "../../../types/birthday-card";
 import dateFormatter from "../../../utils/date-formatter";
 import Donuts from "./donuts";
 import Scribbles from "./scribbles";
 
-export default function Slide1({data}: {data: ICelebrant}) {
+export default function Slide1({data}: {data: IBirthdayCard}) {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {celebrant} = data;
 
   const multiplier = 14;
   const charsShown =
@@ -61,7 +62,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
       <Sequence from={2 * multiplier} layout="none">
         <div className="my-8 h-[210px] w-[210px] shrink-0 grow-0 overflow-hidden rounded-full">
           <Img
-            src={data.image}
+            src={celebrant.image}
             alt=""
             style={{
               transform: `scale(${userPhotoScaleValue})`,
@@ -71,7 +72,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
       </Sequence>
 
       <Sequence from={3 * multiplier} layout="none">
-        <Name>{data.name}</Name>
+        <Name>{celebrant.name}</Name>
       </Sequence>
 
       <Sequence from={4 * multiplier} layout="none">
@@ -80,7 +81,7 @@ export default function Slide1({data}: {data: ICelebrant}) {
 
       <Sequence from={5 * multiplier} layout="none">
         <p className="mt-8">
-          {dateFormatter.format(new Date(data.dateOfBirth))}
+          {dateFormatter.format(new Date(celebrant.dateOfBirth))}
         </p>
       </Sequence>
 
