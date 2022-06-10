@@ -17,5 +17,6 @@ At the end of this experiment, we should be able to
 ## Conclusion
 
 ## Resources
+- https://www.youtube.com/channel/UCjnuBkgYrryPxDuKz0eG09Q
 
 ## Documentation
