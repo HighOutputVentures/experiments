@@ -1,4 +1,10 @@
-import {AbsoluteFill, Sequence, useVideoConfig} from "remotion";
+import {
+  AbsoluteFill,
+  Img,
+  Sequence,
+  staticFile,
+  useVideoConfig,
+} from "remotion";
 import constants from "../../../config/constants";
 import useStore from "../../../hooks/use-store";
 
@@ -17,7 +23,8 @@ export default function Slide3() {
       durationInFrames={constants.lastSlideDuration * fps}
     >
       <AbsoluteFill className="items-center justify-center bg-black text-white">
-        <p>Thanks for watching</p>
+        <Img src={staticFile("hov-logo.png")} width={80} />
+        <p className="mt-4 text-lg">Thanks for watching!</p>
       </AbsoluteFill>
     </Sequence>
   );
