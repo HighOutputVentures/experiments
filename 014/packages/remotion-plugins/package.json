@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write .",
     "database": "json-server --watch db.json --port 5000",
     "video:start": "remotion preview src/remotion/index.tsx --port 3001",
     "video:build": "remotion render src/remotion/index.tsx Video out/video.mp4"
