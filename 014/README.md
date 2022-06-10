@@ -44,11 +44,17 @@ Another important thing we have learned is the difference between `Player` and `
 
 <br/>
 
-With `remotion`, we are no longer limited to embedding a static video in our app via the html's native `video` element, but we now have the option to create a video on the fly whether using a static data or data that comes from an API or a user's input.
+With `remotion`, we are no longer limited to embedding a static video in our app via the html's native `video` element, but we now have the option to create a video on the fly whether using a static data or data that comes from an API or a user's input and this we believe will make our application stand out.
 
 ---
 
 ## Conclusion
+
+We find using remotion a bit challenging when we first use it. But after understanding how the video works and how to use the components and functions that come with the library, coding started to become like those typical ones. Everything is just a timing and styles.
+
+<br/>
+
+Remotion will really create a great impact for applications which use it, especially if design is planned well.
 
 ---
 
