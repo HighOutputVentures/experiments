@@ -21,6 +21,9 @@ At the end of this experiment, we should be able to
   We created video tutorials for the basics on how to do it from creating an object in the editor, creating an events and states
   for the objects animations, setting up camera and lighting, applying materials to the objects, importing and exporting.
   
+  We have also tried to clone this example https://twitter.com/i/status/1521215727319011328 and applied it on the hov-website, 
+  but since we are not designers we have difficulties and come up with different design but the same functionalities as the example
+  
   With spline tool designers are no longer limited to a static designs for websites or other things that needs designs, designers will now
   have the capabilities to create designs that are more interactive, beautiful and eye-catchy to the users.
 ## Conclusion
