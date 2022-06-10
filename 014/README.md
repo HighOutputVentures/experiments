@@ -97,16 +97,21 @@ Remotion will really create a great impact for applications which use it, especi
 - `Video` component that wraps the native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
 - `spring` - use to give bounciness to animations
 
+<br>
+
 ### Plugins
+
+<br>
 
 - `@remotion/player` - similar to `Composition` but is mainly use to render your composition inside react component
 - `@remotion/three` - for rendering `react-three-fiber` components
 - `@remotion/gif` - for rendering `gif`s which will get synced to the video frame
 
 <br>
-<br>
 
 ### How Tos
+
+<br>
 
 - How to use `Composition`
 
@@ -164,8 +169,9 @@ Remotion will really create a great impact for applications which use it, especi
 
 - How to use `Sequence`
 
-  - To use the `Sequence` component you just need to import it from `remotion` package and use it inside your custom components
-    <br><br>
+  <br>
+  To use the `Sequence` component you just need to import it from `remotion` package and use it inside your custom components
+  <br><br>
 
   ```typescript
   import {Sequence} from 'remotion';
@@ -179,8 +185,8 @@ Remotion will really create a great impact for applications which use it, especi
   };
   ```
 
-  - To control the order of what component shows up on the screen at a specific frame, you can pass a `from` props which tells `Sequence` what frame a particular component should be rendered and to hide it we could pass `durationInFrames` (and both accepts a number)
-    <br><br>
+  To control the order of what component shows up on the screen at a specific frame, you can pass a `from` props which tells `Sequence` what frame a particular component should be rendered and to hide it we could pass `durationInFrames` (and both accepts a number)
+  <br><br>
 
   ```typescript
   import {Sequence} from "remotion";
@@ -212,7 +218,7 @@ Remotion will really create a great impact for applications which use it, especi
   ```
 
 - How to use `interpolate`
-  <br><br>
+  <br>
 
   ```typescript
   import {interpolate, useCurrentFrame} from "remotion";
@@ -243,189 +249,6 @@ Remotion will really create a great impact for applications which use it, especi
   [![Watch the video](https://img.youtube.com/vi/sff_CdWw_-c/hqdefault.jpg)](https://www.youtube.com/watch?v=sff_CdWw_-c)
 
   <br/>
-
-- How to use `@remotion/player`
-  <br>
-  **NOTE :**
-  To use this plugin, it is best if you scaffold a new react project (using something like `vite`, `next`, `cra` or etc.).
-  <br>
-  To get started with, open the folder that you've just bootstraped and run the command below
-
-  ```bash
-  npm i remotion @remotion/player
-  ```
-
-  Next is to create a sample component and place this content
-
-  ```typescript
-  export default function Example() {
-    return (
-      <>
-        <Sequence from={0} durationInFrames={15}>
-          Hello
-        </Sequence>
-        <Sequence from={15}>World</Sequence>
-      </>
-    );
-  }
-  ```
-
-  Now, go to `app.js` or `index.js` or whatever your app's entrypoint is and paste the snippet below
-
-  ```typescript
-  import Example from "~/components/example.tsx";
-
-  export default function App() {
-    return (
-      <>
-        <Player
-          component={Example}
-          durationInFrames={30 * 100}
-          compositionWidth={400}
-          compositionHeight={400}
-          fps={30}
-          controls
-        />
-      </>
-    );
-  }
-  ```
-
-  <br>
-  <br>
-
-### Remotion Plugins
-
-  <br>
-  <br>
-
-- `Player` - used to render a your composition in a React component. eg. rendering a video on a landing page
-
-  ```typescript
-  import {Player, PlayerRef} from "@remotion/player";
-  import {Sequence} from "remotion";
-
-  function MyVideo() {
-    return (
-      <>
-        <Sequence from={0}>Hello</Sequence>
-        ...
-      </>
-    );
-  }
-
-  export default function Component() {
-    const ref = useRef<PlayerRef>(null);
-
-    const play = () => {
-      if (ref.current?.paused) {
-        ref.current?.play();
-      }
-    };
-
-    return (
-      <>
-      <Player
-        ref={ref}
-        fps={30}
-        durationInFrames={30 * 15}
-        component={MyVideo}
-        compositionWidth={650}
-        compositionHeight={550}
-        inputProps={
-          {
-            /* props to be passed down to `MyVideo` component  */
-          }
-        }
-      />
-
-      <button onClick={play}>
-      </>
-
-    );
-  }
-  ```
-
-  **Other props**
-
-  - loop
-  - autoPlay
-  - showVolumeControls
-  - allowFullscreen
-  - clickToPlay
-  - doubleClickToFullscreen
-  - spaceKeyToPlayOrPause
-  - errorFallback
-    <br>
-    <br>
-
-- `useAudioData` - used to get the information of an audio
-
-  ```typescript
-  import {useAudioData} from "@remotion/media-utils";
-
-  export default function Component() {
-    const audioData = useAudioData(audio); // use `getAudioData` if outside a react component
-
-    if (!audioData) return <>Failed to get audio info</>;
-
-    console.log(
-      audioData.channelWaveforms, // [Float32Array, Float32Array]
-      audioData.durationInSeconds, // number
-      audioData.isRemote, // boolean
-      audioData.numberOfChannels, // number
-      audioData.resultId, // string
-      audioData.sampleRate // number
-    );
-
-    return (
-      <>
-        <pre>{JSON.stringify(audioData, null, 4)}</pre>
-      </>
-    );
-  }
-  ```
-
-- `visualizeAudio` - returns an array of values describing the amplitude of each frequency range
-
-  ```typescript
-  import {useAudioData, visualizeAudio} from "@remotion/media-utils";
-  import {useCurrentFrame, useVideoConfig} from "remotion";
-
-  export default function Component() {
-    const frame = useCurrentFrame();
-    const {fps} = useVideoConfig();
-    const audioData = useAudioData(audio);
-    const visualization = visualizeAudio({
-      fps,
-      frame,
-      audioData,
-      numberOfSamples: 8,
-    });
-
-    console.log(visualization); // Array with length of `numberOfSamples`
-
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-end",
-          gap: 8,
-        }}
-      >
-        {visualization.map((value) => (
-          <div
-            style={{
-              width: 16,
-              height: value * 10,
-              backgroundColor: "blue",
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-  ```
 
 - `usePlayingState` - hook that returns a state if whether **Player** is playing or not and a dispatch function to play/pause the **Player**
 
@@ -552,34 +375,6 @@ Remotion will really create a great impact for applications which use it, especi
   }
   ```
 
-- `@remotion/three` - a plugin to render `react-three-fiber` components inside composition
-
-  ```javascript
-  import {ThreeCanvas} from "@remotion/three";
-  import {useVideoConfig} from "remotion";
-
-  function Component() {
-    const {width, height} = useVideoConfig();
-
-    return (
-      <ThreeCanvas
-        orthographic={false}
-        width={width}
-        height={height}
-        camera={{
-          fov: 75,
-          position: [0, 0, 470],
-        }}
-        style={{
-          backgroundColor: "white",
-        }}
-      >
-        <boxGeometry args={[100, 100, 100]} />
-      </ThreeCanvas>
-    );
-  }
-  ```
-
 - `getInputProps` - a function to be called to receive the parsed json value of data passed in cli via `--props`. Note that this should be invoked on the parent component or the component where you place all your compositions. Say for example we have the following code
   <br>
 
@@ -617,6 +412,226 @@ Remotion will really create a great impact for applications which use it, especi
   ```
 
   this comes handy if we want to have a dynamic data in the composition (`Composition` component **NOT** `Player`) that we want to download
+
+<br>
+<br>
+
+### Remotion Plugins
+
+<br>
+
+- `@remotion/player`
+
+  **NOTE :** To use this plugin, it is best if you scaffold a new react project (using something like `vite`, `next`, `cra` or etc.).
+  <br>
+  To get started with, open the folder that you've just bootstraped and run the command below
+  <br>
+
+  ```bash
+  npm i remotion @remotion/player
+  ```
+
+  Next is to create a sample component and place this content
+
+  ```typescript
+  export default function Example() {
+    return (
+      <>
+        <Sequence from={0} durationInFrames={15}>
+          Hello
+        </Sequence>
+        <Sequence from={15}>World</Sequence>
+      </>
+    );
+  }
+  ```
+
+  Now, go to `app.js` or `index.js` or whatever your app's entrypoint is and paste the snippet below
+
+  ```typescript
+  import Example from "~/components/example.tsx";
+
+  export default function App() {
+    return (
+      <>
+        <Player
+          component={Example}
+          durationInFrames={30 * 100}
+          compositionWidth={400}
+          compositionHeight={400}
+          fps={30}
+          controls
+        />
+      </>
+    );
+  }
+  ```
+
+  <br>
+
+  **Components**
+
+  - `Player` - used to render a your composition in a React component. eg. rendering a video on a landing page
+
+    ```typescript
+    import {Player, PlayerRef} from "@remotion/player";
+    import {Sequence} from "remotion";
+
+    function MyVideo() {
+      return (
+        <>
+          <Sequence from={0}>Hello</Sequence>
+          ...
+        </>
+      );
+    }
+
+    export default function Component() {
+      const ref = useRef<PlayerRef>(null);
+
+      const play = () => {
+        if (ref.current?.paused) {
+          ref.current?.play();
+        }
+      };
+
+      return (
+        <>
+        <Player
+          ref={ref}
+          fps={30}
+          durationInFrames={30 * 15}
+          component={MyVideo}
+          compositionWidth={650}
+          compositionHeight={550}
+          inputProps={
+            {
+              /* props to be passed down to `MyVideo` component  */
+            }
+          }
+        />
+
+        <button onClick={play}>
+        </>
+
+      );
+    }
+    ```
+
+    **Other props**
+
+    - loop
+    - autoPlay
+    - showVolumeControls
+    - allowFullscreen
+    - clickToPlay
+    - doubleClickToFullscreen
+    - spaceKeyToPlayOrPause
+    - errorFallback
+      <br>
+      <br>
+
+- `@remotion/media-utils` - contains handful of helpers which will ease up remotion development
+
+  <br>
+
+  **Hooks and functions**
+
+  - `useAudioData` - used to get the information of an audio
+
+    ```typescript
+    import {useAudioData} from "@remotion/media-utils";
+
+    export default function Component() {
+      const audioData = useAudioData(audio); // use `getAudioData` if outside a react component
+
+      if (!audioData) return <>Failed to get audio info</>;
+
+      console.log(
+        audioData.channelWaveforms, // [Float32Array, Float32Array]
+        audioData.durationInSeconds, // number
+        audioData.isRemote, // boolean
+        audioData.numberOfChannels, // number
+        audioData.resultId, // string
+        audioData.sampleRate // number
+      );
+
+      return (
+        <>
+          <pre>{JSON.stringify(audioData, null, 4)}</pre>
+        </>
+      );
+    }
+    ```
+
+  - `visualizeAudio` - returns an array of values describing the amplitude of each frequency range
+
+    ```typescript
+    import {useAudioData, visualizeAudio} from "@remotion/media-utils";
+    import {useCurrentFrame, useVideoConfig} from "remotion";
+
+    export default function Component() {
+      const frame = useCurrentFrame();
+      const {fps} = useVideoConfig();
+      const audioData = useAudioData(audio);
+      const visualization = visualizeAudio({
+        fps,
+        frame,
+        audioData,
+        numberOfSamples: 8,
+      });
+
+      console.log(visualization); // Array with length of `numberOfSamples`
+
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            gap: 8,
+          }}
+        >
+          {visualization.map((value) => (
+            <div
+              style={{
+                width: 16,
+                height: value * 10,
+                backgroundColor: "blue",
+              }}
+            />
+          ))}
+        </div>
+      );
+    }
+    ```
+
+- `@remotion/three` - a plugin to render `react-three-fiber` components inside composition
+
+  ```javascript
+  import {ThreeCanvas} from "@remotion/three";
+  import {useVideoConfig} from "remotion";
+
+  function Component() {
+    const {width, height} = useVideoConfig();
+
+    return (
+      <ThreeCanvas
+        orthographic={false}
+        width={width}
+        height={height}
+        camera={{
+          fov: 75,
+          position: [0, 0, 470],
+        }}
+        style={{
+          backgroundColor: "white",
+        }}
+      >
+        <boxGeometry args={[100, 100, 100]} />
+      </ThreeCanvas>
+    );
+  }
+  ```
 
 ### Issues
 
