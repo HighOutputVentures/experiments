@@ -1,5 +1,4 @@
 import {AbsoluteFill, Composition, getInputProps} from "remotion";
-import styled from "styled-components";
 
 export function Video() {
   const props = getInputProps();
@@ -19,23 +18,10 @@ export function Video() {
 
 function Component(props: Record<string, unknown>) {
   return (
-    <AbsoluteFill
-      style={{
-        color: "#000",
-        backgroundColor: "white",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Code>
+    <AbsoluteFill className="items-center justify-center bg-white">
+      <code className="bg-gray-100 p-8 font-monospace">
         <pre>{JSON.stringify(props, null, 2)}</pre>
-      </Code>
+      </code>
     </AbsoluteFill>
   );
 }
-
-const Code = styled.code`
-  padding: 2rem;
-  font-family: monospace;
-  background-color: #ffedd5;
-`;
