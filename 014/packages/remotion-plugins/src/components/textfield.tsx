@@ -17,7 +17,7 @@ export default React.forwardRef<HTMLInputElement, TextFieldProps>(
         )}
 
         <input
-          className="block w-full rounded-md border border-gray-200 p-2 outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
+          className="block w-full rounded-sm border border-gray-200 p-2 outline-none transition-all duration-300 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
           ref={ref}
           {...props}
         />

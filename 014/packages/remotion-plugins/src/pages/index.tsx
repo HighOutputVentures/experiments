@@ -1,7 +1,13 @@
-import {CheckIcon, DuplicateIcon, SearchIcon} from "@heroicons/react/solid";
+import {
+  CheckIcon,
+  DuplicateIcon,
+  PlusIcon,
+  SearchIcon,
+} from "@heroicons/react/solid";
 import clsx from "clsx";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 
 export default function Landing() {
@@ -21,7 +27,7 @@ export default function Landing() {
 
       <div>
         <main className="">
-          <div className="mx-auto w-[600px] p-16">
+          <div className="mx-auto max-w-[600px] p-8 lg:p-16">
             <div className="flex w-full items-center justify-between rounded-sm border border-gray-200 text-sm">
               <input
                 type="text"
@@ -38,8 +44,23 @@ export default function Landing() {
             </div>
           </div>
         </main>
+
+        <CreateButton />
       </div>
     </>
+  );
+}
+
+function CreateButton() {
+  return (
+    <Link passHref href="/create-new">
+      <a
+        className="fixed right-[32px] bottom-[32px] z-50 rounded-full bg-blue-400 p-4 shadow-md"
+        tabIndex={-1}
+      >
+        <PlusIcon className="h-5 w-5 fill-white" />
+      </a>
+    </Link>
   );
 }
 
