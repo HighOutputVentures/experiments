@@ -628,11 +628,17 @@ Remotion will really create a great impact for applications which use it, especi
 ### Issues
 
 - Unexpected `Audio` behaviour in `StrictMode`
-  - <https://github.com/remotion-dev/remotion/issues/957>
-  - <https://github.com/remotion-dev/remotion/issues/723>
-  - <https://www.remotion.dev/docs/player/autoplay>
+
+  references:
+
+  - https://github.com/remotion-dev/remotion/issues/957>
+  - https://github.com/remotion-dev/remotion/issues/723>
+  - https://www.remotion.dev/docs/player/autoplay>
 
 ### Limitations
 
 - Download the composed video when using `Player` on demand. Eg. on button click
-  - <https://github.com/remotion-dev/remotion/issues/655>
+
+  references:
+
+  - https://github.com/remotion-dev/remotion/issues/655>
