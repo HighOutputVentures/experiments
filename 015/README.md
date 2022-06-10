@@ -11,7 +11,8 @@ At the end of this experiment, we should be able to
   - Explore Tools within the Spline Editor
     - create a small library/collections of tutorials on how to use spline tool
   - To recreate the Hero section background with 3D model, in HOV context 
-
+- Phase 2 (Optional)
+  - Explore the option of manipulating the objects inside the model thru code (react-spline)
 ## Abstract
 
 ## Conclusion
