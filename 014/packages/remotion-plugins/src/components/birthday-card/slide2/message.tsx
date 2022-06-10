@@ -3,7 +3,6 @@ import Image from "next/image";
 import * as React from "react";
 import {interpolate, useCurrentFrame} from "remotion";
 import {v4 as uuid} from "uuid";
-import useFileToImgSrc from "../../../hooks/use-file-to-img-src";
 import IMessage from "../../../types/message";
 
 interface MessageProps {
@@ -15,7 +14,6 @@ export default function Message({
   className,
   ...props
 }: MessageProps & Omit<React.ComponentProps<"div">, "children">) {
-  const {src} = useFileToImgSrc(data.image);
   const frame = useCurrentFrame();
   const words = data.body.split(" ");
 
@@ -30,7 +28,7 @@ export default function Message({
     >
       <div className="flex gap-3">
         <div className="relative h-[40px] w-[40px] shrink-0 grow-0">
-          <Image layout="fill" src={src} alt="" />
+          <Image layout="fill" src={data.image ?? "/robot.svg"} alt="" />
         </div>
 
         <div>
