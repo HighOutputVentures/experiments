@@ -85,23 +85,23 @@ Remotion will really create a great impact for applications which use it, especi
 
 <br>
 
-- `Composition` is used to register a component to be displayed as video.
+- `Composition` registers a component to be displayed as video.
 - `Sequence` a component that lets you control what component(s) appear on your video based on the frame.
 - `AbsoluteFill` automatically centers a component in the screen
 - `Img` can be used instead of `img` to ensure that a particular image gets loaded before frame is rendered
-- `staticFile` is typically used to import assets eg. images under `src/public`
+- `staticFile` helper for importing assets eg. images under `src/public`
 - `Audio` component to be used when rendering an audio which accepts a lot of useful props
 - `useCurrentFrame` returns the current frame index/number
 - `useVideoConfig` returns the video settings. `fps`, `durationInFrames`, `width`, `height`, `id`, `defaultProps`. More info [here](https://www.remotion.dev/docs/use-video-config)
 - `interpolate` helps in creating animations. Example if we want a `fade in` effect, it will generate an opacity value for us to be used at a certain point of time
-- `Video` component wraps native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
-- `spring`
+- `Video` component that wraps the native `video` element and accepts all of its props excluding `autoplay` and `controls`. Also comes with additional props `endsAt` and `startsFrom` (which do exactly what thier name sounds)
+- `spring` - use to give bounciness to animations
 
 ### Plugins
 
-- `@remotion/player`
-- `@remotion/three`
-- `@remotion/gif`
+- `@remotion/player` - similar to `Composition` but is mainly use to render your composition inside react component
+- `@remotion/three` - for rendering `react-three-fiber` components
+- `@remotion/gif` - for rendering `gif`s which will get synced to the video frame
 
 <br>
 <br>
@@ -238,7 +238,7 @@ Remotion will really create a great impact for applications which use it, especi
   ```
 
   On the example above, the code will output a `div` component with a `fade-in` effect.
-  The animation will start at frame `0` and will end at frame `50`.
+  The animation will start at frame `0` and will end at frame `50`. Within frame `0` and `50` `interpolate` will return a value which is between `0` and `1` eg `0.1` which you can the use as a value of the opacity for the component you wish to animate
 
   [![Watch the video](https://img.youtube.com/vi/sff_CdWw_-c/hqdefault.jpg)](https://www.youtube.com/watch?v=sff_CdWw_-c)
 
@@ -247,7 +247,7 @@ Remotion will really create a great impact for applications which use it, especi
 - How to use `@remotion/player`
   <br>
   **NOTE :**
-  To use this plugin you have to bootstrap a new react app (using something like `vite`, `next`, `cra` or etc.).
+  To use this plugin, it is best if you scaffold a new react project (using something like `vite`, `next`, `cra` or etc.).
   <br>
   To get started with, open the folder that you've just bootstraped and run the command below
 
