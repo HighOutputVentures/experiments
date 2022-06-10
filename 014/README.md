@@ -34,15 +34,9 @@ At the end of this experiment, we should be able to
 
 With `remotion` and its plugins, we were able to build a simple `nextjs` application that can generate a birthday video based on dynamic data captured thru `<form/>`. We have also tested several styling libraries and they all work just fine. We've choosen to use `tailwindcss` and `styled-components` for simplicity sake, but `chakra-ui` works too. When using `tailwindcss`, a webpack config needs to be set under `remotion.config.ts` and you could just grab the code in the `remotion` docs.
 
-<br/>
-
 When using `nextjs`, we've encountered `hydration` issue and the solution was to wait for the client to hydrate before rendering the `Player`. There is also an ongoing issue with the `Audio` component and at the time of writing the only solution is to disable react's strict mode.
 
-<br/>
-
 Another important thing we have learned is the difference between `Player` and `Composition`. You use `Composition` when you want to have the video downloadable via running an npm script and `Player` if you want to render your composition inside a react component or for example under a particular page in `nextjs`.
-
-<br/>
 
 With `remotion`, we are no longer limited to embedding a static video in our app via the html's native `video` element, but we now have the option to create a video on the fly whether using a static data or data that comes from an API or a user's input and this we believe will make our application stand out.
 
@@ -51,8 +45,6 @@ With `remotion`, we are no longer limited to embedding a static video in our app
 ## Conclusion
 
 We find using remotion a bit challenging when we first use it. But after understanding how the video works and how to use the components and functions that come with the library, coding started to become like those typical ones. Everything is just a timing and styles.
-
-<br/>
 
 Remotion will really create a great impact for applications which use it, especially if design is planned well.
 
@@ -528,8 +520,8 @@ Remotion will really create a great impact for applications which use it, especi
     - doubleClickToFullscreen
     - spaceKeyToPlayOrPause
     - errorFallback
-      <br>
-      <br>
+
+    <br>
 
 - `@remotion/media-utils` - contains handful of helpers which will ease up remotion development
 
