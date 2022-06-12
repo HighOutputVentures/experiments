@@ -5,6 +5,9 @@ async function one(id: string | number): Promise<IBirthdayCard | null> {
   try {
     const response = await fetch(
       `${constants.apiEndpoint}/birthdayCards/${id}`,
+      {
+        cache: "no-cache",
+      },
     );
 
     return await response.json();
@@ -15,7 +18,10 @@ async function one(id: string | number): Promise<IBirthdayCard | null> {
 
 async function all(): Promise<IBirthdayCard[]> {
   try {
-    const response = await fetch(`${constants.apiEndpoint}/birthdayCards`);
+    const response = await fetch(`${constants.apiEndpoint}/birthdayCards`, {
+      cache: "no-cache",
+    });
+
     return await response.json();
   } catch (error) {
     return [];
