@@ -1,14 +1,25 @@
 import constants from "../config/constants";
 import IBirthdayCard from "../types/birthday-card";
 
-async function one(id: number): Promise<IBirthdayCard> {
-  const response = await fetch(`${constants.apiEndpoint}/birthdayCards/${id}`);
-  return await response.json();
+async function one(id: string | number): Promise<IBirthdayCard | null> {
+  try {
+    const response = await fetch(
+      `${constants.apiEndpoint}/birthdayCards/${id}`,
+    );
+
+    return await response.json();
+  } catch (error) {
+    return null;
+  }
 }
 
 async function all(): Promise<IBirthdayCard[]> {
-  const response = await fetch(`${constants.apiEndpoint}/birthdayCards`);
-  return await response.json();
+  try {
+    const response = await fetch(`${constants.apiEndpoint}/birthdayCards`);
+    return await response.json();
+  } catch (error) {
+    return [];
+  }
 }
 
 async function create(data: Omit<IBirthdayCard, "id">): Promise<IBirthdayCard> {
@@ -23,7 +34,7 @@ async function create(data: Omit<IBirthdayCard, "id">): Promise<IBirthdayCard> {
   return await response.json();
 }
 
-async function remove(id: number) {
+async function remove(id: string | number) {
   await fetch(`${constants.apiEndpoint}/birthday-cards/${id}`, {
     method: "delete",
   });
