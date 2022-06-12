@@ -1,17 +1,16 @@
 import {SearchIcon} from "@heroicons/react/solid";
 import Head from "next/head";
 import * as React from "react";
+import IBirthdayCard from "../../types/birthday-card";
 import CreateButton from "./create-button";
 import Item from "./item";
 
-export default function Landing() {
-  const [loading, setLoading] = React.useState(true);
+interface Props {
+  data: IBirthdayCard[];
+}
 
-  React.useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  if (loading) return null;
+export default function Landing({data}: Props) {
+  if (!data) return null;
 
   return (
     <React.Fragment>
@@ -33,8 +32,9 @@ export default function Landing() {
             </div>
 
             <div className="mt-16 flex flex-col gap-2">
-              <Item />
-              <Item />
+              {data.map((birthdayCard) => (
+                <Item key={birthdayCard.id} data={birthdayCard} />
+              ))}
             </div>
           </div>
         </main>

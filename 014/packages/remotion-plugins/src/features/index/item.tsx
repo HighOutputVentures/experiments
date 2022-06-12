@@ -2,8 +2,13 @@ import {CheckIcon, DuplicateIcon} from "@heroicons/react/solid";
 import clsx from "clsx";
 import Image from "next/image";
 import * as React from "react";
+import IBirthdayCard from "../../types/birthday-card";
 
-export default function Item() {
+interface ItemProps {
+  data: IBirthdayCard;
+}
+
+export default function Item({data}: ItemProps) {
   const [copied, setCopied] = React.useState(false);
 
   const SVGIcon = copied ? CheckIcon : DuplicateIcon;
@@ -12,7 +17,10 @@ export default function Item() {
     e.preventDefault();
     e.stopPropagation();
 
-    await navigator.clipboard.writeText("http://localhost:3000/videos/<id>");
+    await navigator.clipboard.writeText(
+      `http://localhost:3000/videos/${data.id}`,
+    );
+
     setCopied(true);
   };
 
@@ -36,13 +44,13 @@ export default function Item() {
 
   return (
     <a
-      href="http://localhost:3000/video/1"
+      href={`http://localhost:3000/videos/${data.id}`}
       rel="noreferrer"
       target="_blank"
       className="flex items-center gap-2 border border-gray-200 p-4 transition-all duration-300 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50"
     >
       <div className="relative h-[48px] w-[48px]">
-        <Image src="/robot.svg" alt="" layout="fill" />
+        <Image src={data.celebrant.image} alt="" layout="fill" />
       </div>
 
       <div className="grow">
