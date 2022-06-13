@@ -35,5 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 
-# dummy database
 db.json
+public/downloads
