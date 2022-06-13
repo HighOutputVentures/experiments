@@ -61,6 +61,7 @@ export default function Video({data}: Props) {
   const router = useRouter();
 
   const [loading, setLoading] = React.useState(true);
+  const [copying, setCopying] = React.useState(false);
   const [deleting, setDeleting] = React.useState(false);
   const [downloading, setDownloading] = React.useState(false);
 
@@ -81,9 +82,13 @@ export default function Video({data}: Props) {
   const handleCopy = async () => {
     const link = `http://localhost:3000/downloads/${data.id}.mp4`;
 
+    setCopying(true);
+
     // need to ensure video exists
     await birthdayCardService.download(data.id, true);
     await navigator.clipboard.writeText(link);
+
+    setCopying(false);
   };
 
   React.useEffect(() => {
@@ -91,6 +96,7 @@ export default function Video({data}: Props) {
 
     return () => {
       setLoading(true);
+      setCopying(false);
       setDeleting(false);
       setDownloading(false);
     };
@@ -142,6 +148,7 @@ export default function Video({data}: Props) {
                   onClick={handleCopy}
                   icon={LinkIcon}
                   title="Copy video link"
+                  disabled={copying}
                 />
                 <IconButton
                   onClick={handleDelete}
