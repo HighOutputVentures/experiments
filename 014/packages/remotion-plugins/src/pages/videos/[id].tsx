@@ -86,7 +86,12 @@ export default function Video({data}: Props) {
 
     // need to ensure video exists
     await birthdayCardService.download(data.id, true);
-    await navigator.clipboard.writeText(link);
+
+    try {
+      await navigator.clipboard.writeText(link);
+    } catch (error) {
+      // this fails for cases like users leave the page
+    }
 
     setCopying(false);
   };
