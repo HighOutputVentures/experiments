@@ -3,13 +3,10 @@ import constants from "../config/constants";
 import IBirthdayCard from "../types/birthday-card";
 
 async function one(id: string | number): Promise<IBirthdayCard | null> {
+  const endpoint = `${constants.apiEndpoint}/birthdayCards/${id}`;
+
   try {
-    const response = await fetch(
-      `${constants.apiEndpoint}/birthdayCards/${id}`,
-      {
-        cache: "no-cache",
-      },
-    );
+    const response = await fetch(endpoint, {cache: "no-cache"});
 
     return await response.json();
   } catch (error) {
@@ -18,13 +15,10 @@ async function one(id: string | number): Promise<IBirthdayCard | null> {
 }
 
 async function all(): Promise<IBirthdayCard[]> {
+  const endpoint = `${constants.apiEndpoint}/birthdayCards?_sort=createdAt&_order=desc`;
+
   try {
-    const response = await fetch(
-      `${constants.apiEndpoint}/birthdayCards?_sort=createdAt&_order=desc`,
-      {
-        cache: "no-cache",
-      },
-    );
+    const response = await fetch(endpoint, {cache: "no-cache"});
 
     return await response.json();
   } catch (error) {
@@ -45,9 +39,18 @@ async function create(data: Omit<IBirthdayCard, "id">): Promise<IBirthdayCard> {
 }
 
 async function remove(id: string | number) {
-  await fetch(`${constants.apiEndpoint}/birthdayCards/${id}`, {
-    method: "delete",
-  });
+  const endpoints = [
+    `/api/download/${id}`,
+    `${constants.apiEndpoint}/birthdayCards/${id}`,
+  ];
+
+  await Promise.allSettled(
+    endpoints.map((endpoint) =>
+      fetch(endpoint, {
+        method: "delete",
+      }),
+    ),
+  );
 }
 
 interface DownloadRespose {

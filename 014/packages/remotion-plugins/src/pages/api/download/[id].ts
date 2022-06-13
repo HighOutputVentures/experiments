@@ -1,10 +1,14 @@
 import {execSync} from "child_process";
 import {existsSync} from "fs";
+import fs from "fs/promises";
 import {NextApiHandler} from "next";
 import path from "node:path";
+import constants from "../../../config/constants";
 
 const handler: NextApiHandler = async (req, res) => {
-  if (req.method?.toLowerCase() === "get") {
+  const method = req.method?.toLowerCase();
+
+  if (method === "get") {
     const id = req.query.id;
 
     if (typeof id !== "string") {
@@ -16,7 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
 
     try {
       // check if record exists
-      await fetch(`http://localhost:5000/birthdayCards/${id}`, {
+      await fetch(`${constants.apiEndpoint}/birthdayCards/${id}`, {
         method: "head",
       });
     } catch (error) {
@@ -41,6 +45,25 @@ const handler: NextApiHandler = async (req, res) => {
       success: true,
       message: "Video successfuly built",
     });
+  }
+
+  if (method === "delete") {
+    const id = req.query.id;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid video id",
+      });
+    }
+
+    const filepath = `public/downloads/${id}.mp4`;
+    const fullpath = path.join(process.cwd(), filepath);
+
+    if (existsSync(fullpath)) await fs.unlink(fullpath);
+
+    res.status(204).end();
+    return;
   }
 
   return res.status(405).json({
