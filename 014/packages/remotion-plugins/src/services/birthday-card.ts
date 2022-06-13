@@ -41,7 +41,7 @@ async function create(data: Omit<IBirthdayCard, "id">): Promise<IBirthdayCard> {
 }
 
 async function remove(id: string | number) {
-  await fetch(`${constants.apiEndpoint}/birthday-cards/${id}`, {
+  await fetch(`${constants.apiEndpoint}/birthdayCards/${id}`, {
     method: "delete",
   });
 }
