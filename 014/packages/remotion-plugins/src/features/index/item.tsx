@@ -1,52 +1,43 @@
-import {CheckIcon, DuplicateIcon} from "@heroicons/react/solid";
+import {XIcon} from "@heroicons/react/solid";
 import clsx from "clsx";
 import {formatDistanceToNow} from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import Spinner from "../../components/spinner";
 import IBirthdayCard from "../../types/birthday-card";
 
 interface ItemProps {
   data: IBirthdayCard;
+  onDelete?: (data: IBirthdayCard) => void;
+  loading?: boolean;
 }
 
-export default function Item({data}: ItemProps) {
-  const [copied, setCopied] = React.useState(false);
-
-  const SVGIcon = copied ? CheckIcon : DuplicateIcon;
-
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+export default function Item({data, onDelete, loading}: ItemProps) {
+  const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
-    await navigator.clipboard.writeText(
-      `http://localhost:3000/videos/${data.id}`,
-    );
-
-    setCopied(true);
+    if (onDelete) onDelete(data);
   };
 
-  React.useEffect(() => {
-    let timeout: NodeJS.Timeout;
-
-    if (copied) {
-      timeout = setTimeout(() => setCopied(false), 3000);
-    }
-
-    return () => {
-      timeout && clearTimeout(timeout);
-    };
-  }, [copied]);
-
-  React.useEffect(() => {
-    return () => {
-      setCopied(false);
-    };
-  }, []);
-
   return (
-    <Link href={`http://localhost:3000/videos/${data.id}`} passHref>
-      <a className="flex items-center gap-3 border border-gray-200 p-4 transition-all duration-300 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50">
+    <Link
+      href={loading ? "/#" : `http://localhost:3000/videos/${data.id}`}
+      passHref
+    >
+      <a
+        className={clsx(
+          "relative flex items-center gap-3 border p-4 outline-none transition-all duration-300",
+          loading && "border-gray-50",
+          !loading &&
+            "border-gray-200 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50 focus:border-blue-300 focus:ring-2 focus:ring-blue-100 focus:ring-opacity-50",
+        )}
+      >
+        <div className="absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+          <Spinner className="h-[64px] w-[64px]" />
+        </div>
+
         <div className="relative h-[48px] w-[48px]">
           <Image src={data.celebrant.image} alt="" layout="fill" />
         </div>
@@ -61,15 +52,8 @@ export default function Item({data}: ItemProps) {
           </div>
         </div>
 
-        <button title="Copy link" onClick={handleClick}>
-          <SVGIcon
-            className={clsx(
-              "h-6 w-6",
-              copied && "fill-green-400",
-              !copied &&
-                "fill-gray-300 transition-all duration-300 hover:fill-gray-400",
-            )}
-          />
+        <button onClick={handleDelete} className="group outline-none">
+          <XIcon className="h-6 w-6 fill-gray-300 transition-all duration-300 group-hover:fill-gray-400 group-focus:fill-gray-400" />
         </button>
       </a>
     </Link>
