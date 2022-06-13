@@ -19,9 +19,12 @@ async function one(id: string | number): Promise<IBirthdayCard | null> {
 
 async function all(): Promise<IBirthdayCard[]> {
   try {
-    const response = await fetch(`${constants.apiEndpoint}/birthdayCards`, {
-      cache: "no-cache",
-    });
+    const response = await fetch(
+      `${constants.apiEndpoint}/birthdayCards?_sort=createdAt&_order=desc`,
+      {
+        cache: "no-cache",
+      },
+    );
 
     return await response.json();
   } catch (error) {
