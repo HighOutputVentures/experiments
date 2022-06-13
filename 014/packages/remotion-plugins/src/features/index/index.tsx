@@ -12,7 +12,11 @@ interface Props {
 }
 
 export default function Landing({data}: Props) {
-  if (!data) return null;
+  const [search, setSearch] = React.useState("");
+
+  const filtered = data.filter(({celebrant}) =>
+    new RegExp(search, "ig").test(celebrant.name),
+  );
 
   return (
     <React.Fragment>
@@ -28,6 +32,8 @@ export default function Landing({data}: Props) {
                 type="text"
                 placeholder="Search"
                 className="p-3 outline-none"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
 
               <SearchIcon className="mr-4 h-4 w-4 fill-gray-400" />
@@ -35,10 +41,10 @@ export default function Landing({data}: Props) {
 
             <div className="mt-16 flex flex-col gap-2">
               {data.length <= 0 && <EmptyState />}
-              {data.length >= 1 &&
-                data.map((birthdayCard) => (
-                  <Item key={birthdayCard.id} data={birthdayCard} />
-                ))}
+
+              {filtered.map((birthdayCard) => (
+                <Item key={birthdayCard.id} data={birthdayCard} />
+              ))}
             </div>
           </div>
         </main>
