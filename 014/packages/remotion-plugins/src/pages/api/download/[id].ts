@@ -1,5 +1,7 @@
 import {execSync} from "child_process";
+import {existsSync} from "fs";
 import {NextApiHandler} from "next";
+import path from "node:path";
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method?.toLowerCase() === "get") {
@@ -23,11 +25,15 @@ const handler: NextApiHandler = async (req, res) => {
       });
     }
 
-    execSync(
-      `npx remotion render src/remotion/index.tsx Video public/downloads/${id}.mp4 --props='${JSON.stringify(
-        {id},
-      )}'`,
-    );
+    const filepath = `public/downloads/${id}.mp4`;
+
+    if (!existsSync(path.join(process.cwd(), filepath))) {
+      const props = JSON.stringify({id});
+
+      execSync(
+        `npx remotion render src/remotion/index.tsx Video ${filepath} --props='${props}'`,
+      );
+    }
 
     return res.status(200).json({
       success: true,
