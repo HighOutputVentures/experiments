@@ -2,7 +2,7 @@ import create from "zustand";
 import {devtools} from "zustand/middleware";
 import {Schema} from "../features/create-new/types";
 
-interface Store {
+export interface Store {
   data?: Schema;
   update: (data: Schema) => void;
   clear: () => void;
