@@ -5,4 +5,5 @@ export default interface IBirthdayCard {
   id: number;
   celebrant: ICelebrant;
   messages: IMessage[];
+  createdAt: string;
 }
