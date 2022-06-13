@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {ReactNode} from "react";
 import {
   Img,
@@ -62,7 +61,7 @@ export default function Slide1({data}: {data: IBirthdayCard}) {
 
       <Sequence from={2 * multiplier} layout="none">
         <div className="my-8 h-[210px] w-[210px] shrink-0 grow-0 overflow-hidden rounded-full">
-          <Image
+          <Img
             src={celebrant.image}
             width={210}
             height={210}

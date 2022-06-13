@@ -1,4 +1,10 @@
-import {Audio, interpolate, useCurrentFrame, useVideoConfig} from "remotion";
+import {
+  Audio,
+  interpolate,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import constants from "../../config/constants";
 import IBirthdayCard from "../../types/birthday-card";
 import Slide1 from "./slide1";
@@ -18,7 +24,7 @@ export default function BirthdayCard(data: IBirthdayCard) {
 
   return (
     <>
-      <Audio src="/ringtone.mp3" startFrom={0} volume={volume} />
+      <Audio src={staticFile("/ringtone.mp3")} startFrom={0} volume={volume} />
 
       <div className="flex w-full flex-col items-center bg-[#0f0f0f] p-8 text-white">
         <Slide1 data={data} />

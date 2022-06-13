@@ -1,7 +1,6 @@
 import clsx from "clsx";
-import Image from "next/image";
 import * as React from "react";
-import {interpolate, useCurrentFrame} from "remotion";
+import {Img, interpolate, useCurrentFrame} from "remotion";
 import {v4 as uuid} from "uuid";
 import IMessage from "../../../types/message";
 
@@ -28,7 +27,11 @@ export default function Message({
     >
       <div className="flex gap-3">
         <div className="relative h-[40px] w-[40px] shrink-0 grow-0">
-          <Image layout="fill" src={data.image ?? "/robot.svg"} alt="" />
+          <Img
+            className="h-full w-full"
+            src={data.image ?? "/robot.svg"}
+            alt=""
+          />
         </div>
 
         <div>
