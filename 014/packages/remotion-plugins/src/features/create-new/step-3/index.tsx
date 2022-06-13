@@ -73,5 +73,11 @@ const createBirthdayCard = async (data: NonNullable<Store["data"]>) => {
       : [...array];
   }, []);
 
-  return await birthdayCardService.create({celebrant, messages});
+  const createdAt = new Date().toISOString();
+
+  return await birthdayCardService.create({
+    celebrant,
+    messages,
+    createdAt,
+  });
 };
