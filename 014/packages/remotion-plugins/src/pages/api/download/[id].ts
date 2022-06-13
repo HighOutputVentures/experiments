@@ -16,23 +16,23 @@ const handler: NextApiHandler = async (req, res) => {
       await fetch(`http://localhost:5000/birthdayCards/${id}`, {
         method: "head",
       });
-
-      execSync(
-        `npx remotion render src/remotion/index.tsx Video public/downloads/${id}.mp4 --props='${JSON.stringify(
-          {id},
-        )}'`,
-      );
-
-      return res.status(200).json({
-        success: true,
-        message: "Video successfuly built",
-      });
     } catch (error) {
-      return res.status(200).json({
+      return res.status(404).json({
         success: false,
         message: "Record does not exist",
       });
     }
+
+    execSync(
+      `npx remotion render src/remotion/index.tsx Video public/downloads/${id}.mp4 --props='${JSON.stringify(
+        {id},
+      )}'`,
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Video successfuly built",
+    });
   }
 
   return res.status(405).json({
