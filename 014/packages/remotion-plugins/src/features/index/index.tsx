@@ -1,4 +1,4 @@
-import {PlusIcon, SearchIcon} from "@heroicons/react/solid";
+import {ArrowNarrowRightIcon, SearchIcon} from "@heroicons/react/solid";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -94,7 +94,7 @@ function NoMatches() {
   return (
     <div>
       <div className="mx-auto w-fit">
-        <Image src="/taken.svg" alt="" width={200} height={200} />
+        <Image src="/taken.svg" alt="" width={300} height={300} />
       </div>
     </div>
   );
@@ -104,14 +104,14 @@ function NoRecords() {
   return (
     <div>
       <div className="mx-auto w-fit">
-        <Image src="/void.svg" alt="" width={200} height={200} />
+        <Image src="/void.svg" alt="" width={300} height={300} />
       </div>
 
       <div className="mt-16">
         <Link href="/create-new" passHref>
-          <a className="mx-auto flex w-fit items-center gap-1 rounded-sm bg-blue-400 py-3 px-4 text-white shadow-sm">
-            <PlusIcon className="h-4 w-4 fill-white" />
-            <span className="text-sm">Create new</span>
+          <a className="mx-auto flex w-fit items-center gap-3 rounded-sm border border-gray-200 py-3 px-4 transition-all duration-300 hover:border-gray-300 focus:border-gray-300">
+            <span className="text-sm">Create new video</span>
+            <ArrowNarrowRightIcon className="h-4 w-4" />
           </a>
         </Link>
       </div>
