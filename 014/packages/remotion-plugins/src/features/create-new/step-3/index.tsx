@@ -1,66 +1,71 @@
 import {useRouter} from "next/router";
 import * as React from "react";
-import invariant from "tiny-invariant";
 import {v4 as uuid} from "uuid";
-import useStore from "../../../hooks/use-store";
+import useStore, {Store} from "../../../hooks/use-store";
 import birthdayCardService from "../../../services/birthday-card";
 import IBirthdayCard from "../../../types/birthday-card";
+import IMessage from "../../../types/message";
 import {base64Encode} from "../../../utils/base64-encode";
-
-type Data =
-  | {loading: true; data?: null}
-  | {loading: false; data: IBirthdayCard};
 
 export default function CreateNewStep3() {
   const store = useStore();
   const router = useRouter();
 
-  const [data, setData] = React.useState<Data>({
-    loading: true,
-  });
-
-  const createBirthdayCard = React.useCallback(async () => {
-    invariant(store.data);
-
-    try {
-      const celebrant = {
-        id: uuid(),
-        name: store.data.celebrant.name,
-        image: await base64Encode(store.data.celebrant.image),
-        dateOfBirth: store.data.celebrant.dateOfBirth.toISOString(),
-      };
-
-      const messages = await Promise.all(
-        store.data.messages.map(async ({id, body, author, image}) => ({
-          id,
-          body,
-          author,
-          image: image ? await base64Encode(image) : undefined,
-        })),
-      );
-
-      const response = await birthdayCardService.create({celebrant, messages});
-
-      setData({
-        loading: false,
-        data: response,
-      });
-    } catch (error) {
-      // todo
-    }
-  }, [store.data]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState(false);
+  const [data, setData] = React.useState<IBirthdayCard | null>(null);
 
   React.useEffect(() => {
-    if (!store.data) router.push("/create-new");
-    else createBirthdayCard();
-  }, [createBirthdayCard, router, store.data]);
+    if (!store.data) {
+      router.push("/create-new");
+    } else {
+      createBirthdayCard(store.data);
+    }
+  }, [router, store.data]);
+
+  React.useEffect(() => {
+    return () => {
+      setLoading(true);
+      setError(false);
+      setData(null);
+    };
+  }, []);
 
   return (
     <div>
-      {data.loading && <div>Loading...</div>}
-      {!data.loading && (
-        <div>http://localhost:3000/birthdayCards/{data.data.id}</div>
-      )}
+      {loading && <div>Loading...</div>}
+      {error && <div>Something went wrong.</div>}
+      {data && <div>http://localhost:3000/birthdayCards/{data.id}</div>}
     </div>
   );
 }
+
+const createBirthdayCard = async (data: NonNullable<Store["data"]>) => {
+  try {
+    const celebrant = {
+      id: uuid(),
+      name: data.celebrant.name,
+      image: await base64Encode(data.celebrant.image),
+      dateOfBirth: data.celebrant.dateOfBirth.toISOString(),
+    };
+
+    const promises = await Promise.allSettled(
+      data.messages.map(async ({id, body, author, image}) => ({
+        id,
+        body,
+        author,
+        image: image ? await base64Encode(image) : undefined,
+      })),
+    );
+
+    const messages = promises.reduce<IMessage[]>((array, promise) => {
+      return promise.status === "fulfilled"
+        ? [...array, promise.value]
+        : [...array];
+    }, []);
+
+    return await birthdayCardService.create({celebrant, messages});
+  } catch (error) {
+    return null;
+  }
+};
