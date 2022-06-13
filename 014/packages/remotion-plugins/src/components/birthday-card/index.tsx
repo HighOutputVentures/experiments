@@ -1,4 +1,5 @@
 import {
+  AbsoluteFill,
   Audio,
   interpolate,
   staticFile,
@@ -23,14 +24,14 @@ export default function BirthdayCard(data: IBirthdayCard) {
   });
 
   return (
-    <>
+    <AbsoluteFill>
       <Audio src={staticFile("/ringtone.mp3")} startFrom={0} volume={volume} />
 
-      <div className="flex w-full flex-col items-center bg-[#0f0f0f] p-8 text-white">
+      <div className="flex h-full w-full flex-col items-center bg-[#0f0f0f] p-8 text-white">
         <Slide1 data={data} />
         <Slide2 data={data} />
         <Slide3 data={data} />
       </div>
-    </>
+    </AbsoluteFill>
   );
 }
