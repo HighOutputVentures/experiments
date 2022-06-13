@@ -1,5 +1,6 @@
 import {useRouter} from "next/router";
 import * as React from "react";
+import invariant from "tiny-invariant";
 import {v4 as uuid} from "uuid";
 import useStore, {Store} from "../../../hooks/use-store";
 import birthdayCardService from "../../../services/birthday-card";
@@ -15,13 +16,22 @@ export default function CreateNewStep3() {
   const [error, setError] = React.useState(false);
   const [data, setData] = React.useState<IBirthdayCard | null>(null);
 
-  React.useEffect(() => {
-    if (!store.data) {
-      router.push("/create-new");
-    } else {
-      createBirthdayCard(store.data);
+  const startCreating = React.useCallback(async () => {
+    invariant(store.data);
+
+    try {
+      setData(await createBirthdayCard(store.data));
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
-  }, [router, store.data]);
+  }, [store.data]);
+
+  React.useEffect(() => {
+    if (!store.data) router.push("/create-new");
+    else startCreating();
+  }, [startCreating, router, store.data]);
 
   React.useEffect(() => {
     return () => {
@@ -35,37 +45,33 @@ export default function CreateNewStep3() {
     <div>
       {loading && <div>Loading...</div>}
       {error && <div>Something went wrong.</div>}
-      {data && <div>http://localhost:3000/birthdayCards/{data.id}</div>}
+      {data && <div>http://localhost:3000/videos/{data.id}</div>}
     </div>
   );
 }
 
 const createBirthdayCard = async (data: NonNullable<Store["data"]>) => {
-  try {
-    const celebrant = {
-      id: uuid(),
-      name: data.celebrant.name,
-      image: await base64Encode(data.celebrant.image),
-      dateOfBirth: data.celebrant.dateOfBirth.toISOString(),
-    };
+  const celebrant = {
+    id: uuid(),
+    name: data.celebrant.name,
+    image: await base64Encode(data.celebrant.image),
+    dateOfBirth: data.celebrant.dateOfBirth.toISOString(),
+  };
 
-    const promises = await Promise.allSettled(
-      data.messages.map(async ({id, body, author, image}) => ({
-        id,
-        body,
-        author,
-        image: image ? await base64Encode(image) : undefined,
-      })),
-    );
+  const promises = await Promise.allSettled(
+    data.messages.map(async ({id, body, author, image}) => ({
+      id,
+      body,
+      author,
+      image: image ? await base64Encode(image) : undefined,
+    })),
+  );
 
-    const messages = promises.reduce<IMessage[]>((array, promise) => {
-      return promise.status === "fulfilled"
-        ? [...array, promise.value]
-        : [...array];
-    }, []);
+  const messages = promises.reduce<IMessage[]>((array, promise) => {
+    return promise.status === "fulfilled"
+      ? [...array, promise.value]
+      : [...array];
+  }, []);
 
-    return await birthdayCardService.create({celebrant, messages});
-  } catch (error) {
-    return null;
-  }
+  return await birthdayCardService.create({celebrant, messages});
 };
