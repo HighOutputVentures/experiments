@@ -10,7 +10,6 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   const data = await birthdayCardService.read.all();
 
   return {
-    revalidate: 60 * 60 * 24 * 3,
     props: {
       data,
     },
