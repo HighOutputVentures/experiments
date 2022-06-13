@@ -130,7 +130,7 @@ const Shine = styled.div`
     height: 100%;
     position: absolute;
     z-index: 1;
-    animation: slide 1s infinite;
+    animation: slide 1s;
     background: -moz-linear-gradient(
       left,
       rgba(255, 255, 255, 0) 0%,
