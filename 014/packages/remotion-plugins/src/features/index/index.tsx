@@ -26,6 +26,14 @@ export default function Landing({data}: Props) {
 
     try {
       await birthdayCardService.remove(subject.id);
+      await fetch("/api/revalidate", {
+        method: "post",
+        body: JSON.stringify({pathname: "/"}),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+
       setItems((o) => o.filter(({id}) => id !== subject.id));
     } catch (error) {
       //
