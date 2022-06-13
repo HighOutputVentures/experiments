@@ -81,6 +81,8 @@ export default function Video({data}: Props) {
   const handleCopy = async () => {
     const link = `http://localhost:3000/downloads/${data.id}.mp4`;
 
+    // need to ensure video exists
+    await birthdayCardService.download(data.id, true);
     await navigator.clipboard.writeText(link);
   };
 

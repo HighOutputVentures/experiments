@@ -52,13 +52,13 @@ interface DownloadRespose {
   message: string;
 }
 
-async function download(id: string | number) {
+async function download(id: string | number, skipDownload?: boolean) {
   try {
     const response = await fetch(`/api/download/${id}`);
 
     const data: DownloadRespose = await response.json();
 
-    if (data.success) {
+    if (data.success && !skipDownload) {
       const anchor = document.createElement("a");
       anchor.setAttribute("href", `http://localhost:3000/downloads/${id}.mp4`);
       anchor.setAttribute("download", `${uuid()}.mp4`);
