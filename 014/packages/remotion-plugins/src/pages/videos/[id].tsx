@@ -8,6 +8,7 @@ import {
 } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import {useRouter} from "next/router";
 import * as React from "react";
 import invariant from "tiny-invariant";
 import BirthdayCard from "../../components/birthday-card";
@@ -16,6 +17,7 @@ import Spinner from "../../components/spinner";
 import constants from "../../config/constants";
 import birthdayCardService from "../../services/birthday-card";
 import IBirthdayCard from "../../types/birthday-card";
+import revalidatePath from "../../utils/revalidate-path";
 
 interface Params {
   id: string;
@@ -56,14 +58,11 @@ export async function getStaticProps({
 }
 
 export default function Video({data}: Props) {
+  const router = useRouter();
+
   const [loading, setLoading] = React.useState(true);
+  const [deleting, setDeleting] = React.useState(false);
   const [downloading, setDownloading] = React.useState(false);
-
-  React.useEffect(() => {
-    setLoading(false);
-
-    return () => setLoading(true);
-  }, []);
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -71,13 +70,29 @@ export default function Video({data}: Props) {
     setDownloading(false);
   };
 
-  const handleDelete = () => {
-    // TODO
+  const handleDelete = async () => {
+    setDeleting(true);
+    await birthdayCardService.remove(data.id);
+    await revalidatePath("/");
+    setDeleting(false);
+    router.push("/");
   };
 
-  const handleCopy = () => {
-    // TODO
+  const handleCopy = async () => {
+    const link = `http://localhost:3000/downloads/${data.id}.mp4`;
+
+    await navigator.clipboard.writeText(link);
   };
+
+  React.useEffect(() => {
+    setLoading(false);
+
+    return () => {
+      setLoading(true);
+      setDeleting(false);
+      setDownloading(false);
+    };
+  }, []);
 
   if (loading) return null;
 
@@ -126,7 +141,11 @@ export default function Video({data}: Props) {
                   icon={LinkIcon}
                   title="Copy video link"
                 />
-                <IconButton onClick={handleDelete} icon={TrashIcon} />
+                <IconButton
+                  onClick={handleDelete}
+                  icon={TrashIcon}
+                  disabled={deleting}
+                />
               </div>
             </>
           )}
