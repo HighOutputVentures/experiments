@@ -57,6 +57,7 @@ export async function getStaticProps({
 
 export default function Video({data}: Props) {
   const [loading, setLoading] = React.useState(true);
+  const [downloading, setDownloading] = React.useState(false);
 
   React.useEffect(() => {
     setLoading(false);
@@ -64,8 +65,10 @@ export default function Video({data}: Props) {
     return () => setLoading(true);
   }, []);
 
-  const handleDownload = () => {
-    // TODO
+  const handleDownload = async () => {
+    setDownloading(true);
+    await birthdayCardService.download(data.id);
+    setDownloading(false);
   };
 
   const handleDelete = () => {
@@ -116,6 +119,7 @@ export default function Video({data}: Props) {
                   onClick={handleDownload}
                   icon={DownloadIcon}
                   title="Download video"
+                  disabled={downloading}
                 />
                 <IconButton
                   onClick={handleCopy}
