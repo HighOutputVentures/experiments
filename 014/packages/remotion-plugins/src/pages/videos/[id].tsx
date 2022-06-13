@@ -1,3 +1,5 @@
+import {DownloadIcon, LinkIcon, TrashIcon} from "@heroicons/react/outline";
+import {ArrowNarrowLeftIcon} from "@heroicons/react/solid";
 import {Player} from "@remotion/player";
 import {
   GetStaticPathsResult,
@@ -5,12 +7,13 @@ import {
   GetStaticPropsResult,
 } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import * as React from "react";
 import invariant from "tiny-invariant";
 import BirthdayCard from "../../components/birthday-card";
+import IconButton from "../../components/icon-button";
 import Spinner from "../../components/spinner";
 import constants from "../../config/constants";
-import Layout from "../../features/create-new/layout";
 import birthdayCardService from "../../services/birthday-card";
 import IBirthdayCard from "../../types/birthday-card";
 
@@ -61,30 +64,71 @@ export default function Video({data}: Props) {
     return () => setLoading(true);
   }, []);
 
+  const handleDownload = () => {
+    // TODO
+  };
+
+  const handleDelete = () => {
+    // TODO
+  };
+
+  const handleCopy = () => {
+    // TODO
+  };
+
   if (loading) return null;
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Happy birthday, {data.celebrant.name}!</title>
       </Head>
 
-      {loading && <Spinner />}
-      {!loading && (
-        <div className="border border-gray-100">
-          <Player
-            fps={constants.FPS}
-            durationInFrames={getDurationInFrames(data.messages.length)}
-            component={BirthdayCard}
-            compositionWidth={640}
-            compositionHeight={640}
-            controls
-            inputProps={data}
-            numberOfSharedAudioTags={0}
-          />
+      <div className="flex min-h-screen flex-col">
+        <div className="p-4">
+          <Link href="/" passHref>
+            <a className="flex w-fit items-center gap-2 text-sm">
+              <ArrowNarrowLeftIcon className="h-4 w-4" />
+              <span>Go back</span>
+            </a>
+          </Link>
         </div>
-      )}
-    </Layout>
+
+        <main className="flex grow flex-col items-center justify-center p-8">
+          {loading && <Spinner />}
+          {!loading && (
+            <>
+              <div className="border border-gray-100">
+                <Player
+                  fps={constants.FPS}
+                  durationInFrames={getDurationInFrames(data.messages.length)}
+                  component={BirthdayCard}
+                  compositionWidth={640}
+                  compositionHeight={640}
+                  controls
+                  inputProps={data}
+                  numberOfSharedAudioTags={0}
+                />
+              </div>
+
+              <div className="mt-8 flex gap-4">
+                <IconButton
+                  onClick={handleDownload}
+                  icon={DownloadIcon}
+                  title="Download video"
+                />
+                <IconButton
+                  onClick={handleCopy}
+                  icon={LinkIcon}
+                  title="Copy video link"
+                />
+                <IconButton onClick={handleDelete} icon={TrashIcon} />
+              </div>
+            </>
+          )}
+        </main>
+      </div>
+    </>
   );
 }
 
