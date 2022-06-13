@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import birthdayCardService from "../../services/birthday-card";
 import IBirthdayCard from "../../types/birthday-card";
 import CreateButton from "./create-button";
 import Item from "./item";
@@ -12,11 +13,27 @@ interface Props {
 }
 
 export default function Landing({data}: Props) {
+  const [items, setItems] = React.useState(data);
   const [search, setSearch] = React.useState("");
+  const [deleting, setDeleting] = React.useState<number | null>(null);
 
-  const filtered = data.filter(({celebrant}) =>
+  const filtered = items.filter(({celebrant}) =>
     new RegExp(search, "ig").test(celebrant.name),
   );
+
+  const handleDelete = async (subject: IBirthdayCard) => {
+    setDeleting(subject.id);
+
+    try {
+      await birthdayCardService.remove(subject.id);
+      setItems((o) => o.filter(({id}) => id !== subject.id));
+    } catch (error) {
+      //
+    }
+  };
+
+  const shouldShowNoRecords = items.length <= 0;
+  const shouldShowNoMatches = items.length >= 1 && filtered.length <= 0;
 
   return (
     <React.Fragment>
@@ -40,10 +57,20 @@ export default function Landing({data}: Props) {
             </div>
 
             <div className="mt-16 flex flex-col gap-2">
-              {data.length <= 0 && <EmptyState />}
+              {(shouldShowNoMatches || shouldShowNoRecords) && (
+                <div className="mt-16">
+                  {shouldShowNoMatches && <NoMatches />}
+                  {shouldShowNoRecords && <NoRecords />}
+                </div>
+              )}
 
               {filtered.map((birthdayCard) => (
-                <Item key={birthdayCard.id} data={birthdayCard} />
+                <Item
+                  key={birthdayCard.id}
+                  data={birthdayCard}
+                  onDelete={handleDelete}
+                  loading={deleting === birthdayCard.id}
+                />
               ))}
             </div>
           </div>
@@ -55,17 +82,21 @@ export default function Landing({data}: Props) {
   );
 }
 
-function EmptyState() {
+function NoMatches() {
   return (
     <div>
-      <div className="mx-auto w-[350px]">
-        <Image
-          layout="raw"
-          src="/notfound.svg"
-          alt=""
-          width={350}
-          height={350}
-        />
+      <div className="mx-auto w-fit">
+        <Image src="/taken.svg" alt="" width={200} height={200} />
+      </div>
+    </div>
+  );
+}
+
+function NoRecords() {
+  return (
+    <div>
+      <div className="mx-auto w-fit">
+        <Image src="/void.svg" alt="" width={200} height={200} />
       </div>
 
       <div className="mt-16">
