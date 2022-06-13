@@ -1,5 +1,6 @@
 import {CheckIcon, DuplicateIcon} from "@heroicons/react/solid";
 import clsx from "clsx";
+import {formatDistanceToNow} from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -45,14 +46,19 @@ export default function Item({data}: ItemProps) {
 
   return (
     <Link href={`http://localhost:3000/videos/${data.id}`} passHref>
-      <a className="flex items-center gap-2 border border-gray-200 p-4 transition-all duration-300 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50">
+      <a className="flex items-center gap-3 border border-gray-200 p-4 transition-all duration-300 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50">
         <div className="relative h-[48px] w-[48px]">
           <Image src={data.celebrant.image} alt="" layout="fill" />
         </div>
 
         <div className="grow">
-          <div>John</div>
-          <div className="text-xs text-gray-500">Created 3 days ago</div>
+          <div>{data.celebrant.name}</div>
+          <div className="text-xs text-gray-500">
+            {formatDistanceToNow(new Date(data.createdAt), {
+              addSuffix: true,
+              includeSeconds: true,
+            })}
+          </div>
         </div>
 
         <button title="Copy link" onClick={handleClick}>
