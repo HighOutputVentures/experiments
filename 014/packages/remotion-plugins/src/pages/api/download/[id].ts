@@ -15,6 +15,7 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     try {
+      // check if record exists
       await fetch(`http://localhost:5000/birthdayCards/${id}`, {
         method: "head",
       });
@@ -27,6 +28,7 @@ const handler: NextApiHandler = async (req, res) => {
 
     const filepath = `public/downloads/${id}.mp4`;
 
+    // only build if video has not built before
     if (!existsSync(path.join(process.cwd(), filepath))) {
       const props = JSON.stringify({id});
 
