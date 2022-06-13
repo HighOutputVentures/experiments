@@ -1,5 +1,7 @@
-import {SearchIcon} from "@heroicons/react/solid";
+import {PlusIcon, SearchIcon} from "@heroicons/react/solid";
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import IBirthdayCard from "../../types/birthday-card";
 import CreateButton from "./create-button";
@@ -32,15 +34,42 @@ export default function Landing({data}: Props) {
             </div>
 
             <div className="mt-16 flex flex-col gap-2">
-              {data.map((birthdayCard) => (
-                <Item key={birthdayCard.id} data={birthdayCard} />
-              ))}
+              {data.length <= 0 && <EmptyState />}
+              {data.length >= 1 &&
+                data.map((birthdayCard) => (
+                  <Item key={birthdayCard.id} data={birthdayCard} />
+                ))}
             </div>
           </div>
         </main>
 
-        <CreateButton />
+        {data.length >= 1 && <CreateButton />}
       </div>
     </React.Fragment>
+  );
+}
+
+function EmptyState() {
+  return (
+    <div>
+      <div className="mx-auto w-[350px]">
+        <Image
+          layout="raw"
+          src="/notfound.svg"
+          alt=""
+          width={350}
+          height={350}
+        />
+      </div>
+
+      <div className="mt-16">
+        <Link href="/create-new" passHref>
+          <a className="mx-auto flex w-fit items-center gap-1 rounded-sm bg-blue-400 py-3 px-4 text-white shadow-sm">
+            <PlusIcon className="h-4 w-4 fill-white" />
+            <span className="text-sm">Create new</span>
+          </a>
+        </Link>
+      </div>
+    </div>
   );
 }
