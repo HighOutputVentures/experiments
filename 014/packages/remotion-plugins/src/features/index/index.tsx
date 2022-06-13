@@ -84,7 +84,7 @@ export default function Landing({data}: Props) {
           </div>
         </main>
 
-        {data.length >= 1 && <CreateButton />}
+        {items.length >= 1 && <CreateButton />}
       </div>
     </React.Fragment>
   );

@@ -124,7 +124,11 @@ export default function CreateNewStep2() {
         />
 
         <div className="mt-16 flex justify-center gap-4">
-          <IconButton type="submit" icon={PlusSmIcon} />
+          <IconButton
+            type="submit"
+            icon={PlusSmIcon}
+            disabled={!(value.author && value.body)}
+          />
 
           <div className="group relative">
             <div className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-400 text-[9px] text-white">

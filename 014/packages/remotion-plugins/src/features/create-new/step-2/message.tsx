@@ -14,18 +14,20 @@ export default function Message({data, onDelete}: MessageProps) {
   if (loading) return null;
 
   return (
-    <div className="flex items-center gap-2 rounded-md border border-gray-200 p-4">
+    <div className="flex items-center gap-3 rounded-sm border border-gray-200 p-4">
       <div className="relative h-[40px] w-[40px] shrink-0 grow-0">
-        <Image layout="fill" src={src} alt="" />
+        <Image layout="fill" src={src} alt="" className="block" />
       </div>
 
       <div className="grow">
-        <h3>{data.author}</h3>
-        <p className="text-xs line-clamp-1">{data.body}</p>
+        <h3 className="leading-1 font-semibold">{data.author}</h3>
+        <p className="text-xs leading-none text-gray-500 line-clamp-1">
+          {data.body}
+        </p>
       </div>
 
       <button className="group outline-none" onClick={onDelete}>
-        <TrashIcon className="h-8 w-8 fill-gray-400 transition-colors duration-300 hover:fill-red-400 group-focus:fill-red-400" />
+        <TrashIcon className="h-6 w-6 fill-gray-400 transition-colors duration-300 hover:fill-red-400 group-focus:fill-red-400" />
       </button>
     </div>
   );
