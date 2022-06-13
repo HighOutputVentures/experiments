@@ -10,7 +10,6 @@
     "format": "prettier --write .",
     "database": "json-server --watch db.json --port 5000",
     "video:start": "remotion preview src/remotion/index.tsx --port 3001",
-    "video:build": "remotion render src/remotion/index.tsx Video public/downloads/video.mp4",
     "prepare": "touch db.json && echo '{\n\t\"birthdayCards\": []\n}' > db.json"
   },
   "dependencies": {
