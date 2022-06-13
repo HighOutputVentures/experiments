@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const defaultSrc = "/robot.svg";
+const defaultSrc = "/alien.svg";
 
 interface CachedImage {
   name: string;
