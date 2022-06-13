@@ -34,9 +34,7 @@ export default function Item({data, onDelete, loading}: ItemProps) {
             "border-gray-200 hover:border-blue-300 hover:ring-2 hover:ring-blue-100 hover:ring-opacity-50 focus:border-blue-300 focus:ring-2 focus:ring-blue-100 focus:ring-opacity-50",
         )}
       >
-        <div className="absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
-          <Spinner className="h-[64px] w-[64px]" />
-        </div>
+        {loading && <Loader />}
 
         <div className="relative h-[48px] w-[48px]">
           <Image src={data.celebrant.image} alt="" layout="fill" />
@@ -57,5 +55,13 @@ export default function Item({data, onDelete, loading}: ItemProps) {
         </button>
       </a>
     </Link>
+  );
+}
+
+function Loader() {
+  return (
+    <div className="absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-gray-100 bg-opacity-50">
+      <Spinner className="h-[64px] w-[64px]" />
+    </div>
   );
 }
