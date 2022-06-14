@@ -1,4 +1,4 @@
-import {XIcon} from "@heroicons/react/solid";
+import {TrashIcon} from "@heroicons/react/solid";
 import clsx from "clsx";
 import {formatDistanceToNow} from "date-fns";
 import Image from "next/image";
@@ -51,7 +51,7 @@ export default function Item({data, onDelete, loading}: ItemProps) {
         </div>
 
         <button onClick={handleDelete} className="group outline-none">
-          <XIcon className="h-6 w-6 fill-gray-300 transition-all duration-300 group-hover:fill-gray-400 group-focus:fill-gray-400" />
+          <TrashIcon className="h-6 w-6 fill-gray-300 transition-all duration-300 group-hover:fill-red-400 group-focus:fill-red-400" />
         </button>
       </a>
     </Link>
