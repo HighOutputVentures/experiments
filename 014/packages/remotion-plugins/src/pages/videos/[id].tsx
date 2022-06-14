@@ -80,7 +80,7 @@ export default function Video({data}: Props) {
   };
 
   const handleCopy = async () => {
-    const link = `http://localhost:3000/downloads/${data.id}.mp4`;
+    const link = `http://localhost:3000/videos/${data.id}`;
 
     setCopying(true);
 
