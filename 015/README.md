@@ -29,7 +29,9 @@ At the end of this experiment, we should be able to
 ## Conclusion
 
 ## Resources
+- https://spline.design/
 - https://www.youtube.com/channel/UCjnuBkgYrryPxDuKz0eG09Q
+- 
 
 ## Documentation
 ### React-Spline
