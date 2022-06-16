@@ -1,13 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
+  swcMinify: false,
   eslint: {
     dirs: ["./src"],
-  },
-  experimental: {
-    images: {
-      layoutRaw: true,
-    },
   },
 };
 
