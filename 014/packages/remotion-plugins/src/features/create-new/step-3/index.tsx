@@ -24,17 +24,7 @@ export default function CreateNewStep3() {
     invariant(store.data);
 
     try {
-      const response = await createBirthdayCard(store.data);
-
-      await fetch("/api/revalidate", {
-        method: "post",
-        body: JSON.stringify({pathname: "/"}),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-
-      setData(response);
+      setData(await createBirthdayCard(store.data));
     } catch {
       setError(true);
     } finally {
