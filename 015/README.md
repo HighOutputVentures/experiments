@@ -31,7 +31,7 @@ At the end of this experiment, we should be able to
 ## Resources
 - https://spline.design/
 - https://www.youtube.com/channel/UCjnuBkgYrryPxDuKz0eG09Q
-- 
+- https://docs.spline.design/
 
 ## Documentation
 ### React-Spline
