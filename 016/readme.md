@@ -48,23 +48,23 @@ File structure in every component made (example):
 
 ```
 - components
-	- HovRadioImage [folder name for component]
-		- HovRadioImage.tsx [reusable component]
-		- HovRadioImage.stories.tsx [storybook component for testing/demo the component]
-		- HovRadioImage.test.tsx [test file]
+	- RadioImage [folder name for component]
+		- RadioImage.tsx [reusable component]
+		- RadioImage.stories.tsx [storybook component for testing/demo the component]
+		- RadioImage.test.tsx [test file]
 ```
 
 ```typescript
-// HovRadioImage.tsx
+// RadioImage.tsx
 import React, { FC } from "react";
 import { RadioProps, useRadio, chakra, Box, Image } from "@chakra-ui/react";
 
-export interface HovRadioImageProps extends RadioProps {
+export interface RadioImageProps extends RadioProps {
   image: string;
   selectColor?: string;
 }
 
-const HovRadioImage: FC<HovRadioImageProps> = (props) => {
+const RadioImage: FC<RadioImageProps> = (props) => {
   const { image, selectColor = "green.200", w = 12, ...radioProps } = props;
   const { state, getInputProps, getCheckboxProps, htmlProps, getLabelProps } =
     useRadio(radioProps);
@@ -91,20 +91,20 @@ const HovRadioImage: FC<HovRadioImageProps> = (props) => {
   );
 };
 
-export default HovRadioImage;
+export default RadioImage;
 ```
 
 ```typescript
-// HovRadioImage.tsx
+// RadioImage.tsx
 import React, { FC } from "react";
 import { RadioProps, useRadio, chakra, Box, Image } from "@chakra-ui/react";
 
-export interface HovRadioImageProps extends RadioProps {
+export interface RadioImageProps extends RadioProps {
   image: string;
   selectColor?: string;
 }
 
-const HovRadioImage: FC<HovRadioImageProps> = (props) => {
+const RadioImage: FC<RadioImageProps> = (props) => {
   const { image, selectColor = "green.200", w = 12, ...radioProps } = props;
   const { state, getInputProps, getCheckboxProps, htmlProps, getLabelProps } =
     useRadio(radioProps);
@@ -131,21 +131,21 @@ const HovRadioImage: FC<HovRadioImageProps> = (props) => {
   );
 };
 
-export default HovRadioImage;
+export default RadioImage;
 ```
 
 ```typescript
-// HovRadioImage.test.tsx
+// RadioImage.test.tsx
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import HovRadioImage from "./HovRadioImage";
+import RadioImage from "./RadioImage";
 
-describe("HOV Radio Image", () => {
+describe("Radio Image", () => {
   beforeEach(() => {
     render(
-      <HovRadioImage
+      <RadioImage
         value={"Kat"}
         image={"https://randomuser.me/api/portraits/women/44.jpg"}
       />
@@ -194,13 +194,13 @@ after creating all those files you can now import your component into `src/index
 
 ```typescript
 //index.tsx
-import HovRadioImage, {
-  HovRadioImageProps,
-} from "./components/HovRadioImage/HovRadioImage";
+import RadioImage, {
+  RadioImageProps,
+} from "./components/RadioImage/RadioImage";
 
 export {
-  HovRadioImage,
-  HovRadioImageProps, // note: always include exporting the component props
+  RadioImage,
+  RadioImageProps, // note: always include exporting the component props
 };
 ```
 
@@ -327,10 +327,10 @@ To import it into react project:
 ```typescript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { HovProvider } from '@highoutput/ui-components';
+import { Provider } from '@highoutput/ui-components';
 
 const App = () => {
-  return (<HovProvider><div>{...components here}</div></HovProvider>);
+  return (<Provider><div>{...components here}</div><Provider>);
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
