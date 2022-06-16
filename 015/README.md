@@ -33,7 +33,7 @@ At the end of this experiment, we should be able to
   `Spline design` tool is capable of creating an animated web design that adds mood to websites. This tool also can export design that is ready to ulilize
    or integrate in any website. The ease of use of this tool is one of the recommendable feature of this tool. 
   
-   With sufficient `documentation` such as creating a library of how spline tool can be used together with attached relevant information/references. `Spline` will      be used in future project with ease and deliver good quality of product. 
+   With sufficient `documentation` such as creating a `library` of how spline tool can be used together with attached relevant `information/references`. `Spline`      will be used in future project with ease and deliver good quality of product. 
 ## Resources
 - https://spline.design/
 - https://www.youtube.com/channel/UCjnuBkgYrryPxDuKz0eG09Q
