@@ -19,7 +19,7 @@ export function Video() {
   const [error, setError] = useState(false);
 
   const fetchData = useCallback(async () => {
-    const endpoint = `http://localhost:5000/birthdayCards/${props.id}`;
+    const endpoint = `${constants.apiEndpoint}/birthdayCards/${props.id}`;
 
     try {
       const response = await fetch(endpoint);
