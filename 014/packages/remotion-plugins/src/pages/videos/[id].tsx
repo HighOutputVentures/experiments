@@ -62,12 +62,9 @@ export default function Video({data}: Props) {
   };
 
   const handleCopy = async () => {
-    const link = `http://localhost:3000/videos/${data.id}`;
+    const link = `${constants.hostname}/videos/${data.id}`;
 
     setCopying(true);
-
-    // need to ensure video exists
-    await birthdayCardService.download(data.id, true);
 
     try {
       await navigator.clipboard.writeText(link);
