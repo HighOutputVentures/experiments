@@ -5,7 +5,6 @@ import Link from "next/link";
 import * as React from "react";
 import birthdayCardService from "../../services/birthday-card";
 import IBirthdayCard from "../../types/birthday-card";
-import revalidatePath from "../../utils/revalidate-path";
 import CreateButton from "./create-button";
 import Item from "./item";
 import Searchbar from "./searchbar";
@@ -28,8 +27,6 @@ export default function Landing({data}: Props) {
 
     try {
       await birthdayCardService.remove(subject.id);
-      await revalidatePath("/");
-
       setItems((o) => o.filter(({id}) => id !== subject.id));
     } catch (error) {
       //

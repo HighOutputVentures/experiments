@@ -1,11 +1,7 @@
 import {DownloadIcon, LinkIcon, TrashIcon} from "@heroicons/react/outline";
 import {ArrowNarrowLeftIcon} from "@heroicons/react/solid";
 import {Player} from "@remotion/player";
-import {
-  GetStaticPathsResult,
-  GetStaticPropsContext,
-  GetStaticPropsResult,
-} from "next";
+import {GetServerSidePropsContext, GetStaticPropsResult} from "next";
 import Head from "next/head";
 import Link from "next/link";
 import {useRouter} from "next/router";
@@ -17,31 +13,19 @@ import Spinner from "../../components/spinner";
 import constants from "../../config/constants";
 import birthdayCardService from "../../services/birthday-card";
 import IBirthdayCard from "../../types/birthday-card";
-import revalidatePath from "../../utils/revalidate-path";
 
 interface Params {
   id: string;
   [key: string]: string | string[];
 }
 
-export async function getStaticPaths(): Promise<GetStaticPathsResult<Params>> {
-  const data = await birthdayCardService.read.all();
-
-  const paths = data.map(({id}) => ({params: {id: id.toString()}}));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
-
 interface Props {
   data: IBirthdayCard;
 }
 
-export async function getStaticProps({
+export async function getServerSideProps({
   params,
-}: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<Props>> {
+}: GetServerSidePropsContext<Params>): Promise<GetStaticPropsResult<Props>> {
   invariant(params);
   invariant(params.id);
 
@@ -50,7 +34,6 @@ export async function getStaticProps({
   if (!data) return {notFound: true};
 
   return {
-    revalidate: 60 * 60 * 24 * 3,
     props: {
       data,
     },
@@ -74,7 +57,6 @@ export default function Video({data}: Props) {
   const handleDelete = async () => {
     setDeleting(true);
     await birthdayCardService.remove(data.id);
-    await revalidatePath("/");
     setDeleting(false);
     router.push("/");
   };
