@@ -32,6 +32,6 @@ At the end of this experiment, we should be able to
 - https://www.youtube.com/channel/UCjnuBkgYrryPxDuKz0eG09Q
 
 ## Documentation
-#Limitations
+##Limitations
  - using this code we can only trigger animation events from the spline tool editor, move and rotate the objects and lastly change the visibility
  - we cannot create an animation event and states with the code
