@@ -1,4 +1,3 @@
-import {v4 as uuid} from "uuid";
 import constants from "../config/constants";
 import IBirthdayCard from "../types/birthday-card";
 
@@ -66,8 +65,10 @@ async function download(id: string | number, skipDownload?: boolean) {
 
     if (data.success && !skipDownload) {
       const anchor = document.createElement("a");
-      anchor.setAttribute("href", `http://localhost:3000/downloads/${id}.mp4`);
-      anchor.setAttribute("download", `${uuid()}.mp4`);
+
+      anchor.href = `${constants.hostname}/downloads/${id}.mp4`;
+      anchor.download = "video.mp4";
+
       document.body.appendChild(anchor);
       anchor.click();
       document.body.removeChild(anchor);
