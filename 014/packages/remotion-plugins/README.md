@@ -10,11 +10,12 @@ npm install
 
 this will create a `db.json` in the top-level directory which will be used by `json-server`
 
-- next is to run json server and nextjs
+- next is to create `.env.local` and copy the content of `.env.example` to it
+- now run json server and nextjs
 
 ```
 npm run database
 npm run dev
 ```
 
-- Go to `http://localhost:3000`
+- Finally, go to `http://localhost:3000`
