@@ -40,7 +40,7 @@ export default function MessageList({
   };
 
   useEffect(() => {
-    if (page > chunks.length) setPage((current) => current - 1);
+    if (page > 1 && page > chunks.length) setPage((current) => current - 1);
   }, [chunks.length, page]);
 
   if (!open) return null;
