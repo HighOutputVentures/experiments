@@ -36,10 +36,21 @@ export default function Landing({data}: Props) {
   const shouldShowNoRecords = items.length <= 0;
   const shouldShowNoMatches = items.length >= 1 && filtered.length <= 0;
 
+  const title = "Birthday Card Generator";
+  const description =
+    "An expirement which uses remotion package to create videos with dynamic data";
+
   return (
     <React.Fragment>
       <Head>
-        <title>Remotion Expirement</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:site_name" content={title} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@highoutputhq" />
+        <meta name="twitter:creator" content="@highoutputhq" />
       </Head>
 
       <div>
