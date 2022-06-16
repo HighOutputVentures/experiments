@@ -129,7 +129,9 @@ export default function Video({data}: Props) {
           {loading && <Spinner />}
           {!loading && (
             <>
-              <div className="border border-gray-100">
+              <div className="relative border border-gray-100">
+                {downloading && <Loader />}
+
                 <Player
                   fps={constants.FPS}
                   durationInFrames={getDurationInFrames(data.messages.length)}
@@ -166,6 +168,17 @@ export default function Video({data}: Props) {
         </main>
       </div>
     </>
+  );
+}
+
+function Loader() {
+  return (
+    <div className="absolute top-0 left-0 z-10 flex h-full w-full flex-col items-center justify-center bg-white bg-opacity-25">
+      <div className="text-sm text-gray-300">
+        <Spinner />
+        <p>Generating Video. Please wait...</p>
+      </div>
+    </div>
   );
 }
 
