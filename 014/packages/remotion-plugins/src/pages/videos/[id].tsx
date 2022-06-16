@@ -1,6 +1,7 @@
 import {DownloadIcon, LinkIcon, TrashIcon} from "@heroicons/react/outline";
 import {ArrowNarrowLeftIcon} from "@heroicons/react/solid";
 import {Player} from "@remotion/player";
+import {differenceInCalendarYears} from "date-fns";
 import {GetServerSidePropsContext, GetStaticPropsResult} from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -88,10 +89,26 @@ export default function Video({data}: Props) {
 
   if (loading) return null;
 
+  const title = `Happy birthday, ${data.celebrant.name}!`;
+  const canonical = `${constants.hostname}/videos/${data.id}`;
+  const description = `${differenceInCalendarYears(
+    new Date(),
+    new Date(data.celebrant.dateOfBirth),
+  )} years old`;
+
   return (
     <>
       <Head>
-        <title>Happy birthday, {data.celebrant.name}!</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:site_name" content="Birtday Card Generator" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={data.celebrant.image} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@highoutputhq" />
+        <meta name="twitter:creator" content="@highoutputhq" />
       </Head>
 
       <div className="flex min-h-screen flex-col">
