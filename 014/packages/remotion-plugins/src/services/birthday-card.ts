@@ -66,7 +66,7 @@ async function download(id: string | number, skipDownload?: boolean) {
     if (data.success && !skipDownload) {
       const anchor = document.createElement("a");
 
-      anchor.href = `${constants.hostname}/downloads/${id}.mp4`;
+      anchor.href = `${constants.hostname}/api/videos/${id}.mp4`;
       anchor.download = "video.mp4";
 
       document.body.appendChild(anchor);
