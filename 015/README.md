@@ -27,7 +27,13 @@ At the end of this experiment, we should be able to
   With spline tool designers are no longer limited to a static designs for websites or other things that needs designs, designers will now
   have the capabilities to create designs that are more interactive, beautiful and eye-catchy to the users.
 ## Conclusion
-
+  `Spline design` is great and powerful tool in designing 3d and interactive web pages. Designers and frontend developers benifits to this tool that mostly
+  `developer` and `designer's` objective is delivering a product that gives a better user experience and pleasant web design therefore spline tool is fit for this.
+  
+  `Spline design` tool is capable of creating an animated web design that adds mood to websites. This tool also can export design that is ready to ulilize
+   or integrate in any website. The ease of use of this tool is one of the recommendable feature of this tool. 
+  
+   With sufficient `documentation` such as creating a `library` of how spline tool can be used together with attached relevant `information/references`. `Spline`      will be used in future project with ease and deliver good quality of product. 
 ## Resources
 - https://spline.design/
 - https://www.youtube.com/channel/UCjnuBkgYrryPxDuKz0eG09Q
