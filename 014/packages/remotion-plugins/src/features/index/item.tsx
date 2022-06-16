@@ -22,10 +22,7 @@ export default function Item({data, onDelete, loading}: ItemProps) {
   };
 
   return (
-    <Link
-      href={loading ? "/#" : `http://localhost:3000/videos/${data.id}`}
-      passHref
-    >
+    <Link href={loading ? "#" : `/videos/${data.id}`} passHref>
       <a
         className={clsx(
           "relative flex items-center gap-3 border p-4 outline-none transition-all duration-300",
