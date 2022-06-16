@@ -3,6 +3,8 @@ import {
   ChevronRightIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import {useEffect, useMemo, useState} from "react";
+import arrayChunk from "../../../utils/array-chunk";
 import {Schema} from "../types";
 import Empty from "./empty";
 import Message from "./message";
@@ -21,9 +23,27 @@ export default function MessageList({
   onClose,
   onDelete,
 }: MessageListProps) {
-  if (!open) return null;
+  const [page, setPage] = useState(1);
 
   const isEmpty = messages.length <= 0;
+  const chunks = useMemo(() => arrayChunk(messages, 2), [messages]);
+
+  const hasNext = page < chunks.length;
+  const hasPrev = page > 1;
+
+  const next = () => {
+    if (hasNext) setPage((current) => current + 1);
+  };
+
+  const prev = () => {
+    if (hasPrev) setPage((current) => current - 1);
+  };
+
+  useEffect(() => {
+    if (page > chunks.length) setPage((current) => current - 1);
+  }, [chunks.length, page]);
+
+  if (!open) return null;
 
   return (
     <div className="absolute top-0 left-0 z-10 flex h-full w-full items-center bg-black bg-opacity-50">
@@ -34,7 +54,7 @@ export default function MessageList({
         {!isEmpty && (
           <>
             <div className="flex grow flex-col gap-4">
-              {messages.map((msg) => (
+              {chunks.at(page - 1)?.map((msg) => (
                 <Message
                   key={msg.id}
                   data={msg}
@@ -44,8 +64,16 @@ export default function MessageList({
             </div>
 
             <div className="mt-12 flex justify-center gap-2">
-              <PaginationButton icon={ChevronLeftIcon} disabled />
-              <PaginationButton icon={ChevronRightIcon} disabled />
+              <PaginationButton
+                icon={ChevronLeftIcon}
+                onClick={prev}
+                disabled={!hasPrev}
+              />
+              <PaginationButton
+                icon={ChevronRightIcon}
+                onClick={next}
+                disabled={!hasNext}
+              />
             </div>
           </>
         )}
