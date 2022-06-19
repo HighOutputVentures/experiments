@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
 
       <body className="min-h-screen bg-white font-sans text-gray-700">
