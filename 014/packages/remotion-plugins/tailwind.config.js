@@ -13,7 +13,6 @@ module.exports = {
       fontFamily: {
         sans: ["'Inter'", ...defaultTheme.fontFamily.sans],
         secondary: ["'Cardo'", ...defaultTheme.fontFamily.sans],
-        monospace: ["'Fira Code'", "monospace"],
       },
     },
   },

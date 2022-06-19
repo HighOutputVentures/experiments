@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@fontsource/cardo": "^4.5.7",
-    "@fontsource/fira-code": "^4.5.10",
     "@fontsource/inter": "^4.5.11",
     "@heroicons/react": "^1.0.6",
     "@remotion/cli": "^3.0.18",
