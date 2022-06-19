@@ -7,7 +7,6 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import styled from "styled-components";
 import Confetti from "../../../components/confetti";
 import constants from "../../../config/constants";
 import IBirthdayCard from "../../../types/birthday-card";
@@ -98,7 +97,59 @@ export default function Slide1({data}: {data: IBirthdayCard}) {
       </Sequence>
 
       <Sequence from={200} durationInFrames={15}>
-        <Shine />
+        <style jsx>{`
+          .shine::after {
+            content: "";
+            top: 0;
+            transform: translateX(100%);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            animation: slide 1s;
+            background: -moz-linear-gradient(
+              left,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.212) 50%,
+              rgba(128, 186, 232, 0) 99%,
+              rgba(125, 185, 232, 0) 100%
+            );
+            background: -webkit-gradient(
+              linear,
+              left top,
+              right top,
+              color-stop(0%, rgba(255, 255, 255, 0)),
+              color-stop(50%, rgba(255, 255, 255, 0.212)),
+              color-stop(99%, rgba(128, 186, 232, 0)),
+              color-stop(100%, rgba(125, 185, 232, 0))
+            );
+            background: -webkit-linear-gradient(
+              left,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.212) 50%,
+              rgba(128, 186, 232, 0) 99%,
+              rgba(125, 185, 232, 0) 100%
+            );
+            background: -o-linear-gradient(
+              left,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(255, 255, 255, 0.212) 50%,
+              rgba(128, 186, 232, 0) 99%,
+              rgba(125, 185, 232, 0) 100%
+            );
+          }
+
+          @keyframes slide {
+            0% {
+              transform: translateX(-100%);
+            }
+            100% {
+              transform: translateX(100%);
+            }
+          }
+        `}</style>
+
+        <div className="shine" />
       </Sequence>
     </Sequence>
   );
@@ -120,55 +171,3 @@ function Name({children}: {children: ReactNode}) {
     </h2>
   );
 }
-
-const Shine = styled.div`
-  &:after {
-    content: "";
-    top: 0;
-    transform: translateX(100%);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    animation: slide 1s;
-    background: -moz-linear-gradient(
-      left,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.212) 50%,
-      rgba(128, 186, 232, 0) 99%,
-      rgba(125, 185, 232, 0) 100%
-    );
-    background: -webkit-gradient(
-      linear,
-      left top,
-      right top,
-      color-stop(0%, rgba(255, 255, 255, 0)),
-      color-stop(50%, rgba(255, 255, 255, 0.212)),
-      color-stop(99%, rgba(128, 186, 232, 0)),
-      color-stop(100%, rgba(125, 185, 232, 0))
-    );
-    background: -webkit-linear-gradient(
-      left,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.212) 50%,
-      rgba(128, 186, 232, 0) 99%,
-      rgba(125, 185, 232, 0) 100%
-    );
-    background: -o-linear-gradient(
-      left,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.212) 50%,
-      rgba(128, 186, 232, 0) 99%,
-      rgba(125, 185, 232, 0) 100%
-    );
-  }
-
-  @keyframes slide {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-`;
