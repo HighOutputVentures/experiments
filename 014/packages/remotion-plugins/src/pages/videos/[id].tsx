@@ -7,7 +7,6 @@ import Head from "next/head";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import * as React from "react";
-import invariant from "tiny-invariant";
 import BirthdayCard from "../../components/birthday-card";
 import IconButton from "../../components/icon-button";
 import Spinner from "../../components/spinner";
@@ -27,8 +26,7 @@ interface Props {
 export async function getServerSideProps({
   params,
 }: GetServerSidePropsContext<Params>): Promise<GetStaticPropsResult<Props>> {
-  invariant(params);
-  invariant(params.id);
+  if (!params?.id) return {notFound: true};
 
   const data = await birthdayCardService.read.one(params.id);
 

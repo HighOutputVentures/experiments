@@ -1,6 +1,5 @@
 import {useRouter} from "next/router";
 import * as React from "react";
-import invariant from "tiny-invariant";
 import {v4 as uuid} from "uuid";
 import Spinner from "../../../components/spinner";
 import useStore, {Store} from "../../../hooks/use-store";
@@ -21,7 +20,7 @@ export default function CreateNewStep3() {
   const [loading, setLoading] = React.useState(true);
 
   const startCreating = React.useCallback(async () => {
-    invariant(store.data);
+    if (!store.data) return;
 
     try {
       setData(await createBirthdayCard(store.data));
