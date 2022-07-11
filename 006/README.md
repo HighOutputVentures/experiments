@@ -20,7 +20,8 @@ In this experiment, I will be using Keras with TensorFlow as backend and Python 
 ## Documentations
 
 1. [Setting Up The Development Environment](./docs/setting-up-the-development-environment.md)
-2. [Gathering of Data](./docs/gathering_of_data.md)
+2. [Planning](./docs/planning.md)
+3. [Gathering of Data](./docs/gathering_of_data.md)
 4. [Designing the Model](./docs/designing-the-model.md)
 5. [Training the Model](./docs/training-the-model.md)
 6. [Optimizations](./docs/optimizations.md)
