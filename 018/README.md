@@ -9,7 +9,7 @@ We should be able to:
 
 ## Abstract
 
-This experiment will explore vault a promising tool for managing secrets and identity-based access management. This experiment will explore Vault, a promising secret and identity-based access management tool. The experiment aims to use Vault in the onboarding and offboarding process in the company.
+This experiment will explore Vault, a promising secret and identity-based access management tool. The experiment aims to use Vault in the onboarding and offboarding process in the company.
 
 ## Conclusion
 
