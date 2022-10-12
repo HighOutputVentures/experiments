@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  vault:
+    image: vault:1.9.10
+    restart: always
+    volumes:
+      - /home/ubuntu/config.hcl:/vault/config
+      - vaultstorage:/vault/file
+    command: --cap-add=IPC_LOCK vault server
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+      - 1.1.1.1
+      - 1.0.0.1
+    ports:
+      - 80:8200
+volumes:
+  vaultstorage:
+

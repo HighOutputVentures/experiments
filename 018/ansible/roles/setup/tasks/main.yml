@@ -1,0 +1,10 @@
+---
+- ansible.builtin.shell:
+    cmd: docker swarm init
+  ignore_errors: true
+- ansible.builtin.copy:
+    src: docker-compose.yml
+    dest: /home/ubuntu/docker-compose.yml
+- ansible.builtin.copy:
+    src: config.hcl
+    dest: /home/ubuntu/config.hcl

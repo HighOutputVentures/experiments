@@ -1,0 +1,10 @@
+---
+- ansible.builtin.shell:
+    cmd: docker system prune --force
+    chdir: /home/ubuntu
+- ansible.builtin.shell:
+    cmd: docker-compose --file docker-compose.yml pull
+    chdir: /home/ubuntu
+- ansible.builtin.shell:
+    cmd: docker stack deploy --compose-file docker-compose.yml vault
+    chdir: /home/ubuntu

@@ -1,0 +1,10 @@
+---
+- name: api deployment
+  remote_user: ubuntu
+  hosts: main
+  become: 'yes'
+  become_method: sudo
+
+  roles:
+    - setup
+    - deploy
