@@ -1,0 +1,13 @@
+---
+- name: docker setup
+  hosts: default
+  remote_user: ubuntu
+  become: 'yes'
+  become_method: sudo
+
+  roles:
+    - posix-authorized
+    - posix-ulimits
+    - docker
+    - docker-aws
+    - docker-compose

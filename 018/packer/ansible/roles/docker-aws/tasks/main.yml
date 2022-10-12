@@ -1,0 +1,18 @@
+---
+- ansible.builtin.apt:
+    name: unzip
+    state: latest
+- ansible.builtin.unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: ~/
+    remote_src: yes
+- ansible.builtin.shell:
+    cmd: sh ~/aws/install
+- ansible.builtin.shell:
+    cmd: |
+      aws configure set region ap-southeast-1
+      aws configure set output json
+      aws configure set aws_access_key_id AKIAR73M5IQAJNSYYCXI
+      aws configure set aws_secret_access_key 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
+- ansible.builtin.shell:
+    cmd: aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 137130492928.dkr.ecr.ap-southeast-1.amazonaws.com

@@ -1,0 +1,17 @@
+---
+- ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+- ansible.builtin.shell:
+    cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+- ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+    state: present
+- ansible.builtin.apt:
+    name: docker-ce
+    state: latest
+- ansible.builtin.shell:
+    cmd: usermod -aG docker ubuntu
