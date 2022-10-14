@@ -5,6 +5,11 @@
 - ansible.builtin.copy:
     src: docker-compose.yml
     dest: /home/ubuntu/docker-compose.yml
+- name: Create vault config directory
+  ansible.builtin.file:
+    path: /home/ubuntu/vault/config
+    state: directory
+    mode: '0755'
 - ansible.builtin.copy:
     src: config.hcl
-    dest: /home/ubuntu/config.hcl
+    dest: /home/ubuntu/vault/config/config.hcl

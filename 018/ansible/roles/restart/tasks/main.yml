@@ -1,0 +1,7 @@
+---
+- ansible.builtin.shell:
+    cmd: docker system prune --force
+    chdir: /home/ubuntu
+- ansible.builtin.shell:
+    cmd: docker service update --force --update-parallelism 1 --update-delay 30s vault_vault
+    chdir: /home/ubuntu
