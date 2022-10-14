@@ -204,9 +204,13 @@ export class EC2Abstraction {
       },
     });
 
+    new TerraformOutput(scope, 'lb_dns', {
+      value: lb.dnsName,
+    });
+
     const lbTargetGroup = new LbTargetGroup(scope, 'lb_target_group', {
       name: 'vault-app',
-      port: 80,
+      port: 8200,
       protocol: 'HTTP',
       targetType: 'instance',
       vpcId: vpc.id,
@@ -227,29 +231,12 @@ export class EC2Abstraction {
     new LbTargetGroupAttachment(scope, 'lb_target_group_attachment', {
       targetGroupArn: lbTargetGroup.arn,
       targetId: instance.id,
-      port: 80,
-    });
-
-    new LbListener(scope, 'lb_listener_http', {
-      loadBalancerArn: lb.arn,
-      port: 80,
-      protocol: 'HTTP',
-
-      defaultAction: [
-        {
-          type: 'redirect',
-          redirect: {
-            port: '443',
-            protocol: 'HTTPS',
-            statusCode: 'HTTP_301',
-          },
-        },
-      ],
+      port: 8200,
     });
 
     const lbListenerHttps = new LbListener(scope, 'lb_listener_https', {
       loadBalancerArn: lb.arn,
-      port: 443,
+      port: 8200,
       protocol: 'HTTPS',
       sslPolicy: 'ELBSecurityPolicy-2016-08',
       certificateArn: acm.arn,
