@@ -1,0 +1,16 @@
+.container {
+  min-height: 100vh;
+}
+
+.innerWrapper {
+  max-width: 960px;
+  margin: auto;
+  padding: 4rem 2rem;
+}
+
+.grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}

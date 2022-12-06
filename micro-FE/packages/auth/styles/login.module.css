@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.main {
+  width: 325px;
+  max-width: 100%;
+}
+
+.heading {
+  color: #404040;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form {
+  margin-top: 2rem;
+}
+
+.form input,
+.form button {
+  width: 100%;
+}
+
+.form button {
+  margin-top: 1.5rem;
+}
+
+.helper {
+  margin-top: 2rem;
+  text-align: center;
+  color: #737373;
+}
+
+.helper a {
+  color: #0284c7;
+  transition: color 300ms ease-in-out;
+  outline: none;
+}
+
+.helper a:hover,
+.helper a:focus {
+  color: #0369a1;
+}
