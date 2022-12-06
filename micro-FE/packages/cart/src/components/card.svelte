@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { IProduct } from "common";
+  import currencyFormatter from "../utils/currency-formatter";
+  import numberFormatter from "../utils/number-formatter";
   import Button from "./button.svelte";
 
   interface Item {
@@ -9,11 +11,6 @@
 
   export let data: Item;
   export let onRemove: (data: IProduct) => void;
-
-  const currencyFmt = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
 </script>
 
 <div class="item">
@@ -28,9 +25,9 @@
 
   <div class="item--info">
     <p class="item--name">{data.product.name}</p>
-    <p class="item--price">{currencyFmt.format(data.product.price)}</p>
-    <p class="item--quantity">Quantity: {data.quantity}</p>
-    <p class="item--total">Total: {currencyFmt.format(data.product.price * data.quantity)}</p>
+    <p class="item--price">{currencyFormatter.format(data.product.price)}</p>
+    <p class="item--quantity">Quantity: {numberFormatter.format(data.quantity)}</p>
+    <p class="item--total">Total: {currencyFormatter.format(data.product.price * data.quantity)}</p>
 
     <div class="item--action">
       <Button
