@@ -3,9 +3,12 @@
 const { NextFederationPlugin } = require("@module-federation/nextjs-mf");
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: false,
   swcMinify: false,
+  images: {
+    domains: ["media.graphassets.com"],
+  },
   webpack(config, { isServer }) {
     if (isServer) {
       config.resolve.fallback = {
@@ -17,7 +20,7 @@ const nextConfig = {
       new NextFederationPlugin({
         name: "host",
         remotes: {
-          remote: "remote@http://localhost:3001/remote-entry.js",
+          remote: "remote@http://localhost:4201/remote-entry.js",
         },
         filename: "static/chunks/remote-entry.js",
         extraOptions: {},
@@ -27,5 +30,3 @@ const nextConfig = {
     return config;
   },
 };
-
-module.exports = nextConfig;

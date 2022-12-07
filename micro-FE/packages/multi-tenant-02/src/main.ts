@@ -5,16 +5,14 @@ const app = new App({
   props: {
     data: {
       id: "1",
-      slug: "nokia-3310",
-      name: "Nokia 3310",
-      brand: "Nokia",
-      image: {
-        url: "https://media.istockphoto.com/id/187032210/photo/mobile-phone.jpg?s=612x612&w=0&k=20&c=EFSin3N0b1T0AvAUPWkpVbO_udrDJ-0T0nm2ETIuG-M=",
-        height: 1,
+      slug: "app-1",
+      name: "App 1",
+      description: "App made using svelte. 🥳🎉",
+      cover: {
+        url: "https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         width: 1,
+        height: 1,
       },
-      price: 5999,
-      stocks: 15,
     },
   },
 });

@@ -1,24 +1,27 @@
-import { IProduct } from "common";
 import { gql } from "graphql-request";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import * as React from "react";
 import client from "../../config/client";
+import IApp from "../../types/app";
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+type Props = {
+  data: IApp;
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
   const slug = params?.slug?.toString() ?? "";
 
-  const { product: data } = await client.request<{ product: IProduct }, { slug: string }>(
-    GetProductDocument,
-    { slug },
-  );
+  const { app: data } = await client.request<{ app: IApp }, { slug: string }>(GetAppDocument, {
+    slug,
+  });
 
   if (!data) return { notFound: true };
 
   return { props: { data } };
 };
 
-export default function Product({ data }: { data: IProduct }) {
+export default function AppPage({ data }: Props) {
   const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -33,29 +36,28 @@ export default function Product({ data }: { data: IProduct }) {
   }, [data]);
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>{data.name}</title>
       </Head>
+
       <div ref={ref} />
-    </React.Fragment>
+    </>
   );
 }
 
-const GetProductDocument = gql`
-  query Product($slug: String!) {
-    product(where: { slug: $slug }, locales: [en], stage: PUBLISHED) {
+const GetAppDocument = gql`
+  query App($slug: String!) {
+    app(where: { slug: $slug }, stage: PUBLISHED, locales: [en]) {
       id
-      slug
       name
-      brand
-      image {
+      description
+      slug
+      cover {
         url
         width
         height
       }
-      price
-      stocks
     }
   }
 `;
