@@ -1,0 +1,47 @@
+.header {
+  padding: 1rem 2rem 1rem 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e5e5e5;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.heading {
+  font-size: 2rem;
+  color: #262626;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+}
+
+.links button {
+  font: inherit;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.links a,
+.links button {
+  color: inherit;
+  transition: color 300ms ease-in-out;
+  outline: none;
+}
+
+.links button:hover,
+.links button:focus,
+.links a:hover,
+.links a:focus {
+  color: #0369a1;
+}
+
+.avatar {
+  color: #525252;
+}
