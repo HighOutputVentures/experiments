@@ -34,7 +34,13 @@ export default function AppsPage({ data }: Props) {
             {data.map(({ id, name, cover, description, slug }) => (
               <li className={styles.listItem} key={id}>
                 <div className={styles.listItemImage}>
-                  <Image src={cover.url} alt={name} width={cover.width} height={cover.height} />
+                  <Image
+                    src={cover.url}
+                    alt={name}
+                    width={cover.width}
+                    height={cover.height}
+                    draggable={false}
+                  />
                 </div>
 
                 <h2>{name}</h2>
