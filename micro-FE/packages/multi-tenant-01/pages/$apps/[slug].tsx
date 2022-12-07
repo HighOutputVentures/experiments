@@ -1,20 +1,22 @@
-import { gql } from "graphql-request";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import * as React from "react";
 import client from "../../config/client";
+import { GetAppDocument } from "../../graphql/queries";
 import IApp from "../../types/app";
 
 type Props = {
   data: IApp;
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ params }) => {
-  const slug = params?.slug?.toString() ?? "";
+type Params = {
+  slug: string;
+};
 
-  const { app: data } = await client.request<{ app: IApp }, { slug: string }>(GetAppDocument, {
-    slug,
-  });
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+  const { slug } = Object.assign({ slug: "" }, params);
+
+  const { app: data } = await client.request<{ app: IApp }, Params>(GetAppDocument, { slug });
 
   if (!data) return { notFound: true };
 
@@ -39,25 +41,11 @@ export default function AppPage({ data }: Props) {
     <>
       <Head>
         <title>{data.name}</title>
+
+        {/* <!-- (seo) meta, jsonld, etc... --> */}
       </Head>
 
       <div ref={ref} />
     </>
   );
 }
-
-const GetAppDocument = gql`
-  query App($slug: String!) {
-    app(where: { slug: $slug }, stage: PUBLISHED, locales: [en]) {
-      id
-      name
-      description
-      slug
-      cover {
-        url
-        width
-        height
-      }
-    }
-  }
-`;

@@ -1,8 +1,8 @@
-import { gql } from "graphql-request";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import client from "../../config/client";
+import { GetAppsDocument } from "../../graphql/queries";
 import styles from "../../styles/home.module.css";
 import IApp from "../../types/app";
 
@@ -64,19 +64,3 @@ function ArrowNarrowRight(props: React.ComponentProps<"svg">) {
     </svg>
   );
 }
-
-const GetAppsDocument = gql`
-  query Apps {
-    apps {
-      id
-      name
-      description
-      slug
-      cover {
-        url
-        width
-        height
-      }
-    }
-  }
-`;
