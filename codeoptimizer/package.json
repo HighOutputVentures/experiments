@@ -2,7 +2,7 @@
   "name": "codeoptimizer",
   "displayName": "codeoptimizer",
   "publisher": "codeoptimizer",
-  "description": "",
+  "description": "Your code optimizer tool.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.73.0"
