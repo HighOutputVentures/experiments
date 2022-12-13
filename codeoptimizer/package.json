@@ -1,6 +1,7 @@
 {
   "name": "codeoptimizer",
   "displayName": "codeoptimizer",
+  "publisher": "codeoptimizer",
   "description": "",
   "version": "0.0.1",
   "engines": {
