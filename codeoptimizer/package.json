@@ -15,6 +15,16 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "codeoptimizer",
+      "properties": {                          
+        "codeoptimizer.apiKey": {
+          "type": ["string", "null"],
+          "default": null,
+          "description": "Add Open AI API key."
+        }
+      }
+    },
     "commands": [
       {
         "command": "codeoptimizer.optimize",

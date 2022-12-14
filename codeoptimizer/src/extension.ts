@@ -72,11 +72,14 @@ function getWebviewContent(text: string) {
 }
 
 export function activate(context: vscode.ExtensionContext) {
+  const config = vscode.workspace.getConfiguration("codeoptimizer");
+  const apiKey = config.get("apiKey") as string;
+
   let disposable = vscode.commands.registerCommand(
     "codeoptimizer.optimize",
     async () => {
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: apiKey || "",
       });
 
       const openai = new OpenAIApi(configuration);
