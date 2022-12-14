@@ -87,13 +87,6 @@ export function activate(context: vscode.ExtensionContext) {
       const code = getHighlightedText() || "";
       const prompt = `${code}\n"""\nthis code can be optimized as follows:\n1.`;
 
-      const panel = vscode.window.createWebviewPanel(
-        "codeoptimizer",
-        "Optimized Code",
-        vscode.ViewColumn.One,
-        {}
-      );
-
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
@@ -102,26 +95,36 @@ export function activate(context: vscode.ExtensionContext) {
           progress.report({
             message: `Loading code suggestions ...`,
           });
+
+          try {
+            const completion = await openai.createCompletion({
+              model: "text-davinci-003",
+              prompt: prompt,
+              max_tokens: 2048,
+            });
+
+            if (completion) {
+              const raw = completion.data.choices[0]?.text;
+
+              const panel = vscode.window.createWebviewPanel(
+                "codeoptimizer",
+                "Optimized Code",
+                vscode.ViewColumn.One,
+                {}
+              );
+
+              panel.webview.html = getWebviewContent(
+                `<pre><code style="font-size: 14px;">1.${
+                  raw || ""
+                }</code></pre>`
+              );
+            }
+          } catch (error) {
+            vscode.window.showErrorMessage(
+              "Open AI API Key is not valid please add in codeoptimizer extension settings."
+            );
+          }
         }
-      );
-
-      panel.webview.html = getWebviewContent(
-        `<div class="lds-facebook flex-1"><div></div><div></div><div></div></div>`
-      );
-
-      const completion = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt,
-        max_tokens: 2048,
-      });
-
-      console.log(completion);
-
-      const raw = completion.data.choices[0]?.text;
-      // const lines = `1.${raw}`.split("\n");
-
-      panel.webview.html = getWebviewContent(
-        `<pre><code style="font-size: 14px;">1.${raw}</code></pre>` || ""
       );
     }
   );
