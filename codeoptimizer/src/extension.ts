@@ -94,6 +94,17 @@ export function activate(context: vscode.ExtensionContext) {
         {}
       );
 
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+        },
+        async (progress) => {
+          progress.report({
+            message: `Loading code suggestions ...`,
+          });
+        }
+      );
+
       panel.webview.html = getWebviewContent(
         `<div class="lds-facebook flex-1"><div></div><div></div><div></div></div>`
       );
@@ -104,8 +115,10 @@ export function activate(context: vscode.ExtensionContext) {
         max_tokens: 2048,
       });
 
+      console.log(completion);
+
       const raw = completion.data.choices[0]?.text;
-      const lines = `1.${raw}`.split("\n");
+      // const lines = `1.${raw}`.split("\n");
 
       panel.webview.html = getWebviewContent(
         `<pre><code style="font-size: 14px;">1.${raw}</code></pre>` || ""

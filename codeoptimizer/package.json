@@ -30,7 +30,16 @@
         "command": "codeoptimizer.optimize",
         "title": "Code Optimizer: Optimize"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "codeoptimizer.optimize",
+          "when": "editorHasSelection",
+          "group": "1_modication"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
