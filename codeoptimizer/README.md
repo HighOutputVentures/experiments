@@ -8,4 +8,4 @@ codeoptimizer uses OpenAI text-davinci-003 model to  suggest optimize code and w
 
 Adding OpenAI API key in extension settings
 
- ![Alt Text](./assets/add-api-key.gif)
+![add-api-key](https://user-images.githubusercontent.com/19664897/207792854-952d1388-aa5e-44bf-a73f-a26332484583.gif)
