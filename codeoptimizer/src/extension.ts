@@ -1,6 +1,9 @@
 import * as vscode from "vscode";
 import { Configuration, OpenAIApi } from "openai";
 
+/**
+ * @getHighlightedText get editor selected code/text
+ */
 function getHighlightedText() {
   const editor = vscode.window.activeTextEditor;
   const selection = editor?.selection;
@@ -17,6 +20,9 @@ function getHighlightedText() {
   }
 }
 
+/**
+ * @getWebviewContent create a web content for new panel
+ */
 function getWebviewContent(text: string) {
   return `<!DOCTYPE html>
   <html lang="en">
@@ -36,18 +42,23 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "codeoptimizer.optimize",
     async () => {
+      // get the open ai api key in extension settings
       const config = vscode.workspace.getConfiguration("codeoptimizer.views");
       const apiKey = config.get("openaiApiKey") as string;
 
+      // new instance open ai configuration
       const configuration = new Configuration({
         apiKey: apiKey,
       });
 
+      // initiate openai
       const openai = new OpenAIApi(configuration);
 
+      // get text/code selected from editor
       const code = getHighlightedText() || "";
       const prompt = `${code}\n"""\nthis code can be optimized as follows:\n1.`;
 
+      // initiate loading progress notification
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
@@ -58,8 +69,9 @@ export function activate(context: vscode.ExtensionContext) {
           });
 
           try {
+            // make a request and receive instructions
             const completion = await openai.createCompletion({
-              model: "text-davinci-003",
+              model: "text-davinci-003", // openai ai model
               prompt: prompt,
               max_tokens: 2048,
             });
