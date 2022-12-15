@@ -38,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const config = vscode.workspace.getConfiguration("codeoptimizer.views");
       const apiKey = config.get("openaiApiKey") as string;
-      console.log(apiKey);
+
       const configuration = new Configuration({
         apiKey: apiKey,
       });
@@ -81,6 +81,15 @@ export function activate(context: vscode.ExtensionContext) {
               );
             }
           } catch (error) {
+            const errorMessage = String(error);
+
+            if (errorMessage.includes("code 429")) {
+              vscode.window.showErrorMessage(
+                "Sorry, too many request organization hit it's limit."
+              );
+              return;
+            }
+
             vscode.window.showErrorMessage(
               "Open AI API Key is not valid please add in codeoptimizer extension settings."
             );
