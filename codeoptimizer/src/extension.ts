@@ -37,8 +37,8 @@ export function activate(context: vscode.ExtensionContext) {
     "codeoptimizer.optimize",
     async () => {
       const config = vscode.workspace.getConfiguration("codeoptimizer.views");
-      const apiKey = config.get("openAIApiKey") as string;
-
+      const apiKey = config.get("openaiApiKey") as string;
+      console.log(apiKey);
       const configuration = new Configuration({
         apiKey: apiKey,
       });
