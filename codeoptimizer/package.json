@@ -3,7 +3,7 @@
   "displayName": "codeoptimizer",
   "publisher": "codeoptimizer",
   "description": "Your code optimizer tool.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
     "vscode": "^1.73.0"
   },
@@ -18,10 +18,10 @@
     "configuration": {
       "title": "codeoptimizer",
       "properties": {                          
-        "codeoptimizer.views.apiKey": {
+        "codeoptimizer.views.openAIApiKey": {
           "type": "string",
           "default": "",
-          "description": "Add Open AI API key."
+          "description": "OpenAI API key"
         }
       }
     },
