@@ -1,7 +1,7 @@
 ![This is an image](https://img.shields.io/badge/codeoptimizer-OPEN%20AI-purple)
-# codeoptimizer
+# CodeTip
 
-codeoptimizer uses OpenAI text-davinci-003 model to  suggest optimize code and written right from your editor. 
+CodeTip uses OpenAI text-davinci-003 model to gave you some suggestion with optimizing, enhancing or improve your code and written right from your editor. 
 
  
  # Extension Settings
