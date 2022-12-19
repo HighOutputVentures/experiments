@@ -3,7 +3,7 @@
   "displayName": "CodeTip",
   "publisher": "CodeTip",
   "description": "Your code assistant for cleaner code.",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "engines": {
     "vscode": "^1.73.0"
   },
