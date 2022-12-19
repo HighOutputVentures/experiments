@@ -1,8 +1,8 @@
 {
-  "name": "codeoptimizer",
-  "displayName": "codeoptimizer",
-  "publisher": "codeoptimizer",
-  "description": "Your code optimizer tool.",
+  "name": "codetip",
+  "displayName": "CodeTip",
+  "publisher": "CodeTip",
+  "description": "Your code assistant for cleaner code.",
   "version": "0.0.11",
   "engines": {
     "vscode": "^1.73.0"
@@ -11,14 +11,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:codeoptimizer.optimize"
+    "onCommand:codetip.improve"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
-      "title": "codeoptimizer",
+      "title": "CodeTip",
       "properties": {                          
-        "codeoptimizer.views.openaiApiKey": {
+        "codetip.views.openaiApiKey": {
           "type": "string",
           "default": "",
           "description": "OpenAI API key"
@@ -27,14 +27,14 @@
     },
     "commands": [
       {
-        "command": "codeoptimizer.optimize",
-        "title": "Code Optimizer: Optimize"
+        "command": "codetip.improve",
+        "title": "CodeTip: Improve/Enhance code"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "codeoptimizer.optimize",
+          "command": "codetip.improve",
           "when": "editorHasSelection",
           "group": "1_modication"
         }

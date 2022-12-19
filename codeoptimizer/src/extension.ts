@@ -23,14 +23,14 @@ function getHighlightedText() {
 /**
  * @getWebviewContent create a web content for new panel
  */
-function getWebviewContent(text: string) {
+function getWebviewContent(text: string, title: string) {
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-	  <title>Code Optimizer</title>
+	  <title>CodeTip: ${title}</title>
   </head>
   <body>
       <div class="w-screen">${text}</div>
@@ -40,10 +40,10 @@ function getWebviewContent(text: string) {
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
-    "codeoptimizer.optimize",
+    "codetip.improve",
     async () => {
       // get the open ai api key in extension settings
-      const config = vscode.workspace.getConfiguration("codeoptimizer.views");
+      const config = vscode.workspace.getConfiguration("codetip.views");
       const apiKey = config.get("openaiApiKey") as string;
 
       // new instance open ai configuration
@@ -80,8 +80,8 @@ export function activate(context: vscode.ExtensionContext) {
               const raw = completion.data.choices[0]?.text;
 
               const panel = vscode.window.createWebviewPanel(
-                "codeoptimizer",
-                "Optimized Code",
+                "codetip",
+                "CodeTip: Improve/Enhance Code",
                 vscode.ViewColumn.One,
                 {}
               );
@@ -89,7 +89,8 @@ export function activate(context: vscode.ExtensionContext) {
               panel.webview.html = getWebviewContent(
                 `<pre><code style="font-size: 14px;">1.${
                   raw || ""
-                }</code></pre>`
+                }</code></pre>`,
+                "Improve/Enhance code"
               );
             }
           } catch (error) {
